@@ -7,11 +7,19 @@ categories:
     - Tor
 slug: geedge-leak-one-year
 image: "https://assets.anoni.net/blog/2026-geedge-leak-one-year-map-e255e63a.webp"
-summary: "In September 2025, internal files leaked from Geedge Networks, a company that builds internet censorship systems for China and other countries. A year on, researchers comparing the leaked source code with real networks find that part of China's Great Firewall likely runs this system, while results for other countries are mostly inconclusive. Some news coverage has also gone further than the research supports."
-description: "A year of research on the Geedge leak: the findings, the open questions, and the effects on circumvention tools, Tor and VPNs."
+summary: "In September 2025, internal files leaked from Geedge Networks, a company that builds internet censorship systems for China and other countries. Over the following year, investigations moved from what Geedge sold and to whom, to which parts are actually running: part of China's Great Firewall likely uses this system, while results for other countries are mostly inconclusive."
+description: "A year of research on the Geedge leak, from document investigations and supply chain tracing to code comparison, and the effects on circumvention tools, Tor and VPNs."
 ---
 
 # What a Year of Research on the Geedge Leak Found
+
+In September 2025, internal files and source code (the text of a software program) leaked from Geedge Networks, a company that builds internet censorship systems for China and other countries. Until then, outsiders could only infer how the Great Firewall (the system China uses to censor and monitor the internet) works by testing it from outside; the leak let journalists and researchers compare the code of censorship equipment with real networks for the first time. Over the year, research moved from what Geedge sold and to whom, to which parts are actually running. What has been confirmed is narrower than the headlines suggested but more solid than earlier guesswork, and people who use circumvention tools, Tor or VPNs now have a clearer picture of what they are up against.
+
+<!-- more -->
+
+## Starting from the Documents
+
+In the first weeks, partner media outlets and the investigative organisation InterSecLab worked from the documents and tickets. InterSecLab published its report "The Internet Coup" in September 2025, setting out how Geedge sold its censorship system to the governments of Kazakhstan, Ethiopia, Pakistan and Myanmar, and built provincial firewalls in Xinjiang, Fujian and Jiangsu in China. Geedge works closely with the MESA Lab at the Chinese Academy of Sciences, and according to GFW Report, a group that studies the Great Firewall, Fang Binxing, known as the "father of the Great Firewall", is Geedge's chief scientist. The leak amounts to 572 GiB (about 600 GB), including source code, project management records and customer deployment configurations.
 
 <figure markdown="span">
     <a href="https://assets.anoni.net/blog/2026-geedge-leak-one-year-map-e255e63a.webp" target="_blank">
@@ -22,21 +30,21 @@ description: "A year of research on the Geedge leak: the findings, the open ques
     <figcaption markdown="span">Geedge deployment locations recorded in the leaked documents: ① Kazakhstan, ② Ethiopia, ③ Pakistan and ④ Myanmar, with ⑤ to ⑦ marking Xinjiang, Fujian and Jiangsu in China. Boundaries from Natural Earth (public domain).</figcaption>
 </figure>
 
-In September 2025, internal files and source code (the text of a software program) leaked from Geedge Networks, a company that builds internet censorship systems for China and other countries. Until then, outsiders could only infer how the Great Firewall (the system China uses to censor and monitor the internet) works by testing it from outside; for the first time, researchers could read the code of censorship equipment directly. A year on, part of the Great Firewall likely runs Geedge's code, results for other countries are mostly inconclusive, and some news coverage has gone further than the research supports.
+The documents show who Geedge sold to and what its customers asked for; whether the deployed equipment actually runs the code had to be checked separately. GFW Report's analysis that same month also noted that the source code had not yet been carefully analysed. The community released a Traditional Chinese translation of [The Internet Coup](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"} in October 2025 and [retranslated it in full](./interseclab-coup-retranslation.md) in October 2026.
 
-<!-- more -->
+## Tracing the Supply Chain to Taiwan
 
-## What Leaked
+The documents also offered leads on the supply chain. In April 2026, InterSecLab published "MADLink", which used the leaked documents to trace where Geedge's hardware comes from. ADLINK, a Taiwanese company, shipped 1,708 network platforms to Geedge through its Beijing branch between 2019 and early 2020. They formed the hardware basis of Geedge's first-generation censorship system, and in the leaked documents this configuration was deployed only in Kazakhstan.
 
-Geedge works closely with the MESA Lab at the Chinese Academy of Sciences, and according to GFW Report, a group that studies the Great Firewall, Fang Binxing, known as the "father of the Great Firewall", is Geedge's chief scientist. The leak amounts to 572 GiB (about 600 GB), including source code, project management records and customer deployment configurations. According to the investigative organisation InterSecLab, Geedge sold its censorship system to the governments of Kazakhstan, Ethiopia, Pakistan and Myanmar, and built provincial firewalls in Xinjiang, Fujian and Jiangsu in China.
+ADLINK's reply to InterSecLab says it screened against export control lists before shipping, and Geedge was not on any restricted list at the time. As of 30 October 2026, Geedge does not appear on the US and EU sanctions lists we checked. The community has also translated [MADLink](https://anoni.net/docs/reports/interseclab-madlink/){target="_blank"} in full into Traditional Chinese.
 
-The community has translated InterSecLab's two reports into Traditional Chinese: "[The Internet Coup](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}" is about Geedge's products and customers, and "[MADLink](https://anoni.net/docs/reports/interseclab-madlink/){target="_blank"}" is about where Geedge's hardware comes from.
+## Comparing the Code with Real Networks
 
-## What the Research Found
-
-In August 2026, researchers from universities in the United States and Germany and from GFW Report published a paper. They built the leaked source code, tested Geedge's censorship system (known as TSG) in an isolated environment, and then compared how censorship equipment in different places responds on real networks. On DNS injection (sending back fake answers to website lookups) and cutting connections, three Great Firewall devices behave in ways that closely match TSG. The researchers conclude that the leaked code, or a close version of it, is likely deployed on part of the Great Firewall.
+Alongside the document work, a second line of research read the code itself. In August 2026, researchers from universities in the United States and Germany and from GFW Report published a paper. They built the leaked source code, tested Geedge's censorship system (known as TSG) in an isolated environment, and then compared how censorship equipment in different places responds on real networks. On DNS injection (sending back fake answers to website lookups) and cutting connections, three Great Firewall devices behave in ways that closely match TSG. The researchers conclude that the leaked code, or a close version of it, is likely deployed on part of the Great Firewall.
 
 Other Great Firewall devices measured in the same way do not match TSG, and there is no public evidence of who supplied them. Results for Kazakhstan, Myanmar and Pakistan mostly stop at "possible" or "cannot confirm", and Ethiopia was not measured. In a report by the news site Risky Bulletin, TSG is "one of the Great Firewall's three known traffic filtering capabilities", wording that does not appear in the paper, and a researcher quoted in the same report noted that Geedge is only one of the vendors involved in the Great Firewall.
+
+The subtitle of "The Internet Coup" describes how a Chinese company is exporting the Great Firewall to autocratic regimes, which is what the documents show about sales and deployments. The code comparison answers a different question, and its answer is that part of the Great Firewall uses Geedge's code, while deployments in other countries still await confirmation by measurement.
 
 ## Effects on Circumvention Tools, Tor and VPNs
 
@@ -46,17 +54,17 @@ Tor is an anonymity network that hides your location and keeps your internet pro
 
 If Tor will not connect on a censored network, the usual advice still applies: you can use a bridge (a Tor entry point whose address is not public); see [Tor Browser advanced settings](../../tools/tor-browser-advanced.md). "The Internet Coup" notes that on unencrypted connections TSG can intercept passwords and email content, so do not log in or enter personal information on sites your browser marks as "Not secure". Do not install a certificate (a digital document a website uses to prove its identity to your browser) from an unknown source either; once installed, it can let encrypted connections be fully decrypted. Even without one, TSG can still learn from encrypted connections which site you are visiting. Before choosing a VPN, read [VPN: risks and how to choose](../../tools/vpn-guide.md).
 
-## How Much Test Lists Cover
+## Blocking That Measurement Misses
 
-In another 2026 paper, researchers compared the domains in the leaked files and found that more than 90% of the domains measured as blocked at the researchers' vantage points are on neither of the two website lists researchers commonly measure with. List-based tools such as [OONI](../../tools/what-is-ooni.md) (an open source tool for testing whether websites are blocked) only cover the sites on the list; anything outside it is not observed at all, so finding no blocking does not mean there is none. The community also maintains the Taiwan portion of the Citizen Lab test lists.
+In another paper, from February 2026, researchers started from the domains that appear in the leaked files. More than 90% of the domains measured as blocked at their vantage points are on neither of the two website lists researchers commonly measure with. List-based tools such as [OONI](../../tools/what-is-ooni.md) (an open source tool for testing whether websites are blocked) only cover the sites on the list; anything outside it is not observed at all, so finding no blocking does not mean there is none. The community maintains the Taiwan portion of the Citizen Lab test lists, and a list can only cover the sites its maintainers think of, a limit we keep in mind as we maintain it.
 
 ## Open Source Shared by Censors and Circumventors
 
-Geedge's system relies heavily on open source software such as Linux and Kafka (software for handling large volumes of real-time data). InterSecLab suggests in its report that some of that code may have been used in breach of its licence terms (the conditions set for its use). Open source licences do not restrict use, so the censorship system and circumvention tools such as Tor are both built on open source software. The researchers, journalists and communities who exposed the system also investigated with open source tools and published their findings openly.
+Geedge's system relies heavily on open source software such as Linux and Kafka (software for handling large volumes of real-time data), and InterSecLab suggests in its report that some of that code may have been used in breach of its licence terms (the conditions set for its use). Open source licences do not restrict use, so the censorship system and circumvention tools such as Tor are both built on open source software. The year's investigations relied on openness too: researchers used open source tools to process documents and published their measurement scripts, and InterSecLab released its reports under an open licence, which is what allowed the community to translate them.
 
-## The Taiwan Connection
+## Open Questions
 
-According to the MADLink report, ADLINK, a Taiwanese company, shipped 1,708 network platforms to Geedge through its Beijing branch between 2019 and early 2020. They formed the hardware basis of Geedge's first-generation censorship system, and in the leaked documents this configuration was deployed only in Kazakhstan. ADLINK's reply to InterSecLab says it screened against export control lists before shipping, and Geedge was not on any restricted list at the time. As of 30 October 2026, Geedge does not appear on the US and EU sanctions lists we checked.
+There is no public evidence of who supplied the rest of the Great Firewall's equipment. Kazakhstan and Ethiopia lack suitable vantage points, so deployments in the client countries cannot yet be confirmed by measurement. The leaked documents also mention a client code-named A24 whose identity is still unknown, and the leaked code has not been fully reviewed. Tor, Psiphon and VPN providers have not publicly described any changes made in response to the leak. The community will keep following the research, and you are welcome to join the discussion on [Matrix](https://anoni.net/en/contact/){target="_blank"}.
 
 ## The Full Analysis
 

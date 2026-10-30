@@ -653,14 +653,15 @@
 	#部落格社群文章的新位置
 /blog/2026/10/geedge-leak-one-year/
 	#Geedge-外洩一年後的研究重點
-	#外洩的內容
 	#審查與規避共用的開源軟體
+	#從供應鏈追到台灣
+	#從文件開始的調查
 	#更完整的分析
 	#相關閱讀
-	#研究的結果
-	#網站檢測清單的涵蓋範圍
+	#程式碼與真實網路的比對
 	#翻牆工具Tor-與-VPN-受到的影響
-	#與台灣的關聯
+	#還沒有答案的問題
+	#量測看不到的封鎖
 /blog/2026/10/interseclab-coup-retranslation/
 	#Geedge-對-WebTunnel-的封鎖研究
 	#公司回覆信
@@ -1678,15 +1679,16 @@
 	#Old-addresses-and-RSS
 	#What-moved
 /en/blog/2026/10/geedge-leak-one-year/
+	#Blocking-That-Measurement-Misses
+	#Comparing-the-Code-with-Real-Networks
 	#Effects-on-Circumvention-Tools-Tor-and-VPNs
-	#How-Much-Test-Lists-Cover
+	#Open-Questions
 	#Open-Source-Shared-by-Censors-and-Circumventors
 	#Related-Reading
+	#Starting-from-the-Documents
 	#The-Full-Analysis
-	#The-Taiwan-Connection
-	#What-Leaked
+	#Tracing-the-Supply-Chain-to-Taiwan
 	#What-a-Year-of-Research-on-the-Geedge-Leak-Found
-	#What-the-Research-Found
 /en/blog/2026/10/interseclab-coup-retranslation/
 	#A-Full-Retranslation-of-The-Internet-Coup
 	#For-Readers-and-Partners
@@ -5640,14 +5642,15 @@
 	#旧网址与-RSS
 /zh-cn/blog/2026/10/geedge-leak-one-year/
 	#Geedge-外泄一年后的研究重点
-	#与台湾的关联
-	#外泄的内容
+	#从供应链追到台湾
+	#从文件开始的调查
+	#代码与真实网络的比对
 	#审查与规避共用的开源软件
 	#更完整的分析
+	#测量看不到的封锁
 	#相关阅读
-	#研究的结果
-	#网站检测清单的覆盖范围
 	#翻墙工具Tor-与-VPN-受到的影响
+	#还没有答案的问题
 /zh-cn/blog/2026/10/interseclab-coup-retranslation/
 	#Geedge-对-WebTunnel-的封锁研究
 	#公司回复信
