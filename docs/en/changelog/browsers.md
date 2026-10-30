@@ -35,9 +35,14 @@ Both browsers download updates in the background, but an update only takes effec
 
 ## Chrome October 2026
 
-> 2026-10-20 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
+> 2026-10-29 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>Major version 156.0.8078.47 on 20 October fixed 353 security issues, 6 Critical and 61 High. Across this month's four desktop stable announcements, Google does not flag any item as actively exploited, and this release is the latest.
+- <span class="urg-tag urg-tag--soon">Soon</span>156.0.8078.79 on 29 October fixed 21 security issues, 1 Critical, 19 High and 1 Medium. Across October's six desktop stable announcements, Google does not flag any item as actively exploited, and 156.0.8078.79 is the latest.
+- The Critical issue is memory corruption in MediaStream, the interface web pages use to reach the camera and microphone (CVE-2026-76024). Among the High issues, FileSystem has 3, Quota, CacheStorage and Skia have 2 each, and V8 and Dawn (the WebGPU implementation) have one each. Extended Stable also moves to 156.0.8078.79 this time. The Android release shipped the same day, and its announcement states it carries the same security fixes as desktop.
+- 156.0.8078.73 on 27 October fixed 52 security issues, 4 Critical and 46 High.
+- The 4 Critical issues are memory corruption in FileSystem (CVE-2026-118306), insufficient input validation in FileAPI and Skia (CVE-2026-118331, CVE-2026-118348), and a use-after-free in Layout (CVE-2026-118344). Among the High issues, V8 and Turbolev account for 6, and the PDFium PDF engine has another use-after-free (CVE-2026-118345). The Android release shipped the same day, and its announcement states it carries the same security fixes as desktop.
+- 157 went out as an Early Stable release to a small share of Windows users on 22 and 28 October; neither announcement lists security fixes.
+- Major version 156.0.8078.47 on 20 October fixed 353 security issues, 6 Critical and 61 High.
 - Five of the six Critical issues in 156 are memory corruption, in Skia (the graphics engine), Accessibility, CSS, Paint and WebRTC (CVE-2026-113341, CVE-2026-113279, CVE-2026-113072, CVE-2026-113280, CVE-2026-113303); the sixth is a use-after-free in Accessibility (CVE-2026-113271). Among the High ones, V8 and its Turbolev compiler account for seven, plus a use-after-free in Site Isolation (CVE-2026-113101) and insufficient input validation in Proxy (CVE-2026-113040).
 - 155.0.8059.79 on 13 October fixed 37, 7 Critical and 29 High. All seven Critical issues are memory errors, in ANGLE, the browser process, PDF, Network, Core, SVG and Media; the PDF one (CVE-2026-110136) is reached simply by opening a PDF. The High ones include a privilege escalation in the Windows installer (CVE-2026-110150) and an incorrect authorization in the updater (CVE-2026-110159).
 - 155.0.8059.84 on 15 October fixed 10, one Critical, a use-after-free in Prerender (CVE-2026-110922); three of the six High ones are in V8.
@@ -50,9 +55,13 @@ Both browsers download updates in the background, but an update only takes effec
 
 ## Firefox October 2026
 
-> 2026-10-21 · [Mozilla security advisories](https://www.mozilla.org/security/advisories/){target="_blank"}
+> 2026-10-27 · [Mozilla security advisories](https://www.mozilla.org/security/advisories/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>Firefox 158 on 13 October fixed 77 issues, 30 High, 33 Moderate and 14 Low, with none Critical. Mozilla does not flag any item as actively exploited, and the phrase "in the wild" does not appear in the advisory. The latest desktop release is 158.0.1 from 20 October.
+- <span class="urg-tag urg-tag--soon">Soon</span>Firefox 159 on 27 October fixed 167 issues, 108 High, 52 Moderate and 7 Low, with none Critical. Mozilla does not flag any item as actively exploited, and the phrase "in the wild" does not appear in the advisory. 159 is the latest desktop release.
+- Among 159's High issues are 3 sandbox escapes, in navigation, form management and networking (CVE-2026-117861, CVE-2026-117864, CVE-2026-117868), plus 5 privilege escalations, 3 same-origin policy bypasses and 5 JIT compiler issues. The Moderate issues include another 10 sandbox escapes, half of them in graphics and WebRender.
+- ESR 153.6 and 115.44 shipped the same day, fixing 145 and 80 issues respectively. ESR 140 again had no matching release; Tor Browser 16.0, released on 29 October, moves straight to a 153.6.0esr base (see the [Tor changelog](./tor.md)).
+- The iOS app shipped 156.1 on 26 October, fixing 2 issues. The Moderate one lets the FaceTime protocol handler be used for spoofing (CVE-2026-116632), and the Low one lets a tel: link spoof the address shown in the address bar (CVE-2026-116631).
+- Firefox 158 on 13 October fixed 77 issues, 30 High, 33 Moderate and 14 Low, with none Critical.
 - Starting with this release Mozilla changed how it writes advisories: memory safety bugs found internally are no longer rolled into a single aggregate CVE, and each bug now gets its own number. That inflates the High count compared with earlier releases, which is worth knowing when comparing figures across months. The stock "could have been exploited" sentence that appeared in every release went away together with the aggregate entries.
 - The High fixes in 158 include four sandbox escapes in networking and graphics components (CVE-2026-109705, CVE-2026-109707, CVE-2026-109708, CVE-2026-109712), a privilege escalation in the application update component (CVE-2026-109704), and seven in the JavaScript engine and JIT compiler. Most of the rest are use-after-free bugs in DOM, SVG, graphics and media components.
 - 158.0.1 fixed four issues, two of them High. One concerns certificates: intermediate certificates from eMudhra were misused, and Mozilla blocked them through OneCRL (Firefox's certificate revocation list) on 17 October. OneCRL normally updates automatically through remote settings; this release ships the updated list inside the program, so people who have turned remote settings off are protected too (CVE-2026-113470). The other is a boundary condition error in SVG (CVE-2026-113399).

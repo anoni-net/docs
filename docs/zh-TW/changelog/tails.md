@@ -24,6 +24,18 @@ Tails 上的漏洞後果跟一般作業系統不同。取得管理員權限等�
 
 Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志工讀完公告後補的判斷。判斷不確定時以較高一級為準。
 
+## Tails 7.15.1
+
+> 2026-10-23 · [上游公告](https://tails.net/news/version_7.15.1/){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">立刻</span>緊急釋出，目的是移除遭到入侵的憑證機構。上游寫明目前沒有發現出口節點利用這項攻擊。
+- Tor Browser 升至 15.0.26，修補 CVE-2026-113470。eMudhra 這家憑證機構的中繼憑證遭到盜用，Mozilla 在 10 月 17 日封鎖了它的憑證，Tor Browser 15.0.26 同樣封鎖 eMudhra 的所有憑證（細節見 [Tor 更新日誌](./tor.md)）。
+- 攻擊者握有遭盜用的中繼憑證，就能冒充任何網站，連線用了 HTTPS 也一樣。公告寫明出口節點、出口節點的網路業者或政府都有能力這樣做，onion 網站不受影響。
+- Tor Browser 以外的應用程式靠 Debian 的 ca-certificates 套件判斷憑證是否可信，這一版也一併更新。對應的是 Debian 10 月 20 日的 DSA-6572-1，移除 emSign ECC Root CA - G3 與 Comodo AAA Services root 兩張根憑證，整個系統都不再信任 eMudhra 那一批憑證。
+- 比對 7.15.1 的套件清單，7.15 未納入的幾份 Debian 公告這次都已納入。核心從 6.12.111 升到 6.12.113，涵蓋 10 月 16 日的核心安全公告 DSA-6568-1，curl（DSA-6558-1）、JPEG XL（DSA-6564-1）與 expat（DSA-6566-1）也都是修補後的版本。公告本身沒有提到這些套件。
+- tor 維持 0.4.9.14，10 月 28 日的 0.4.9.15 晚於這一版（見 [tor daemon 更新日誌](./tor-daemon.md)）。
+- 可從 Tails 7.0 以後版本自動升級。全新安裝會清除既有的 Persistent Storage。
+
 ## Tails 7.15
 
 > 2026-10-13 · [上游公告](https://tails.net/news/version_7.15/){target="_blank"} · [7.14 已知漏洞公告](https://tails.net/security/known_security_vulnerabilities_in_7.14/){target="_blank"}

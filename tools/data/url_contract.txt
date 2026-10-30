@@ -822,6 +822,7 @@
 	#Snowflake-2141
 	#Snowflake-21502151
 	#Snowflake-2152
+	#Snowflake-2153
 	#WebTunnel-005
 	#WebTunnel-006
 	#WebTunnel-007
@@ -879,11 +880,14 @@
 	#iOS-2662iPadOS-2662
 	#iOS-266iPadOS-266
 	#iOS-2671iPadOS-2671同日另有-2701
+	#iOS-271
+	#iOS-272267218711
 	#iOS-27iPadOS-27同日另有-267
 	#iOS-安全更新
 	#你的機器走哪一條線
 	#急迫程度怎麼判斷
 /changelog/macos/
+	#macOS-Golden-Gate-272Tahoe-2672Sequoia-1582
 	#macOS-Golden-Gate-27同日另有-Tahoe-267Sequoia-158
 	#macOS-Tahoe-265
 	#macOS-Tahoe-2652
@@ -905,6 +909,7 @@
 	#OnionShare-264
 	#OnionShare-265
 	#OnionShare-27
+	#OnionShare-271
 	#OnionShare-更新日誌
 	#急迫程度怎麼判斷
 /changelog/ooni/
@@ -931,6 +936,7 @@
 	#Tails-713
 	#Tails-714
 	#Tails-715
+	#Tails-7151
 	#Tails-76
 	#Tails-771
 	#Tails-772
@@ -948,6 +954,7 @@
 	#tor-04912
 	#tor-04913
 	#tor-04914
+	#tor-04915
 	#tor-049604823
 	#tor-049704824
 	#tor-0498
@@ -972,6 +979,7 @@
 	#Tor-Browser-15024
 	#Tor-Browser-15025
 	#Tor-Browser-15026
+	#Tor-Browser-160
 	#Tor-Browser-160a10Alpha-測試通道
 	#Tor-Browser-160a11Alpha-測試通道
 	#Tor-Browser-160a12Alpha-測試通道
@@ -1780,6 +1788,7 @@
 	#Snowflake-2141
 	#Snowflake-2150-2151
 	#Snowflake-2152
+	#Snowflake-2153
 	#WebTunnel-005
 	#WebTunnel-006
 	#WebTunnel-007
@@ -1838,11 +1847,14 @@
 	#iOS-2662-iPadOS-2662
 	#iOS-2671-iPadOS-2671-2701-shipped-the-same-day
 	#iOS-27-iPadOS-27-267-shipped-the-same-day
+	#iOS-271
+	#iOS-272-2672-18711
 	#iOS-Security-Updates
 /en/changelog/macos/
 	#How-we-rate-urgency
 	#Three-maintenance-lines
 	#macOS-Golden-Gate-27-Tahoe-267-and-Sequoia-158-shipped-the-same-day
+	#macOS-Golden-Gate-272-Tahoe-2672-Sequoia-1582
 	#macOS-Security-Updates
 	#macOS-Tahoe-265
 	#macOS-Tahoe-2652
@@ -1862,6 +1874,7 @@
 	#OnionShare-264
 	#OnionShare-265
 	#OnionShare-27
+	#OnionShare-271
 	#OnionShare-Changelog
 /en/changelog/ooni/
 	#OONI-Changelog
@@ -1885,6 +1898,7 @@
 	#Tails-713
 	#Tails-714
 	#Tails-715
+	#Tails-7151
 	#Tails-76
 	#Tails-78
 	#Tails-781
@@ -1900,6 +1914,7 @@
 	#tor-04912
 	#tor-04913
 	#tor-04914
+	#tor-04915
 	#tor-0496-04823
 	#tor-0497-04824
 	#tor-0498
@@ -1918,6 +1933,7 @@
 	#Tor-Browser-15024
 	#Tor-Browser-15025
 	#Tor-Browser-15026
+	#Tor-Browser-160
 	#Tor-Browser-160a10-alpha
 	#Tor-Browser-160a11-alpha
 	#Tor-Browser-160a12-alpha
@@ -5713,6 +5729,7 @@
 	#Snowflake-2141
 	#Snowflake-21502151
 	#Snowflake-2152
+	#Snowflake-2153
 	#WebTunnel-005
 	#WebTunnel-006
 	#WebTunnel-007
@@ -5769,11 +5786,14 @@
 	#iOS-2662iPadOS-2662
 	#iOS-266iPadOS-266
 	#iOS-2671iPadOS-2671同日另有-2701
+	#iOS-271
+	#iOS-272267218711
 	#iOS-27iPadOS-27同日另有-267
 	#iOS-安全更新
 	#你的机器走哪一条线
 	#紧急程度怎么判断
 /zh-cn/changelog/macos/
+	#macOS-Golden-Gate-272Tahoe-2672Sequoia-1582
 	#macOS-Golden-Gate-27同日另有-Tahoe-267Sequoia-158
 	#macOS-Tahoe-265
 	#macOS-Tahoe-2652
@@ -5795,6 +5815,7 @@
 	#OnionShare-264
 	#OnionShare-265
 	#OnionShare-27
+	#OnionShare-271
 	#OnionShare-更新日志
 	#紧急程度怎么判断
 /zh-cn/changelog/ooni/
@@ -5822,6 +5843,7 @@
 	#Tails-713
 	#Tails-714
 	#Tails-715
+	#Tails-7151
 	#Tails-76
 	#Tails-78
 	#Tails-781
@@ -5836,6 +5858,7 @@
 	#tor-04912
 	#tor-04913
 	#tor-04914
+	#tor-04915
 	#tor-049604823
 	#tor-049704824
 	#tor-0498
@@ -5856,6 +5879,7 @@
 	#Tor-Browser-15024
 	#Tor-Browser-15025
 	#Tor-Browser-15026
+	#Tor-Browser-160
 	#Tor-Browser-160a10Alpha-测试通道
 	#Tor-Browser-160a11Alpha-测试通道
 	#Tor-Browser-160a12Alpha-测试通道

@@ -43,6 +43,27 @@ Any iPhone 11 or later can take either line, and 26.7 is there for people who wo
 
 Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a concrete example. A device that no longer receives updates at all means known vulnerabilities go unpatched, so consider replacing it if you handle sensitive material.
 
+## iOS 27.2, 26.7.2, 18.7.11
+
+> 2026-10-26 · [27.2 advisory](https://support.apple.com/en-us/149230){target="_blank"} · [26.7.2 advisory](https://support.apple.com/en-us/149227){target="_blank"} · [18.7.11 advisory](https://support.apple.com/en-us/149225){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>Devices still on the 18.x line should update today. The iPhone XS, XS Max, XR and iPad 7 receive 18.7.11, which brings the CoreGraphics out-of-bounds write (CVE-2026-86950) fixed in 26.7.1 on 28 September. Apple attaches the same note to this advisory: the issue may have been exploited in an extremely sophisticated attack against specific targeted individuals on versions of iOS before iOS 27. CISA added it to KEV on 29 September.
+- 18.7.11 arrives 28 days after 26.7.1, and older devices went without a fix for the same flaw in the meantime. The other two items are a CoreMedia issue letting a malicious app access the camera without permission (CVE-2026-86990) and an Audio issue letting an app leak sensitive user information (CVE-2026-65339). Apple does not flag either as actively exploited.
+- Under this page's criteria the 27.x and 26.x lines rate Soon. 27.2 fixes 163 CVEs and 26.7.2 fixes 134, and Apple does not flag any item as actively exploited.
+- WebKit is the group to watch. 27.2 has 30 WebKit-related CVEs, 8 of which could lead to arbitrary code execution when processing malicious web content; 26.7.2 has 24, 7 of them of that kind. 27.2 also fixes a WebKit Process Model issue that may let a remote attacker break out of the web content sandbox (CVE-2026-113897). Both lines fix a website being able to use a media format that Lockdown Mode should restrict (CVE-2026-113952), so people relying on Lockdown Mode only get that protection after updating.
+- An App Store issue on both lines may let a remote attacker break out of the web content sandbox (CVE-2026-112690). Kernel accounts for 15 CVEs in 27.2 and 14 in 26.7.2, mostly apps causing unexpected system termination or kernel memory corruption; none this round allow code execution with kernel privileges.
+- The tracking-related fixes are the same on both lines. MobileGestalt and Power Management each have an issue letting an app fingerprint the user, and Maps has one letting an app identify which other apps you have installed. Privacy preference bypasses number 4 in 27.2 and 3 in 26.7.2, in Accounts, Kernel, Photos Storage and Spotlight; the Spotlight one is only in 27.2.
+- Several fixes cover attacks that need physical proximity. A Wi-Fi issue lets an attacker in radio range corrupt process memory (CVE-2026-113909), an AccessorySetupKit issue lets a malicious app access Bluetooth without consent, and an Accounts issue lets an attacker with physical access to a trust-paired device read and write arbitrary files (CVE-2026-112612). 27.2 also fixes a Thread issue (Thread is a network protocol used by smart home devices) that lets a nearby attacker craft malicious traffic to join a Thread network.
+- The two lists are still not a simple subset. 15 CVEs in 26.7.2 do not appear in the 27.2 list, and Apple added 13 of them to the September iOS 27 advisory the same day, meaning 27 already had those fixes when it shipped (see the revision note in the 27 entry below).
+- On 23 October Apple also released 27.1 for the iPhone Duo only; see the next entry. The macOS releases from the same day are covered in [macOS security updates](./macos.md).
+
+## iOS 27.1
+
+> 2026-10-23 · [Security releases page](https://support.apple.com/en-us/100100){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">Routine</span>For the iPhone Duo only. Apple lists 27.1 on its security releases page with a note that the update has no published CVE entries, and gives no link to security content. No issue is flagged as actively exploited.
+- Other models have no 27.1; 27.2 three days later covers the iPhone 11 and later (see the previous entry).
+
 ## iOS 26.7.1, iPadOS 26.7.1 (27.0.1 shipped the same day)
 
 > 2026-09-28 · [26.7.1 advisory](https://support.apple.com/en-us/149226){target="_blank"} · [Security releases page](https://support.apple.com/en-us/100100){target="_blank"}
@@ -52,7 +73,7 @@ Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a
 - If you are still on 26.x, update to 26.7.1 today. The iPad Pro 12.9-inch 3rd generation, iPad Pro 11-inch 1st generation, iPad Air 3, iPad 8 and iPad mini 5 cannot move to 27, so this release is their only option.
 - If you are already on 27, update to 27.0.1 as usual. Apple's releases page notes that 27.0.1 has no published CVE entries, the 14 September advisory for 27 does not list this CVE, and the only thing the 26.7.1 advisory says about 27 is that the attacks targeted earlier versions.
 - Apple describes the targets as specific individuals. If you are likely to be targeted over the long term, turn on Lockdown Mode (described at the top of this page) in addition to updating; the advisory does not say whether Lockdown Mode blocks this flaw.
-- The 18.x line got no update this round. The advisory's wording, versions of iOS before iOS 27, literally covers 18.x, yet Apple has released no fix for that line and does not say whether it is affected. Devices still on 18.x remain on 18.7.10 from 17 August.
+- The 18.x line got no update this round. The advisory's wording, versions of iOS before iOS 27, literally covers 18.x, yet Apple has released no fix for that line and does not say whether it is affected. Devices still on 18.x remain on 18.7.10 from 17 August. 18.7.11 on 26 October brought this fix (see the 27.2 entry above).
 - macOS Tahoe 26.7.1 and Sequoia 15.8.1 fix the same flaw on the same day; see [macOS Security Updates](./macos.md).
 
 ## iOS 27, iPadOS 27 (26.7 shipped the same day)
@@ -69,6 +90,8 @@ Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a
 - Apple revised both advisories on 19 October: 27 grew from 126 CVEs to 145 and 26.7 from 82 to 91, and the figures above are from the first version. The revised advisories still flag nothing as actively exploited. If you already run 27 or 26.7 or later, there is nothing more to do; these fixes were in the release all along and are only now being published.
 - Among the added entries, both lines carry CVE-2026-86919 in Core Bluetooth, where a paired Bluetooth device may be able to execute arbitrary code on the phone, plus one Bluetooth and one Wi-Fi issue where an attacker within radio range can cause unexpected system termination. Only in 27 are a WebKit fix (CVE-2026-86922), where processing malicious web content may lead to arbitrary code execution, a sandbox escape in Foundation, a Telephony issue where an app can place calls or send messages on its own, and an issue where, with iPhone Mirroring on, someone holding a locked phone may be able to bypass digital ID verification.
 - The difference between the two lists shifts as well: 8 CVEs in 26.7 do not appear in the 27 list, and 27 now has 62 extra.
+- Apple revised both advisories again on 26 October; 27 now lists 163 CVEs and 26.7 lists 95. The revised advisories still flag nothing as actively exploited, and people already on 27 or 26.7 or later again have nothing more to do.
+- Among this round of additions, both lines gain a Kernel issue that may let an app execute arbitrary code with kernel privileges (CVE-2026-86916). On the 27 side there are also an ImageIO issue where processing a malicious image may lead to arbitrary code execution (CVE-2026-64759), a sandbox escape in Security (CVE-2026-65363), a Siri issue letting someone holding the phone read contacts from the lock screen (CVE-2026-84614), and an old 2019 identifier in Kernel, CVE-2019-5598, which may let a remote attacker bypass firewall rules. On the 26.7 side there is also a CoreMedia issue where parsing a file may lead to arbitrary code execution (CVE-2026-112688).
 
 ## iOS 26.6.2, iPadOS 26.6.2
 

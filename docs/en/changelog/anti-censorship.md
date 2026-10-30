@@ -21,6 +21,14 @@ Newest at the top.
 
 All three are in Tor Browser's connection settings, with nothing extra to install. Bridge addresses come from [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} or automatically via Moat.
 
+## Snowflake 2.15.3
+
+> 2026-10-28 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}
+
+- Two fixes, one in the Broker and one on the proxy side, so people using the Snowflake built into Tor Browser have nothing to do. Upstream does not mention exploitation in the wild.
+- The Broker fix addresses an issue rated High in an external security audit (issue 40553). The `/answer` endpoint that receives proxy answers needs no authentication, and it only checked that the session ID existed, without confirming that a client was actually waiting for the answer. An attacker could keep registering IDs and immediately submitting answers, leaving request handlers blocked indefinitely until the Broker ran out of memory and Snowflake matching stalled. The Broker is run by the Tor Project, and the ChangeLog does not say when the server side was updated.
+- The proxy fix removes a deadlock. Proxies that cap concurrent clients with `-capacity` stopped accepting new clients after running for a while, with nothing further in the logs (issue 40557). The reporter first saw it in 2.14.1; if you run a proxy with a cap, upgrade.
+
 ## Snowflake 2.15.2
 
 > 2026-10-20 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}

@@ -35,6 +35,19 @@ Nearly every release in the first half of 2026 lands on "Now". Security scrutiny
 
 Several entries below fix conflux. It lets a client send one connection's data over two circuits at once for extra speed, landed in Tor in 2023, and is the common source of multiple security issues this half-year. New code paths bring new ways to get things wrong, so the concentration of fixes there is not surprising.
 
+## tor 0.4.9.15
+
+> 2026-10-28 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.15/ChangeLog){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>A security release three weeks after 0.4.9.14, adding denial-of-service defences for relays that receive large volumes of directory requests. Upstream states that it primarily affects relays and asks operators to upgrade as soon as possible. No TROVE identifiers are attached this time, and upstream does not mention exploitation in the wild.
+- If you use Tor through the browser, Tor Browser 16.0 on 29 October already brings in this version (see the [Tor changelog](./tor.md)). Tails 7.15.1 still ships 0.4.9.14; the next Tails release that picks it up will be covered in the [Tails changelog](./tails.md). People running relays, bridges and onion services need to upgrade themselves.
+- From this release on, versions 0.4.8 and earlier no longer work on the Tor network. Directory authorities now list DESC_NO_TAP and MICRODESC_NO_TAP as required protocol capabilities for clients and relays, and a new consensus method drops all TAP keys and family lists from microdescriptors (the condensed relay descriptors that clients download), saving a great deal of directory bandwidth. Relays on 0.4.8.x have been shut out since 0.4.9.12; now clients on that line cannot connect either. If you use a distribution package or another app that bundles tor, check that it is on 0.4.9.x.
+- Directory authorities also list RELAY_NEGOTIATE_SUBPROTO and RELAY_CRYPT_CGO as required for relays. Clients can then assume every relay supports Counter Galois Onion encryption (CGO) and use it even with relays not yet listed in the consensus.
+- The new denial-of-service defences all concern BEGIN_DIR, the stream a circuit opens for a directory request (ticket 41411). Directory caches can rate-limit BEGIN_DIR per circuit, controlled by DoSBeginDirRateEnabled, DoSBeginDirRate, DoSBeginDirBurst and DoSBeginDirDefenseType, available as consensus parameters and torrc options and enabled by default. Another option lets directory caches refuse any second BEGIN_DIR on a circuit from an authenticated relay; it is controlled by DoSBeginDirLimitEnabled and disabled by default.
+- Onion service directories now accept at most one descriptor fetch or upload per circuit from an authenticated relay and close the circuit on any later one. Refusals are reported in the heartbeat and in the `relay_dos_total` metric. Relays in turn now use a separate circuit for each directory request, so that caches can later hold them to one BEGIN_DIR per circuit.
+- The HSDir flag (HSDir relays store onion service descriptors) now survives restarts. If a relay held it in a recent consensus, directory authorities keep assigning it even when uptime is below the threshold, so a restart no longer costs the relay the flag for 96 hours (ticket 41175).
+- Four more fixes. Directory authorities no longer let a newly created consensus clobber the MiddleOnly flag, which had been flip-flopping (bug 41457, introduced in 0.4.9.14). The control port refuses to attach a stream to a conflux circuit that has not finished linking (bug 41454). Every HSPOST control-port command leaked memory roughly the size of a descriptor (bug 41455). A queue-removal bug in the scheduler could temporarily starve higher-priority circuits (bug 41428).
+
 ## tor 0.4.9.14
 
 > 2026-10-07 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.14/ChangeLog){target="_blank"}

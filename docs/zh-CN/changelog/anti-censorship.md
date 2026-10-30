@@ -21,6 +21,14 @@ digest:
 
 三种都在 Tor Browser 的连接设置里，不必另外安装。网桥地址可以从 [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} 或 Moat 自动获取。
 
+## Snowflake 2.15.3
+
+> 2026-10-28 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}
+
+- 两项修正分别在 Broker 与代理端，用 Tor Browser 内置 Snowflake 的人不需要做任何事。上游没有提到已被实际利用。
+- Broker 那一项是外部安全审计评为 High 的问题（issue 40553）。接收代理回复的 `/answer` 端点不需要验证，原本只检查连接编号存在，没有确认是否有客户端正在等这份回复。攻击者可以不断注册编号、立刻发送回复，让处理程序一直停在等待状态，耗尽 Broker 的内存。Snowflake 的配对因此停摆。Broker 由 Tor Project 运营，ChangeLog 没有写明服务器端何时换上新版。
+- 代理端修正一个死锁。用 `-capacity` 限制同时服务人数的代理，运行一段时间后会停止接受新的客户端，日志也不再有任何记录（issue 40557）。回报的人从 2.14.1 开始遇到，自行架设代理又设了上限的人要升级。
+
 ## Snowflake 2.15.2
 
 > 2026-10-20 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}
