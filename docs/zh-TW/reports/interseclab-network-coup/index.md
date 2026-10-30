@@ -19,7 +19,7 @@ InterSecLab 分析外洩的約 500GB 檔案，說明 Geedge Networks（積至公
 * [INDEX 3/8：引言](./index_3.md)
 * [INDEX 4/8：研究方法](./index_4.md)
 * [INDEX 5/8：產品與服務](./index_5.md)
-* [INDEX 6/8：Geedge 的運營與客戶](./index_6.md)
+* [INDEX 6/8：Geedge 的營運與客戶](./index_6.md)
 * [INDEX 7/8：封鎖網路隱私與規避工具](./index_7.md)
 * [INDEX 8/8：結論、反思與未來步驟：反擊作為服務的數位威權主義](./index_8.md)
 
