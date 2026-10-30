@@ -18,7 +18,7 @@ icon: material/file-pdf-box
 
 ### The Internet Coup / 网络政变
 
-InterSecLab，2025-09-12。InterSecLab 分析泄漏的约 500GB 文件，说明 Geedge Networks（积至公司，积至（海南）信息技术有限公司）如何把中国防火长城的技术做成产品、部署与运营，并输出到其他国家。
+InterSecLab，2025-09-09。InterSecLab 分析泄漏的约 500GB 文件，说明 Geedge Networks（积至公司，积至（海南）信息技术有限公司）如何把中国防火长城的技术做成产品、部署与运营，并输出到其他国家。
 
 * 原报告：[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes - InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}
 * 正体中文译文（八个章节）：[网络政变](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}

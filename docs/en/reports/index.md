@@ -18,7 +18,7 @@ This section collects external research that the community has translated into T
 
 ### The Internet Coup
 
-InterSecLab, 2025-09-12. An analysis of a leaked dataset of roughly 500 GB, showing how Geedge Networks (积至公司 / 积至（海南）信息技术有限公司) turned Great Firewall technology into a product, deployed and operated it, and exported it to other countries.
+InterSecLab, 2025-09-09. An analysis of a leaked dataset of roughly 500 GB, showing how Geedge Networks (积至公司 / 积至（海南）信息技术有限公司) turned Great Firewall technology into a product, deployed and operated it, and exported it to other countries.
 
 * Original report: [The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes - InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}
 * zh-TW translation (8 chapters): [網路政變](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}
