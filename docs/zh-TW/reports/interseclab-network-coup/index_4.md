@@ -4,7 +4,7 @@ description: InterSecLab 如何架設協作平台，索引、翻譯並交叉核�
 icon: material/arrow-right-bottom
 ---
 
-# :material-file-outline: 研究方法
+# :material-file-outline: 研究方法 { #方法論 }
 
 !!! note ""
 
