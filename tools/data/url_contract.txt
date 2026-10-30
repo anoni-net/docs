@@ -261,8 +261,8 @@
 /blog/
 	#202609-文件站更新回顧
 	#Anthropic-九月威脅報告寫到台灣的四個段落從長老教會的人物檔案到電子戰模擬的十二個目標
+	#Geedge-外洩一年後的研究重點
 	#Signal-免門號註冊與付款紀錄
-	#介紹-Signal-自動金鑰驗證
 	#從零打造-Android-上的-Tor-VPNBeta-一年下來學到的事
 	#把整個文件站與小工具存進裝置沒有網路的時候照樣可以開啟
 	#文件站新增八個小工具全部在讀者自己的瀏覽器裡執行
@@ -651,6 +651,16 @@
 	#搬過去的文章
 	#舊網址與-RSS
 	#部落格社群文章的新位置
+/blog/2026/10/geedge-leak-one-year/
+	#Geedge-外洩一年後的研究重點
+	#外洩的內容
+	#審查與規避共用的開源軟體
+	#更完整的分析
+	#相關閱讀
+	#研究的結果
+	#網站檢測清單的涵蓋範圍
+	#翻牆工具Tor-與-VPN-受到的影響
+	#與台灣的關聯
 /blog/2026/10/interseclab-coup-retranslation/
 	#Geedge-對-WebTunnel-的封鎖研究
 	#公司回覆信
@@ -677,8 +687,8 @@
 	#2026
 	#202609-文件站更新回顧
 	#Anthropic-九月威脅報告寫到台灣的四個段落從長老教會的人物檔案到電子戰模擬的十二個目標
+	#Geedge-外洩一年後的研究重點
 	#Signal-免門號註冊與付款紀錄
-	#介紹-Signal-自動金鑰驗證
 	#從零打造-Android-上的-Tor-VPNBeta-一年下來學到的事
 	#把整個文件站與小工具存進裝置沒有網路的時候照樣可以開啟
 	#文件站新增八個小工具全部在讀者自己的瀏覽器裡執行
@@ -688,15 +698,18 @@
 /blog/archive/2026/page/2/
 	#2026
 	#Android-17-上線後的-GrapheneOS誰決定手機上能執行什麼系統
-	#Cure53-完成-Tor-VPN-安全稽核
 	#FISA-702-條款到期美國無令狀蒐集境外通訊的授權2026-年-6-月暫時失效
 	#PayPal-關閉台灣境內交易Stripe-至今未開放EFF-新書-Transaction-Denied-整理十多年金融審查案例
 	#Snowflake-VolunteerTor-Project-推出手機志工橋接-App
 	#什麼是差分隱私
+	#介紹-Signal-自動金鑰驗證
 	#出國前數位安全把該問的問題帶回去問你自己的-AI
 	#從肯亞高院到台灣盲點OONI-開放資料如何進到法庭新聞室與公共紀錄
 	#撤回自己寫過的話近兩週更正了哪些內容
 	#測量網路審查挑戰趨勢與影響
+/blog/archive/2026/page/3/
+	#2026
+	#Cure53-完成-Tor-VPN-安全稽核
 /blog/category/ooni/
 	#OONI
 	#從肯亞高院到台灣盲點OONI-開放資料如何進到法庭新聞室與公共紀錄
@@ -710,6 +723,7 @@
 	#追憶
 /blog/category/tor/
 	#Cure53-完成-Tor-VPN-安全稽核
+	#Geedge-外洩一年後的研究重點
 	#Snowflake-VolunteerTor-Project-推出手機志工橋接-App
 	#Tor
 	#Tor-使用者文件的新家
@@ -773,6 +787,7 @@
 	#翻譯文章
 	#貪腐與控管土庫曼如何將網路審查變成一門生意
 /blog/category/觀察/
+	#Geedge-外洩一年後的研究重點
 	#測量網路審查挑戰趨勢與影響
 	#觀察
 /blog/category/隱私/
@@ -789,17 +804,18 @@
 	#隱私
 /blog/page/2/
 	#Android-17-上線後的-GrapheneOS誰決定手機上能執行什麼系統
-	#Cure53-完成-Tor-VPN-安全稽核
 	#FISA-702-條款到期美國無令狀蒐集境外通訊的授權2026-年-6-月暫時失效
 	#PayPal-關閉台灣境內交易Stripe-至今未開放EFF-新書-Transaction-Denied-整理十多年金融審查案例
 	#Snowflake-VolunteerTor-Project-推出手機志工橋接-App
 	#什麼是差分隱私
+	#介紹-Signal-自動金鑰驗證
 	#出國前數位安全把該問的問題帶回去問你自己的-AI
 	#從肯亞高院到台灣盲點OONI-開放資料如何進到法庭新聞室與公共紀錄
 	#撤回自己寫過的話近兩週更正了哪些內容
 	#測量網路審查挑戰趨勢與影響
 	#近期公告
 /blog/page/3/
+	#Cure53-完成-Tor-VPN-安全稽核
 	#Tails-70-發佈
 	#Tor-使用者文件的新家
 	#Tor-的秘密歷史如何從軍事專案到維繫隱私的救命繩索
@@ -1393,10 +1409,10 @@
 	#Four-cases-in-Anthropics-September-2026-threat-report-involve-Taiwan-and-here-are-the-page-numbers
 	#New-Home-for-the-Blogs-Technical-Posts
 	#Recent-Updates
-	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#Signal-Login-and-the-payment-trail-it-leaves
 	#Storing-the-whole-docs-site-and-its-tools-on-a-device-so-they-open-with-the-network-off
 	#What-Tor-VPN-Betas-first-year-looks-like-across-seven-Asia-Pacific-regions
+	#What-a-Year-of-Research-on-the-Geedge-Leak-Found
 /en/blog/2025/01/project-relaunch-2025/ -> https://anoni.net/en/updates/2025/01/project-relaunch-2025/
 /en/blog/2025/01/專案重啟-2025/ -> https://anoni.net/en/updates/2025/01/project-relaunch-2025/
 /en/blog/2025/01/项目重启-2025/ -> https://anoni.net/en/updates/2025/01/project-relaunch-2025/
@@ -1661,6 +1677,16 @@
 	#A-new-home-for-the-blogs-community-posts
 	#Old-addresses-and-RSS
 	#What-moved
+/en/blog/2026/10/geedge-leak-one-year/
+	#Effects-on-Circumvention-Tools-Tor-and-VPNs
+	#How-Much-Test-Lists-Cover
+	#Open-Source-Shared-by-Censors-and-Circumventors
+	#Related-Reading
+	#The-Full-Analysis
+	#The-Taiwan-Connection
+	#What-Leaked
+	#What-a-Year-of-Research-on-the-Geedge-Leak-Found
+	#What-the-Research-Found
 /en/blog/2026/10/interseclab-coup-retranslation/
 	#A-Full-Retranslation-of-The-Internet-Coup
 	#For-Readers-and-Partners
@@ -1678,10 +1704,10 @@
 	#Eight-new-tools-on-the-docs-site-all-running-in-the-readers-own-browser
 	#Four-cases-in-Anthropics-September-2026-threat-report-involve-Taiwan-and-here-are-the-page-numbers
 	#New-Home-for-the-Blogs-Technical-Posts
-	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#Signal-Login-and-the-payment-trail-it-leaves
 	#Storing-the-whole-docs-site-and-its-tools-on-a-device-so-they-open-with-the-network-off
 	#What-Tor-VPN-Betas-first-year-looks-like-across-seven-Asia-Pacific-regions
+	#What-a-Year-of-Research-on-the-Geedge-Leak-Found
 /en/blog/archive/2026/page/2/
 	#2026
 	#Android-17-ships-the-real-GrapheneOS-story-is-who-decides-what-runs-on-your-phone
@@ -1689,6 +1715,7 @@
 	#Defending-the-Publics-Right-to-Know-A-Sinophone-Asia-Pacific-Reading-of-OONI-in-Practice
 	#Financial-Companies-as-Censors-A-Sinophone-Asia-Pacific-Reading-of-EFFs-Transaction-Denied
 	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
+	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#Section-702-Has-Expired-A-Sinophone-Asia-Pacific-Read-on-Warrantless-US-Surveillance
 	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#What-is-Differential-Privacy
@@ -1715,6 +1742,7 @@
 /en/blog/category/observation/
 	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
 	#Observation
+	#What-a-Year-of-Research-on-the-Geedge-Leak-Found
 	#What-the-original-article-covers
 /en/blog/category/ooni/
 	#Defending-the-Publics-Right-to-Know-A-Sinophone-Asia-Pacific-Reading-of-OONI-in-Practice
@@ -1748,6 +1776,7 @@
 	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#Tor
 	#What-Tor-VPN-Betas-first-year-looks-like-across-seven-Asia-Pacific-regions
+	#What-a-Year-of-Research-on-the-Geedge-Leak-Found
 	#What-the-Tor-VPN-security-audit-means-for-Taiwans-privacy-community
 /en/blog/category/translated-article/
 	#Defending-the-Publics-Right-to-Know-A-Sinophone-Asia-Pacific-Reading-of-OONI-in-Practice
@@ -1774,6 +1803,7 @@
 	#Financial-Companies-as-Censors-A-Sinophone-Asia-Pacific-Reading-of-EFFs-Transaction-Denied
 	#Measuring-Internet-Censorship-Challenges-Trends-and-Impact
 	#Recent-Updates
+	#Retracting-what-we-published-and-what-changed-on-the-docs-site-in-the-past-two-weeks
 	#Section-702-Has-Expired-A-Sinophone-Asia-Pacific-Read-on-Warrantless-US-Surveillance
 	#Snowflake-gets-a-dedicated-app-and-the-volunteer-pool-grew-29-in-a-month
 	#What-is-Differential-Privacy
@@ -5218,8 +5248,8 @@
 /zh-cn/blog/
 	#202609-文档站更新回顾
 	#Anthropic-九月威胁报告写到台湾的四个段落从长老教会的人物档案到电子战模拟的十二个目标
+	#Geedge-外泄一年后的研究重点
 	#Signal-免手机号注册与付款记录
-	#介绍-Signal-自动密钥验证
 	#从零打造-Android-上的-Tor-VPNBeta-一年下来学到的事
 	#博客技术文章的新位置
 	#博客社区文章的新位置
@@ -5608,6 +5638,16 @@
 	#博客社区文章的新位置
 	#搬过去的文章
 	#旧网址与-RSS
+/zh-cn/blog/2026/10/geedge-leak-one-year/
+	#Geedge-外泄一年后的研究重点
+	#与台湾的关联
+	#外泄的内容
+	#审查与规避共用的开源软件
+	#更完整的分析
+	#相关阅读
+	#研究的结果
+	#网站检测清单的覆盖范围
+	#翻墙工具Tor-与-VPN-受到的影响
 /zh-cn/blog/2026/10/interseclab-coup-retranslation/
 	#Geedge-对-WebTunnel-的封锁研究
 	#公司回复信
@@ -5634,8 +5674,8 @@
 	#2026
 	#202609-文档站更新回顾
 	#Anthropic-九月威胁报告写到台湾的四个段落从长老教会的人物档案到电子战模拟的十二个目标
+	#Geedge-外泄一年后的研究重点
 	#Signal-免手机号注册与付款记录
-	#介绍-Signal-自动密钥验证
 	#从零打造-Android-上的-Tor-VPNBeta-一年下来学到的事
 	#博客技术文章的新位置
 	#博客社区文章的新位置
@@ -5645,15 +5685,18 @@
 /zh-cn/blog/archive/2026/page/2/
 	#2026
 	#Android-17-上线后的-GrapheneOS谁决定手机上能执行什么系统
-	#Cure53-完成-Tor-VPN-安全审计
 	#FISA-702-条款到期美国无令状收集境外通信的授权2026-年-6-月暂时失效
 	#PayPal-关闭台湾境内交易Stripe-至今未开放EFF-新书-Transaction-Denied-整理十多年金融审查案例
 	#Snowflake-VolunteerTor-Project-推出手机志愿者桥接-App
 	#什么是差分隐私
+	#介绍-Signal-自动密钥验证
 	#从肯尼亚高院到华语六地区OONI-开放数据如何进到法庭新闻室与公共纪录
 	#出国前数字安全把该问的问题带回去问你自己的-AI
 	#撤回自己写过的话近两周更正了哪些内容
 	#测量网络审查挑战趋势与影响
+/zh-cn/blog/archive/2026/page/3/
+	#2026
+	#Cure53-完成-Tor-VPN-安全审计
 /zh-cn/blog/category/ooni/
 	#OONI
 	#从肯尼亚高院到华语六地区OONI-开放数据如何进到法庭新闻室与公共纪录
@@ -5667,6 +5710,7 @@
 	#追忆
 /zh-cn/blog/category/tor/
 	#Cure53-完成-Tor-VPN-安全审计
+	#Geedge-外泄一年后的研究重点
 	#Snowflake-VolunteerTor-Project-推出手机志愿者桥接-App
 	#Tor
 	#Tor-用户文档的新家
@@ -5730,6 +5774,7 @@
 	#翻译文章
 	#腐败与监管土库曼斯坦如何将网络审查变成一门生意
 /zh-cn/blog/category/观察/
+	#Geedge-外泄一年后的研究重点
 	#测量网络审查挑战趋势与影响
 	#观察
 /zh-cn/blog/category/隐私/
@@ -5746,17 +5791,18 @@
 	#隐私
 /zh-cn/blog/page/2/
 	#Android-17-上线后的-GrapheneOS谁决定手机上能执行什么系统
-	#Cure53-完成-Tor-VPN-安全审计
 	#FISA-702-条款到期美国无令状收集境外通信的授权2026-年-6-月暂时失效
 	#PayPal-关闭台湾境内交易Stripe-至今未开放EFF-新书-Transaction-Denied-整理十多年金融审查案例
 	#Snowflake-VolunteerTor-Project-推出手机志愿者桥接-App
 	#什么是差分隐私
+	#介绍-Signal-自动密钥验证
 	#从肯尼亚高院到华语六地区OONI-开放数据如何进到法庭新闻室与公共纪录
 	#出国前数字安全把该问的问题带回去问你自己的-AI
 	#撤回自己写过的话近两周更正了哪些内容
 	#测量网络审查挑战趋势与影响
 	#近期公告
 /zh-cn/blog/page/3/
+	#Cure53-完成-Tor-VPN-安全审计
 	#Tails-70-发布
 	#Tor-用户文档的新家
 	#Tor-的秘密历史如何从军事项目变成维系隐私的生命线
