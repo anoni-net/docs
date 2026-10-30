@@ -1,6 +1,6 @@
 ---
 title: 封鎖網路隱私與規避工具
-description: 網路政變 / The Internet Coup | InterSecLab
+description: Geedge 的設備在客戶國家封鎖 Tor、VPN 與 Psiphon 的手法，以及這些工具受到的影響。
 icon: material/arrow-right-bottom
 ---
 
@@ -8,54 +8,58 @@ icon: material/arrow-right-bottom
 
 !!! note ""
 
-    - 本篇報告翻譯自 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes | InterSecLab](https://interseclab.org/research/the-internet-coup/){target="_blank"}" 的 "[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}" 報告，內容以正體中文、臺灣用語翻譯。
-    - 本章節內容翻譯範圍為報告 **INDEX 7/8** 的內容。
-    - 你可以[參與討論](./index.md#參與討論)或檢視[報告翻譯更新](./index.md#更新紀錄)。
+    - 本章翻譯自 InterSecLab 的報告「[The Internet Coup: A Technical Analysis on How a Chinese Company is Exporting The Great Firewall to Autocratic Regimes](https://interseclab.org/wp-content/uploads/2025/09/The-Internet-Coup_September2025.pdf){target="_blank"}」（[報告介紹頁](https://interseclab.org/research/the-internet-coup/){target="_blank"}），以正體中文、臺灣用語翻譯。
+    - 本章對應原報告目錄（INDEX）的第 7/8 章。
+    - 歡迎[參與討論](./index.md#參與討論)，或查看譯文的[更新紀錄](./index.md#更新紀錄)。
 
-Geedge 的產品在客戶（國家）被用來封鎖某些隱私與規避工具。洩漏的文件顯示，Geedge 的設備被用來阻止訪問 Tor、VPN 以及 Psiphon 等規避工具。
+客戶國家正用 Geedge Networks（積至公司）的產品封鎖部分隱私與規避工具。具體來說，外洩文件顯示，Geedge 的設備曾用來阻擋使用者連上 Tor、VPN，以及 Psiphon 等規避工具。
 
-## 封鎖 Tor
+## 對 Tor 的封鎖
 
-Tor 網路是一個免費的開源系統，旨在增強上網的隱私和匿名性。Tor 廣泛用於尋求保護隱私的人士，比如壓迫地區的記者和活動者，以及那些旨在規避網路審查的人。它的運作原理是將網路流量透過由全球超過 7000 個志工營運的中繼節點所構成的去中心化網路，使用的是洋蔥路由技術。這種方法將使用者的流量透過三個中繼節點傳送，在每一個步驟都加密使用者的流量，使得追蹤使用者的網路活動變得更加困難。儘管 Tor 採用了多種技術方法，例如未列出的橋接中繼節點，來避免被深度封包檢測及其他審查技術偵測到，一些國家政府仍然設法限制或封鎖對該工具的存取[^73]。
+Tor 網路是免費、開放原始碼的系統，設計目的是加強上網的隱私與匿名性。許多想保護隱私的人都在用 Tor，例如身處高壓統治地區的記者與社運人士，以及想規避網路審查的人。Tor 的去中心化網路由全球超過 7,000 個志工營運的中繼節點組成，採用洋蔥路由（onion routing）技術轉送流量。使用者的流量會依序經過三個中繼節點，每一段都經過加密，外界很難追查使用者的上網活動。Tor 採用多種技術手段躲避深度封包檢測（DPI）與其他審查技術的偵測，例如不公開列出的橋接中繼節點（bridge relay，沒有列在公開清單上的入口節點），但仍有一些政府設法限制或封鎖使用者連上 Tor[^73]。
 
-洩漏的數據揭示了 Geedge Networks 在封鎖 Tor 訪問上的重要工作。緬甸和中國的客戶積極努力限制對 Tor 的訪問，主要針對的目標是 Tor 支持的應用包括 Android 版 Tor 瀏覽器和 Orbot 的行動裝置版本。來自開放觀察和網路干擾（OONI）專案的資料數據，以及 Tor 專案發布的中繼節點指標顯示，從 2024 年 5 月起，Tor 已在緬甸被有效封鎖。洩漏的文件確認了之前的揣測，即 Geedge Networks 的設備被用來實施這些限制。
+從外洩資料可以看到 Geedge Networks 封鎖 Tor 的許多重要細節。緬甸與中國的客戶正積極限制使用者連上 Tor，主要針對以 Tor 為基礎的行動版 App，例如 Android 版 Tor Browser 與 Orbot（讓手機上的其他 App 經由 Tor 連線的工具）。開放網路干擾觀測站（Open Observatory of Network Interference，OONI）的資料，以及 Tor Project 公布的中繼節點統計，都顯示 Tor 從 2024 年 5 月起在緬甸遭到有效封鎖。外洩文件證實先前的推測，這些限制確實是用 Geedge Networks 的設備實施的。
 
-儘管 Tor 橋接的完整列表並未公開可用，但當使用者無法直接連接到 Tor 時，他們可以從橋接分發渠道請求一小部分橋接。即使橋接頻繁增加和刪除，整體集合仍保持相對靜態，這意味著一個有決心的對手可能會透過不斷查詢橋接分發系統來最終編譯一個幾乎完整的列表。我們未能明確確定 Geedge Networks 是否自己收集這些資訊或從第三方獲得。
+Tor 橋接的完整清單沒有公開，但使用者無法直接連上 Tor 時，可以向橋接的發放管道索取一小部分橋接。雖然橋接經常有增有減，整體集合仍相對固定，因此有心的對手反覆向橋接發放系統查詢，最後可能彙整出幾乎完整的清單。我們無法明確判斷 Geedge Networks 是自行蒐集這些資訊，還是從第三方取得。
 
-Snowflake 是一種可插拔傳輸，設計用來透過將 Tor 流量偽裝成 WebRTC（一種常用於影音串流和視訊會議的點對點協議）的方式來規避深度封包檢測。在 Geedge 成功封鎖對 Tor 的直接連接後，Snowflake 成為緬甸 Tor 瀏覽器使用者的預設連線方式。
+Snowflake 是一種可插拔傳輸（pluggable transport，替 Tor 流量換上其他協定外觀、躲避偵測的模組），把 Tor 流量偽裝成 WebRTC 流量，用來規避深度封包檢測。WebRTC 是常用於語音與視訊會議的點對點協定。Geedge 成功封鎖 Tor 的直接連線之後，緬甸使用者的 Tor Browser 預設連線方式改為 Snowflake。
 
-WebTunnel 是一種新的 Tor 可插拔傳輸，可以將網路流量偽裝成無害的 HTTPS 網路流量。目前研究顯示，Geedge Networks 似乎缺乏對付 WebTunnel 的有效對策。儘管如此，由 Mesalab 的學生進行的研究表明，WebTunnel 是一種高效的規避審查方法，但截至洩漏時，他們尚未開發出有效的封鎖措施。
+WebTunnel 是 Tor 新推出的可插拔傳輸，可以把網路流量偽裝成無害的 HTTPS 網頁流量。在資料外洩的時間點，Geedge Networks 似乎還沒有任何有效對付 WebTunnel 的手段。不過我們在調查中發現，中國科學院 Mesalab 實驗室（Massive and Effective Stream Analysis）的學生做過初步研究，探討封鎖 WebTunnel 的可能方法。由此看來，Geedge Networks 知道 WebTunnel 是有效的審查規避方法，只是到資料外洩時還沒有發展出有效的封鎖措施。
 
-## 封鎖 VPN
+我們已與 Tor Project 協調，以負責任揭露（先私下通知開發團隊，再對外公開）的方式處理這些發現。我們要特別強調，目前沒有找到任何證據，顯示 Geedge Networks 發現或正在利用 Tor 軟體或 Tor 設計上任何先前未知的漏洞。
 
-虛擬私人網路（VPN）是一種服務，能在使用者設備與遠端伺服器之間建立安全且加密的連接，從而掩飾使用者的 IP 地址。它允許使用者將網際網路流量路由到不同的位置，使其看起來像是從其他國家訪問網路。
+## 對 VPN 的封鎖
 
-雖然此技術主要用於保護企業網路間的通訊安全，VPN 也常被用來幫助使用者規避政府或網路施加的限制。透過連接到未受限區域的伺服器，使用 VPN 的使用者可以訪問可能在其本國被封鎖的網站和服務。VPN 的封鎖干擾了人們將其用於規避審查和合法遵從（例如企業環境）上的使用。
+VPN（虛擬私人網路）是一種服務，在使用者的裝置與遠端伺服器之間建立安全、加密的連線，隱藏使用者的 IP 位址。使用者可以讓網路流量經由不同的地點轉送，看起來就像從另一個國家上網。
 
-客戶（政府）會提供他們想要封鎖的 VPN 應用程式清單給 Geedge，然後 Geedge 為客戶制定封鎖規則。洩漏的文件顯示，這些努力主要針對的是行動裝置的 VPN 應用程式。
+VPN 的主要用途是保護企業網路之間的通訊，但也常用來規避審查，協助使用者繞過政府或網路管理者設下的限制。VPN 使用者連上設在其他地區、當地沒有封鎖這些內容的伺服器，就能造訪在自己國家可能受限的網站與服務。各國封鎖 VPN 的規定不盡相同。全面封鎖 VPN 會干擾用 VPN 規避審查的人，也會干擾其他用途，例如企業環境中為了法規遵循而使用 VPN。
 
-為了建立封鎖規則，Geedge Networks 使用逆向工程技術，並運用靜態和動態分析技術。靜態分析包括反編譯應用程式的原始碼以尋找返回 API 的調用，而動態分析則包括運行該應用程式並分析其網路流量，以識別阻擋模式。
+政府客戶會把想封鎖的 VPN 應用程式清單交給 Geedge，再由 Geedge 替客戶制定封鎖規則。外洩文件顯示，這些工作主要針對行動版的 VPN App。
 
-洩漏的證據顯示，Geedge Networks 維持著一些流行 VPN 供應商的付費帳戶，以便分析和封鎖它們的應用程式。TSG 硬體還能識別如 IPSec、OpenVPN 和 WireGuard 等流行的 VPN 協議。
+Geedge Networks 用逆向工程制定封鎖規則，同時採用靜態分析與動態分析。靜態分析是反編譯 App 的原始碼，找出會回傳伺服器清單的 API，再封鎖清單上的伺服器。動態分析是實際執行 VPN App，分析它的網路流量，找出可用於封鎖的特徵。
 
-## 繞過 Psiphon 的保護措施
+從外洩資料中的證據看來，Geedge Networks 在多家熱門 VPN 業者持有付費帳號，用來分析並封鎖這些業者的 App。天狗安全閘道（TSG）的硬體也能辨識 IPSec、OpenVPN 與 WireGuard 等常見的 VPN 協定。
 
-由位於加拿大的 Psiphon Inc. 開發的 Psiphon 是一款免費且開源的網路規避工具，旨在幫助使用者繞過網路審查並訪問受限內容[^74]。Psiphon 主要在有嚴重網路審查的國家使用，包括中國、伊朗、埃及和土耳其[^75]。它在政治動盪時期（如 2021 年緬甸反軍政府抗議和 2021 年古巴抗議）中發揮了重要作用，使訊息能夠被訪問。
+## 繞過 Psiphon 防護的手法
 
-Psiphon3 使用一種稱為混淆伺服器列表（OSL）的系統來促進向客戶端分發伺服器節點訊息。與其他 VPN 應用相比，這個伺服器列表使用伺服器列表加密密鑰（SLOKs）的方法進行加密。這種加密的目的是確保只有受信任的客戶端才能訪問完整的伺服器節點列表，從而防止自動化的爬蟲和偶然的對手從中抓取訊息。
+Psiphon 由加拿大的 Psiphon Inc. 開發，是免費、開放原始碼的網路規避工具，協助使用者繞過網路審查、取得受限的內容[^74]。
 
-根據洩漏的數據，Geedge Networks 似乎嘗試透過開發一個名為 Psiphon3-SLOK 的內部工具來繞過這一保護措施。這個工具的目的是不斷抓取混淆的伺服器列表並生成要封鎖的 IP 地址清單，然後透過 TSG Galaxy 分發到客戶位置的 TSG 節點。
+Psiphon 主要在網路審查嚴重的國家使用，包括中國、伊朗、埃及與土耳其[^75]。在政治動盪期間，例如 2021 年緬甸的反軍政府抗議與 2021 年的古巴抗議，Psiphon 是民眾取得遭審查資訊的重要管道。
 
-在與 Psiphon 團隊的對話中，我們了解到在 2024 年 5 月下旬，來自緬甸的使用者數迅速增加，客戶選擇伺服器的方式也發生了變化，這與伺服器枚舉和目標封鎖一致。該時間點與 Geedge 系統在緬甸的部署同時發生。Psiphon 內部數據顯示，從 2024 年 5 月 30 日開始，Psiphon 記錄了大約 50 萬名新使用者。緬甸的流量從一種發現方法（REMOTE 和 EMBEDDED）混合逐漸轉向主要基於 merit 的 OBFUSCATED 伺服器上，這表示許多伺服器被某些 ISP 同時封鎖。儘管某些伺服器被封鎖，整體連線品質（衡量方法為隧道持續時間和傳輸數據）保持正常。封鎖的持續時間和嚴重程度在不同的 ISP 間有所不同。
+Psiphon3 用名為混淆伺服器清單（Obfuscated Server Lists，OSL）的機制，把伺服器節點的資訊發送給用戶端。跟其他 VPN 應用程式不同，Psiphon3 的伺服器清單經過加密，使用的方法稱為伺服器清單加密金鑰（SLOK）。加密的目的是確保只有受信任的用戶端能取得完整的伺服器節點清單，防止自動化程式與伺機而動的對手大量抓取這些資訊。
 
-Psiphon 採用多層伺服器發現過程，允許客戶端找尋可用的伺服器。最初，EMBEDDED 伺服器在安裝時包含，提供直接可用節點列表。隨後，DISCOVERY 伺服器在初次連接後被提取，擴展使用者的訪問選擇。REMOTE 伺服器可以從遠程位置訪問，而 OBFUSCATED 伺服器根據 merit 解鎖，因其安全性而特別不易於枚舉和封鎖。
+根據外洩資料，Geedge Networks 似乎開發了名為 Psiphon3-SLOK 的內部工具，試圖繞過這項防護措施。這個工具的用途是持續抓取混淆伺服器清單，產生一份要封鎖的 IP 位址清單，再透過 TSG Galaxy 發送到客戶據點的 TSG 節點。
 
-自 2024 年 5 月以來，隨著 Geedge 套件在緬甸的部署，Psiphon 觀察到使用者行為的顯著轉變。REMOTE 使用者的比例下降，而 OBFUSCATED 的使用則相應增加，這與試圖透過伺服器枚舉進行封鎖的預期影響一致。這一發展表明，Geedge 對 Psiphon 的封鎖努力只能部分成功，因為使用者繼續調整並找到替代路徑。
+我們跟 Psiphon 團隊討論時得知，2024 年 5 月下旬，來自緬甸的使用者急遽增加，用戶端選擇伺服器的方式也出現變化，符合有人先做伺服器列舉（逐一找出伺服器位址）、再針對性封鎖的情形。這段期間正好是 Geedge 系統在緬甸部署的時間。Psiphon 提供的內部資料顯示，從 2024 年 5 月 30 日開始，Psiphon 記錄到約 50 萬名新使用者。緬甸的流量原本分散在多種取得伺服器的方式（REMOTE 與 EMBEDDED），後來轉成以 OBFUSCATED 伺服器為主，這類伺服器要達到一定條件才解鎖（merit-based）。從這個轉變可以看出，許多伺服器同時遭到部分 ISP（網路服務供應商）封鎖。雖然有些伺服器遭到封鎖，以連線通道維持的時間與傳輸的資料量衡量，整體連線品質仍維持正常。封鎖持續的時間與嚴重程度因 ISP 而異。
 
-[^73]: Sentinel HASP 最初由馬里蘭州的小公司 Aladdin Knowledge Systems 開發，之後陸續由 SafeNet、Gemalto 收購，目前屬於法國航太與國防集團 Thales。（譯註：原報告這則註腳的內容與所在段落對應不上，內容與原報告第 55 頁、[第 6 章「西方公司的共謀」](./index_6.md#西方公司的共謀)一節的正文相同，照原文翻譯。）
+Psiphon 用多層的流程讓用戶端找到可用的伺服器（server discovery）。首先，EMBEDDED 伺服器在安裝時就已內建，提供一份馬上可用的節點清單。接著，用戶端在第一次連線之後取得 DISCOVERY 伺服器，增加可連線的選擇。REMOTE 伺服器可以從遠端取得，OBFUSCATED 伺服器則要達到一定條件才解鎖，設計上較安全，特別難以列舉與封鎖。
+
+從 2024 年 5 月起，也就是 Geedge 整套系統在緬甸部署的時間，Psiphon 觀察到使用者行為明顯轉變。REMOTE 使用者的比例下降，OBFUSCATED 的使用比例相應增加。有人試圖靠伺服器列舉封鎖 Psiphon 時，預期就會出現這樣的變化。由此可見，Geedge 封鎖 Psiphon 的行動只有部分成功，使用者持續調整做法，找到其他連線途徑。
+
+[^73]: Sentinel HASP 最初由馬里蘭州的小公司 Aladdin Knowledge Systems 開發，之後先後由 SafeNet、Gemalto 收購，目前屬於法國航太與國防巨擘 Thales 集團。（譯註：原報告這則註腳的內容與所在段落無法對應，內容與原報告第 55 頁、[第 6 章「西方公司的共謀」](./index_6.md#西方公司的共謀)一節的正文相同，照原文翻譯。）
 [^74]: Brody Ford，[Cubans Evade Internet Curbs with U.S.-Backed Tech PSIPHON](https://www.bloomberg.com/news/articles/2021-07-16/over-1-million-cubans-evade-internet-curbs-with-u-s-backed-tech){target="_blank"}，Bloomberg，2021-07-16。
 [^75]: Brody Ford，[Cubans Evade Internet Curbs with U.S.-Backed Tech PSIPHON](https://www.bloomberg.com/news/articles/2021-07-16/over-1-million-cubans-evade-internet-curbs-with-u-s-backed-tech){target="_blank"}，Bloomberg，2021-07-16。
 
-*[Geedge Networks]: 中文簡稱：積至公司（积至公司），商業名稱：積至（海南）信息技術有限公司，是一家中國網路公司，涉及網際網路審查與監控技術的研發、部署與對外出口。
-*[Geedge]: 積至公司（积至公司）是一家中國網路公司，涉及網際網路審查與監控技術的研發、部署與對外出口。
-*[TSG]: 天狗安全閘道（TSG）是 Geedge Networks 提供的旗艦產品，作為一個運營商級別或國家級防火牆與流量管理解決方案，其全面能力可媲美中國防火長城（GFW）。TSG5 允許對整個國家所有使用者流量進行全面監控，並促進識別和阻擋網頁內容及應用程式。TSG 與企業環境中部署的防火牆設備相似，但能夠擴展以處理整個國家的網際網路流量。這項技術似乎缺乏保障人權的倫理限制。
+*[TSG]: 天狗安全閘道，Geedge Networks 的旗艦產品，國家等級的防火牆與流量管理系統
+*[ISP]: 網路服務供應商，提供上網連線的電信或網路業者
+*[OONI]: 開放網路干擾觀測站，蒐集各國網路審查量測資料的計畫
