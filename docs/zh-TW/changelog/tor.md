@@ -18,6 +18,15 @@ digest:
 
 Alpha 從 16.0a6（2026 年 5 月）起改以 Firefox beta 為基底，逐版小步 rebase。追的那條 beta 線在 7 月成為新的 Firefox ESR 153，所以 16.0a9 之後的版號標示又回到 esr，那是同一條線的延續，不是換回舊基底。穩定版幾乎每次發布都帶 Firefox 或 tor daemon 的安全修補，看到新版就更新即可。Firefox 從 2026 年 9 月起改為兩週發布一次，Tor Browser 跟著改，穩定版的更新會比過去更密。
 
+## Tor Browser 16.0.1
+
+> 2026-11-10 · [上游公告](https://blog.torproject.org/new-release-tor-browser-1601/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">穩定版</span>16.0 之後的第一個維護版，主要帶進 Firefox 的安全修補。桌面版的基底換到 153.7.0esr（tor-browser#45439），Android 版的 GeckoView 同步，另外從 Firefox 160 backport 安全修補（tor-browser#45442）。Mozilla 11 月 10 日的 ESR 153.7 公告列了 81 個 CVE，High 51 個、Moderate 21 個、Low 9 個（見[瀏覽器安全更新](./browsers.md)）。Mozilla 沒有標注任何一項已被實際利用，Tor Project 的公告也沒有提到。
+- 內建的 tor 升到 11 月 4 日的 0.4.9.16。那是只影響目錄權威的緊急釋出，處理 0.4.9.15 新規定的協定版本讓舊版用戶端直接結束執行的問題（細節見 [tor daemon 更新日誌](./tor-daemon.md)）。瀏覽器這一側多的是重新產生的備援目錄清單。
+- NoScript 升至 13.6.38.1984，zlib 升到 1.4。Android 的簽署流程改用新版的 apksigner（tor-browser-build#41814、tor-browser-build#41912），沒有介面與行為上的變更。
+- 發布檔的簽章子金鑰維持 `022DA248432D2A0E0F54E65E316C1FACD62D07D9`，已用 16.0.1 的 `sha256sums-signed-build.txt.asc` 核對。16.0 公告預告的新電路顯示要先在 Alpha 推出，截至 11 月 11 日 Alpha 通道仍停在 10 月 15 日的 16.0a14。
+
 ## Tor Browser 16.0
 
 > 2026-10-29 · [上游公告](https://blog.torproject.org/new-release-tor-browser-160/){target="_blank"}

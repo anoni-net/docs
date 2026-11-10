@@ -40,6 +40,16 @@ Apple 同時維護最新版與前兩代，安全修補三條線都發，但只�
 
 同一天三條線一起發是常態，數量落差很正常，見下面 2026-07-27 那則的比較。硬體太舊升不上最新線的話，留在 Tahoe 或 Sequoia 仍然收得到安全修補。
 
+## macOS Golden Gate 27.2.1、Tahoe 26.7.3、Sequoia 15.8.3
+
+> 2026-11-09 · [Golden Gate 27.2.1 公告](https://support.apple.com/en-us/149718){target="_blank"} · [Tahoe 26.7.3 公告](https://support.apple.com/en-us/149719){target="_blank"} · [Sequoia 15.8.3 公告](https://support.apple.com/en-us/149720){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">立刻</span>三條線同日發出，各補 8 個 CVE，三份清單完全相同。其中 Brotli 的越界寫入（CVE-2026-111497）在 10 月 27 日被 CISA 收進 KEV。Brotli 是 Google 開發的壓縮格式，網頁伺服器常用它壓縮傳給瀏覽器的內容，許多軟體都內建它的解碼器。Apple 的公告寫的是處理惡意製作的輸入可能導致記憶體損毀，沒有標注任何一項已被實際利用，也沒有說明系統裡哪些元件會用到 Brotli。
+- KEV 收錄的對象是 Brotli 函式庫本身，條目沒有寫明攻擊發生在哪一種產品上。依本頁判準，漏洞進了 CISA 的目錄就列為立刻，三條線今天都要更新。從 CISA 收錄到 Apple 發布修補，中間隔了 13 天。
+- 其餘 7 個裡有 5 個跟藍牙與 AirPlay 有關，要在藍牙範圍內或同一個網路上才能觸發。CoreUtils 有一個惡意的藍牙裝置不需要使用者操作就能完成配對（CVE-2026-113965），另一個讓藍牙範圍內的攻擊者繞過配對碼的嘗試次數上限、同樣不需要使用者操作就能配對（CVE-2026-113964）。AirPlay 與 rapportd 各有一個配對碼次數上限的繞過，Bluetooth 有一個藍牙範圍內就能損毀行程記憶體的問題（CVE-2026-113970）。
+- iMessage 群組有兩個問題，遠端攻擊者可能加入群組並收到群組裡的訊息（CVE-2026-113961），新加入群組的人可能讀到加入之前的訊息（CVE-2026-113960）。在 Mac 上用訊息 app 參與 iMessage 群組的人，iPhone 與 Mac 都要更新。
+- 11 月 9 日的安全性更新發布頁沒有 Safari 的項目。Sonoma 14.x 這一輪仍然沒有對應版本。iPhone 與 iPad 的對應版本整理在 [iOS 安全更新](./ios.md)，iOS 27.2.1 比 Golden Gate 27.2.1 多一個 App Intents 的項目。
+
 ## macOS Golden Gate 27.2、Tahoe 26.7.2、Sequoia 15.8.2
 
 > 2026-10-26 · [Golden Gate 27.2 公告](https://support.apple.com/en-us/149521){target="_blank"} · [Tahoe 26.7.2 公告](https://support.apple.com/en-us/149522){target="_blank"} · [Sequoia 15.8.2 公告](https://support.apple.com/en-us/149523){target="_blank"} · [Safari 27.2 公告](https://support.apple.com/en-us/149527){target="_blank"}

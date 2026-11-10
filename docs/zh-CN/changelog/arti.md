@@ -27,8 +27,8 @@ Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor�
 | 流量控制与拥塞控制 | ✅ 2.6.0 起永远启用，`flowctl-cc` 这个开关已移除 | 2.4.0 转 stable、2.6.0（2026-09）默认化 |
 | Counter Galois Onion 加密（CGO） | ✅ 2.6.0 起永远启用 | 2.6.0（2026-09） |
 | 嵌入非 Rust 语言（C FFI） | 🟡 RPC client 已有 C 友好接口，完整 FFI 规划中 | 进行中 |
-| 中继（relay） | 🟡 开发中，官方明说不要拿去接公开网络 | 2.0.0（2026-02）到 2.7.0 持续推进 |
-| 目录权威（directory authority） | 🟡 开发中，文档解析与 microdescriptor 计算已有雏形 | 2.0.0（2026-02）到 2.7.0 持续推进 |
+| 中继（relay） | 🟡 开发中，官方明说不要拿去接公开网络 | 2.0.0（2026-02）到 2.8.0 持续推进 |
+| 目录权威（directory authority） | 🟡 开发中，文档解析、microdescriptor 与共识的计算已有雏形 | 2.0.0（2026-02）到 2.8.0 持续推进 |
 | control-port 协议兼容 | ⬜ 不另行实现，改以 RPC 取代 | — |
 
 图例：✅ 已完成　🟡 开发中　⬜ 不实现
@@ -39,12 +39,12 @@ Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor�
 
 2.6.0 随版附上一份 [`README_relay.md`](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/README_relay.md){target="_blank"}，把中继与目录权威要做的事列成清单并标出完成状态。这是目前最接近官方路线图的东西，开头第一句就是不要在公开 Tor 网络上运行 `arti-relay`。
 
-依 2026 年 8 月那份清单，中继端的完成度：
+依 2.8.0 随版的清单，中继端的完成度：
 
 | 区块 | 已完成 | 待办 |
 |---|---|---|
 | 基本运作（通道、电路、CREATE2、EXTEND2、ORPort） | 9 | 8 |
-| 出口支持（DNS、BEGIN、RESOLVE、出口策略） | 0 | 5 |
+| 出口支持（DNS、BEGIN、RESOLVE、timeless 侧信道防护、出口策略） | 2 | 4 |
 | 目录缓存 | 0 | 13 |
 | 自我检测（ORPort 可达性、带宽、DNS） | 0 | 3 |
 | onion 服务支持（HsDir、引介、会合） | 0 | 3 |
@@ -52,9 +52,22 @@ Arti 是 Tor Project 从 2021 年开始的计划，把原本用 C 写成的 Tor�
 | 性能功能（缓冲区调校、电路调度、conflux） | 0 | 5 |
 | 目录权威 | 0 | 28 |
 
-已完成的九项集中在最底层：接受连入通道、双向通道认证、处理与递送 relay cell、CREATE2 与 CREATE\_FAST、EXTEND2、监听 ORPort。也就是说电路建得起来，但一个中继要能真的上线所需的其他东西几乎都还没开始，密钥生成与轮换、发布 router descriptor、带宽上限这些都还在待办。
+已完成的九项集中在最底层：接受连入通道、双向通道认证、处理与递送 relay cell、CREATE2 与 CREATE\_FAST、EXTEND2、监听 ORPort。也就是说电路建得起来，但一个中继要能真的上线所需的其他东西在清单上几乎都还是待办，包含密钥生成与轮换、发布 router descriptor、带宽上限。2.8.0 在清单上勾掉的只有出口支持的两项，基本的 DNS 支持与处理 RESOLVE 请求。
 
-那份清单自己注明 2026 年 8 月 11 日之后团队还没回头勾选，所以实际进度可能比表上更前面，2.6.0 就补上了 `ntor-v3` 的 CREATE2 握手与中继 DNS 解析器的初步设计。要追精确状态得看 [issue tracker](https://gitlab.torproject.org/tpo/core/arti/-/issues/){target="_blank"}。
+2.8.0 的清单开头仍留着「2026 年 8 月 11 日之后团队还没回头勾选」的注记，实际上已经勾了上面两项。清单也还没跟上 CHANGELOG，2.8.0 的 CHANGELOG 已经列出中继 DNS 缓存、发布 router descriptor 与全局带宽限速的实现，清单上对应的项目仍是待办，所以实际进度比表上更前面。要追精确状态得看 [issue tracker](https://gitlab.torproject.org/tpo/core/arti/-/issues/){target="_blank"}。
+
+## Arti 2.8.0
+
+> 2026-11-03 · [上游公告](https://blog.torproject.org/arti_2_8_0_released/){target="_blank"} · [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md){target="_blank"}
+
+- 修复了两个带 TROVE 编号的低严重度问题，另外升级依赖包，处理一大批 RUSTSEC（Rust 软件包的安全通报编号）。上游建议 `arti` 与 `arti-client` 的用户尽快升级，架设 onion 服务的人尤其要升。上游没有提到已被实际利用。
+- TROVE-2026-069 影响开了工作量证明（proof-of-work，onion 服务被大量连接时要求客户端先解题的防护）的 onion 服务，某些情况下会过于频繁地上传描述符，非 release 构建则会 panic（程序直接终止）。TROVE-2026-070 是网桥配置的 ID 互相冲突时，Arti 可能进入不一致的状态而 panic，收到一连串没有强制密钥 ID 绑定的冲突共识也会触发。
+- 依赖包的升级涵盖 14 个 RUSTSEC，都跟非常数时间的运算有关（执行时间随数据而变，有机会被拿来推测机密），webpki 系列的根证书与证书验证软件包也一并更新。`rustls` 升到 0.23.64，另外对应 4 个 RUSTSEC。
+- onion 服务的修正：手动从密钥库删掉身份密钥之后，服务原本会继续用旧身份发布描述符，直到盲化密钥与描述符签名密钥过期。hs_ntor 握手另外加上纵深防御的检查。为了追查 Arti 的描述符编码或 c-tor 的 HSDir 实现可能有的错误，暂时加上把被拒绝的描述符存到硬盘的功能。
+- 中继端进展：中继 DNS 解析器有了配置选项与缓存，可以设置昵称与联系信息，支持编码与发布 router descriptor（中继对外公布自身信息的描述符），中继通道加上全局带宽限速，`tor-dirserver` 可以 bootstrap router descriptor 与 microdescriptor。
+- 目录权威端进展：「从投票生成共识」的计算接上顶层流程，标志、权威区段、前言的网络参数与软件版本、建议与必要的协议版本都已实现，页脚有初步支持，也能计算投票延迟。
+- `arti` 的 `secmem-proc` feature 改为弃用，由 `harden` 取代。`arti-client` 移除上游已弃用的 `accel-sha1-asm` feature，备用目录列表同步更新。
+- `README_relay.md` 这一版有更新，上面「中继端做到哪里」的表格已换成 2.8.0 的清单。
 
 ## Arti 2.7.0
 

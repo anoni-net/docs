@@ -22,9 +22,9 @@ The two apps publish differently. WhatsApp's are issued by Meta as CVEs and coll
 
 Releases without a security advisory are not listed, so "Routine" never appears here. "Now" requires evidence, the same basis as the iOS and Windows pages.
 
-## July to October 2026 { #July-to-September-2026 }
+## July to November 2026 { #July-to-September-2026 }
 
-Neither WhatsApp nor Signal published a new security advisory during this period, and CISA's KEV catalogue added no entries for either app. WhatsApp's most recent were two CVEs in May, listed below. Signal shipped 41 stable releases across its three platforms from July to September, plus 9 more from 1 to 20 October (2 for Android, 3 for iOS and 4 for desktop), and none of the release notes mention a security fix.
+As of 10 November, neither WhatsApp nor Signal has published a new security advisory, and CISA's KEV catalogue has added no entries for either app. WhatsApp's most recent were two CVEs in May, listed below. Signal shipped 41 stable releases across its three platforms from July to September, plus 20 more from 1 October to 10 November (6 for Android, 8 for iOS and 6 for desktop), and none of the release notes mention a security fix.
 
 Keep automatic updates on even when there are no advisories. Every Signal version has an expiry date, and an outdated one stops working until it is updated. WhatsApp for Windows updates through the Microsoft Store, so check that automatic updates in the Store have not been switched off.
 

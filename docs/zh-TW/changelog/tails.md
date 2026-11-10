@@ -24,6 +24,17 @@ Tails 上的漏洞後果跟一般作業系統不同。取得管理員權限等�
 
 Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志工讀完公告後補的判斷。判斷不確定時以較高一級為準。
 
+## Tails 7.16
+
+> 2026-10-30 · [上游公告](https://tails.net/news/version_7.16/){target="_blank"} · [7.15.1 已知漏洞公告](https://tails.net/security/known_security_vulnerabilities_in_7.15.1/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">儘快</span>例行排程版本，帶進 Tor Browser 與 tor 的安全更新。Tails 另外發了一份 7.15.1 的已知漏洞公告，要求儘快升級。上游沒有提到已被實際利用。
+- Tor Browser 從 15.0.26 升至 16.0，基底換成 Firefox ESR 153，設定頁也跟著 Firefox 的改版全面重整，細節見 [Tor 更新日誌](./tor.md)。Tor 用戶端升至 0.4.9.15，那是加強中繼端阻斷服務防禦的安全釋出，整理在 [tor daemon 更新日誌](./tor-daemon.md)。
+- 修好 Thunderbird 的 OpenPGP 功能（issue 21841）。
+- 已知漏洞公告一樣沒有列出清單，7.15.1 的套件清單也已經從 Tails 網站撤下，這次無法逐份比對新納入的 Debian 公告。7.16 的建置紀錄（build manifest）寫明 Debian 安全更新取自 10 月 29 日的快照。10 月 23 日以後的公告裡，HEIF 與 AVIF 影像的 libheif（DSA-6583-1）與壓縮函式庫 brotli（DSA-6582-1）裝的都是修補後的版本，10 月 29 日 ImageMagick 函式庫的公告（DSA-6593-1）沒有趕上。
+- 核心維持 6.12.113，Debian 11 月 2 日的核心安全公告（DSA-6602-1）晚於這一版。11 月 4 日的 tor 0.4.9.16 與 11 月 10 日的 Tor Browser 16.0.1 也都在這一版之後。
+- 可從 Tails 7.0 以後版本自動升級。全新安裝會清除既有的 Persistent Storage。
+
 ## Tails 7.15.1
 
 > 2026-10-23 · [上游公告](https://tails.net/news/version_7.15.1/){target="_blank"}

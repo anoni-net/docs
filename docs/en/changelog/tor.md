@@ -18,6 +18,15 @@ Tor Browser, Tor daemon, and Onion service release summaries. Newest at the top.
 
 Since 16.0a6 (May 2026) the alpha channel has been based on Firefox betas, rebasing in small steps. The beta line it follows became the new Firefox ESR 153 in July, which is why entries from 16.0a9 onward carry esr version numbers again: same line, not a return to the old base. Stable releases almost always carry Firefox or tor daemon security fixes, so install them as they appear. Firefox moved to a two-week release cadence in September 2026 and Tor Browser follows, so stable updates now arrive more often than before.
 
+## Tor Browser 16.0.1
+
+> 2026-11-10 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-1601/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">Stable</span>The first maintenance release after 16.0, mainly bringing in Firefox security fixes. Desktop moves to a 153.7.0esr base (tor-browser#45439), GeckoView on Android is updated to match, and security fixes are backported from Firefox 160 (tor-browser#45442). Mozilla's ESR 153.7 advisory of 10 November lists 81 CVEs, 51 High, 21 Moderate and 9 Low (see [browser security updates](./browsers.md)). Mozilla does not flag any of them as actively exploited, and the Tor Project's announcement does not mention exploitation either.
+- The bundled tor moves to 0.4.9.16 from 4 November, an emergency release affecting only directory authorities. It deals with the protocol versions newly required in 0.4.9.15 causing older clients to exit outright (details in the [tor daemon changelog](./tor-daemon.md)). On the browser side, the only addition is a regenerated fallback directory list.
+- NoScript moves to 13.6.38.1984 and zlib to 1.4. The Android signing process switches to a newer apksigner (tor-browser-build#41814, tor-browser-build#41912), with no change to the interface or behaviour.
+- The signing subkey for release files remains `022DA248432D2A0E0F54E65E316C1FACD62D07D9`, checked against the `sha256sums-signed-build.txt.asc` for 16.0.1. The new circuit display announced with 16.0 is due to land in Alpha first; as of 11 November the Alpha channel is still on 16.0a14 from 15 October.
+
 ## Tor Browser 16.0
 
 > 2026-10-29 · [Upstream announcement](https://blog.torproject.org/new-release-tor-browser-160/){target="_blank"}

@@ -23,6 +23,15 @@ OnionShare ships far less often than Tor Browser or Tails: fifteen months passed
 
 Releases are infrequent and none so far has warranted same-day installation, so this page has no "Now" entries yet.
 
+## OnionShare 2.7.2
+
+> 2026-11-07 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.7.2){target="_blank"} · [GHSA-vc3q-8pwp-9hw6](https://github.com/onionshare/onionshare/security/advisories/GHSA-vc3q-8pwp-9hw6){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>Fixes two security issues, covered by a single advisory, GHSA-vc3q-8pwp-9hw6, with no CVE identifier and a low severity rating. The advisory says the issues were found through automated code analysis and AI review, then confirmed by reading the code by hand; the proof of concept was never actually run, and the advisory does not mention active exploitation.
+- The first affects only the command-line `onionshare-cli`, versions 2.6.1 through 2.7.1; the desktop app is not affected. Share mode stops sharing by default once the files have been downloaded for the first time, and the command-line version prints "Stopped because transfer is complete", yet the server and onion service stayed up, so anyone holding the address (and private key) could download again. If you rely on auto-stop to end a share, you may believe it is closed when it is still open.
+- The second is in chat mode and affects 2.6.2 through 2.7.1. Usernames were checked against a sanitised version, but the raw input was what got stored and broadcast. A name containing non-ASCII lookalike letters or bidirectional text control characters (invisible characters that switch text direction) could therefore let one participant appear in the chat under someone else's name, which is exactly what the 2022 fix for CVE-2022-21696 was meant to prevent. Names are escaped on display, so there is no HTML injection. The advisory only rules out the desktop app for the first issue; the chat mode code lives in the web module shared by the desktop and command-line versions.
+- The rest are build fixes (extracting GeoIP data from the Tor archive during packaging, and a timer test for reproducible builds), a switch to scoped PySide6 enums, a new Hungarian translation, and dependency updates.
+
 ## OnionShare 2.7.1
 
 > 2026-10-29 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.7.1){target="_blank"}

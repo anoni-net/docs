@@ -836,6 +836,7 @@
 	#軟體更新日誌
 /changelog/android/
 	#2026-年-10-月
+	#2026-年-11-月
 	#2026-年-4-月
 	#2026-年-5-月
 	#2026-年-6-月
@@ -856,6 +857,7 @@
 	#WebTunnel-005
 	#WebTunnel-006
 	#WebTunnel-007
+	#lyrebird-0100
 	#lyrebird-081
 	#lyrebird-090
 	#三種傳輸適合什麼情況
@@ -870,15 +872,18 @@
 	#Arti-251
 	#Arti-260
 	#Arti-270
+	#Arti-280
 	#Arti-更新日誌
 	#c-tor-移植到-Rust-的進度
 	#中繼端做到哪裡
 /changelog/browsers/
 	#Chrome-2026-年-10-月
+	#Chrome-2026-年-11-月
 	#Chrome-2026-年-7-月
 	#Chrome-2026-年-8-月
 	#Chrome-2026-年-9-月
 	#Firefox-2026-年-10-月
+	#Firefox-2026-年-11-月
 	#Firefox-2026-年-7-月
 	#Firefox-2026-年-8-月
 	#Firefox-2026-年-9-月
@@ -897,6 +902,7 @@
 /changelog/feed.xml
 /changelog/grapheneos/
 	#2026-年-10-月
+	#2026-年-11-月
 	#2026-年-6-月
 	#2026-年-7-月
 	#2026-年-8-月
@@ -911,12 +917,14 @@
 	#iOS-266iPadOS-266
 	#iOS-2671iPadOS-2671同日另有-2701
 	#iOS-271
+	#iOS-2721267318712
 	#iOS-272267218711
 	#iOS-27iPadOS-27同日另有-267
 	#iOS-安全更新
 	#你的機器走哪一條線
 	#急迫程度怎麼判斷
 /changelog/macos/
+	#macOS-Golden-Gate-2721Tahoe-2673Sequoia-1583
 	#macOS-Golden-Gate-272Tahoe-2672Sequoia-1582
 	#macOS-Golden-Gate-27同日另有-Tahoe-267Sequoia-158
 	#macOS-Tahoe-265
@@ -940,6 +948,7 @@
 	#OnionShare-265
 	#OnionShare-27
 	#OnionShare-271
+	#OnionShare-272
 	#OnionShare-更新日誌
 	#急迫程度怎麼判斷
 /changelog/ooni/
@@ -951,10 +960,13 @@
 	#OONI-Probe-611
 	#OONI-Probe-620
 	#OONI-Probe-621
+	#OONI-Probe-630
+	#OONI-Probe-631
 	#OONI-Probe-CLI-v3290
 	#OONI-Probe-CLI-v3291
 	#OONI-Probe-CLI-v3300
 	#OONI-Probe-CLI-v3310
+	#OONI-Probe-CLI-v3311
 	#OONI-更新日誌
 /changelog/tails/
 	#Tails-618
@@ -967,6 +979,7 @@
 	#Tails-714
 	#Tails-715
 	#Tails-7151
+	#Tails-716
 	#Tails-76
 	#Tails-771
 	#Tails-772
@@ -985,6 +998,7 @@
 	#tor-04913
 	#tor-04914
 	#tor-04915
+	#tor-04916
 	#tor-049604823
 	#tor-049704824
 	#tor-0498
@@ -1010,6 +1024,7 @@
 	#Tor-Browser-15025
 	#Tor-Browser-15026
 	#Tor-Browser-160
+	#Tor-Browser-1601
 	#Tor-Browser-160a10Alpha-測試通道
 	#Tor-Browser-160a11Alpha-測試通道
 	#Tor-Browser-160a12Alpha-測試通道
@@ -1023,6 +1038,7 @@
 	#兩個發布通道
 /changelog/windows/
 	#2026-年-10-月
+	#2026-年-11-月
 	#2026-年-4-月
 	#2026-年-5-月
 	#2026-年-6-月
@@ -1830,6 +1846,7 @@
 	#July-2026
 	#June-2026
 	#May-2026
+	#November-2026
 	#October-2026
 	#September-2026
 	#Why-this-page-has-no-urgency-ratings
@@ -1846,6 +1863,7 @@
 	#WebTunnel-006
 	#WebTunnel-007
 	#Which-transport-suits-which-situation
+	#lyrebird-0100
 	#lyrebird-081
 	#lyrebird-090
 /en/changelog/arti/
@@ -1857,6 +1875,7 @@
 	#Arti-251
 	#Arti-260
 	#Arti-270
+	#Arti-280
 	#Arti-Changelog
 	#How-far-the-relay-side-has-got
 	#c-tor-to-Rust-porting-progress
@@ -1864,10 +1883,12 @@
 	#Browser-Security-Updates
 	#Chrome-August-2026
 	#Chrome-July-2026
+	#Chrome-November-2026
 	#Chrome-October-2026
 	#Chrome-September-2026
 	#Firefox-August-2026
 	#Firefox-July-2026
+	#Firefox-November-2026
 	#Firefox-October-2026
 	#Firefox-September-2026
 	#How-often-each-browser-ships
@@ -1887,6 +1908,7 @@
 	#GrapheneOS-Monthly-Summary
 	#July-2026
 	#June-2026
+	#November-2026
 	#October-2026
 	#September-2026
 /en/changelog/ios/
@@ -1902,12 +1924,14 @@
 	#iOS-27-iPadOS-27-267-shipped-the-same-day
 	#iOS-271
 	#iOS-272-2672-18711
+	#iOS-2721-2673-18712
 	#iOS-Security-Updates
 /en/changelog/macos/
 	#How-we-rate-urgency
 	#Three-maintenance-lines
 	#macOS-Golden-Gate-27-Tahoe-267-and-Sequoia-158-shipped-the-same-day
 	#macOS-Golden-Gate-272-Tahoe-2672-Sequoia-1582
+	#macOS-Golden-Gate-2721-Tahoe-2673-Sequoia-1583
 	#macOS-Security-Updates
 	#macOS-Tahoe-265
 	#macOS-Tahoe-2652
@@ -1928,6 +1952,7 @@
 	#OnionShare-265
 	#OnionShare-27
 	#OnionShare-271
+	#OnionShare-272
 	#OnionShare-Changelog
 /en/changelog/ooni/
 	#OONI-Changelog
@@ -1936,10 +1961,13 @@
 	#OONI-Probe-611
 	#OONI-Probe-620
 	#OONI-Probe-621
+	#OONI-Probe-630
+	#OONI-Probe-631
 	#OONI-Probe-CLI-v3290
 	#OONI-Probe-CLI-v3291
 	#OONI-Probe-CLI-v3300
 	#OONI-Probe-CLI-v3310
+	#OONI-Probe-CLI-v3311
 /en/changelog/tails/
 	#How-we-rate-urgency
 	#Tails-618
@@ -1952,6 +1980,7 @@
 	#Tails-714
 	#Tails-715
 	#Tails-7151
+	#Tails-716
 	#Tails-76
 	#Tails-78
 	#Tails-781
@@ -1968,6 +1997,7 @@
 	#tor-04913
 	#tor-04914
 	#tor-04915
+	#tor-04916
 	#tor-0496-04823
 	#tor-0497-04824
 	#tor-0498
@@ -1987,6 +2017,7 @@
 	#Tor-Browser-15025
 	#Tor-Browser-15026
 	#Tor-Browser-160
+	#Tor-Browser-1601
 	#Tor-Browser-160a10-alpha
 	#Tor-Browser-160a11-alpha
 	#Tor-Browser-160a12-alpha
@@ -2005,6 +2036,7 @@
 	#July-2026
 	#June-2026
 	#May-2026
+	#November-2026
 	#October-2026
 	#September-2026
 	#Windows-Security-Updates
@@ -5825,6 +5857,7 @@
 	#软件更新日志
 /zh-cn/changelog/android/
 	#2026-年-10-月
+	#2026-年-11-月
 	#2026-年-4-月
 	#2026-年-5-月
 	#2026-年-6-月
@@ -5845,6 +5878,7 @@
 	#WebTunnel-005
 	#WebTunnel-006
 	#WebTunnel-007
+	#lyrebird-0100
 	#lyrebird-081
 	#lyrebird-090
 	#三种传输适合什么情况
@@ -5858,15 +5892,18 @@
 	#Arti-251
 	#Arti-260
 	#Arti-270
+	#Arti-280
 	#Arti-更新日志
 	#c-tor-移植到-Rust-的进度
 	#中继端做到哪里
 /zh-cn/changelog/browsers/
 	#Chrome-2026-年-10-月
+	#Chrome-2026-年-11-月
 	#Chrome-2026-年-7-月
 	#Chrome-2026-年-8-月
 	#Chrome-2026-年-9-月
 	#Firefox-2026-年-10-月
+	#Firefox-2026-年-11-月
 	#Firefox-2026-年-7-月
 	#Firefox-2026-年-8-月
 	#Firefox-2026-年-9-月
@@ -5885,6 +5922,7 @@
 /zh-cn/changelog/feed.xml
 /zh-cn/changelog/grapheneos/
 	#2026-年-10-月
+	#2026-年-11-月
 	#2026-年-6-月
 	#2026-年-7-月
 	#2026-年-8-月
@@ -5899,12 +5937,14 @@
 	#iOS-266iPadOS-266
 	#iOS-2671iPadOS-2671同日另有-2701
 	#iOS-271
+	#iOS-2721267318712
 	#iOS-272267218711
 	#iOS-27iPadOS-27同日另有-267
 	#iOS-安全更新
 	#你的机器走哪一条线
 	#紧急程度怎么判断
 /zh-cn/changelog/macos/
+	#macOS-Golden-Gate-2721Tahoe-2673Sequoia-1583
 	#macOS-Golden-Gate-272Tahoe-2672Sequoia-1582
 	#macOS-Golden-Gate-27同日另有-Tahoe-267Sequoia-158
 	#macOS-Tahoe-265
@@ -5928,6 +5968,7 @@
 	#OnionShare-265
 	#OnionShare-27
 	#OnionShare-271
+	#OnionShare-272
 	#OnionShare-更新日志
 	#紧急程度怎么判断
 /zh-cn/changelog/ooni/
@@ -5937,10 +5978,13 @@
 	#OONI-Probe-611
 	#OONI-Probe-620
 	#OONI-Probe-621
+	#OONI-Probe-630
+	#OONI-Probe-631
 	#OONI-Probe-CLI-v3290
 	#OONI-Probe-CLI-v3291
 	#OONI-Probe-CLI-v3300
 	#OONI-Probe-CLI-v3310
+	#OONI-Probe-CLI-v3311
 	#OONI-Probe-Desktop-601-beta
 	#OONI-更新日志
 /zh-cn/changelog/tails/
@@ -5956,6 +6000,7 @@
 	#Tails-714
 	#Tails-715
 	#Tails-7151
+	#Tails-716
 	#Tails-76
 	#Tails-78
 	#Tails-781
@@ -5971,6 +6016,7 @@
 	#tor-04913
 	#tor-04914
 	#tor-04915
+	#tor-04916
 	#tor-049604823
 	#tor-049704824
 	#tor-0498
@@ -5992,6 +6038,7 @@
 	#Tor-Browser-15025
 	#Tor-Browser-15026
 	#Tor-Browser-160
+	#Tor-Browser-1601
 	#Tor-Browser-160a10Alpha-测试通道
 	#Tor-Browser-160a11Alpha-测试通道
 	#Tor-Browser-160a12Alpha-测试通道
@@ -6004,6 +6051,7 @@
 	#两个发布通道
 /zh-cn/changelog/windows/
 	#2026-年-10-月
+	#2026-年-11-月
 	#2026-年-4-月
 	#2026-年-5-月
 	#2026-年-6-月

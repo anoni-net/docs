@@ -15,6 +15,34 @@ GrapheneOS 走自动更新，设备在后台就会装好，一般用户不需要
 
 原始数据来自[官方发布页](https://grapheneos.org/releases){target="_blank"}。官方的 atom feed 只保留最近 20 则（大约四个月），更早的记录要到官网翻。
 
+## 2026 年 11 月
+
+> 版本 `2026110100`、`2026110200`、`2026110700`、`2026110800` · [官方发布页](https://grapheneos.org/releases){target="_blank"}
+
+- 11 月 8 日的 `2026110800` 只发给第 10 代 Pixel 的四款机型（Pixel 10、10 Pro、10 Pro XL、10 Pro Fold），从 Android 17 QPR2 Beta backport 一个上游休眠时间计算错误的修补。原厂系统也有这个错误，上一版更新 GKI 之后变得更常发生。
+- 11 月 7 日的 `2026110700` 新增向系统请求粗略位置的 API，给 Vanadium 与 Sandboxed Google Play 使用。Sandboxed Google Play 原本自己重做一份上游的位置模糊化代码（LocationFudger），改用新的 API 之后不必再维护那一份。
+- 紧急电话号码的处理整套重写，改从 Safety Hub 取出正确的数据，取代上游 AOSP 过时且有错误的实现。
+- 启动器原本只对私密空间做的搜索过滤，扩大到锁定或暂停中的工作资料（work profile），搜索结果不会列出里面的 app。
+- 用 secure spawning 启动的原生 zygote 进程，恢复设置附加组与 NoNewPrivs（禁止进程再取得新权限的标志）。目前用到这条路径的主要是 Vanadium、Chrome 与部分 Chromium 系浏览器，用来以较省内存的方式运行渲染器。
+- 6.18 内核跟上 GKI LTS 的最新修订，并 backport 上游 FUSE 的 use-after-free（程序把内存还回去之后又拿来用，可能被塞进恶意代码）修补。第 10 代 Pixel 修掉移植到 6.18 之后的音频卸载兼容问题、zram 初始化失败的处理，以及上游 PCIe 重新扫描缺少同步的错误。
+- 时区数据更新到 2026f，Vanadium 升到 157.0.8103.38.0。
+- security preview 版（`2026110701`）提前应用的范围往后推到 Google 排定在 2026 年 12 月到 2027 年 5 月公告的修补，额外修好的 CVE 清单有 107 个（12 个 Critical、95 个 High）。
+- 11 月 2 日的 `2026110200` 带上完整的 2026-11-01 安全补丁级别，十一月公告的内容整理在 [Android 安全补丁级别](./android.md)。到 11 月 8 日那版为止，显示的补丁级别仍是 2026-11-01，Google 的 Pixel 更新公告到 11 月 11 日也还没发布。
+- 6.1 内核从 Android GKI 分支与上游 Linux 补上一批回归修正，包括 MGLRU 的空指针解引用、页面迁移的无限循环，以及 USB HID、MIDI 与块加密的 use-after-free。
+- 第 10 代 Pixel 修掉移植到 6.18 之后的两个充电问题，支持 AVS 的充电器无法 PPS 快充，以及充电记录代码的无效内存访问（由 UBSan 抓到）。
+- security preview 版（`2026110201`）的范围变成 2026 年 12 月到 2027 年 4 月。十一月那批已经正式公告，从清单里移出，清单剩 94 个（8 个 Critical、86 个 High）。
+- 11 月 1 日的 `2026110100` 把第 10 代 Pixel 的全部驱动移植到 6.18 内核并切换过去，同时修掉一批上游驱动的错误，范围包括 pKVM 与 SMMU 的 DMA 映射、内存生命周期，以及初始化失败时的处理。
+- 6.18 内核改用 Rust 实现的 Binder（Android 进程之间通信的机制），取代旧的 C 实现。lockdown 从机密模式改成完整性模式，原因是 DMA-BUF 的统计改用 BPF 程序，跟机密模式不兼容，microdroid 内核仍维持机密模式。
+- 四条内核线都 backport CVE-2026-98432 的修补。漏洞在 MPTCP，GrapheneOS 写明它的内核原本就停用 MPTCP，另有 MTE 等防护。6.1、6.12、6.18 分别升到 6.1.182、6.12.97、6.18.38。
+- 十一月公告里一个可以远程触发的拒绝服务漏洞，security preview 版从 2026 年 7 月起就修好了，这一版把修补放进一般版本。
+- 加入可用的卫星移动网络支持，不会再像先前的尝试那样让 Android Auto 部分失灵，GrapheneOS 已确认可以搭配 T-Mobile 的 T-Satellite。
+- 撤回 8 月 13 日那版加上的两项防护，凭证管理器的选择界面（CredentialSelectorActivity）与 Sandboxed Google Play 的 FIDO 界面不再设为不透明（见 2026 年 8 月那则），原因是 app 兼容性问题。
+- 修掉 SystemUI 画中画触控处理（PipTouchHandler）的上游 use-after-free，以及启动器主屏幕无障碍操作失效的上游错误。
+- Vanadium 依次升到 156.0.8078.73.0 与 156.0.8078.79.0，信息 app 升到第 18 版，TalkBack 升到第 23 版。
+- security preview 版（`2026110101`）提前应用 Google 排定在 2026 年 11 月到 2027 年 4 月公告的修补，额外修好的 CVE 清单有 152 个（11 个 Critical、141 个 High），10 月 21 日那版是 139 个。
+- GrapheneOS 这个月的四版发布说明都没有提到已被实际利用的漏洞，Google 在十一月的 Android 安全公告里也没有标注任何一项。
+- 机型涵盖 Pixel 6 到 Pixel 10a，没有变动。
+
 ## 2026 年 10 月
 
 > 版本 `2026100200`、`2026100600`、`2026101600`、`2026102100` · [官方发布页](https://grapheneos.org/releases){target="_blank"}

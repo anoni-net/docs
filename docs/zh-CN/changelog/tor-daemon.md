@@ -35,13 +35,24 @@ tor daemon（社区惯称 c-tor）是 [Tor](../tools/what-is-tor.md) 网络的 C
 
 下面多则条目都在修 conflux。它让客户端同时用两条电路传同一个连接的数据以提升速度，2023 年进入 Tor，是这半年多起安全问题的共同来源。新的代码路径带来新的错误面，这批修补集中在那里并不意外。
 
+## tor 0.4.9.16
+
+> 2026-11-04 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.16/ChangeLog){target="_blank"}
+
+- <span class="urg-tag urg-tag--routine">一般</span>官方写明这是只影响目录权威（负责投票生成共识的九台服务器）的紧急发布（emergency release），没有标为安全发布，也没有 TROVE 编号。这一版没有安全问题，也就没有利用与否的问题。架设中继、网桥与 onion 服务的人按平常的节奏升级即可。
+- 起因在 0.4.9.15，那一版的目录权威把 DESC_NO_TAP 与 MICRODESC_NO_TAP 列为必要能力，并从 microdescriptor 拿掉所有 TAP key。ChangeLog 写明新的必要协议版本让 0.4.8.x 以前的客户端直接退出运行（exit(1)），旧版客户端也没有按预期处理解析不了的 microdescriptor，造成 thundering herd（大量客户端同时涌向同一批服务器）。
+- 这一版的目录权威把 Desc 与 Microdesc 的必要协议版本从 3 退回 2，microdescriptor 也改成放一把假的 TAP key，不再整个拿掉，对应新的共识方法 38。ChangeLog 写明这样做是安全的，v2 onion 服务之后已经没有任何地方使用 TAP。
+- ChangeLog 没有写明 0.4.8.x 的客户端之后能否正常连接。0.4.9.15 已写明 0.4.8 不再受支持，用发行版软件包或其他内置 tor 的 app 的人，仍要确认版本是 0.4.9.x。
+- 另外重新生成 11 月 4 日版本的备用目录（fallback directory）列表，目录权威的获取大小上限也加倍，ChangeLog 写明九份投票即使压缩过也可能超过 16 MB（ticket 41471 的一部分）。
+- 用浏览器连上 Tor 的人，11 月 10 日的 Tor Browser 16.0.1 已经带进这一版（见 [Tor 更新日志](./tor.md)）。
+
 ## tor 0.4.9.15
 
 > 2026-10-28 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.15/ChangeLog){target="_blank"}
 
 - <span class="urg-tag urg-tag--now">立刻</span>安全发布，距离 0.4.9.14 三周，修补的是中继收到大量目录请求时的拒绝服务防御。官方写明主要影响中继，请尽快升级。这次没有附 TROVE 编号，上游也没有提到已被实际利用。
-- 用浏览器连上 Tor 的人，10 月 29 日的 Tor Browser 16.0 已经带进这一版（见 [Tor 更新日志](./tor.md)）。Tails 7.15.1 带的仍是 0.4.9.14，下一版跟进时会整理在 [Tails 更新日志](./tails.md)。架设中继、网桥与 onion 服务的人要自行升级。
-- 0.4.8 以前的版本从这一版起无法在 Tor 网络上运作。目录权威把 DESC_NO_TAP 与 MICRODESC_NO_TAP 列为客户端与中继的必要协议能力，并启用新的共识方法，从 microdescriptor（客户端下载的精简版中继描述文件）移除所有 TAP key 与家族清单，省下大量目录带宽。0.4.9.12 起 0.4.8.x 的中继已经被挡在网络外面，这次连客户端也无法连接。用发行版软件包或其他内置 tor 的 app 的人，要确认版本已经是 0.4.9.x。
+- 用浏览器连上 Tor 的人，10 月 29 日的 Tor Browser 16.0 已经带进这一版（见 [Tor 更新日志](./tor.md)）。10 月 30 日的 Tails 7.16 也跟上了（见 [Tails 更新日志](./tails.md)）。架设中继、网桥与 onion 服务的人要自行升级。
+- 0.4.8 以前的版本从这一版起无法在 Tor 网络上运作。目录权威把 DESC_NO_TAP 与 MICRODESC_NO_TAP 列为客户端与中继的必要协议能力，并启用新的共识方法，从 microdescriptor（客户端下载的精简版中继描述文件）移除所有 TAP key 与家族清单，省下大量目录带宽。0.4.9.12 起 0.4.8.x 的中继已经被挡在网络外面，这次连客户端也无法连接。用发行版软件包或其他内置 tor 的 app 的人，要确认版本已经是 0.4.9.x。这项规定造成旧版客户端直接退出运行，11 月 4 日的 0.4.9.16 把其中 Desc 与 Microdesc 的必要版本退回，细节见上面那一则。
 - 目录权威另外把 RELAY_NEGOTIATE_SUBPROTO 与 RELAY_CRYPT_CGO 列为中继的必要能力。客户端之后可以假设每个中继都支持 Counter Galois Onion 加密（CGO），连还没出现在共识里的中继也直接使用。
 - 新的拒绝服务防御都跟 BEGIN_DIR（在电路上开一条目录请求的流）有关（ticket 41411）。目录缓存可以按电路限制 BEGIN_DIR 的频率，由 DoSBeginDirRateEnabled、DoSBeginDirRate、DoSBeginDirBurst 与 DoSBeginDirDefenseType 控制，四个选项在共识参数与 torrc 都能设置，默认开启。另一项让目录缓存拒绝已验证中继在同一条电路上的第二个 BEGIN_DIR，由 DoSBeginDirLimitEnabled 控制，默认关闭。
 - onion 服务目录则一律只接受已验证中继在每条电路上获取或上传一次描述文件，之后再有请求，整条电路就会被关闭。被拒绝的次数记在 heartbeat 与 `relay_dos_total` 指标。中继端也改成每个目录请求各开一条电路，让目录缓存之后能把中继限制在每条电路一个 BEGIN_DIR。

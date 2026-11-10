@@ -40,6 +40,16 @@ Golden Gate 27 arrived on 14 September 2026 and pushed every line back a step. S
 
 All three shipping the same day is normal, and so is the gap in fix counts. See the 2026-07-27 entry below for the comparison. If your hardware cannot run the current line, staying on Tahoe or Sequoia still gets you security fixes.
 
+## macOS Golden Gate 27.2.1, Tahoe 26.7.3, Sequoia 15.8.3
+
+> 2026-11-09 · [Golden Gate 27.2.1 advisory](https://support.apple.com/en-us/149718){target="_blank"} · [Tahoe 26.7.3 advisory](https://support.apple.com/en-us/149719){target="_blank"} · [Sequoia 15.8.3 advisory](https://support.apple.com/en-us/149720){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>All three lines shipped the same day, each fixing the same 8 CVEs. Among them is an out-of-bounds write in Brotli (CVE-2026-111497) that CISA added to KEV on 27 October. Brotli is a compression format developed by Google; web servers commonly use it to compress what they send to browsers, and a great deal of software bundles a Brotli decoder. Apple's advisory says processing maliciously crafted input may lead to memory corruption. It does not flag any item as actively exploited, and it does not say which parts of the system use Brotli.
+- The KEV entry covers the Brotli library itself and does not say which product the attacks targeted. Under this page's criteria, a flaw that enters the CISA catalogue rates Now, so all three lines should update today. Apple's fix arrived 13 days after CISA listed it.
+- Five of the other 7 relate to Bluetooth and AirPlay and require being within Bluetooth range or on the same network. In CoreUtils, one issue let a malicious Bluetooth device complete pairing without user interaction (CVE-2026-113965), and another let an attacker in Bluetooth range bypass the limit on pairing code attempts and pair, again without user interaction (CVE-2026-113964). AirPlay and rapportd each had a bypass of the pairing code attempt limit, and Bluetooth had an issue letting an attacker in range corrupt process memory (CVE-2026-113970).
+- There are two iMessage group issues. A remote attacker may be able to join a group and receive its messages (CVE-2026-113961), and someone newly added to a group may be able to read messages sent before they joined (CVE-2026-113960). If you take part in iMessage groups through the Messages app on a Mac, update both your iPhone and your Mac.
+- Apple's security releases page has no Safari entry for 9 November, and Sonoma 14.x again has no matching release this round. The corresponding iPhone and iPad releases are covered in [iOS security updates](./ios.md); iOS 27.2.1 has one more item than Golden Gate 27.2.1, in App Intents.
+
 ## macOS Golden Gate 27.2, Tahoe 26.7.2, Sequoia 15.8.2
 
 > 2026-10-26 · [Golden Gate 27.2 advisory](https://support.apple.com/en-us/149521){target="_blank"} · [Tahoe 26.7.2 advisory](https://support.apple.com/en-us/149522){target="_blank"} · [Sequoia 15.8.2 advisory](https://support.apple.com/en-us/149523){target="_blank"} · [Safari 27.2 advisory](https://support.apple.com/en-us/149527){target="_blank"}

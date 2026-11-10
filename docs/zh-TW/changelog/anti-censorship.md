@@ -21,6 +21,14 @@ digest:
 
 三種都在 Tor Browser 的連線設定裡，不必另外安裝。橋接位址可以從 [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} 或 Moat 自動取得。
 
+## lyrebird 0.10.0
+
+> 2026-11-04 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird/-/blob/main/ChangeLog){target="_blank"}
+
+- ChangeLog 只列了兩項，一是內建的 Snowflake 函式庫從 2.14.1 一次升到 2.15.3，另一項只修測試程式。Go 的版本需求也從 1.26.0 提高到 1.26.10。Snowflake 2.15.x 修的安全問題都在 Broker 與代理端，lyrebird 用的是用戶端。這一版沒有安全問題，也就沒有利用與否的問題。
+- 用戶端這一側實際帶進來的是 2.15.0 的兩項，一是 NAT 配對改成 open、moderate、strict 三類，用戶端也支援新的分法（issue 40077），port-restricted NAT 後面的用戶端比較不會配到實際上連不通的代理（細節見下面的 Snowflake 2.15.0、2.15.1）。另一項是用戶端與代理改回 SDP munging（直接改寫 WebRTC 連線參數）的做法（issue 40561），ChangeLog 沒有說明原因。
+- 截至 11 月 11 日，Tor Browser 還沒有帶這一版。10 月 29 日的穩定版 16.0 與 11 月 10 日的 16.0.1 內建的是 lyrebird 0.9.0。
+
 ## Snowflake 2.15.3
 
 > 2026-10-28 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}
@@ -54,7 +62,7 @@ digest:
 
 - 修掉 Snowflake 傳輸忽略代理設定的錯誤。在 Tor 裡設定上游代理時（例如 Tor Browser 連線設定裡的代理選項），透過 lyrebird 執行的 Snowflake 原本不會經過那個代理，只能透過代理上網的環境會因此無法連線。
 - 發布流程改用 goreleaser 產生套件，相依套件同步更新。這一版沒有安全問題，也就沒有利用與否的問題。
-- ChangeLog 上這一版標的日期是 9 月 21 日，那是修正合併的日子，版本標籤在 10 月 6 日才建立。截至 10 月 8 日，Tor Browser 還沒有帶這一版的新版本。
+- ChangeLog 上這一版標的日期是 9 月 21 日，那是修正合併的日子，版本標籤在 10 月 6 日才建立。截至 10 月 8 日，Tor Browser 還沒有帶這一版的新版本。之後 10 月 15 日的 Alpha 16.0a14 與 10 月 29 日的穩定版 16.0 都帶進了這一版。
 
 ## WebTunnel 0.0.7
 
