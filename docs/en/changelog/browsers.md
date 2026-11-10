@@ -33,6 +33,30 @@ Chrome ships a minor version with security fixes nearly every week. Major versio
 
 Both browsers download updates in the background, but an update only takes effect after the browser restarts. Anyone who keeps their browser open for days may have the new version downloaded while still running the old one. In Chrome, type `chrome://settings/help` into the address bar to see the version; in Firefox, open "Help" in the menu and choose "About Firefox".
 
+## Chrome November 2026
+
+> 2026-11-09 · [Chrome Releases](https://chromereleases.googleblog.com/2026/11/){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>157.0.8103.50/.51 on 9 November (157.0.8103.50 on Linux) fixed 9 security issues, and one of them, CVE-2026-125350, is being exploited. Google's announcement states that it is aware an exploit exists in the wild, and rates the flaw High. This is the latest release; update and restart your browser.
+- CVE-2026-125350 is a use-after-free (memory used again after being released) in the XML handling component. It was reported on 6 November and fixed three days later. As of 11 November CISA's Known Exploited Vulnerabilities catalogue (KEV) has not listed it, but under this page's criteria Google's own flag is enough to rate it Now.
+- The other 6 High issues in the same release are one each in WebGL, FileSystem, Compositing, GPU, V8 and XML, plus 2 Medium in GPU.
+- Extended Stable (Windows and Mac only) moved to 156.0.8078.96 the same day, and its fix list also includes CVE-2026-125350. The Android release 157.0.8103.50 shipped the same day, and its announcement states it carries the same security fixes as desktop. Chromium-based browsers such as Edge and Brave need their own updates; Tor Browser is built on Firefox and is not affected by this flaw.
+- Major version 157.0.8103.38/.39 on 3 November fixed 213 security issues: 7 Critical, 77 High, 75 Medium and 54 Low. Google does not flag any of them as actively exploited.
+- Of the 7 Critical issues in 157, two are buffer overflows in Dawn, Chrome's WebGPU implementation (CVE-2026-121156, CVE-2026-121247), one is memory corruption in ANGLE (CVE-2026-121229), and the other four are use-after-free bugs in WebGL, Prerender, Geometry and Core (CVE-2026-121246, CVE-2026-121035, CVE-2026-121203, CVE-2026-121126). Among the High ones, V8 has 10, Skia 5, and the PDFium PDF engine 3.
+- Extended Stable first moved to 156.0.8078.88 on 3 November, fixing 55 security issues, 3 of them Critical. The Android release 157.0.8103.38 shipped the same day, and its announcement states it carries the same security fixes as desktop.
+- 158 went out as an Early Stable release to a small share of Windows users on 4 November, with Android following on 5 November; neither announcement lists security fixes.
+
+## Firefox November 2026
+
+> 2026-11-10 · [Mozilla security advisories](https://www.mozilla.org/security/advisories/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>Firefox 160 on 10 November fixed 99 issues, 57 High, 24 Moderate and 18 Low, with none Critical. Mozilla does not flag any item as actively exploited, and the phrase "in the wild" does not appear in the advisory. 160 is the latest desktop release.
+- Among 160's High issues are 9 sandbox escapes (the sandbox is the isolation layer between web pages and the operating system), in Service Workers, page navigation, IPC, the Cache API, graphics and audio components, with 4 more among the Moderate ones. The High issues also include 2 same-origin policy bypasses (CVE-2026-124874, CVE-2026-124902) and 2 privilege escalations (CVE-2026-124854, CVE-2026-124907); most of the rest are use-after-free bugs in DOM, CSS parsing and text layout components.
+- Two issues affect only Android, a clickjacking issue in autofill (CVE-2026-124911, Moderate) and an issue in the media component (CVE-2026-124937, Low), both also fixed in 160.
+- ESR 153.7 and 115.45 shipped the same day, fixing 81 and 28 issues respectively. ESR 140 again had no matching release. Tor Browser 16.0.1 moved to a 153.7.0esr base on 10 November (see the [Tor changelog](./tor.md)).
+- 159.0.1 on 3 November fixed one High issue, a boundary condition error in layout (Layout: Block and Inline, CVE-2026-120572).
+- The iOS app shipped 160.0 on 9 November, fixing 3 issues. Both High ones are privilege escalations, one in Reader View (CVE-2026-121842) and the other CVE-2026-121843. The Moderate CVE-2026-121841 is described in the advisory only as "Other issue", with no detail.
+
 ## Chrome October 2026
 
 > 2026-10-29 · [Chrome Releases](https://chromereleases.googleblog.com/2026/10/){target="_blank"}

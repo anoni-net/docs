@@ -23,6 +23,15 @@ OnionShare 的发版节奏比 Tor Browser 与 Tails 慢很多，2.6.3 到 2.6.4 
 
 发版节奏慢，目前没有出现过需要当天更新的等级，所以这一页还没有「立刻」。
 
+## OnionShare 2.7.2
+
+> 2026-11-07 · [上游发布页](https://github.com/onionshare/onionshare/releases/tag/v2.7.2){target="_blank"} · [GHSA-vc3q-8pwp-9hw6](https://github.com/onionshare/onionshare/security/advisories/GHSA-vc3q-8pwp-9hw6){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">尽快</span>修补两个安全问题，收在同一则安全公告 GHSA-vc3q-8pwp-9hw6，没有 CVE 编号，严重度评为低。公告写明问题是用自动化代码分析与 AI 审查找到、再人工阅读代码确认，概念验证没有实际执行过，也没有提到已被实际利用。
+- 第一个只影响命令行版 `onionshare-cli`，2.6.1 到 2.7.1 都有，桌面版不受影响。分享模式默认会在文件第一次下载完成后自动停止分享，命令行版会打印「Stopped because transfer is complete」，服务器与 onion 服务却没有关闭，持有网址（与私钥）的人仍然可以再下载。依赖自动停止来结束分享的人，以为分享已经结束，实际上还开着。
+- 第二个在聊天模式，影响 2.6.2 到 2.7.1。用户名的检查用的是清理过的版本，存储与广播出去的却是原始输入。夹带非 ASCII 的相似字母或双向文本控制字符（用来切换文字左右方向的隐形字符）的名称，因此可以让一个参与者以另一个人的名称出现在聊天室里，2022 年 CVE-2022-21696 的修补原本就是要防这件事。显示时有做转义处理，没有 HTML 注入的问题。公告只排除了桌面版受第一个问题影响，聊天模式的代码在桌面版与命令行版共用的 web 模块里。
+- 其余是构建相关的错误修正（打包时从 Tor 压缩包取出 GeoIP 数据、可重现构建的计时器测试）、改用有范围的 PySide6 枚举、新增匈牙利语翻译与依赖包更新。
+
 ## OnionShare 2.7.1
 
 > 2026-10-29 · [上游发布页](https://github.com/onionshare/onionshare/releases/tag/v2.7.1){target="_blank"}

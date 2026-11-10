@@ -13,6 +13,39 @@ digest:
 
 App 與引擎的版本號各走各的。跨平台應用是 6.x，量測引擎與命令列工具（OONI Probe CLI）是 3.x，app 內建的就是某一版引擎。做資料分析或自己排量測的人看引擎那幾則，量測行為的變動寫在那裡。
 
+## OONI Probe 6.3.1
+
+> 2026-11-09 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.3.1){target="_blank"}
+
+- 量測引擎升至 OONI Probe CLI v3.31.1，app 因此帶進 Brotli（網頁常用的一種壓縮格式）解壓縮函式庫的修補，細節見下方 v3.31.1 那一則。app 的發布說明沒有另外列出安全修補，也沒有提到已被實際利用。
+- 新增塞爾維亞文，拉丁字母與西里爾字母兩種寫法都有。
+- 自訂代理伺服器的主機欄位改成接受 `localhost` 與超過六個字母的頂級網域，原本這兩種會被判成格式錯誤。
+- 另外修正三個錯誤：數值在一百萬到一千萬之間時單位換算錯誤、結果篩選的網路名稱可能是空值，以及發生錯誤的量測結果無法取消選取。
+- 依賴項目與翻譯更新。
+
+## OONI Probe CLI v3.31.1
+
+> 2026-11-03 · [上游發布頁](https://github.com/ooni/probe-cli/releases/tag/v3.31.1){target="_blank"}
+
+- 量測引擎與命令列工具的小改版，跨平台應用從 6.3.1 起帶這一版。
+- 安全相關的是相依套件更新（#1862）。Go 版的 Brotli 函式庫從 1.1.1 升到 1.2.7，修補對應 Brotli 的 CVE-2026-111497（又稱 HTTP2Shell，解壓縮特製資料時的越界寫入）。CISA 在 10 月 27 日把這個漏洞收進已知遭利用漏洞目錄（KEV），收錄的是 Google 以 C 語言寫的原始實作。資安公司 Sweet Security 的分析文章寫到 Go 版同樣受影響，文中重現的結果是程式異常中止（panic），建議升到 1.2.7 以上。
+- Brotli 在 OONI Probe 裡是間接相依的套件。提交修補的貢獻者評估它在 Go 裡的嚴重度低，OONI 的發布說明與 PR 都沒有提到 OONI Probe 被實際利用。
+- 同一個 PR 把 utls（模仿瀏覽器 TLS 交握特徵的函式庫）從 2021 年之後就沒有更新的 yawning/utls 換成 refraction-networking/utls，PR 說明裡寫了舊版 utls 有已公開的安全公告。壓縮函式庫 klauspost/compress 也從 1.19.1 升到 1.20.3。
+- 量測時送出的 User-Agent 換成較新的 Chrome 版本，原因是網站的機器人管理服務會擋下版號太舊的 User-Agent（#1861）。
+- 引擎對呼叫它的 app 公開自己的名稱與版本（#1860）。
+
+## OONI Probe 6.3.0
+
+> 2026-11-02 · [上游公告](https://github.com/ooni/probe-multiplatform/releases/tag/v6.3.0){target="_blank"}
+
+- 量測引擎升至 OONI Probe CLI v3.31.0，引擎裡移除 eMudhra 根憑證與 Go 升到 1.27.3 這兩項安全相關的變更，從這一版起進到 app（見下方 v3.31.0 那一則）。app 的發布說明沒有另外列出安全修補，也沒有提到已被實際利用。Passport 升至 0.1.8。
+- 自訂代理支援 SOCKS5 的帳號密碼驗證（RFC 1929）。原本需要帳密的代理接不上，Android 上有人用帳密擋住不受信任的 app 使用同一個代理。
+- 量測結果提交失敗時，改送到備援的 `api.oo-srv.com`。
+- 桌面版的自動更新多了備援的更新來源。對應的 issue 寫的情境是 GitHub 被限速、下載常常失敗的地方。
+- macOS 與 iOS 也能偵測加密 DNS 有沒有開啟，判斷依據是系統實際送出的 DNS 查詢走 HTTPS、TLS，還是一般的 UDP、TCP。6.2.1 起寫進量測結果的 `resolver_type` 註記，原本只有 Android 判斷得出私人 DNS。
+- Android 版的網路函式庫從 ktor-android 換成 OkHttp。
+- 依賴項目與翻譯更新。
+
 ## OONI Probe CLI v3.31.0
 
 > 2026-10-22 · [上游發布頁](https://github.com/ooni/probe-cli/releases/tag/v3.31.0){target="_blank"}

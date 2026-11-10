@@ -43,6 +43,19 @@ Any iPhone 11 or later can take either line, and 26.7 is there for people who wo
 
 Older lines get fewer fixes and get them later. The 2026-04-22 entry below has a concrete example. A device that no longer receives updates at all means known vulnerabilities go unpatched, so consider replacing it if you handle sensitive material.
 
+## iOS 27.2.1, 26.7.3, 18.7.12
+
+> 2026-11-09 · [27.2.1 advisory](https://support.apple.com/en-us/149715){target="_blank"} · [26.7.3 advisory](https://support.apple.com/en-us/149716){target="_blank"} · [18.7.12 advisory](https://support.apple.com/en-us/149717){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>Devices on the 27.x and 26.x lines should update today. 27.2.1 fixes 9 CVEs and 26.7.3 fixes 8, among them an out-of-bounds write in Brotli (CVE-2026-111497) that CISA added to KEV on 27 October. Brotli is a compression format developed by Google; web servers commonly use it to compress what they send to browsers, and a great deal of software bundles a Brotli decoder. Apple's advisory says processing maliciously crafted input may lead to memory corruption. It does not flag any item as actively exploited, and it does not say which parts of the system use Brotli.
+- The KEV entry covers the Brotli library itself and does not say which product the attacks targeted. Under this page's criteria, a flaw that enters the CISA catalogue rates Now. Apple's fix arrived 13 days after CISA listed it.
+- The 18.7.12 list has no Brotli fix, and Apple does not say whether the 18.x line is affected. Under this page's criteria its 6 fixes rate Routine: all of them require proximity to the device, whether within Bluetooth range, on the same network, or with physical access to the phone. Apple does not flag any of them as actively exploited.
+- All three lines share fixes for Bluetooth pairing. In CoreUtils, one issue let a malicious Bluetooth device complete pairing without user interaction (CVE-2026-113965), and another let an attacker in Bluetooth range bypass the limit on pairing code attempts and pair, again without user interaction (CVE-2026-113964). AirPlay and rapportd each had a bypass of the pairing code attempt limit, the first reachable within Bluetooth range and the second from the same network. With the limit bypassed, someone nearby can keep guessing the pairing code until their own device is paired.
+- A use-after-free in Bluetooth (the program keeps using memory it has already released) let an attacker in Bluetooth range corrupt process memory (CVE-2026-113970), also fixed on all three lines.
+- Two iMessage group issues are fixed on the 27.x and 26.x lines but are not in the 18.7.12 list. A remote attacker may be able to join an iMessage group and receive its messages (CVE-2026-113961), and someone newly added to a group may be able to read messages sent before they joined (CVE-2026-113960). If you discuss sensitive matters in iMessage groups, hold off on sending anything important there until you have updated.
+- Only in 27.2.1 is an App Intents issue that let an app access sensitive user data (CVE-2026-113963). Only in 18.7.12 is a MediaRemote issue that let someone with physical access pair the device to an AirPlay receiver from the lock screen (CVE-2026-113971).
+- All 8 fixes in 26.7.3 appear in the 27.2.1 list, which adds only the App Intents item. The macOS releases from the same day fix the same set; see [macOS security updates](./macos.md).
+
 ## iOS 27.2, 26.7.2, 18.7.11
 
 > 2026-10-26 · [27.2 advisory](https://support.apple.com/en-us/149230){target="_blank"} · [26.7.2 advisory](https://support.apple.com/en-us/149227){target="_blank"} · [18.7.11 advisory](https://support.apple.com/en-us/149225){target="_blank"}

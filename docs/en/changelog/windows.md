@@ -36,6 +36,20 @@ Microsoft Defender is another common misunderstanding. Its fixes ship through au
 
 One more thing worth knowing if you run Tor Browser or other anonymity tools on Windows: once the operating system is compromised, nothing running on top of it can protect you. Privilege escalation (a program obtaining higher system privileges than it started with) fixes matter as much in that scenario as browser flaws do.
 
+## November 2026
+
+> 2026-11-10 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>As of 11 November, 1,342 CVEs (745 in Windows itself), 68 rated Critical (counting distinct CVEs), one flagged as actively exploited. The exploited one is in Outlook, not Windows itself, but it targets Office on the desktop, so under this page's criteria it rates Now.
+- CVE-2026-124194: a spoofing flaw in Outlook. An attacker sends a crafted email file, and when the user opens it in Outlook, Outlook connects to a network location the attacker controls without showing the usual external content warning. This leaks the user's NTLMv2 hash (a digest of the credential Windows uses to prove who is logged in), which the attacker can use to impersonate the user. The user has to open the file themselves; the Preview Pane does not trigger it. Microsoft's data marks it as exploitation detected, CVSS 6.5.
+- Affected products are Microsoft 365 Apps for enterprise and Office LTSC 2021 and 2024. Office updates come through their own channel and usually install automatically in the background, though organisations often delay them. If you read email in Outlook, you can run an update by hand under File, Account, Update Options, Update Now.
+- As of writing on 11 November, CISA's Known Exploited Vulnerabilities catalogue (KEV) has not listed it; the catalogue was last updated on 9 November, before this round shipped.
+- Nothing in Windows itself is flagged as actively exploited this month, and nothing in the entire dataset is flagged as publicly disclosed. Windows itself has 37 Critical, most concentrated in 8 privilege escalations in Hyper-V, plus 5 remote code execution flaws in Message Queuing (MSMQ).
+- Among the Critical flaws reachable over the network without logging in, CVE-2026-119958 in LDAP and CVE-2026-112967 in Xbox Live Networking Service are both CVSS 9.8. The LDAP one covers everything from Windows 10 1607 through Windows 11 26H2 and Windows Server 2016 and later; the Xbox Live one affects desktop editions only and requires the attacker to be on the same network. Microsoft rates CVE-2026-113862 in NAT as Exploitation More Likely, though the attacker has to win a race condition. None of the three is flagged as actively exploited, so install them on your normal schedule.
+- CVE-2026-116928 in Windows Search is also CVSS 9.8, with the attack path running through Exchange Server. Exchange indexes attachments automatically, so it triggers without the recipient opening the message, and Exchange administrators should prioritise it.
+- Of the 745 in Windows itself, the four largest components are Windows Advanced Rasterization Platform (WARP, software rendering on the CPU) with 37, Windows Installer 36, Graphics Kernel 35 and Windows Kernel 28. Privilege escalation is the most common type at 475, with remote code execution and information disclosure at 104 each.
+- Of the 1,342 total, Azure Linux accounts for 84 and Edge for 166, with the remaining 347 spread across Office, developer tools and other products. Counts for those two product lines usually keep growing for weeks after release; October's round grew from 1,758 on release day to 3,491 by 7 November.
+
 ## October 2026
 
 > 2026-10-13 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
@@ -47,6 +61,7 @@ One more thing worth knowing if you run Tor Browser or other anonymity tools on 
 - Two more were publicly disclosed but not exploited. CVE-2026-108398 in .NET Framework can bypass Windows Defender Application Control (WDAC) and requires a local attacker who is already logged in. CVE-2026-92707 is a denial of service in the MessagePack package used by .NET's SignalR, of little concern to ordinary desktop users.
 - Of the 2,575 total, Azure Linux accounts for 868 and Edge for 255. The release-day total was 1,758, and nearly all the growth since falls in those two product lines.
 - Rechecked on 29 October, the total has grown to 3,327 with 231 rated Critical. Of the 742 added after 21 October, Edge accounts for 451 and Azure Linux for 284, with the remaining 7 spread across other products; Windows itself gained none. CVE-2026-96951 remains the only one marked exploited.
+- Recounted on 11 November against Microsoft's 7 November revision, the total stands at 3,491 with 238 rated Critical. The 7 new Critical entries were all registered on 31 October, 3 in Azure Linux and 4 in Edge. Windows itself gained no new entries; 14 entries only had their acknowledgements updated, and CVE-2026-96951 remains the only one marked exploited.
 
 ## September 2026
 

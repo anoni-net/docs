@@ -13,6 +13,39 @@ digest:
 
 The app and the engine version independently. The cross-platform app is 6.x, while the measurement engine and command-line tool (OONI Probe CLI) are 3.x, and each app build bundles one engine version. If you analyse data or schedule your own measurements, read the engine entries: that is where changes to measurement behaviour land.
 
+## OONI Probe 6.3.1
+
+> 2026-11-09 · [Upstream announcement](https://github.com/ooni/probe-multiplatform/releases/tag/v6.3.1){target="_blank"}
+
+- The measurement engine moves to OONI Probe CLI v3.31.1, which brings the app the fix to the Brotli (a compression format widely used on the web) decompression library; see the v3.31.1 entry below for details. The app's release notes list no separate security fixes and do not mention exploitation in the wild.
+- Adds Serbian, in both Latin and Cyrillic script.
+- The host field for a custom proxy now accepts `localhost` and top-level domains longer than six letters, both of which were previously rejected as malformed.
+- Three more bug fixes: unit conversion was wrong for values between one million and ten million, the network name in the results filter could be empty, and failed measurement results could not be deselected.
+- Dependency and translation updates.
+
+## OONI Probe CLI v3.31.1
+
+> 2026-11-03 · [Upstream release](https://github.com/ooni/probe-cli/releases/tag/v3.31.1){target="_blank"}
+
+- A minor release of the measurement engine and command-line tool, bundled in the cross-platform app from 6.3.1.
+- The security-relevant part is a dependency update (#1862). The Go Brotli library moves from 1.1.1 to 1.2.7, fixing the counterpart of Brotli's CVE-2026-111497 (also called HTTP2Shell, an out-of-bounds write when decompressing crafted data). CISA added the flaw to its Known Exploited Vulnerabilities catalogue (KEV) on 27 October, listing Google's original C implementation. An analysis by the security firm Sweet Security states that the Go version is affected too, reproducing it as a program crash (panic), and recommends upgrading to 1.2.7 or later.
+- Brotli is an indirect dependency in OONI Probe. The contributor who submitted the fix assessed its severity in Go as low, and neither OONI's release notes nor the PR mention OONI Probe being exploited.
+- The same PR replaces utls (a library that mimics browsers' TLS handshake fingerprints) from yawning/utls, unmaintained since 2021, with refraction-networking/utls; the PR description notes that the old utls has published security advisories. The compression library klauspost/compress also moves from 1.19.1 to 1.20.3.
+- The User-Agent sent during measurements now names a newer Chrome version, because bot management services on websites block User-Agents with outdated version numbers (#1861).
+- The engine now reports its own name and version to the app that calls it (#1860).
+
+## OONI Probe 6.3.0
+
+> 2026-11-02 · [Upstream announcement](https://github.com/ooni/probe-multiplatform/releases/tag/v6.3.0){target="_blank"}
+
+- The measurement engine moves to OONI Probe CLI v3.31.0, so its two security-related changes, removing the eMudhra root certificate and moving Go to 1.27.3, reach the app from this release (see the v3.31.0 entry below). The app's release notes list no separate security fixes and do not mention exploitation in the wild. Passport moves to 0.1.8.
+- Custom proxies support SOCKS5 username and password authentication (RFC 1929). Proxies that required credentials previously could not be used; on Android, some people use credentials to keep untrusted apps off the same proxy.
+- When submitting measurement results fails, the app now falls back to `api.oo-srv.com`.
+- Automatic updates on desktop gain a fallback update source. The corresponding issue describes places where GitHub is throttled and downloads often fail.
+- macOS and iOS can now detect whether encrypted DNS is turned on, based on whether the DNS queries the system actually sends go over HTTPS or TLS rather than plain UDP or TCP. This feeds the `resolver_type` annotation written into measurements since 6.2.1; previously only Android could detect Private DNS.
+- The Android networking library moves from ktor-android to OkHttp.
+- Dependency and translation updates.
+
 ## OONI Probe CLI v3.31.0
 
 > 2026-10-22 · [Upstream release](https://github.com/ooni/probe-cli/releases/tag/v3.31.0){target="_blank"}

@@ -33,6 +33,19 @@ Android 裝置的實際修補等級由手機廠決定，跟 Google 公告的日�
 
 原廠支援期長短差很多，買之前查清楚該型號的承諾支援年限，比買了之後才發現划算。
 
+## 2026 年 11 月
+
+> 修補等級 2026-11-05 · [Google 公告](https://source.android.com/docs/security/bulletin/2026/2026-11-01){target="_blank"} · [GrapheneOS 發布頁](https://grapheneos.org/releases){target="_blank"}
+
+- 公告在 11 月 2 日發布，11 月 6 日補上 AOSP 的修補連結。明細延續九月以來的格式，這一則的數字直接來自 Google 的公告。
+- 215 個 CVE，23 個評為 Critical、192 個 High，總數比九月的 180 個還多，十月只有 25 個。分成 2026-11-01 與 2026-11-05 兩個修補等級，前者 118 個、後者 97 個，裝置顯示 2026-11-05 或更新才代表兩批都涵蓋。
+- 最嚴重的是 Framework 的 CVE-2026-58868，可以從遠端執行程式碼，不需要額外的執行權限，也不需要使用者做任何動作，影響 Android 14 到 17。System 另有 2 個同樣條件的 Critical 遠端執行程式碼（CVE-2026-58876、CVE-2026-58936），以及 3 個 Critical 提權（讓程式取得比原本更高的系統權限）與 2 個 Critical 阻斷服務。
+- 核心那一組有 6 個 Critical，藍牙 2 個提權、HID 1 個提權，其餘 3 個在受保護的 KVM（Protected KVM，Android 用來隔離敏感工作的虛擬化層），2 個提權、1 個資訊外洩。Google 在這一節的摘要寫明，最嚴重的一項可以從遠端提權，不需要使用者做任何動作。
+- 晶片廠那一側，MediaTek 有 30 個，其中 8 個 Critical 都在行動數據機。Qualcomm 閉源元件有 1 個 Critical，Imagination Technologies 有 12 個 High。
+- 17 個 CVE 透過 Google Play 系統更新發送，分布在媒體編解碼器、MediaProvider、電話核心與 Wi-Fi 等模組，System 的 Critical 遠端執行程式碼 CVE-2026-58876 也在其中。有這個更新管道的裝置（Android 10 以後的部分裝置）不必等手機廠的完整更新，就可以收到這幾項。
+- Google 在 Android 安全公告裡沒有標注任何一項已被實際利用。Pixel 更新公告到 11 月 11 日還沒發布（網址仍回傳 404），Pixel 專屬的修補與它們的利用狀態要等那一份。九月的 CVE-2026-58704 就是只寫在 Pixel 公告裡。
+- GrapheneOS 在 11 月 2 日的 `2026110200` 帶上完整的 2026-11-01 修補等級，到 11 月 8 日那版為止顯示的仍是這個等級，詳見 [GrapheneOS 月度更新摘要](./grapheneos.md)。十一月公告的 215 個裡，有 77 個早在 GrapheneOS 10 月 21 日那版的提前修補清單裡。
+
 ## 2026 年 10 月
 
 > 修補等級 2026-10-05 · [Google 公告](https://source.android.com/docs/security/bulletin/2026/2026-10-01){target="_blank"} · [Pixel 更新公告](https://source.android.com/docs/security/bulletin/pixel/2026/2026-10-01){target="_blank"} · [GrapheneOS 發布頁](https://grapheneos.org/releases){target="_blank"}

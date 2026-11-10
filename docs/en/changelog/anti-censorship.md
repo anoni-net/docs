@@ -21,6 +21,14 @@ Newest at the top.
 
 All three are in Tor Browser's connection settings, with nothing extra to install. Bridge addresses come from [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} or automatically via Moat.
 
+## lyrebird 0.10.0
+
+> 2026-11-04 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird/-/blob/main/ChangeLog){target="_blank"}
+
+- The ChangeLog lists only two changes: the bundled Snowflake library jumps from 2.14.1 straight to 2.15.3, and a test fix. The required Go version also rises from 1.26.0 to 1.26.10. The security issues fixed in Snowflake 2.15.x are all in the Broker and on the proxy side, while lyrebird uses the client. This release has no security issues, so the question of exploitation does not arise.
+- What actually reaches the client side are two changes from 2.15.0. First, NAT matching moves to three categories, open, moderate and strict, and the client now supports the new split (issue 40077), so clients behind a port-restricted NAT are less likely to be paired with a proxy they cannot actually reach (details in the Snowflake 2.15.0, 2.15.1 entry below). Second, the client and proxy go back to SDP munging (rewriting WebRTC connection parameters directly) (issue 40561); the ChangeLog does not say why.
+- As of 11 November, Tor Browser has not shipped this release. Stable 16.0 on 29 October and 16.0.1 on 10 November both bundle lyrebird 0.9.0.
+
 ## Snowflake 2.15.3
 
 > 2026-10-28 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}
@@ -54,7 +62,7 @@ All three are in Tor Browser's connection settings, with nothing extra to instal
 
 - Fixes Snowflake ignoring proxy settings. When an upstream proxy was configured in Tor (for example the proxy option in Tor Browser's connection settings), Snowflake running through lyrebird did not go through it, so it could not connect on networks that only allow traffic via a proxy.
 - Releases now build packages with goreleaser, and dependencies were updated. This release has no security issues, so the question of exploitation does not arise.
-- The ChangeLog dates this release 21 September, the day the fix was merged; the version tag was only created on 6 October. As of 8 October, Tor Browser has not shipped a release with it.
+- The ChangeLog dates this release 21 September, the day the fix was merged; the version tag was only created on 6 October. As of 8 October, Tor Browser had not shipped a release with it. Alpha 16.0a14 on 15 October and stable 16.0 on 29 October have since both brought it in.
 
 ## WebTunnel 0.0.7
 

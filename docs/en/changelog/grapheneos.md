@@ -15,6 +15,34 @@ GrapheneOS updates automatically in the background, so ordinary users need to do
 
 Source data comes from the [official releases page](https://grapheneos.org/releases){target="_blank"}. The official atom feed keeps only the last 20 entries (roughly four months), so anything older has to be looked up on the site.
 
+## November 2026
+
+> Releases `2026110100`, `2026110200`, `2026110700`, `2026110800` · [Official releases](https://grapheneos.org/releases){target="_blank"}
+
+- `2026110800` on 8 November ships only to the four 10th generation Pixel models (Pixel 10, 10 Pro, 10 Pro XL and 10 Pro Fold), backporting from the Android 17 QPR2 Beta a fix for an upstream bug in how sleep time is calculated. The stock OS has the same bug, which became more frequent after the GKI update in the previous release.
+- `2026110700` on 7 November adds an API for requesting coarse location from the OS, for use by Vanadium and Sandboxed Google Play. Sandboxed Google Play previously carried its own reimplementation of the upstream location obfuscation code (LocationFudger); with the new API it no longer has to maintain that copy.
+- Emergency number handling is rewritten, now pulling the correct data from Safety Hub in place of upstream AOSP's outdated and buggy implementation.
+- The launcher's search filtering, previously applied only to the private space, now extends to work profiles that are locked or paused, so apps inside them no longer appear in search results.
+- Native zygote processes launched through secure spawning once again set supplementary groups and NoNewPrivs (a flag that stops a process from gaining new privileges). This path is mainly used by Vanadium, Chrome and some Chromium-based browsers to run renderers in a more memory-efficient way.
+- The 6.18 kernel moves to the latest GKI LTS revision and backports an upstream fix for a use-after-free in FUSE (memory used again after being released, which can be abused to slip in malicious code). On 10th generation Pixels, it fixes an audio offload compatibility problem from the move to 6.18, the handling of zram initialisation failures, and an upstream bug where PCIe rescans lacked synchronisation.
+- Time zone data is updated to 2026f, and Vanadium moves to 157.0.8103.38.0.
+- The security preview release (`2026110701`) now extends to patches Google has scheduled for its December 2026 to May 2027 bulletins; the list of additional fixed CVEs has 107 entries (12 Critical, 95 High).
+- `2026110200` on 2 November brings the full 2026-11-01 security patch level; the November bulletin is summarised in [Android Security Patch Levels](./android.md). Through the 8 November release the listed patch level is still 2026-11-01, and as of 11 November Google had not yet published its Pixel Update Bulletin.
+- The 6.1 kernel picks up a batch of regression fixes from the Android GKI branch and upstream Linux, including a null pointer dereference in MGLRU, an infinite loop in page migration, and use-after-free bugs in USB HID, MIDI and block encryption.
+- On 10th generation Pixels it fixes two charging problems from the move to 6.18: chargers supporting AVS could not PPS fast charge, and the charging log code made an invalid memory access (caught by UBSan).
+- The security preview release (`2026110201`) now covers December 2026 to April 2027. The November batch has been published officially and dropped off the list, which is down to 94 entries (8 Critical, 86 High).
+- `2026110100` on 1 November ports all of the 10th generation Pixel drivers to the 6.18 kernel and switches over to it, fixing a batch of upstream driver bugs along the way, covering DMA mapping in pKVM and the SMMU, memory lifetimes, and handling of initialisation failures.
+- The 6.18 kernel switches to the Rust implementation of Binder (the mechanism Android processes use to communicate with each other), replacing the old C implementation. Lockdown moves from confidentiality mode to integrity mode because DMA-BUF accounting now uses a BPF program that is incompatible with confidentiality mode; the microdroid kernel stays in confidentiality mode.
+- All four kernel lines get a backported fix for CVE-2026-98432, a flaw in MPTCP. GrapheneOS states that its kernels already had MPTCP disabled, with MTE and other protections on top. 6.1, 6.12 and 6.18 move to 6.1.182, 6.12.97 and 6.18.38 respectively.
+- A remotely triggerable denial-of-service flaw from the November bulletin had been fixed in the security preview release since July 2026; this release brings the fix into the regular release.
+- Adds working satellite cellular support that no longer partially breaks Android Auto the way earlier attempts did. GrapheneOS has confirmed it works with T-Mobile's T-Satellite.
+- The two protections added in the 13 August release are reverted because of app compatibility issues: the Credential Manager selection screen (CredentialSelectorActivity) and Sandboxed Google Play's FIDO screens are no longer marked opaque (see the August 2026 entry).
+- Fixed an upstream use-after-free in SystemUI's picture-in-picture touch handling (PipTouchHandler), and an upstream bug that broke accessibility actions on the launcher home screen.
+- Vanadium moves through 156.0.8078.73.0 and 156.0.8078.79.0, the Messaging app moves to version 18, and TalkBack moves to version 23.
+- The security preview release (`2026110101`) applies early the patches Google has scheduled for its November 2026 to April 2027 bulletins; the list of additional fixed CVEs has 152 entries (11 Critical, 141 High), up from 139 in the 21 October release.
+- None of GrapheneOS's four release notes this month mention any actively exploited vulnerability, and Google does not flag any item in its November Android Security Bulletin either.
+- Device coverage runs from Pixel 6 to Pixel 10a, unchanged.
+
 ## October 2026
 
 > Releases `2026100200`, `2026100600`, `2026101600`, `2026102100` · [Official releases](https://grapheneos.org/releases){target="_blank"}

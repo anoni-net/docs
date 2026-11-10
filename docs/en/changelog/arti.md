@@ -27,8 +27,8 @@ Arti is the Tor Project's effort, started in 2021, to rewrite the original C imp
 | Flow control and congestion control | ✅ Always on since 2.6.0; the `flowctl-cc` flag is gone | Stable in 2.4.0, on by default in 2.6.0 (2026-09) |
 | Counter Galois Onion cryptography (CGO) | ✅ Always on since 2.6.0 | 2.6.0 (2026-09) |
 | Embedding from non-Rust languages (C FFI) | 🟡 RPC client already has a C-friendly interface; full FFI planned | In progress |
-| Relay | 🟡 In development; upstream says explicitly not to point it at the public network | 2.0.0 (2026-02) through 2.7.0 |
-| Directory authority | 🟡 In development; document parsing and microdescriptor generation have early shape | 2.0.0 (2026-02) through 2.7.0 |
+| Relay | 🟡 In development; upstream says explicitly not to point it at the public network | 2.0.0 (2026-02) through 2.8.0 |
+| Directory authority | 🟡 In development; document parsing, microdescriptor generation and consensus computation have early shape | 2.0.0 (2026-02) through 2.8.0 |
 | control-port protocol compatibility | ⬜ Not reimplemented; replaced by RPC | — |
 
 Legend: ✅ Done　🟡 In development　⬜ Not implemented
@@ -39,12 +39,12 @@ On the client side, Arti's capabilities are now largely on par with c-tor: it wo
 
 2.6.0 ships a [`README_relay.md`](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/README_relay.md){target="_blank"} listing what relay and directory authority support still needs, with completion marked. It is the closest thing to an official roadmap right now, and its opening line is not to run `arti-relay` on the public Tor network.
 
-Per that list, as of August 2026:
+Per the list shipped with 2.8.0:
 
 | Area | Done | To do |
 |---|---|---|
 | Basic operations (channels, circuits, CREATE2, EXTEND2, ORPort) | 9 | 8 |
-| Exit support (DNS, BEGIN, RESOLVE, exit policies) | 0 | 5 |
+| Exit support (DNS, BEGIN, RESOLVE, timeless side-channel defences, exit policies) | 2 | 4 |
 | Directory cache | 0 | 13 |
 | Self-testing (ORPort reachability, bandwidth, DNS) | 0 | 3 |
 | Onion service support (HsDir, introduction, rendezvous) | 0 | 3 |
@@ -52,9 +52,22 @@ Per that list, as of August 2026:
 | Performance features (buffer tuning, circuit scheduling, conflux) | 0 | 5 |
 | Directory authority | 0 | 28 |
 
-The nine finished items sit at the lowest layer: accepting incoming channels, bidirectional channel authentication, processing and delivering relay cells, CREATE2 and CREATE\_FAST, EXTEND2, and listening on ORPort. Circuits can be built, in other words, but almost everything else a relay needs to actually go live is untouched, including key generation and rotation, publishing router descriptors, and bandwidth caps.
+The nine finished items sit at the lowest layer: accepting incoming channels, bidirectional channel authentication, processing and delivering relay cells, CREATE2 and CREATE\_FAST, EXTEND2, and listening on ORPort. Circuits can be built, in other words, but almost everything else a relay needs to actually go live is still marked to do on the list, including key generation and rotation, publishing router descriptors, and bandwidth caps. The only items 2.8.0 ticked off are two under exit support: basic DNS support and handling RESOLVE requests.
 
-The list notes that the team had not revisited the checkboxes since 11 August 2026, so real progress may run ahead of it: 2.6.0 alone added `ntor-v3` CREATE2 handshakes and an initial design for the relay DNS resolver. For exact status, the [issue tracker](https://gitlab.torproject.org/tpo/core/arti/-/issues/){target="_blank"} is authoritative.
+The 2.8.0 list still opens with the note that the team had not revisited the checkboxes since 11 August 2026, even though the two items above have now been ticked. The list also lags behind the CHANGELOG: the 2.8.0 CHANGELOG already describes implementations of a relay DNS cache, publishing router descriptors and global bandwidth rate limiting, while the matching items on the list are still marked to do, so real progress runs ahead of the table. For exact status, the [issue tracker](https://gitlab.torproject.org/tpo/core/arti/-/issues/){target="_blank"} is authoritative.
+
+## Arti 2.8.0
+
+> 2026-11-03 · [Upstream announcement](https://blog.torproject.org/arti_2_8_0_released/){target="_blank"} · [CHANGELOG](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/CHANGELOG.md){target="_blank"}
+
+- Fixes two low-severity issues with TROVE identifiers and upgrades dependencies to address a large batch of RUSTSEC advisories (the security advisory numbering for Rust crates). Upstream encourages users of `arti` and `arti-client` to upgrade as soon as possible, especially anyone running onion services. Upstream does not mention active exploitation.
+- TROVE-2026-069 affects onion services with proof-of-work enabled (a defence that makes clients solve a puzzle first when the service is flooded with connections): in some cases they uploaded descriptors far too often, and non-release builds would panic (the program aborts outright). TROVE-2026-070: when configured bridges had conflicting IDs, Arti could enter an inconsistent state and panic; a series of conflicting consensuses without mandatory key ID binding could also trigger it.
+- The dependency upgrades cover 14 RUSTSEC advisories, all concerning non-constant-time operations (where execution time varies with the data, which can be used to infer secrets), and the webpki family of root certificate and certificate verification crates is updated as well. `rustls` moves to 0.23.64, addressing another 4 RUSTSEC advisories.
+- Onion service fixes: after an identity key was manually deleted from the keystore, the service kept publishing descriptors under the old identity until the blinded key and descriptor signing key expired. The hs_ntor handshake gains a defence-in-depth check. To track down possible bugs in Arti's descriptor encoding or in c-tor's HSDir implementation, a temporary feature saves rejected descriptors to disk.
+- Relay progress: the relay DNS resolver gains configuration options and a cache, a nickname and contact information can be configured, encoding and publishing router descriptors (the documents a relay uses to announce itself) is supported, relay channels gain global bandwidth rate limiting, and `tor-dirserver` can bootstrap router descriptors and microdescriptors.
+- Directory authority progress: the consensus-from-votes computation is wired into the top-level flow. Flags, the authority section, the preamble's network parameters and software versions, and recommended and required protocol versions are all implemented, the footer has initial support, and voting delays can be computed.
+- The `secmem-proc` feature of `arti` is deprecated in favour of `harden`. `arti-client` drops the `accel-sha1-asm` feature, which upstream had deprecated, and the fallback directory list is refreshed.
+- `README_relay.md` was updated in this release, so the table under "How far the relay side has got" now reflects the 2.8.0 list.
 
 ## Arti 2.7.0
 

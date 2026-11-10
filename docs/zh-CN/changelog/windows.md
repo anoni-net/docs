@@ -36,6 +36,20 @@ Windows 每月更新的整理。微软固定在每月第二个星期二发布（
 
 在 Windows 上使用 Tor Browser 或其他匿名工具的人另外要知道：操作系统被取得权限之后，上面运行的任何工具都保护不了你。提权（让程序取得比原本更高的系统权限）类的修补对这个情境的重要性不亚于浏览器本身的漏洞。
 
+## 2026 年 11 月
+
+> 2026-11-10 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">立刻</span>截至 11 月 11 日有 1342 个 CVE（Windows 本体 745 个），68 个被评为 Critical（按不同的 CVE 计），一个标为已被实际利用。被利用的那一个在 Outlook，Windows 本体没有，但它打的是桌面上的 Office，按本页判断标准列为立刻。
+- CVE-2026-124194：Outlook 的仿冒漏洞。攻击者发送特制的邮件文件，用户在 Outlook 打开之后，Outlook 会连接到攻击者控制的网络位置，平常的外部内容警告不会出现。用户的 NTLMv2 哈希（Windows 用来证明登录身份的凭据摘要）因此泄露，攻击者可以拿它冒用用户的身份。需要用户亲手打开文件，预览窗格不会触发。微软在数据里标的是已检测到利用行为，CVSS 6.5。
+- 受影响的是 Microsoft 365 Apps 企业版与 Office LTSC 2021、2024。Office 的更新走自己的渠道，通常会在后台自动安装，企业环境常会推迟。用 Outlook 收信的人可以从「文件」、「账户」、「更新选项」手动执行一次「立即更新」。
+- 到 11 月 11 日写稿时，CISA 的已知遭利用漏洞目录（KEV）还没有收录这一项，目录最后一次更新在 11 月 9 日，早于这一轮发布。
+- Windows 本体这个月没有标为已被实际利用的项目，整份数据也没有标为公开披露的项目。Windows 本体的 Critical 有 37 个，Hyper-V 的 8 个提权最集中，Message Queuing（MSMQ）另有 5 个远程执行代码。
+- 不需要登录、从网络就能触发的 Critical 里，LDAP 的 CVE-2026-119958 与 Xbox Live 网络服务的 CVE-2026-112967 都是 CVSS 9.8。LDAP 那一个从 Windows 10 1607 到 Windows 11 26H2、Windows Server 2016 以后都在范围内，Xbox Live 那一个只影响桌面版，攻击者需要在同一个网络里。NAT 的 CVE-2026-113862 被微软评为较可能被利用（Exploitation More Likely），攻击者需要赢得竞争条件才能成功。三个都没有标为已被实际利用，跟着平常的更新节奏装上即可。
+- Windows Search 的 CVE-2026-116928 同样是 CVSS 9.8，攻击路径在 Exchange Server。Exchange 会自动为附件建立索引，收件人不必打开邮件就会触发，管理 Exchange 的人要优先处理。
+- Windows 本体的 745 个里，最多的四个组件是 Windows Advanced Rasterization Platform（WARP，在 CPU 上运行的软件绘图）37 个、Windows Installer 36 个、Graphics Kernel 35 个与 Windows Kernel 28 个。类型以提权最多，有 475 个，远程执行代码与信息泄露各 104 个。
+- 总数 1342 个里，Azure Linux 占 84 个、Edge 占 166 个，其余 347 个分散在 Office、开发工具与其他产品。这两条产品线的数字通常会在发布后几周持续增加，10 月那一轮就从发布当天的 1758 个增加到 11 月 7 日的 3491 个。
+
 ## 2026 年 10 月
 
 > 2026-10-13 · [MSRC](https://msrc.microsoft.com/update-guide){target="_blank"}
@@ -47,6 +61,7 @@ Windows 每月更新的整理。微软固定在每月第二个星期二发布（
 - 另外两个是公开披露、还没有被利用的。.NET Framework 的 CVE-2026-108398 可以绕过 Windows Defender 应用程序控制（WDAC），需要已经登录的本地攻击者。CVE-2026-92707 是 .NET 的 SignalR 用的 MessagePack 包拒绝服务，跟一般桌面用户关系不大。
 - 总数 2575 个里，Azure Linux 占 868 个、Edge 占 255 个。发布当天的总数是 1758 个，之后增加的几乎都落在这两条产品线。
 - 10 月 29 日再查一次，总数增加到 3327 个、Critical 231 个。10 月 21 日之后补进的 742 个里，Edge 占 451 个、Azure Linux 占 284 个，其余 7 个分散在其他产品，Windows 本体没有增加。已被利用的仍只有 CVE-2026-96951。
+- 11 月 11 日以微软 11 月 7 日修订的数据再数一次，总数 3491 个、Critical 238 个。新增的 7 个 Critical 都在 10 月 31 日登记，Azure Linux 3 个、Edge 4 个。Windows 本体没有新增项目，只有 14 个项目更新了致谢名单，已被利用的仍只有 CVE-2026-96951。
 
 ## 2026 年 9 月
 

@@ -24,6 +24,17 @@ A compromise on Tails means something different from a compromise on an ordinary
 
 The Tails project only distinguishes emergency from scheduled releases. The middle tier is a judgement community volunteers add after reading each advisory. Where the call is unclear, we round up.
 
+## Tails 7.16
+
+> 2026-10-30 · [Upstream announcement](https://tails.net/news/version_7.16/){target="_blank"} · [Known vulnerabilities in 7.15.1](https://tails.net/security/known_security_vulnerabilities_in_7.15.1/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>A scheduled release that brings in security updates to Tor Browser and tor. Tails also published a known-vulnerabilities notice for 7.15.1 asking users to upgrade as soon as possible. Upstream does not mention active exploitation.
+- Tor Browser moves from 15.0.26 to 16.0, now based on Firefox ESR 153, with the Settings pages fully reorganised following Firefox's redesign; see the [Tor changelog](./tor.md). The Tor client moves to 0.4.9.15, a security release strengthening denial-of-service defences on relays, covered in the [tor daemon changelog](./tor-daemon.md).
+- Fixes OpenPGP in Thunderbird (issue 21841).
+- The known-vulnerabilities notice again gives no list, and the 7.15.1 package list has been taken down from the Tails website, so this time the newly included Debian advisories could not be checked one by one. The 7.16 build manifest states that Debian security updates were taken from the 29 October snapshot. Of the advisories since 23 October, libheif for HEIF and AVIF images (DSA-6583-1) and the brotli compression library (DSA-6582-1) are at fixed versions, while the ImageMagick library advisory of 29 October (DSA-6593-1) did not make it in.
+- The kernel stays at 6.12.113; Debian's 2 November kernel security advisory (DSA-6602-1) came after this release. tor 0.4.9.16 on 4 November and Tor Browser 16.0.1 on 10 November also came after it.
+- Automatic upgrades are available from Tails 7.0 or later. A fresh install wipes any existing Persistent Storage.
+
 ## Tails 7.15.1
 
 > 2026-10-23 · [Upstream announcement](https://tails.net/news/version_7.15.1/){target="_blank"}
