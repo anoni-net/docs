@@ -35,6 +35,18 @@ Nearly every release in the first half of 2026 lands on "Now". Security scrutiny
 
 Several entries below fix conflux. It lets a client send one connection's data over two circuits at once for extra speed, landed in Tor in 2023, and is the common source of multiple security issues this half-year. New code paths bring new ways to get things wrong, so the concentration of fixes there is not surprising.
 
+## tor 0.4.9.17
+
+> 2026-11-13 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.17/ChangeLog){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>Nine days after 0.4.9.16, upstream again calls this an emergency release, mainly affecting relays, and asks relay operators to upgrade as soon as possible. It does not use the words "security release", but it carries two TROVE identifiers, so under this page's criteria it is rated Now. Upstream does not mention active exploitation.
+- TROVE-2026-031 concerns the denial-of-service defences on relays. IPv6 clients used to be tracked by individual address, and a single /64 network offers a huge number of addresses to rotate through, which made the limits meaningless. This release counts a whole /64 prefix as one client (bug 41344, present since 0.3.3.2-alpha). The unique client counts that relays and bridges report now also count a /64 as one client.
+- TROVE-2026-075 is listed under minor security fixes and affects clients. tor now rejects any RESOLVED cell (the message a relay uses to return a DNS lookup result) whose hostname is not a valid DNS name (bug 41464, present since 0.1.1.1-alpha).
+- The keys for the bastet directory authority have been removed. The ChangeLog gives the reason as a "potential compromise" and says it can be reinstated with new keys later. Another directory authority, maatuska, changed its IP address. Both are part of the directory authority list built into tor, so clients only pick up the new list by upgrading.
+- Clients also get a stream isolation fix. HTTPTunnelPort recorded the length of its isolation header (X-Tor-Stream-Isolation) in only 8 bits, so two values longer than 251 bytes whose lengths matched modulo 256 were treated as the same and could share a circuit (bug 41474). Ordinary Tor Browser users do not use this port.
+- The remaining two fixes make relays actually enforce the intended check on ntor-v3 subprotocol requests (bug 41475) and remove a latent client assertion that cannot occur with the current consensus (bug 41476). The fallback directory list and geoip data are also refreshed as of 13 November.
+- As of 14 November neither Tor Browser nor Tails includes this release; the latest Tor Browser 16.0.1 and Tails 7.17 use 0.4.9.16. People running relays, bridges and onion services need to upgrade on their own.
+
 ## tor 0.4.9.16
 
 > 2026-11-04 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.16/ChangeLog){target="_blank"}
@@ -44,7 +56,7 @@ Several entries below fix conflux. It lets a client send one connection's data o
 - In this release, directory authorities roll the required Desc and Microdesc protocol versions back from 3 to 2, and microdescriptors now carry a dummy TAP key instead of dropping it entirely, under the new consensus method 38. The ChangeLog states this is safe because nothing has used TAP since v2 onion services.
 - The ChangeLog does not say whether 0.4.8.x clients can connect normally again. 0.4.9.15 already stated that 0.4.8 is no longer supported, so if you use a distribution package or another app that bundles tor, still check that it is on 0.4.9.x.
 - The fallback directory list is also regenerated as of 4 November, and the fetch size limit for directory authorities is doubled; the ChangeLog notes that nine votes can exceed 16 MB even when compressed (part of ticket 41471).
-- If you use Tor through the browser, Tor Browser 16.0.1 on 10 November already brings in this version (see the [Tor changelog](./tor.md)).
+- If you use Tor through the browser, Tor Browser 16.0.1 on 10 November already brings in this version (see the [Tor changelog](./tor.md)). Tails 7.17 on 11 November followed (see the [Tails changelog](./tails.md)).
 
 ## tor 0.4.9.15
 

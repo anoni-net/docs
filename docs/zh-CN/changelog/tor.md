@@ -25,7 +25,8 @@ Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小
 - <span class="chan-tag chan-tag--stable">稳定版</span>16.0 之后的第一个维护版，主要带进 Firefox 的安全修补。桌面版的基础换到 153.7.0esr（tor-browser#45439），Android 版的 GeckoView 同步，另外从 Firefox 160 backport 安全修补（tor-browser#45442）。Mozilla 11 月 10 日的 ESR 153.7 公告列了 81 个 CVE，High 51 个、Moderate 21 个、Low 9 个（见[浏览器安全更新](./browsers.md)）。Mozilla 没有标注任何一项已被实际利用，Tor Project 的公告也没有提到。
 - 内置的 tor 升到 11 月 4 日的 0.4.9.16。那是只影响目录权威的紧急发布，处理 0.4.9.15 新规定的协议版本让旧版客户端直接退出运行的问题（细节见 [tor daemon 更新日志](./tor-daemon.md)）。浏览器这一侧多的是重新生成的备用目录列表。
 - NoScript 升至 13.6.38.1984，zlib 升到 1.4。Android 的签名流程改用新版的 apksigner（tor-browser-build#41814、tor-browser-build#41912），没有界面与行为上的变更。
-- 发布文件的签名子密钥维持 `022DA248432D2A0E0F54E65E316C1FACD62D07D9`，已用 16.0.1 的 `sha256sums-signed-build.txt.asc` 核对。16.0 公告预告的新电路显示要先在 Alpha 推出，截至 11 月 11 日 Alpha 通道仍停在 10 月 15 日的 16.0a14。
+- 发布文件的签名子密钥维持 `022DA248432D2A0E0F54E65E316C1FACD62D07D9`，已用 16.0.1 的 `sha256sums-signed-build.txt.asc` 核对。16.0 公告预告的新电路显示要先在 Alpha 推出，截至 11 月 14 日 Alpha 通道仍停在 10 月 15 日的 16.0a14。
+- Android 版在同一天另发 [16.0.2](https://blog.torproject.org/new-release-tor-browser-1602/){target="_blank"}，只有 Android。16.0.1 的 Android 版内置的 tor 在构建时链接到动态的 zlib 库，运行时会异常退出（tor-browser-build#41919），16.0.2 只修这一项，没有其他变更。用 Android 版的人要确认版本是 16.0.2，桌面版维持 16.0.1。16.0.2 的签名子密钥同样是上面那一把，已用 `sha256sums-signed-build.txt.asc` 核对。
 
 ## Tor Browser 16.0
 

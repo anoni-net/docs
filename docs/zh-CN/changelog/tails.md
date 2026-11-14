@@ -24,6 +24,17 @@ Tails 上的漏洞后果跟一般操作系统不同。取得管理员权限等�
 
 Tails 官方只区分紧急发布与排程发布，中间那一层是社区志愿者读完公告后补的判断。判断不确定时以较高一级为准。
 
+## Tails 7.17
+
+> 2026-11-11 · [上游公告](https://tails.net/news/version_7.17/){target="_blank"} · [7.16 已知漏洞公告](https://tails.net/security/known_security_vulnerabilities_in_7.16/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">尽快</span>例行排程版本，带进 Tor Browser 的安全更新。Tails 另外发了一份 7.16 的已知漏洞公告，要求尽快升级。上游没有提到已被实际利用。
+- Tor Browser 升至 16.0.1，基础更新到 153.7.0esr，Mozilla 为这一版列了 81 个 CVE（见 [Tor 更新日志](./tor.md)）。Tor 客户端升至 0.4.9.16，那是只影响目录权威的紧急发布（见 [tor daemon 更新日志](./tor-daemon.md)）。
+- 内核升到 6.12.116，涵盖 Debian 11 月 2 日与 11 月 8 日的两份内核安全公告（DSA-6602-1、DSA-6616-1）。7.16 那一则提到没赶上的 ImageMagick（DSA-6593-1）这次也装了修补后的版本，连同 11 月 4 日的后续公告（DSA-6611-1）一起涵盖。
+- 已知漏洞公告一样没有列出清单。7.17 的构建记录写明 Debian 安全更新取自 11 月 10 日的快照，比对软件包清单，zlib（DSA-6613-1）、NSS（DSA-6599-1）、vim（DSA-6600-1 与 6600-2）与 apt（DSA-6607-1）都是修补后的版本。公告本身只列了 Tor Browser、tor 与内核三项。
+- 11 月 13 日的 tor 0.4.9.17 与同一天的内核公告（DSA-6628-1，6.12.117）都晚于这一版。
+- 可从 Tails 7.0 以后版本自动升级。全新安装会清除已有的 Persistent Storage。
+
 ## Tails 7.16
 
 > 2026-10-30 · [上游公告](https://tails.net/news/version_7.16/){target="_blank"} · [7.15.1 已知漏洞公告](https://tails.net/security/known_security_vulnerabilities_in_7.15.1/){target="_blank"}

@@ -35,7 +35,7 @@ Vendor support periods vary widely. Checking a model's committed support window 
 
 ## November 2026
 
-> Patch level 2026-11-05 · [Google bulletin](https://source.android.com/docs/security/bulletin/2026/2026-11-01){target="_blank"} · [GrapheneOS releases](https://grapheneos.org/releases){target="_blank"}
+> Patch level 2026-11-05 · [Google bulletin](https://source.android.com/docs/security/bulletin/2026/2026-11-01){target="_blank"} · [Pixel Update Bulletin](https://source.android.com/docs/security/bulletin/pixel/2026/2026-11-01){target="_blank"} · [GrapheneOS releases](https://grapheneos.org/releases){target="_blank"}
 
 - The bulletin was published on 2 November, with links to the AOSP patches added on 6 November. It keeps the detailed format used since September, so the figures here come straight from Google.
 - It lists 215 CVEs, 23 Critical and 192 High, more than September's 180, after only 25 in October. They are split across two patch levels, 118 at 2026-11-01 and 97 at 2026-11-05, so only a device showing 2026-11-05 or later has both batches.
@@ -43,8 +43,10 @@ Vendor support periods vary widely. Checking a model's committed support window 
 - The kernel section has 6 Critical issues: 2 privilege escalations in Bluetooth, 1 in HID, and 3 in Protected KVM (the virtualisation layer Android uses to isolate sensitive work), 2 of them privilege escalations and 1 an information disclosure. Google's summary for this section states that the most severe could allow remote escalation of privilege with no user interaction needed.
 - On the chip vendor side, MediaTek has 30, including 8 Critical, all in the cellular modem. Qualcomm closed-source components have 1 Critical, and Imagination Technologies has 12 High.
 - 17 CVEs ship through Google Play system updates, across modules including media codecs, MediaProvider, telephony core and Wi-Fi, and they include the Critical System remote code execution CVE-2026-58876. Devices on that update channel (some devices on Android 10 and later) can receive these without waiting for a full update from the manufacturer.
-- Google does not flag anything in the Android Security Bulletin as actively exploited. As of 11 November the Pixel Update Bulletin has not been published (its URL still returns 404), so Pixel-specific fixes and their exploitation status will have to wait for it. In September, CVE-2026-58704 appeared only in the Pixel bulletin.
-- GrapheneOS brought the full 2026-11-01 patch level in `2026110200` on 2 November, and through the 8 November release that is still the level shown; see [GrapheneOS monthly summary](./grapheneos.md). Of the 215 CVEs in the November bulletin, 77 were already in the list of early fixes in GrapheneOS's 21 October release.
+- The Pixel Update Bulletin on 10 November lists 166 additional Pixel-specific CVEs at the 2026-11-05 patch level: 43 Critical, 87 High and 36 Moderate, with no overlap with the 215 in the Android Security Bulletin. October had only 6.
+- Three of the Critical issues in the Pixel bulletin allow remote code execution: in the cellular modem (CVE-2026-58799), the MFC video codec (CVE-2026-57047) and the hardware codec firmware (CVE-2026-95402). The other 40 Critical issues are mostly privilege escalation; the 5 in the kernel group sit in low-level components such as the IOMMU, the LK bootloader and the hypervisor.
+- Google does not flag anything in either bulletin as actively exploited.
+- GrapheneOS brought the full 2026-11-01 patch level in `2026110200` on 2 November, and through the 13 November release no release notes mention moving to 2026-11-05; see [GrapheneOS monthly summary](./grapheneos.md). Of the 215 CVEs in the November bulletin, 77 were already in the list of early fixes in GrapheneOS's 21 October release.
 
 ## October 2026
 
