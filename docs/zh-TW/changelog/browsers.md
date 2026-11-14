@@ -35,16 +35,18 @@ Chrome 每週都有帶安全修補的小版本，大版本原本約四週一版�
 
 ## Chrome 2026 年 11 月
 
-> 2026-11-09 · [Chrome Releases](https://chromereleases.googleblog.com/2026/11/){target="_blank"}
+> 2026-11-11 · [Chrome Releases](https://chromereleases.googleblog.com/2026/11/){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">立刻</span>11 月 9 日的 157.0.8103.50/.51（Linux 是 157.0.8103.50）修了 9 個安全問題，其中 CVE-2026-125350 已被利用。Google 在公告裡寫明知道這個漏洞的利用程式在外流傳（exists in the wild），嚴重度評為 High。目前最新的就是這一版，請更新後重新啟動瀏覽器。
-- CVE-2026-125350 是 XML 處理元件的 use-after-free（程式把記憶體還回去之後又拿來用），11 月 6 日回報，三天後修掉。截至 11 月 11 日，CISA 的已知遭利用漏洞目錄（KEV）還沒有收錄這一項，依本頁的判準，Google 的標注已經足以列為立刻。
+- <span class="urg-tag urg-tag--now">立刻</span>11 月 9 日的 157.0.8103.50/.51（Linux 是 157.0.8103.50）修了 9 個安全問題，其中 CVE-2026-125350 已被利用。Google 在公告裡寫明知道這個漏洞的利用程式在外流傳（exists in the wild），嚴重度評為 High。兩天後又有 157.0.8103.78，目前最新的是那一版，更新到 .78 就同時涵蓋兩次修補，請更新後重新啟動瀏覽器。
+- CVE-2026-125350 是 XML 處理元件的 use-after-free（程式把記憶體還回去之後又拿來用），11 月 6 日回報，三天後修掉。CISA 在 11 月 10 日把它收進已知遭利用漏洞目錄（KEV）。
 - 同一版其餘 6 個 High 分布在 WebGL、FileSystem、Compositing、GPU、V8 與 XML 各一個，另有 2 個 Medium 在 GPU。
 - 延長穩定版（Extended Stable，只有 Windows 與 Mac）同日更新到 156.0.8078.96，修補清單裡也有 CVE-2026-125350。Android 版同日發布 157.0.8103.50，公告寫明修補內容跟桌面版相同。Edge、Brave 這類以 Chromium 為基底的瀏覽器要等各自的更新，Tor Browser 以 Firefox 為基底，不受這一項影響。
+- 11 月 11 日的 157.0.8103.78/.79（Linux 是 157.0.8103.78）修了 83 個安全問題，Critical 5 個、High 78 個。Google 沒有標注其中任何一項已被實際利用，單看這一版是儘快。5 個 Critical 都是 use-after-free，落在 ServiceWorker、CSS、Layout、Skia 與無障礙元件（CVE-2026-126885、CVE-2026-126895、CVE-2026-126879、CVE-2026-126846、CVE-2026-126911）。High 裡 V8（Chrome 的 JavaScript 引擎）有 17 個、它的編譯器 Turbolev 另有 2 個，繪圖函式庫 Skia 有 16 個。
+- 延長穩定版同日更新到 156.0.8078.100，修了 72 個，Critical 4 個。Android 版同日發布 157.0.8103.78，公告寫明修補內容跟桌面版相同。
 - 11 月 3 日的大版本 157.0.8103.38/.39 修了 213 個安全問題，Critical 7 個、High 77 個、Medium 75 個、Low 54 個。Google 沒有標注其中任何一項已被實際利用。
 - 157 的 7 個 Critical 裡，Dawn（Chrome 的 WebGPU 實作）有 2 個緩衝區溢位（CVE-2026-121156、CVE-2026-121247），ANGLE 有 1 個記憶體損毀（CVE-2026-121229），另外 4 個是 use-after-free，落在 WebGL、預先轉譯（Prerender）、Geometry 與 Core（CVE-2026-121246、CVE-2026-121035、CVE-2026-121203、CVE-2026-121126）。High 裡 V8 有 10 個、Skia 有 5 個，PDF 引擎 PDFium 有 3 個。
 - 延長穩定版在 11 月 3 日先更新到 156.0.8078.88，修了 55 個安全問題，Critical 3 個。Android 版同日發布 157.0.8103.38，公告寫明修補內容跟桌面版相同。
-- 158 已經在 11 月 4 日以搶先穩定版（Early Stable）推給一小部分 Windows 使用者，Android 版在 11 月 5 日跟進，兩份公告都沒有列出安全修補。
+- 158 已經在 11 月 4 日以搶先穩定版（Early Stable）推給一小部分 Windows 使用者，Android 版在 11 月 5 日跟進，11 月 12 日兩邊各更新到 158.0.8127.36。iOS 版在 11 月 10 日直接以穩定版發布 158。這幾份公告都沒有列出安全修補。
 
 ## Firefox 2026 年 11 月
 

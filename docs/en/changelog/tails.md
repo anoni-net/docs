@@ -24,6 +24,17 @@ A compromise on Tails means something different from a compromise on an ordinary
 
 The Tails project only distinguishes emergency from scheduled releases. The middle tier is a judgement community volunteers add after reading each advisory. Where the call is unclear, we round up.
 
+## Tails 7.17
+
+> 2026-11-11 · [Upstream announcement](https://tails.net/news/version_7.17/){target="_blank"} · [Known vulnerabilities in 7.16](https://tails.net/security/known_security_vulnerabilities_in_7.16/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>A scheduled release that brings in Tor Browser security updates. Tails also published a known-vulnerabilities notice for 7.16 asking users to upgrade as soon as possible. Upstream does not mention active exploitation.
+- Tor Browser moves to 16.0.1, rebased on 153.7.0esr, for which Mozilla listed 81 CVEs (see the [Tor changelog](./tor.md)). The Tor client moves to 0.4.9.16, an emergency release affecting only directory authorities (see the [tor daemon changelog](./tor-daemon.md)).
+- The kernel moves to 6.12.116, covering Debian's kernel security advisories of 2 November and 8 November (DSA-6602-1, DSA-6616-1). ImageMagick (DSA-6593-1), which missed 7.16, is now at a fixed version, which also covers the follow-up advisory of 4 November (DSA-6611-1).
+- The known-vulnerabilities notice again gives no list. The 7.17 build manifest states that Debian security updates were taken from the 10 November snapshot, and the package list shows zlib (DSA-6613-1), NSS (DSA-6599-1), vim (DSA-6600-1 and 6600-2) and apt (DSA-6607-1) at fixed versions. The announcement itself lists only Tor Browser, tor and the kernel.
+- tor 0.4.9.17 on 13 November and the kernel advisory from the same day (DSA-6628-1, 6.12.117) both came after this release.
+- Automatic upgrades are available from Tails 7.0 or later. A fresh install wipes any existing Persistent Storage.
+
 ## Tails 7.16
 
 > 2026-10-30 · [Upstream announcement](https://tails.net/news/version_7.16/){target="_blank"} · [Known vulnerabilities in 7.15.1](https://tails.net/security/known_security_vulnerabilities_in_7.15.1/){target="_blank"}

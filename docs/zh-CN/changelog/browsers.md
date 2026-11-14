@@ -35,16 +35,18 @@ Chrome 每周都有带安全修补的小版本，大版本原本约四周一版�
 
 ## Chrome 2026 年 11 月
 
-> 2026-11-09 · [Chrome Releases](https://chromereleases.googleblog.com/2026/11/){target="_blank"}
+> 2026-11-11 · [Chrome Releases](https://chromereleases.googleblog.com/2026/11/){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">立刻</span>11 月 9 日的 157.0.8103.50/.51（Linux 是 157.0.8103.50）修复了 9 个安全问题，其中 CVE-2026-125350 已被利用。Google 在公告里写明知道这个漏洞的利用程序在外流传（exists in the wild），严重程度评为 High。目前最新的就是这一版，请更新后重新启动浏览器。
-- CVE-2026-125350 是 XML 处理组件的 use-after-free（程序把内存还回去之后又拿来用），11 月 6 日报告，三天后修复。截至 11 月 11 日，CISA 的已知遭利用漏洞目录（KEV）还没有收录这一项，按本页的判断标准，Google 的标注已经足以列为立刻。
+- <span class="urg-tag urg-tag--now">立刻</span>11 月 9 日的 157.0.8103.50/.51（Linux 是 157.0.8103.50）修复了 9 个安全问题，其中 CVE-2026-125350 已被利用。Google 在公告里写明知道这个漏洞的利用程序在外流传（exists in the wild），严重程度评为 High。两天后又有 157.0.8103.78，目前最新的是那一版，更新到 .78 就同时涵盖两次修补，请更新后重新启动浏览器。
+- CVE-2026-125350 是 XML 处理组件的 use-after-free（程序把内存还回去之后又拿来用），11 月 6 日报告，三天后修复。CISA 在 11 月 10 日把它收进已知遭利用漏洞目录（KEV）。
 - 同一版其余 6 个 High 分布在 WebGL、FileSystem、Compositing、GPU、V8 与 XML 各一个，另有 2 个 Medium 在 GPU。
 - 扩展稳定版（Extended Stable，只有 Windows 与 Mac）同日更新到 156.0.8078.96，修补清单里也有 CVE-2026-125350。Android 版同日发布 157.0.8103.50，公告写明修补内容跟桌面版相同。Edge、Brave 这类基于 Chromium 的浏览器要等各自的更新，Tor Browser 基于 Firefox，不受这一项影响。
+- 11 月 11 日的 157.0.8103.78/.79（Linux 是 157.0.8103.78）修复了 83 个安全问题，Critical 5 个、High 78 个。Google 没有标注其中任何一项已被实际利用，单看这一版是尽快。5 个 Critical 都是 use-after-free，落在 ServiceWorker、CSS、Layout、Skia 与无障碍组件（CVE-2026-126885、CVE-2026-126895、CVE-2026-126879、CVE-2026-126846、CVE-2026-126911）。High 里 V8（Chrome 的 JavaScript 引擎）有 17 个、它的编译器 Turbolev 另有 2 个，图形库 Skia 有 16 个。
+- 扩展稳定版同日更新到 156.0.8078.100，修复了 72 个，Critical 4 个。Android 版同日发布 157.0.8103.78，公告写明修补内容跟桌面版相同。
 - 11 月 3 日的大版本 157.0.8103.38/.39 修复了 213 个安全问题，Critical 7 个、High 77 个、Medium 75 个、Low 54 个。Google 没有标注其中任何一项已被实际利用。
 - 157 的 7 个 Critical 里，Dawn（Chrome 的 WebGPU 实现）有 2 个缓冲区溢出（CVE-2026-121156、CVE-2026-121247），ANGLE 有 1 个内存损坏（CVE-2026-121229），另外 4 个是 use-after-free，落在 WebGL、预渲染（Prerender）、Geometry 与 Core（CVE-2026-121246、CVE-2026-121035、CVE-2026-121203、CVE-2026-121126）。High 里 V8 有 10 个、Skia 有 5 个，PDF 引擎 PDFium 有 3 个。
 - 扩展稳定版在 11 月 3 日先更新到 156.0.8078.88，修复了 55 个安全问题，Critical 3 个。Android 版同日发布 157.0.8103.38，公告写明修补内容跟桌面版相同。
-- 158 已经在 11 月 4 日以抢先稳定版（Early Stable）推给一小部分 Windows 用户，Android 版在 11 月 5 日跟进，两份公告都没有列出安全修补。
+- 158 已经在 11 月 4 日以抢先稳定版（Early Stable）推给一小部分 Windows 用户，Android 版在 11 月 5 日跟进，11 月 12 日两边各更新到 158.0.8127.36。iOS 版在 11 月 10 日直接以稳定版发布 158。这几份公告都没有列出安全修补。
 
 ## Firefox 2026 年 11 月
 

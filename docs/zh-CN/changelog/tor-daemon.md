@@ -35,6 +35,18 @@ tor daemon（社区惯称 c-tor）是 [Tor](../tools/what-is-tor.md) 网络的 C
 
 下面多则条目都在修 conflux。它让客户端同时用两条电路传同一个连接的数据以提升速度，2023 年进入 Tor，是这半年多起安全问题的共同来源。新的代码路径带来新的错误面，这批修补集中在那里并不意外。
 
+## tor 0.4.9.17
+
+> 2026-11-13 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.17/ChangeLog){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">立刻</span>距离 0.4.9.16 九天，官方再次写明是紧急发布（emergency release），主要影响中继，请中继运营者尽快升级。这一版没有用安全发布这个词，但带两个 TROVE 编号，按本页的判断标准列为立刻。上游没有提到已被实际利用。
+- TROVE-2026-031 是中继的拒绝服务防御。IPv6 客户端原本逐个地址计算，一个 /64 网段里有大量地址可以轮换，限制形同虚设。这一版改成整个 /64 前缀算一个客户端（bug 41344，问题从 0.3.3.2-alpha 就存在）。中继与网桥报告的不重复客户端数，也改成一个 /64 算一个。
+- TROVE-2026-075 列在次要的安全修补下面，影响的是客户端。RESOLVED 信元（中继返回 DNS 查询结果的消息）里的主机名不是合法的 DNS 名称时，tor 现在会拒绝整个信元（bug 41464，问题从 0.1.1.1-alpha 就存在）。
+- 目录权威 bastet 的密钥被移除，ChangeLog 写的原因是可能遭到入侵（potential compromise），之后可以换上新密钥再恢复。另一台目录权威 maatuska 换了 IP 地址。两项都写在 tor 内置的目录权威列表里，客户端要升级才会取得新的列表。
+- 客户端另有一项流隔离的修正。HTTPTunnelPort 记录隔离标头（X-Tor-Stream-Isolation）长度时只留 8 位，两个超过 251 字节、长度除以 256 余数相同的值会被当成同一个，共用一条电路（bug 41474）。一般用 Tor Browser 的人不会用到这个端口。
+- 其余两项是中继端 ntor-v3 握手的子协议请求检查没有按设计执行（bug 41475），以及客户端一个在当前共识里不会遇到的断言（bug 41476）。备用目录列表与 geoip 数据也更新到 11 月 13 日。
+- 截至 11 月 14 日，Tor Browser 与 Tails 都还没有带进这一版，最新的 Tor Browser 16.0.1 与 Tails 7.17 用的是 0.4.9.16。架设中继、网桥与 onion 服务的人要自行升级。
+
 ## tor 0.4.9.16
 
 > 2026-11-04 · [ChangeLog](https://gitlab.torproject.org/tpo/core/tor/-/blob/tor-0.4.9.16/ChangeLog){target="_blank"}
@@ -44,7 +56,7 @@ tor daemon（社区惯称 c-tor）是 [Tor](../tools/what-is-tor.md) 网络的 C
 - 这一版的目录权威把 Desc 与 Microdesc 的必要协议版本从 3 退回 2，microdescriptor 也改成放一把假的 TAP key，不再整个拿掉，对应新的共识方法 38。ChangeLog 写明这样做是安全的，v2 onion 服务之后已经没有任何地方使用 TAP。
 - ChangeLog 没有写明 0.4.8.x 的客户端之后能否正常连接。0.4.9.15 已写明 0.4.8 不再受支持，用发行版软件包或其他内置 tor 的 app 的人，仍要确认版本是 0.4.9.x。
 - 另外重新生成 11 月 4 日版本的备用目录（fallback directory）列表，目录权威的获取大小上限也加倍，ChangeLog 写明九份投票即使压缩过也可能超过 16 MB（ticket 41471 的一部分）。
-- 用浏览器连上 Tor 的人，11 月 10 日的 Tor Browser 16.0.1 已经带进这一版（见 [Tor 更新日志](./tor.md)）。
+- 用浏览器连上 Tor 的人，11 月 10 日的 Tor Browser 16.0.1 已经带进这一版（见 [Tor 更新日志](./tor.md)）。11 月 11 日的 Tails 7.17 也跟上了（见 [Tails 更新日志](./tails.md)）。
 
 ## tor 0.4.9.15
 

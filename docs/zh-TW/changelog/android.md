@@ -35,7 +35,7 @@ Android 裝置的實際修補等級由手機廠決定，跟 Google 公告的日�
 
 ## 2026 年 11 月
 
-> 修補等級 2026-11-05 · [Google 公告](https://source.android.com/docs/security/bulletin/2026/2026-11-01){target="_blank"} · [GrapheneOS 發布頁](https://grapheneos.org/releases){target="_blank"}
+> 修補等級 2026-11-05 · [Google 公告](https://source.android.com/docs/security/bulletin/2026/2026-11-01){target="_blank"} · [Pixel 更新公告](https://source.android.com/docs/security/bulletin/pixel/2026/2026-11-01){target="_blank"} · [GrapheneOS 發布頁](https://grapheneos.org/releases){target="_blank"}
 
 - 公告在 11 月 2 日發布，11 月 6 日補上 AOSP 的修補連結。明細延續九月以來的格式，這一則的數字直接來自 Google 的公告。
 - 215 個 CVE，23 個評為 Critical、192 個 High，總數比九月的 180 個還多，十月只有 25 個。分成 2026-11-01 與 2026-11-05 兩個修補等級，前者 118 個、後者 97 個，裝置顯示 2026-11-05 或更新才代表兩批都涵蓋。
@@ -43,8 +43,10 @@ Android 裝置的實際修補等級由手機廠決定，跟 Google 公告的日�
 - 核心那一組有 6 個 Critical，藍牙 2 個提權、HID 1 個提權，其餘 3 個在受保護的 KVM（Protected KVM，Android 用來隔離敏感工作的虛擬化層），2 個提權、1 個資訊外洩。Google 在這一節的摘要寫明，最嚴重的一項可以從遠端提權，不需要使用者做任何動作。
 - 晶片廠那一側，MediaTek 有 30 個，其中 8 個 Critical 都在行動數據機。Qualcomm 閉源元件有 1 個 Critical，Imagination Technologies 有 12 個 High。
 - 17 個 CVE 透過 Google Play 系統更新發送，分布在媒體編解碼器、MediaProvider、電話核心與 Wi-Fi 等模組，System 的 Critical 遠端執行程式碼 CVE-2026-58876 也在其中。有這個更新管道的裝置（Android 10 以後的部分裝置）不必等手機廠的完整更新，就可以收到這幾項。
-- Google 在 Android 安全公告裡沒有標注任何一項已被實際利用。Pixel 更新公告到 11 月 11 日還沒發布（網址仍回傳 404），Pixel 專屬的修補與它們的利用狀態要等那一份。九月的 CVE-2026-58704 就是只寫在 Pixel 公告裡。
-- GrapheneOS 在 11 月 2 日的 `2026110200` 帶上完整的 2026-11-01 修補等級，到 11 月 8 日那版為止顯示的仍是這個等級，詳見 [GrapheneOS 月度更新摘要](./grapheneos.md)。十一月公告的 215 個裡，有 77 個早在 GrapheneOS 10 月 21 日那版的提前修補清單裡。
+- 11 月 10 日的 Pixel 更新公告另外列了 166 個 Pixel 專屬的 CVE，43 個 Critical、87 個 High、36 個 Moderate，修補等級是 2026-11-05，跟 Android 安全公告的 215 個沒有重疊。十月只有 6 個。
+- Pixel 公告裡可以遠端執行程式碼的 Critical 有 3 個，在行動數據機（CVE-2026-58799）、影片編解碼器 MFC（CVE-2026-57047）與硬體編解碼器的韌體（CVE-2026-95402）。其餘 40 個 Critical 以提權為主，核心那一組 5 個落在 IOMMU、開機程式 LK 與 Hypervisor 這類底層元件。
+- Google 在兩份公告裡都沒有標注任何一項已被實際利用。
+- GrapheneOS 在 11 月 2 日的 `2026110200` 帶上完整的 2026-11-01 修補等級，到 11 月 13 日那版為止，發布說明都沒有提到推進到 2026-11-05，詳見 [GrapheneOS 月度更新摘要](./grapheneos.md)。十一月公告的 215 個裡，有 77 個早在 GrapheneOS 10 月 21 日那版的提前修補清單裡。
 
 ## 2026 年 10 月
 

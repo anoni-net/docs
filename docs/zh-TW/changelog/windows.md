@@ -43,12 +43,13 @@ Windows 每月更新的整理。微軟固定在每月第二個星期二發布（
 - <span class="urg-tag urg-tag--now">立刻</span>截至 11 月 11 日有 1342 個 CVE（Windows 本體 745 個），68 個被評為 Critical（以相異 CVE 計），一個標為已被實際利用。被利用的那一個在 Outlook，Windows 本體沒有，但它打的是桌面上的 Office，依本頁判準列為立刻。
 - CVE-2026-124194：Outlook 的偽冒漏洞。攻擊者送出特製的郵件檔案，使用者在 Outlook 打開之後，Outlook 會連線到攻擊者控制的網路位置，平常的外部內容警告不會出現。使用者的 NTLMv2 雜湊（Windows 用來證明登入身分的憑證摘要）因此外洩，攻擊者可以拿它冒用使用者的身分。需要使用者親手打開檔案，預覽窗格不會觸發。微軟在資料裡標的是已偵測到利用行為，CVSS 6.5。
 - 受影響的是 Microsoft 365 Apps 企業版與 Office LTSC 2021、2024。Office 的更新走自己的通道，通常會在背景自動安裝，企業環境常會延後。用 Outlook 收信的人可以從「檔案」、「帳戶」、「更新選項」手動執行一次「立即更新」。
-- 到 11 月 11 日寫稿時，CISA 的已知遭利用漏洞目錄（KEV）還沒有收錄這一項，目錄最後一次更新在 11 月 9 日，早於這一輪發布。
+- CISA 的已知遭利用漏洞目錄（KEV）已經收錄這一項，收錄日期記為 11 月 10 日，11 月 11 日寫稿時還查不到。
 - Windows 本體這個月沒有標為已被實際利用的項目，整份資料也沒有標為公開揭露的項目。Windows 本體的 Critical 有 37 個，Hyper-V 的 8 個提權最集中，Message Queuing（MSMQ）另有 5 個遠端執行程式碼。
 - 不需要登入、從網路就能觸發的 Critical 裡，LDAP 的 CVE-2026-119958 與 Xbox Live 網路服務的 CVE-2026-112967 都是 CVSS 9.8。LDAP 那一個從 Windows 10 1607 到 Windows 11 26H2、Windows Server 2016 以後都在範圍內，Xbox Live 那一個只影響桌面版，攻擊者需要在同一個網路裡。NAT 的 CVE-2026-113862 被微軟評為較可能被利用（Exploitation More Likely），攻擊者需要贏得競爭條件才能成功。三個都沒有標為已被實際利用，跟著平常的更新節奏裝上即可。
 - Windows Search 的 CVE-2026-116928 同樣是 CVSS 9.8，攻擊路徑在 Exchange Server。Exchange 會自動為附件建立索引，收件人不必打開信件就會觸發，管理 Exchange 的人要優先處理。
 - Windows 本體的 745 個裡，最多的四個元件是 Windows Advanced Rasterization Platform（WARP，在 CPU 上執行的軟體繪圖）37 個、Windows Installer 36 個、Graphics Kernel 35 個與 Windows Kernel 28 個。類型以提權最多，有 475 個，遠端執行程式碼與資訊外洩各 104 個。
 - 總數 1342 個裡，Azure Linux 佔 84 個、Edge 佔 166 個，其餘 347 個分散在 Office、開發工具與其他產品。這兩條產品線的數字通常會在發布後幾週持續增加，10 月那一輪就從發布當天的 1758 個增加到 11 月 7 日的 3491 個。
+- 11 月 14 日以微軟當天修訂的資料再數一次，總數 1644 個、Critical 76 個（以相異 CVE 計）。增加的項目幾乎都在 Azure Linux 與 Edge，11 月 11 日以後首次登錄的就有 Azure Linux 174 個、Edge 121 個，另有 1 個是 Office 的 OneNote。其中 Edge 的 4 個 Critical 就是 Chrome 11 月 11 日修掉的 Chromium 漏洞（見[瀏覽器安全更新](./browsers.md)），Azure Linux 另有 3 個。Windows 本體沒有新增項目，11 月 13 日只更新了幾項的致謝名單，另有兩項補上受影響的 Office 版本，已被利用的仍只有 CVE-2026-124194。
 
 ## 2026 年 10 月
 

@@ -17,8 +17,13 @@ Source data comes from the [official releases page](https://grapheneos.org/relea
 
 ## November 2026
 
-> Releases `2026110100`, `2026110200`, `2026110700`, `2026110800` · [Official releases](https://grapheneos.org/releases){target="_blank"}
+> Releases `2026110100`, `2026110200`, `2026110700`, `2026110800`, `2026111300` · [Official releases](https://grapheneos.org/releases){target="_blank"}
 
+- `2026111300` on 13 November removes the last eMudhra root certificate, the RSA root left in place by the 21 October release (see [October 2026](#October-2026)). GrapheneOS notes that this root has no known compromised keys, but that Chrome, Firefox and Vanadium will block new certificates issued under it from 16 November, Microsoft will remove it on the same date and Apple on 30 November, so it is being removed ahead of them. The release also removes 26 obsolete root certificates that the stock Pixel OS has already dropped but AOSP still carries.
+- Vanadium moves to 157.0.8103.50.0 and then 157.0.8103.78.0, bringing in CVE-2026-125350, the actively exploited flaw Chrome fixed on 9 November, and the 83 fixes from 11 November (see [Browser security updates](./browsers.md)).
+- The 6.1 and 6.18 kernels follow the latest GKI LTS revisions, reaching 6.1.182 and 6.18.39. 6.18 again allows SHA-1 to be requested explicitly, which some carriers' IMS tunnels (the encrypted links used by services such as Wi-Fi calling) still need for legacy ciphers; it was disabled by accident in the port to 6.18. On 10th generation Pixels the release also fixes GNSS initialisation failure handling, memory leaks on early initialisation failure in the pKVM SMMU driver, and unnecessary polling with some USB PD chargers.
+- Fixes an upstream bug that made WebView exit abnormally, caused by external service metadata not being kept when app information is updated.
+- The security preview release (`2026111301`) still covers December 2026 to May 2027, and its list of additional fixed CVEs has 118 entries (13 Critical, 105 High).
 - `2026110800` on 8 November ships only to the four 10th generation Pixel models (Pixel 10, 10 Pro, 10 Pro XL and 10 Pro Fold), backporting from the Android 17 QPR2 Beta a fix for an upstream bug in how sleep time is calculated. The stock OS has the same bug, which became more frequent after the GKI update in the previous release.
 - `2026110700` on 7 November adds an API for requesting coarse location from the OS, for use by Vanadium and Sandboxed Google Play. Sandboxed Google Play previously carried its own reimplementation of the upstream location obfuscation code (LocationFudger); with the new API it no longer has to maintain that copy.
 - Emergency number handling is rewritten, now pulling the correct data from Safety Hub in place of upstream AOSP's outdated and buggy implementation.
@@ -27,7 +32,7 @@ Source data comes from the [official releases page](https://grapheneos.org/relea
 - The 6.18 kernel moves to the latest GKI LTS revision and backports an upstream fix for a use-after-free in FUSE (memory used again after being released, which can be abused to slip in malicious code). On 10th generation Pixels, it fixes an audio offload compatibility problem from the move to 6.18, the handling of zram initialisation failures, and an upstream bug where PCIe rescans lacked synchronisation.
 - Time zone data is updated to 2026f, and Vanadium moves to 157.0.8103.38.0.
 - The security preview release (`2026110701`) now extends to patches Google has scheduled for its December 2026 to May 2027 bulletins; the list of additional fixed CVEs has 107 entries (12 Critical, 95 High).
-- `2026110200` on 2 November brings the full 2026-11-01 security patch level; the November bulletin is summarised in [Android Security Patch Levels](./android.md). Through the 8 November release the listed patch level is still 2026-11-01, and as of 11 November Google had not yet published its Pixel Update Bulletin.
+- `2026110200` on 2 November brings the full 2026-11-01 security patch level; the November bulletin is summarised in [Android Security Patch Levels](./android.md). Through the 13 November release, no release notes mention moving to 2026-11-05. Google published its Pixel Update Bulletin on 10 November, summarised in [Android Security Patch Levels](./android.md).
 - The 6.1 kernel picks up a batch of regression fixes from the Android GKI branch and upstream Linux, including a null pointer dereference in MGLRU, an infinite loop in page migration, and use-after-free bugs in USB HID, MIDI and block encryption.
 - On 10th generation Pixels it fixes two charging problems from the move to 6.18: chargers supporting AVS could not PPS fast charge, and the charging log code made an invalid memory access (caught by UBSan).
 - The security preview release (`2026110201`) now covers December 2026 to April 2027. The November batch has been published officially and dropped off the list, which is down to 94 entries (8 Critical, 86 High).
@@ -40,7 +45,7 @@ Source data comes from the [official releases page](https://grapheneos.org/relea
 - Fixed an upstream use-after-free in SystemUI's picture-in-picture touch handling (PipTouchHandler), and an upstream bug that broke accessibility actions on the launcher home screen.
 - Vanadium moves through 156.0.8078.73.0 and 156.0.8078.79.0, the Messaging app moves to version 18, and TalkBack moves to version 23.
 - The security preview release (`2026110101`) applies early the patches Google has scheduled for its November 2026 to April 2027 bulletins; the list of additional fixed CVEs has 152 entries (11 Critical, 141 High), up from 139 in the 21 October release.
-- None of GrapheneOS's four release notes this month mention any actively exploited vulnerability, and Google does not flag any item in its November Android Security Bulletin either.
+- None of GrapheneOS's five release notes this month mention any actively exploited vulnerability, and Google does not flag any item in its November Android Security Bulletin or Pixel Update Bulletin either.
 - Device coverage runs from Pixel 6 to Pixel 10a, unchanged.
 
 ## October 2026

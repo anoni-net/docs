@@ -35,16 +35,18 @@ Both browsers download updates in the background, but an update only takes effec
 
 ## Chrome November 2026
 
-> 2026-11-09 · [Chrome Releases](https://chromereleases.googleblog.com/2026/11/){target="_blank"}
+> 2026-11-11 · [Chrome Releases](https://chromereleases.googleblog.com/2026/11/){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">Now</span>157.0.8103.50/.51 on 9 November (157.0.8103.50 on Linux) fixed 9 security issues, and one of them, CVE-2026-125350, is being exploited. Google's announcement states that it is aware an exploit exists in the wild, and rates the flaw High. This is the latest release; update and restart your browser.
-- CVE-2026-125350 is a use-after-free (memory used again after being released) in the XML handling component. It was reported on 6 November and fixed three days later. As of 11 November CISA's Known Exploited Vulnerabilities catalogue (KEV) has not listed it, but under this page's criteria Google's own flag is enough to rate it Now.
+- <span class="urg-tag urg-tag--now">Now</span>157.0.8103.50/.51 on 9 November (157.0.8103.50 on Linux) fixed 9 security issues, and one of them, CVE-2026-125350, is being exploited. Google's announcement states that it is aware an exploit exists in the wild, and rates the flaw High. 157.0.8103.78 followed two days later and is now the latest; updating to .78 covers both rounds of fixes. Update and restart your browser.
+- CVE-2026-125350 is a use-after-free (memory used again after being released) in the XML handling component. It was reported on 6 November and fixed three days later. CISA added it to its Known Exploited Vulnerabilities catalogue (KEV) on 10 November.
 - The other 6 High issues in the same release are one each in WebGL, FileSystem, Compositing, GPU, V8 and XML, plus 2 Medium in GPU.
 - Extended Stable (Windows and Mac only) moved to 156.0.8078.96 the same day, and its fix list also includes CVE-2026-125350. The Android release 157.0.8103.50 shipped the same day, and its announcement states it carries the same security fixes as desktop. Chromium-based browsers such as Edge and Brave need their own updates; Tor Browser is built on Firefox and is not affected by this flaw.
+- 157.0.8103.78/.79 on 11 November (157.0.8103.78 on Linux) fixed 83 security issues, 5 Critical and 78 High. Google does not flag any of them as actively exploited, so on its own this release would rate Soon. All 5 Critical issues are use-after-free bugs, in ServiceWorker, CSS, Layout, Skia and Accessibility (CVE-2026-126885, CVE-2026-126895, CVE-2026-126879, CVE-2026-126846, CVE-2026-126911). Among the High ones, V8 (Chrome's JavaScript engine) has 17, its Turbolev compiler another 2, and the Skia graphics library 16.
+- Extended Stable moved to 156.0.8078.100 the same day, fixing 72, 4 of them Critical. The Android release 157.0.8103.78 shipped the same day, and its announcement states it carries the same security fixes as desktop.
 - Major version 157.0.8103.38/.39 on 3 November fixed 213 security issues: 7 Critical, 77 High, 75 Medium and 54 Low. Google does not flag any of them as actively exploited.
 - Of the 7 Critical issues in 157, two are buffer overflows in Dawn, Chrome's WebGPU implementation (CVE-2026-121156, CVE-2026-121247), one is memory corruption in ANGLE (CVE-2026-121229), and the other four are use-after-free bugs in WebGL, Prerender, Geometry and Core (CVE-2026-121246, CVE-2026-121035, CVE-2026-121203, CVE-2026-121126). Among the High ones, V8 has 10, Skia 5, and the PDFium PDF engine 3.
 - Extended Stable first moved to 156.0.8078.88 on 3 November, fixing 55 security issues, 3 of them Critical. The Android release 157.0.8103.38 shipped the same day, and its announcement states it carries the same security fixes as desktop.
-- 158 went out as an Early Stable release to a small share of Windows users on 4 November, with Android following on 5 November; neither announcement lists security fixes.
+- 158 went out as an Early Stable release to a small share of Windows users on 4 November, with Android following on 5 November, and both moved to 158.0.8127.36 on 12 November. iOS went straight to a stable 158 release on 10 November. None of these announcements lists security fixes.
 
 ## Firefox November 2026
 
