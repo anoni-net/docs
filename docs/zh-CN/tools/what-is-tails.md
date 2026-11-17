@@ -23,8 +23,8 @@ Tails 真正的价值在三个刻意的设计选择所组合出来的工作环�
 ### 一、无记忆（Amnesic）
 
 <figure markdown="span">
-    <a href="../assets/images/tails-amnesia.svg" target="_blank">
-        <img src="../assets/images/tails-amnesia.svg"
+    <a href="../../assets/images/tails-amnesia.svg" target="_blank">
+        <img src="../../assets/images/tails-amnesia.svg"
             alt="Tails 关闭后会自动遗忘，重启后如同全新的环境不留下踪迹"
             title="Tails 关闭后会自动遗忘，重启后如同全新的环境不留下踪迹"
             style="width: 80%;"
@@ -42,8 +42,8 @@ Tails 完全运作于内存里，不写硬盘。关机时内存清空，这台�
 ### 二、默认强制走 Tor
 
 <figure markdown="span">
-    <a href="../assets/images/tails-footprints.svg" target="_blank">
-        <img src="../assets/images/tails-footprints.svg"
+    <a href="../../assets/images/tails-footprints.svg" target="_blank">
+        <img src="../../assets/images/tails-footprints.svg"
             alt="Tails 不留下踪迹"
             title="Tails 不留下踪迹"
             style="height: 350px;"
@@ -59,8 +59,8 @@ Tails 的所有网络流量都经过 [Tor](./what-is-tor.md)。任何应用程�
 ### 三、从 USB 启动，跟主机系统彻底分开
 
 <figure markdown="span">
-    <a href="../assets/images/tails-laptop.svg" target="_blank">
-        <img src="../assets/images/tails-laptop.svg"
+    <a href="../../assets/images/tails-laptop.svg" target="_blank">
+        <img src="../../assets/images/tails-laptop.svg"
             alt="Tails 可运行在 USB 随身碟或外接硬盘中。"
             title="Tails 可运行在 USB 随身碟或外接硬盘中。"
             style="width: 80%;"

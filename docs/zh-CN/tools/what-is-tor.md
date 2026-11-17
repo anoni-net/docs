@@ -8,8 +8,8 @@ icon: simple/torproject
 
 <figure markdown="span">
     <a target="_blank"
-       href="../assets/images/tor_diagram.original.webp">
-        <img src="../assets/images/tor_diagram.original.webp"
+       href="../../assets/images/tor_diagram.original.webp">
+        <img src="../../assets/images/tor_diagram.original.webp"
             alt="Tor Relay 运作流程"
             title="Tor Relay 运作流程"
         >
@@ -35,8 +35,8 @@ icon: simple/torproject
 
 <figure markdown="span">
     <a target="_blank"
-       href="../assets/images/tor_relays.svg">
-        <img src="../assets/images/tor_relays.svg"
+       href="../../assets/images/tor_relays.svg">
+        <img src="../../assets/images/tor_relays.svg"
             alt="Tor Relay 类型"
             title="Tor Relay 类型"
         >

@@ -19,8 +19,8 @@ OONI 的工作可以拆成四块。核心是 [OONI Probe](https://ooni.org/insta
 ## 如何运作？
 
 <figure markdown="span">
-    <a href="../assets/images/how-ooni-works.svg">
-        <img src="../assets/images/how-ooni-works.svg"
+    <a href="../../assets/images/how-ooni-works.svg">
+        <img src="../../assets/images/how-ooni-works.svg"
             alt="OONI 如何运作，透过比对网页呈现来推测是否内容被干预"
             title="OONI 如何运作，透过比对网页呈现来推测是否内容被干预"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 0%);">
@@ -67,8 +67,8 @@ OONI 的定位跟 [Tor](./what-is-tor.md)、[Tails](./what-is-tails.md) 不一�
 OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){target="_blank"}（Android、iOS）、[桌面版本](https://ooni.org/install/){target="_blank"}（Windows 64bit、macOS），或是无任何桌面界面的[终端程序版本](https://ooni.org/install/cli){target="_blank"}。
 
 <figure markdown="span">
-    <a href="../assets/images/ooni_screen_desktop.png">
-        <img src="../assets/images/ooni_screen_desktop.png"
+    <a href="../../assets/images/ooni_screen_desktop.png">
+        <img src="../../assets/images/ooni_screen_desktop.png"
             alt="OONI 桌面程序操作页面"
             title="OONI 桌面程序操作页面"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 50%);width:75%;">
@@ -89,8 +89,8 @@ OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){tar
 ## OONI Explorer 观测数据
 
 <figure markdown="span">
-    <a href="../assets/images/ooni_explorer.png">
-        <img src="../assets/images/ooni_explorer.png"
+    <a href="../../assets/images/ooni_explorer.png">
+        <img src="../../assets/images/ooni_explorer.png"
             alt="OONI Explorer 观测数据网站（延迟一小时）"
             title="OONI Explorer 观测数据网站（延迟一小时）"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 50%);width:75%;">
@@ -104,8 +104,8 @@ OONI Probe 观测程序提供[移动装置版本](https://ooni.org/install/){tar
     可将「纵轴」项目选成 ASN，筛选分离各 ASN 观测数据状况。
 
     <figure markdown="span">
-        <a href="../assets/images/ooni_explorer_asn.png">
-            <img src="../assets/images/ooni_explorer_asn.png"
+        <a href="../../assets/images/ooni_explorer_asn.png">
+            <img src="../../assets/images/ooni_explorer_asn.png"
                 alt="OONI Explorer 可将「纵轴」项目选成 ASN 筛选分离各 ASN 观测数据状况。"
                 title="OONI Explorer 可将「纵轴」项目选成 ASN 筛选分离各 ASN 观测数据状况。"
                 style="border-radius: 10px;border:1px solid hsl(0, 0%, 50%);width:80%;">

@@ -30,7 +30,7 @@ icon: material/chat-question
 
 <figure markdown="span">
     <a href="https://freedomhouse.org/explore-the-map" target="_blank">
-        <img src="../assets/images/freedom_house_explore_the_map.png"
+        <img src="../../assets/images/freedom_house_explore_the_map.png"
             alt="Freedom House Freedom on the Net 互动地图"
             title="Freedom House Freedom on the Net 互动地图"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
@@ -52,7 +52,7 @@ icon: material/chat-question
 
 <figure markdown="span">
     <a href="https://explorer.ooni.org/chart/circumvention?since=2025-07-01&until=2026-03-31&probe_cc=CN%2CHK%2CTW" target="_blank">
-        <img src="../assets/images/ooni_chart_circumvention.png"
+        <img src="../../assets/images/ooni_chart_circumvention.png"
             alt="OONI Explorer：规避工具观测（CN, HK, TW 范例）"
             title="OONI Explorer：规避工具观测（CN, HK, TW 范例）"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 100%);">
@@ -64,7 +64,7 @@ icon: material/chat-question
 
 <figure markdown="span">
     <a href="https://metrics.torproject.org/rs.html#search/country:tw" target="_blank">
-        <img src="../assets/images/tor_relay_tw.png"
+        <img src="../../assets/images/tor_relay_tw.png"
             alt="Tor Metrics：台湾地区 Tor 中继与守护节点"
             title="Tor Metrics：台湾地区 Tor 中继与守护节点"
             style="border-radius: 10px;border:1px solid hsl(0, 0%, 0%);">
