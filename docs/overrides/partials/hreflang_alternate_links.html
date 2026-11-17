@@ -9,3 +9,24 @@
     {% endif %}
   {% endfor %}
 {% endif %}
+{#-
+  Material 的 setupAlternate 會對頁面上每一條 link[rel=alternate] 抓同一層的 sitemap.xml，
+  它預期 alternate 指向語系的根目錄。這裡的 hreflang 指向各語系的同一頁，結果每載入一頁就多出
+  三個 <頁面>/sitemap.xml 的 404，讀者的瀏覽器與 Googlebot 算繪頁面時都一樣（2026-11 在 m6 的
+  存取日誌看到，53 天一萬多次）。Material 把抓不到的 sitemap 當成空的，之後點語言切換器時
+  攔下點擊，改導到去掉尾斜線的網址，S3 再 302 回有尾斜線的網址，每次切換多一趟轉址。
+
+  Material 在 DOMContentLoaded 時同步查詢。這段在 <head> 裡，比文末的 bundle 先註冊監聽器，
+  查詢前把 hreflang 那幾條的 rel 暫時改掉，同一輪事件跑完（setTimeout 0）就改回 alternate。
+  原始 HTML 與之後的 DOM 都維持 rel="alternate"，搜尋引擎讀到的跟原本一樣。Material 改了
+  查詢的時機時，這段攔不到，最壞的情況是 404 與多一趟的轉址又出現，不會影響 hreflang 本身。
+-#}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var links = document.querySelectorAll('link[rel="alternate"][hreflang]');
+    for (var i = 0; i < links.length; i++) links[i].setAttribute("rel", "x-alternate");
+    setTimeout(function () {
+      for (var i = 0; i < links.length; i++) links[i].setAttribute("rel", "alternate");
+    }, 0);
+  }, { once: true });
+</script>
