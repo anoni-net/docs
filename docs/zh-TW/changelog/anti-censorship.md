@@ -21,6 +21,14 @@ digest:
 
 三種都在 Tor Browser 的連線設定裡，不必另外安裝。橋接位址可以從 [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} 或 Moat 自動取得。
 
+## Snowflake 2.15.4
+
+> 2026-11-18 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}
+
+- 兩項修正都在伺服器端，也就是 Snowflake 流量最後抵達的橋接。用 Tor Browser 內建 Snowflake 的人不需要做任何事，截至 11 月 21 日 Tor Browser 也還沒有帶進這一版。上游沒有提到已被實際利用。
+- 第一項修掉一個可以從遠端讓橋接異常終止的錯誤，起因是用戶端編號（ClientID）對照表淘汰舊項目時的處理（issue 40556）。第二項替 smux（在一條連線裡多工傳送多個串流的程式庫）的串流建立數量加上限制（issue 40552）。橋接由 Tor Project 營運，ChangeLog 沒有寫明伺服器端何時換上新版。
+- ChangeLog 另外寫明相依套件的更新包含安全修補。比對兩版之間的提交，標為安全更新的有四個，壓縮函式庫 brotli（1.2.7）與 klauspost/compress（1.20.2），以及 Go 的 golang.org/x/text 與 golang.org/x/crypto（0.59.0）。
+
 ## lyrebird 0.10.0
 
 > 2026-11-04 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird/-/blob/main/ChangeLog){target="_blank"}

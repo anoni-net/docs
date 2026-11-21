@@ -21,6 +21,14 @@ Newest at the top.
 
 All three are in Tor Browser's connection settings, with nothing extra to install. Bridge addresses come from [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} or automatically via Moat.
 
+## Snowflake 2.15.4
+
+> 2026-11-18 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}
+
+- Both fixes are on the server side, the bridge where Snowflake traffic ends up. People using the Snowflake built into Tor Browser do not need to do anything, and as of 21 November Tor Browser has not picked up this release. Upstream does not mention active exploitation.
+- The first fix removes a way to crash the bridge remotely, caused by how old entries were evicted from the client ID (ClientID) map (issue 40556). The second bounds the creation of smux streams (smux is the library that multiplexes several streams over one connection) (issue 40552). The bridge is run by the Tor Project, and the ChangeLog does not say when the server side switched to the new release.
+- The ChangeLog also notes that the dependency updates include security fixes. Comparing the commits between the two releases, four are marked as security updates: the compression libraries brotli (1.2.7) and klauspost/compress (1.20.2), and Go's golang.org/x/text and golang.org/x/crypto (0.59.0).
+
 ## lyrebird 0.10.0
 
 > 2026-11-04 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird/-/blob/main/ChangeLog){target="_blank"}

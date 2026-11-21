@@ -50,6 +50,8 @@ Windows 每月更新的整理。微软固定在每月第二个星期二发布（
 - Windows 本体的 745 个里，最多的四个组件是 Windows Advanced Rasterization Platform（WARP，在 CPU 上运行的软件绘图）37 个、Windows Installer 36 个、Graphics Kernel 35 个与 Windows Kernel 28 个。类型以提权最多，有 475 个，远程执行代码与信息泄露各 104 个。
 - 总数 1342 个里，Azure Linux 占 84 个、Edge 占 166 个，其余 347 个分散在 Office、开发工具与其他产品。这两条产品线的数字通常会在发布后几周持续增加，10 月那一轮就从发布当天的 1758 个增加到 11 月 7 日的 3491 个。
 - 11 月 14 日以微软当天修订的数据再数一次，总数 1644 个、Critical 76 个（以不同 CVE 计）。增加的项目几乎都在 Azure Linux 与 Edge，11 月 11 日以后首次登记的就有 Azure Linux 174 个、Edge 121 个，另有 1 个是 Office 的 OneNote。其中 Edge 的 4 个 Critical 就是 Chrome 11 月 11 日修复的 Chromium 漏洞（见[浏览器安全更新](./browsers.md)），Azure Linux 另有 3 个。Windows 本体没有新增项目，11 月 13 日只更新了几项的致谢名单，另有两项补上受影响的 Office 版本，已被利用的仍只有 CVE-2026-124194。
+- 11 月 21 日以微软 11 月 20 日修订的数据再数一次，总数 1918 个、Critical 109 个（以不同 CVE 计）。11 月 14 日以后首次登记的项目，Azure Linux 有 221 个（Critical 14 个），另有 15 个云服务在 11 月 19 日一起登记，包括 Azure 的多项服务、Entra ID、SharePoint Online 与 Microsoft 365 Copilot，15 个都评为 Critical。云服务由微软在服务器端修好，公告写明用户不需要做任何事。
+- 微软另外补登 SharePoint 的两项（CVE-2026-124222、CVE-2026-124223），说明这两项已经由 11 月的更新修好，只是发布时漏列，装过 11 月更新的人不必再做什么。Windows 本体没有新增项目，已被利用的仍只有 CVE-2026-124194。
 
 ## 2026 年 10 月
 

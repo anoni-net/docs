@@ -24,6 +24,18 @@ A compromise on Tails means something different from a compromise on an ordinary
 
 The Tails project only distinguishes emergency from scheduled releases. The middle tier is a judgement community volunteers add after reading each advisory. Where the call is unclear, we round up.
 
+## Tails 7.17.1
+
+> 2026-11-17 · [Upstream announcement](https://tails.net/news/version_7.17.1/){target="_blank"} · [uBlock Origin advisory](https://github.com/gorhill/uBlock/security/advisories/GHSA-cmqw-9r2w-6wv2){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">Now</span>An emergency release fixing a critical vulnerability in uBlock Origin, the ad-blocking extension bundled with the Tor Browser in Tails. Upstream states it is not aware of the attack being used in practice so far.
+- The flaw is a one-click universal XSS (cross-site scripting, where one website injects code into others). If a malicious website tricks you into clicking on its page, it can change the behaviour of any website you visit afterwards and steal or manipulate data there. The announcement notes this is relatively easy for any website you visit to do.
+- Tor Browser's Standard and Safer security levels are affected; Safest is not. Any malicious configuration inserted through the flaw is deleted when Tails restarts, and anyone who has not upgraded yet can switch to the Safest level in the meantime.
+- This release removes uBlock Origin temporarily, and Tails says it will add it back as soon as possible. The uBlock Origin advisory (GHSA-cmqw-9r2w-6wv2, rated High) says the report arrived on 1 November: a webpage could embed the element picker in an iframe and control it to add arbitrary trusted filters. Fixes landed in three steps, in 1.75.2, 1.75.4 and 1.76.0. The standalone Tor Browser does not bundle uBlock Origin and is not affected.
+- The kernel moves to 6.12.117, covering Debian's 13 November kernel security advisory (DSA-6628-1), along with some firmware packages that improve support for newer hardware such as graphics cards and Wi-Fi.
+- Tor Browser stays at 16.0.1 and tor at 0.4.9.16; tor 0.4.9.17 on 13 November still came after this release (see the [tor daemon changelog](./tor-daemon.md)).
+- Automatic upgrades are available from Tails 7.0 or later. A fresh install wipes any existing Persistent Storage.
+
 ## Tails 7.17
 
 > 2026-11-11 · [Upstream announcement](https://tails.net/news/version_7.17/){target="_blank"} · [Known vulnerabilities in 7.16](https://tails.net/security/known_security_vulnerabilities_in_7.16/){target="_blank"}

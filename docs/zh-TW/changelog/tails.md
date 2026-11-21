@@ -24,6 +24,18 @@ Tails 上的漏洞後果跟一般作業系統不同。取得管理員權限等�
 
 Tails 官方只區分緊急釋出與排程釋出，中間那一層是社群志工讀完公告後補的判斷。判斷不確定時以較高一級為準。
 
+## Tails 7.17.1
+
+> 2026-11-17 · [上游公告](https://tails.net/news/version_7.17.1/){target="_blank"} · [uBlock Origin 安全公告](https://github.com/gorhill/uBlock/security/advisories/GHSA-cmqw-9r2w-6wv2){target="_blank"}
+
+- <span class="urg-tag urg-tag--now">立刻</span>緊急釋出，修補 Tails 的 Tor Browser 內建的廣告封鎖擴充套件 uBlock Origin 的嚴重漏洞。上游寫明目前沒有發現這項攻擊被實際利用。
+- 漏洞是一鍵觸發的 universal XSS（跨站腳本攻擊，讓一個網站把程式碼塞進其他網站）。惡意網站只要騙你在它的頁面上點一下，就能改變你之後造訪的任何網站，竊取或竄改那些網站上的資料。公告寫明任何你造訪的網站都相對容易做到。
+- Tor Browser 的安全等級設在「標準」與「較安全」都受影響，「最安全」不受影響。漏洞植入的惡意設定會在重新啟動 Tails 後清除，還沒升級的人可以先把安全等級調到「最安全」。
+- 這一版的做法是暫時移除 uBlock Origin，Tails 寫明會盡快加回來。uBlock Origin 的上游公告（GHSA-cmqw-9r2w-6wv2，評為 High）寫明 11 月 1 日收到回報，問題出在網頁可以把元素選取器（element picker）嵌進 iframe 並操控它，加入任意的受信任過濾規則。修補分三次進到 1.75.2、1.75.4 與 1.76.0。單獨下載的 Tor Browser 沒有內建 uBlock Origin，不受這一項影響。
+- 核心升到 6.12.117，涵蓋 Debian 11 月 13 日的核心安全公告（DSA-6628-1），部分韌體套件也一併更新，改善顯示卡、Wi-Fi 等較新硬體的支援。
+- Tor Browser 維持 16.0.1，tor 維持 0.4.9.16，11 月 13 日的 tor 0.4.9.17 仍晚於這一版（見 [tor daemon 更新日誌](./tor-daemon.md)）。
+- 可從 Tails 7.0 以後版本自動升級。全新安裝會清除既有的 Persistent Storage。
+
 ## Tails 7.17
 
 > 2026-11-11 · [上游公告](https://tails.net/news/version_7.17/){target="_blank"} · [7.16 已知漏洞公告](https://tails.net/security/known_security_vulnerabilities_in_7.16/){target="_blank"}

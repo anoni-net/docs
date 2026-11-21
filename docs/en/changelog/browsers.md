@@ -35,12 +35,14 @@ Both browsers download updates in the background, but an update only takes effec
 
 ## Chrome November 2026
 
-> 2026-11-11 · [Chrome Releases](https://chromereleases.googleblog.com/2026/11/){target="_blank"}
+> 2026-11-17 · [Chrome Releases](https://chromereleases.googleblog.com/2026/11/){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">Now</span>157.0.8103.50/.51 on 9 November (157.0.8103.50 on Linux) fixed 9 security issues, and one of them, CVE-2026-125350, is being exploited. Google's announcement states that it is aware an exploit exists in the wild, and rates the flaw High. 157.0.8103.78 followed two days later and is now the latest; updating to .78 covers both rounds of fixes. Update and restart your browser.
+- <span class="urg-tag urg-tag--now">Now</span>157.0.8103.50/.51 on 9 November (157.0.8103.50 on Linux) fixed 9 security issues, and one of them, CVE-2026-125350, is being exploited. Google's announcement states that it is aware an exploit exists in the wild, and rates the flaw High. The later 157.0.8103.78 and 158 on 17 November both include this fix, and 158 is now the latest. Update and restart your browser.
 - CVE-2026-125350 is a use-after-free (memory used again after being released) in the XML handling component. It was reported on 6 November and fixed three days later. CISA added it to its Known Exploited Vulnerabilities catalogue (KEV) on 10 November.
 - The other 6 High issues in the same release are one each in WebGL, FileSystem, Compositing, GPU, V8 and XML, plus 2 Medium in GPU.
 - Extended Stable (Windows and Mac only) moved to 156.0.8078.96 the same day, and its fix list also includes CVE-2026-125350. The Android release 157.0.8103.50 shipped the same day, and its announcement states it carries the same security fixes as desktop. Chromium-based browsers such as Edge and Brave need their own updates; Tor Browser is built on Firefox and is not affected by this flaw.
+- Major version 158.0.8127.36/.37 on 17 November (158.0.8127.36 on Linux) fixed 204 security issues: 6 Critical, 62 High, 82 Medium and 54 Low. Google does not flag any of them as actively exploited. The 6 Critical issues are in WebView, GPU, Media, GarbageCollection, ANGLE and WebAudio (CVE-2026-130963, CVE-2026-131031, CVE-2026-131060, CVE-2026-131008, CVE-2026-131054, CVE-2026-130975); among the High ones, GPU has 7 and ANGLE 6.
+- Extended Stable moved to 156.0.8078.108/.109 the same day, fixing 79, 3 of them Critical. The Android release 158.0.8127.42 shipped the same day. 159 went out as an Early Stable release to a small share of Windows and Mac users on 18 November, with Android following the same day; neither announcement lists security fixes.
 - 157.0.8103.78/.79 on 11 November (157.0.8103.78 on Linux) fixed 83 security issues, 5 Critical and 78 High. Google does not flag any of them as actively exploited, so on its own this release would rate Soon. All 5 Critical issues are use-after-free bugs, in ServiceWorker, CSS, Layout, Skia and Accessibility (CVE-2026-126885, CVE-2026-126895, CVE-2026-126879, CVE-2026-126846, CVE-2026-126911). Among the High ones, V8 (Chrome's JavaScript engine) has 17, its Turbolev compiler another 2, and the Skia graphics library 16.
 - Extended Stable moved to 156.0.8078.100 the same day, fixing 72, 4 of them Critical. The Android release 157.0.8103.78 shipped the same day, and its announcement states it carries the same security fixes as desktop.
 - Major version 157.0.8103.38/.39 on 3 November fixed 213 security issues: 7 Critical, 77 High, 75 Medium and 54 Low. Google does not flag any of them as actively exploited.
@@ -50,9 +52,10 @@ Both browsers download updates in the background, but an update only takes effec
 
 ## Firefox November 2026
 
-> 2026-11-10 · [Mozilla security advisories](https://www.mozilla.org/security/advisories/){target="_blank"}
+> 2026-11-17 · [Mozilla security advisories](https://www.mozilla.org/security/advisories/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>Firefox 160 on 10 November fixed 99 issues, 57 High, 24 Moderate and 18 Low, with none Critical. Mozilla does not flag any item as actively exploited, and the phrase "in the wild" does not appear in the advisory. 160 is the latest desktop release.
+- <span class="urg-tag urg-tag--soon">Soon</span>Firefox 160 on 10 November fixed 99 issues, 57 High, 24 Moderate and 18 Low, with none Critical. Mozilla does not flag any item as actively exploited, and the phrase "in the wild" does not appear in the advisory. 160.0.1 followed on 17 November and is now the latest.
+- 160.0.1 fixed 2 High issues: a use-after-free in the audio/video playback component (CVE-2026-130021) and, on Android only, a boundary condition error in the WebGL graphics component that allows privilege escalation (CVE-2026-130020). Mozilla again does not flag either as actively exploited.
 - Among 160's High issues are 9 sandbox escapes (the sandbox is the isolation layer between web pages and the operating system), in Service Workers, page navigation, IPC, the Cache API, graphics and audio components, with 4 more among the Moderate ones. The High issues also include 2 same-origin policy bypasses (CVE-2026-124874, CVE-2026-124902) and 2 privilege escalations (CVE-2026-124854, CVE-2026-124907); most of the rest are use-after-free bugs in DOM, CSS parsing and text layout components.
 - Two issues affect only Android, a clickjacking issue in autofill (CVE-2026-124911, Moderate) and an issue in the media component (CVE-2026-124937, Low), both also fixed in 160.
 - ESR 153.7 and 115.45 shipped the same day, fixing 81 and 28 issues respectively. ESR 140 again had no matching release. Tor Browser 16.0.1 moved to a 153.7.0esr base on 10 November (see the [Tor changelog](./tor.md)).
