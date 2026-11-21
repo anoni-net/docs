@@ -55,7 +55,7 @@ GrapheneOS 的功能可以分成三組：縮減攻擊面、減少對 Google 的�
 
 ## 為什麼幾乎只支援 Pixel
 
-GrapheneOS 對硬體的要求很嚴格，列在官方 [FAQ](https://grapheneos.org/faq){target="_blank"}：bootloader 要能解鎖、刷完客製系統後還能重新鎖回（重鎖才能完整啟用 verified boot）、要有安全晶片提供的 StrongBox keystore 與硬體金鑰驗證、韌體與作業系統都要 A/B 雙槽更新加上防回滾保護、原廠還要給夠長的安全更新（GrapheneOS 要求至少 5 年）。Pixel 8 以後的機型是 7 年，仍在支援清單上的 Pixel 6、7 系列是 5 年，兩者不同。
+GrapheneOS 對硬體的要求很嚴格，列在官方 [FAQ](https://grapheneos.org/faq){target="_blank"}：bootloader 要能解鎖、刷完客製系統後還能重新鎖回（重鎖才能完整啟用 verified boot）、要有安全晶片提供的 StrongBox keystore 與硬體金鑰驗證、韌體與作業系統都要 A/B 雙槽更新加上防回滾保護、原廠還要給夠長的安全更新（GrapheneOS 要求至少 5 年）。Pixel 8 以後的機型是 7 年，Pixel 6、7 系列是 5 年，兩者不同。Pixel 6 與 6 Pro 在 2026 年 11 月已經停止收到 Google 的更新，GrapheneOS 把它們轉為舊機型延伸支援，修補等級停在 2026-11-01，並建議停止使用（見 [GrapheneOS 月度更新摘要](../changelog/grapheneos.md)）。
 
 目前同時滿足這些條件的消費級手機幾乎只有 Google Pixel。Pixel 從第 6 代到第 10 代搭載 Titan M2 安全晶片，第 11 代換成 Titan M3，第 3 到 5 代是第一代 Titan M。這顆晶片是金鑰保護與硬體驗證的信任根。
 

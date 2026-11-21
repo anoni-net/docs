@@ -45,7 +45,7 @@ tor daemon（社群慣稱 c-tor）是 [Tor](../tools/what-is-tor.md) 網路的 C
 - 目錄權威 bastet 的金鑰被移除，ChangeLog 寫的原因是可能遭到入侵（potential compromise），之後可以換上新金鑰再恢復。另一台目錄權威 maatuska 換了 IP 位址。兩項都寫在 tor 內建的目錄權威清單裡，用戶端要升級才會取得新的清單。
 - 用戶端另有一項串流隔離的修正。HTTPTunnelPort 記錄隔離標頭（X-Tor-Stream-Isolation）長度時只留 8 位元，兩個超過 251 位元組、長度除以 256 餘數相同的值會被當成同一個，共用一條電路（bug 41474）。一般用 Tor Browser 的人不會用到這個連接埠。
 - 其餘兩項是中繼端 ntor-v3 握手的子協定請求檢查沒有照設計執行（bug 41475），以及用戶端一個目前共識裡不會遇到的斷言（bug 41476）。備援目錄清單與 geoip 資料也更新到 11 月 13 日。
-- 截至 11 月 14 日，Tor Browser 與 Tails 都還沒有帶進這一版，最新的 Tor Browser 16.0.1 與 Tails 7.17 用的是 0.4.9.16。架設中繼、橋接與 onion 服務的人要自行升級。
+- 截至 11 月 21 日，Tor Browser 與 Tails 都還沒有帶進這一版，最新的 Tor Browser 16.0.1 與 Tails 7.17.1 用的是 0.4.9.16。架設中繼、橋接與 onion 服務的人要自行升級。
 
 ## tor 0.4.9.16
 

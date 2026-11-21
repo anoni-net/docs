@@ -21,6 +21,14 @@ digest:
 
 三种都在 Tor Browser 的连接设置里，不必另外安装。网桥地址可以从 [bridges.torproject.org](https://bridges.torproject.org/){target="_blank"} 或 Moat 自动获取。
 
+## Snowflake 2.15.4
+
+> 2026-11-18 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/blob/main/ChangeLog){target="_blank"}
+
+- 两项修正都在服务器端，也就是 Snowflake 流量最后抵达的网桥。用 Tor Browser 内置 Snowflake 的人不需要做任何事，截至 11 月 21 日 Tor Browser 也还没有带进这一版。上游没有提到已被实际利用。
+- 第一项修复一个可以从远程让网桥异常终止的错误，起因是客户端编号（ClientID）映射表淘汰旧项目时的处理（issue 40556）。第二项给 smux（在一条连接里多路传送多个流的库）的流创建数量加上限制（issue 40552）。网桥由 Tor Project 运营，ChangeLog 没有写明服务器端何时换上新版。
+- ChangeLog 另外写明依赖包的更新包含安全修补。比对两版之间的提交，标为安全更新的有四个，压缩库 brotli（1.2.7）与 klauspost/compress（1.20.2），以及 Go 的 golang.org/x/text 与 golang.org/x/crypto（0.59.0）。
+
 ## lyrebird 0.10.0
 
 > 2026-11-04 · [ChangeLog](https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird/-/blob/main/ChangeLog){target="_blank"}
