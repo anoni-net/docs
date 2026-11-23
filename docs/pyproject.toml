@@ -5,6 +5,7 @@ description = "About OONI Probe and ASNs finding in Taiwan."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "jieba>=0.42.1",
     "mkdocs>=1.6,<2",
     "mkdocs-charts-plugin>=0.0.12",
     "mkdocs-git-revision-date-localized-plugin>=1.4.5",

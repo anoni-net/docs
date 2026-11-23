@@ -160,3 +160,4 @@ CC BY-NC-SA 3.0 版本收回，改成年費授權。網路上還找得到那個�
 | 檔案 | 來源 | 授權 |
 |------|------|------|
 | `.claude/skills/drawio/SKILL.md` | [jgraph/drawio-mcp](https://github.com/jgraph/drawio-mcp) 的 `plugins/claude-code/skills/drawio/SKILL.md` | Apache-2.0，全文在同目錄的 `LICENSE`。開頭「Using this skill in anoni-net/docs」一段是本專案的增補，其餘為上游原文 |
+| `docs/jieba/dict.txt.big` | [fxsjy/jieba](https://github.com/fxsjy/jieba) 的 `extra_dict/dict.txt.big`，站內搜尋的中文斷詞詞典 | MIT，全文在同目錄的 `LICENSE`，來源細節見同目錄的 `README.md` |

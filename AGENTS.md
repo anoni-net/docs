@@ -29,6 +29,7 @@ anoni-net-docs/
 |------|------|
 | `docs/` 網站內容 | [CC-BY 4.0](./LICENSE)（根目錄 `LICENSE` 為全文） |
 | `.claude/skills/drawio/` | [Apache-2.0](./.claude/skills/drawio/LICENSE)，取自 [jgraph/drawio-mcp](https://github.com/jgraph/drawio-mcp)，開頭增補一段本 repo 的用法 |
+| `docs/jieba/` | [MIT](./docs/jieba/LICENSE)，站內搜尋用的 jieba 繁體大詞典，取自 [fxsjy/jieba](https://github.com/fxsjy/jieba) |
 
 `docs/zh-TW/games/tor-network/` 底下有六份外部資料，各自沿用原始授權，其中 `ooni.json` 是
 CC BY-NC-SA 4.0（禁止商業使用）。清單見根目錄 [`NOTICE`](./NOTICE)。

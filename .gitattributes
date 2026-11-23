@@ -1,0 +1,2 @@
+# jieba 的繁體大詞典（約 58 萬行），PR 的 diff 與語言統計不展開它，來源見 docs/jieba/README.md
+docs/jieba/dict.txt.big -diff linguist-vendored
