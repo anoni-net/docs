@@ -18,6 +18,7 @@ import tempfile
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 from check_theme_assets import (  # noqa: E402
+    generator_version,
     locked_version,
     missing_assets,
     recorded_version,
@@ -69,6 +70,20 @@ def test_recorded_version() -> None:
         # 標記被刪掉時回 None，檢查腳本會要求補回來而不是默默放行
         base.write_text("<html></html>\n", encoding="utf-8")
         check("recorded_version 無標記", recorded_version(base), None)
+
+
+def test_generator_version() -> None:
+    with tempfile.TemporaryDirectory() as td:
+        base = pathlib.Path(td) / "base.html"
+        base.write_text(
+            '<meta name="generator" content="mkdocs-{{ mkdocs_version }}, mkdocs-material-9.7.7">\n',
+            encoding="utf-8",
+        )
+        check("generator_version", generator_version(base), "9.7.7")
+
+        # 這一行被拿掉時回 None，檢查腳本會要求補回來
+        base.write_text('<meta name="theme-color" content="#00aeff">\n', encoding="utf-8")
+        check("generator_version 無 generator", generator_version(base), None)
 
 
 PAGE = """<!doctype html>
@@ -161,12 +176,19 @@ def test_repo_versions_match() -> None:
             " 改版後雜湊會變，部署會讓線上的 HTML 指向 404。"
             " 詳細的修法見 tools/check_theme_assets.py 的檔頭。"
         )
+    generator = generator_version()
+    if generator != locked:
+        failures.append(
+            f"mkdocs-material 鎖在 {locked}，base.html 的 generator 寫的是 {generator}。"
+            " 升級時那一行要一起改（anoni-net/docs#691）。"
+        )
 
 
 def main() -> int:
     for fn in [
         test_locked_version,
         test_recorded_version,
+        test_generator_version,
         test_missing_assets_all_present,
         test_missing_assets_detects_stale_hash,
         test_missing_assets_reports_absent_page,
