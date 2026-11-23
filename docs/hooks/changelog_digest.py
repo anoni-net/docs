@@ -83,6 +83,13 @@ RSS_ICON = ":material-rss-box:{ .rss-icon }"
 # 每份 feed 的則數上限。閱讀器只看得到新進的項目，舊的留著只是讓檔案變大。
 FEED_ITEMS = 50
 
+# 各產品頁在站內搜尋的權重（Material 的 search.boost，預設 1）。十四頁每頁都有幾十則
+# 條目，2026-11 的索引 2,258 筆裡佔 204 筆，搜「Tor 瀏覽器」第一名是瀏覽器安全更新，
+# 不是 Tor Browser 的教學頁（#691）。降低排序而不排除，搜版本號或產品名照樣找得到。
+# 只套用在 front matter 有 digest 的頁面，新增一頁時不必另外記得加。頁面自己寫了
+# search 的話以頁面為準。
+SEARCH_BOOST = 0.5
+
 # on_page_markdown 算好的 feed，等 on_post_build 再寫進產物。
 _feeds: dict[str, str] = {}
 _feed_dir: str | None = None
@@ -506,7 +513,15 @@ def _slugify(config):
     return lambda text: func(text, separator)
 
 
+def apply_search_boost(meta: dict) -> None:
+    """產品頁（front matter 有 digest）補上較低的搜尋權重，頁面自己寫了 search 就不動。"""
+    if isinstance(meta.get("digest"), dict) and "search" not in meta:
+        meta["search"] = {"boost": SEARCH_BOOST}
+
+
 def on_page_markdown(markdown, page, config, files, **kwargs):
+    # search 外掛在 on_page_context 才讀 page.meta，這裡寫入趕得上
+    apply_search_boost(page.meta)
     if not PLACEHOLDER.search(markdown):
         return markdown
 
