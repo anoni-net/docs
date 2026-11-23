@@ -358,7 +358,14 @@ hooks:
   - hooks/nav_icon_sprite.py
   - hooks/offline_index.py
 plugins:
+  # 中文斷詞要靠 jieba（pyproject.toml 有列）。Material 只在 import 得到 jieba 時才斷詞，
+  # 沒裝的話整串中文會變成一個詞，句子型的查詢常常找不到東西（#690）。
+  # jieba 內建的詞典斷繁體常切錯，這裡改用 jieba 的繁體大詞典，來源與授權見
+  # jieba/README.md。路徑從執行 mkdocs 的目錄起算（plugin 用 os.path.normpath 加
+  # isfile，不是從這份設定檔起算），建置一律在 docs/ 底下執行，跟 cards_layout_dir 一樣。
+  # 簡體版用 jieba 內建的詞典即可，mkdocs_cn.yml 不設。
   - search:
+      jieba_dict: jieba/dict.txt.big
       lang:
         - zh
         - en
