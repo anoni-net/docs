@@ -41,13 +41,13 @@ In the first weeks, partner media outlets and the investigative organisation Int
     <figcaption markdown="span">Geedge deployment locations recorded in the leaked documents: ① Kazakhstan, ② Ethiopia, ③ Pakistan and ④ Myanmar, with ⑤ to ⑦ marking Xinjiang, Fujian and Jiangsu in China. Boundaries from Natural Earth (public domain).</figcaption>
 </figure>
 
-The documents show who Geedge sold to and what its customers asked for; whether the deployed equipment actually runs the code had to be checked separately. GFW Report's analysis that same month also noted that the source code had not yet been carefully analysed. The community released a Traditional Chinese translation of [The Internet Coup](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"} in October 2025 and [retranslated it in full](./interseclab-coup-retranslation.md) in October 2026.
+The documents show who Geedge sold to and what its customers asked for; whether the deployed equipment actually runs the code had to be checked separately. GFW Report's analysis that same month also noted that the source code had not yet been carefully analysed. The community released a Traditional Chinese translation of [The Internet Coup](https://anoni.net/library/interseclab-network-coup/){target="_blank"} in October 2025 and [retranslated it in full](./interseclab-coup-retranslation.md) in October 2026.
 
 ## Tracing the Supply Chain to Taiwan
 
 The documents also offered leads on the supply chain. In April 2026, InterSecLab published "MADLink", which used the leaked documents to trace where Geedge's hardware comes from. ADLINK, a Taiwanese company, shipped 1,708 network platforms to Geedge through its Beijing branch between 2019 and early 2020. They formed the hardware basis of Geedge's first-generation censorship system, and in the leaked documents this configuration was deployed only in Kazakhstan.
 
-ADLINK's reply to InterSecLab says it screened against export control lists before shipping, and Geedge was not on any restricted list at the time. As of 30 October 2026, Geedge does not appear on the US and EU sanctions lists we checked. The community has also translated [MADLink](https://anoni.net/docs/reports/interseclab-madlink/){target="_blank"} in full into Traditional Chinese.
+ADLINK's reply to InterSecLab says it screened against export control lists before shipping, and Geedge was not on any restricted list at the time. As of 30 October 2026, Geedge does not appear on the US and EU sanctions lists we checked. The community has also translated [MADLink](https://anoni.net/library/interseclab-madlink/){target="_blank"} in full into Traditional Chinese.
 
 ## Comparing the Code with Real Networks
 
@@ -101,7 +101,7 @@ The comparison tables, a diagram of the TSG system, the overview of open source 
 
 ## Related Reading
 
-- [Translated Reports](../../reports/index.md): Chinese translations of InterSecLab's two reports, The Internet Coup and MADLink
+- [Translated Reports and Guidance](https://anoni.net/en/library/){target="_blank"}: Chinese translations of InterSecLab's two reports, The Internet Coup and MADLink
 - [What Is Tor?](../../tools/what-is-tor.md): how Tor hides your location and who you connect to
 - [Tor Browser advanced settings](../../tools/tor-browser-advanced.md): setting up a bridge when Tor will not connect
 - [What Is OONI?](../../tools/what-is-ooni.md): testing whether websites are blocked with OONI

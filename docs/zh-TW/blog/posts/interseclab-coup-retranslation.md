@@ -14,7 +14,7 @@ description: "網路政變八章從原報告重新翻譯，補上漏譯的段落
 
 ![The Internet Coup 報告封面](https://assets.anoni.net/the-internet-coup/The-Internet-Coup-InterSecLab-2048x986.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-InterSecLab 報告[網路政變](../../reports/interseclab-network-coup/index.md)的舊譯文有幾處把原報告的意思漏掉或譯錯，包括中國公司 Geedge 是否掌握匿名網路 Tor 的漏洞、沒有加密的連線會被攔截到什麼、各國使用者的資料有哪些人能存取，以及相關公司如何回覆。讀舊版的人可能以為 Tor 已經被攻破，也不知道沒有加密的連線連密碼都會被攔截。社群把八章全部從原報告 PDF 重新翻譯，網址不變。
+InterSecLab 報告[網路政變](https://anoni.net/library/interseclab-network-coup/){target="_blank"}的舊譯文有幾處把原報告的意思漏掉或譯錯，包括中國公司 Geedge 是否掌握匿名網路 Tor 的漏洞、沒有加密的連線會被攔截到什麼、各國使用者的資料有哪些人能存取，以及相關公司如何回覆。讀舊版的人可能以為 Tor 已經被攻破，也不知道沒有加密的連線連密碼都會被攔截。社群把八章全部從原報告 PDF 重新翻譯，網址不變。
 
 <!-- more -->
 
@@ -34,29 +34,29 @@ InterSecLab 在 2025 年 9 月發表〈The Internet Coup〉，分析中國公司
 
 Tor 是隱藏使用者位置、讓網路業者無法得知你連去哪裡的匿名網路，WebTunnel 是 Tor 的一種連線方式，把 Tor 的流量偽裝成一般的 HTTPS 網頁連線。在資料外洩的時間點，Geedge 看來還沒有能有效封鎖 WebTunnel 的手段，不過 Mesalab（與 Geedge 關係密切的中國科學院實驗室）的學生已經在研究封鎖的方法。報告作者據此推論，Geedge 知道 WebTunnel 是有效的規避工具。舊譯文把這段寫成 Mesalab 學生的研究證明 WebTunnel 很有效，沒有提到他們在研究如何封鎖。
 
-研究團隊在同一節的最後一段說明，他們先把發現告知 Tor Project 再對外公開，也沒有找到證據顯示 Geedge 發現或正在利用 Tor 軟體與設計上的未知漏洞。舊譯文漏了這一段。詳見第 7 章[對 Tor 的封鎖](../../reports/interseclab-network-coup/index_7.md#封鎖-Tor)。
+研究團隊在同一節的最後一段說明，他們先把發現告知 Tor Project 再對外公開，也沒有找到證據顯示 Geedge 發現或正在利用 Tor 軟體與設計上的未知漏洞。舊譯文漏了這一段。詳見第 7 章[對 Tor 的封鎖](https://anoni.net/library/interseclab-network-coup/chapter-7/#封鎖-Tor){target="_blank"}。
 
 ### 沒有加密的連線
 
-天狗安全閘道（TSG）是 Geedge 賣給各國政府的國家等級防火牆。原報告寫到，連線沒有加密（網址不是 https）時，TSG 能攔截密碼、電子郵件信箱、附件與信件內容。舊譯文漏了密碼與信件內容，附件也譯成只有中繼資料。瀏覽器網址列標示「不安全」的網站，不要在上面登入或輸入個人資料。也不要安裝來路不明的憑證，原報告寫到，使用者裝了自簽的根憑證，TSG 就能解密 HTTPS 連線。詳見第 5 章的[深度封包檢測](../../reports/interseclab-network-coup/index_5.md#深度封包檢測)。
+天狗安全閘道（TSG）是 Geedge 賣給各國政府的國家等級防火牆。原報告寫到，連線沒有加密（網址不是 https）時，TSG 能攔截密碼、電子郵件信箱、附件與信件內容。舊譯文漏了密碼與信件內容，附件也譯成只有中繼資料。瀏覽器網址列標示「不安全」的網站，不要在上面登入或輸入個人資料。也不要安裝來路不明的憑證，原報告寫到，使用者裝了自簽的根憑證，TSG 就能解密 HTTPS 連線。詳見第 5 章的[深度封包檢測](https://anoni.net/library/interseclab-network-coup/chapter-5/#深度封包檢測){target="_blank"}。
 
 ### 各國資料的存取與分享
 
-系統由 Geedge 在中國的員工遠端管理，Geedge 的員工似乎能存取各國網路使用者的資料。資料看來也分享給 Mesalab 的學生，用來研究如何阻擋規避審查的工具，保留多久則還不清楚。舊譯文的第 5 章有提到這件事，但主要發現漏了整節，只讀摘要與主要發現的人無從得知。詳見[主要發現](../../reports/interseclab-network-coup/index_2.md)。
+系統由 Geedge 在中國的員工遠端管理，Geedge 的員工似乎能存取各國網路使用者的資料。資料看來也分享給 Mesalab 的學生，用來研究如何阻擋規避審查的工具，保留多久則還不清楚。舊譯文的第 5 章有提到這件事，但主要發現漏了整節，只讀摘要與主要發現的人無從得知。詳見[主要發現](https://anoni.net/library/interseclab-network-coup/chapter-2/){target="_blank"}。
 
 ### 公司回覆信
 
-緬甸電信業者 ATOM（前身為 Telenor Myanmar）的母公司被問到，是否知道有人以 Geedge 產品替緬甸運輸與通訊部實施「大規模監控與審查」。舊譯文的提問漏了運輸與通訊部，無法得知監控是替誰做的。Sandvine 曾把審查設備賣給巴基斯坦，AppLogic Networks 就 Sandvine 的部分回覆。信裡寫的是 Sandvine「先前並不知道」Geedge Networks，舊譯文寫成「並不知情」，讀起來像到現在仍不知道。詳見第 8 章的[附錄](../../reports/interseclab-network-coup/index_8.md#附錄)。
+緬甸電信業者 ATOM（前身為 Telenor Myanmar）的母公司被問到，是否知道有人以 Geedge 產品替緬甸運輸與通訊部實施「大規模監控與審查」。舊譯文的提問漏了運輸與通訊部，無法得知監控是替誰做的。Sandvine 曾把審查設備賣給巴基斯坦，AppLogic Networks 就 Sandvine 的部分回覆。信裡寫的是 Sandvine「先前並不知道」Geedge Networks，舊譯文寫成「並不知情」，讀起來像到現在仍不知道。詳見第 8 章的[附錄](https://anoni.net/library/interseclab-network-coup/chapter-8/#附錄){target="_blank"}。
 
 ## 舊連結與回報
 
-章節的網址都沒有改，小標題改名之後，舊連結指向的段落仍然存在，書籤與其他文章裡的連結都能用。更動的摘要記在譯文首頁的[更新紀錄](../../reports/interseclab-network-coup/index.md#更新紀錄)。
+章節的網址都沒有改，小標題改名之後，舊連結指向的段落仍然存在，書籤與其他文章裡的連結都能用。更動的摘要記在譯文首頁的[更新紀錄](https://anoni.net/library/interseclab-network-coup/#更新紀錄){target="_blank"}。
 
 讀到不通順或看起來不對的地方，可以用頁面右上方的編輯圖示直接到 GitHub 提交修正，或到譯文首頁列出的 Matrix 頻道一起討論。
 
 ## 相關閱讀
 
-- [研究報告中譯](../../reports/index.md)：網路政變與 MADLink 兩份 InterSecLab 報告的中譯
+- [報告與指引中譯](https://anoni.net/library/){target="_blank"}：網路政變與 MADLink 兩份 InterSecLab 報告的全文譯本，2026-11 起收在社群首頁
 - [Tor Browser 進階設定](../../tools/tor-browser-advanced.md)：無法連上 Tor 時如何設定橋接
 - [VPN 的風險與選擇](../../tools/vpn-guide.md)：選擇 VPN 時要考慮的風險
 - [Metadata 是什麼，為什麼重要](../../basics/metadata.md)：連線加密之後，仍會露出連到哪個網站

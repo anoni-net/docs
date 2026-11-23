@@ -41,13 +41,13 @@ description: "Geedge 外泄一年来，从文件调查、供应链追查到代�
     <figcaption markdown="span">外泄文件记录的 Geedge 部署地点：① 哈萨克斯坦、② 埃塞俄比亚、③ 巴基斯坦、④ 缅甸，⑤ 到 ⑦ 是中国的新疆、福建与江苏。国界数据来自 Natural Earth（公有领域）。</figcaption>
 </figure>
 
-从文件可以知道 Geedge 卖给谁、客户要求什么，部署出去的设备是否照着程序运作，则要另外验证。GFW Report 在同一个月的分析文章里也写到，源代码的部分还没有人仔细分析。社区在 2025 年 10 月发布[网络政变](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"}的正体中文译文，2026 年 10 月[重新翻译了全文](./interseclab-coup-retranslation.md)。
+从文件可以知道 Geedge 卖给谁、客户要求什么，部署出去的设备是否照着程序运作，则要另外验证。GFW Report 在同一个月的分析文章里也写到，源代码的部分还没有人仔细分析。社区在 2025 年 10 月发布[网络政变](https://anoni.net/library/interseclab-network-coup/){target="_blank"}的正体中文译文，2026 年 10 月[重新翻译了全文](./interseclab-coup-retranslation.md)。
 
 ## 从供应链追到台湾
 
 文件也是追查供应链的线索。2026 年 4 月，InterSecLab 发表〈MADLink〉，依外泄文件追查 Geedge 的硬件从哪里来。台湾的凌华科技在 2019 到 2020 年初，经由北京分公司向 Geedge 出货 1,708 台网络设备。这批设备是 Geedge 第一代审查系统的硬件基础，外泄文件里这套配置只部署在哈萨克斯坦。
 
-凌华给 InterSecLab 的回复写到，出货前做了出口管制名单的筛查，当时 Geedge 不在受限名单上。截至 2026 年 10 月 30 日，在我们比对的美国与欧盟制裁名单里，都没有 Geedge。社区也翻译了 [MADLink](https://anoni.net/docs/reports/interseclab-madlink/){target="_blank"} 的全文（正体中文）。
+凌华给 InterSecLab 的回复写到，出货前做了出口管制名单的筛查，当时 Geedge 不在受限名单上。截至 2026 年 10 月 30 日，在我们比对的美国与欧盟制裁名单里，都没有 Geedge。社区也翻译了 [MADLink](https://anoni.net/library/interseclab-madlink/){target="_blank"} 的全文（正体中文）。
 
 ## 代码与真实网络的比对
 
@@ -101,7 +101,7 @@ Geedge 的系统大量使用 Linux、Kafka（处理大量实时数据的软件�
 
 ## 相关阅读
 
-- [研究报告中译](../../reports/index.md)：网络政变与 MADLink 两份 InterSecLab 报告的中译
+- [报告与指引中译](https://anoni.net/zh-cn/library/){target="_blank"}：网络政变与 MADLink 两份 InterSecLab 报告的正体中文全文译本，2026-11 起收在社区首页
 - [什么是 Tor](../../tools/what-is-tor.md)：Tor 如何隐藏你的位置与连接对象
 - [Tor Browser 进阶设定](../../tools/tor-browser-advanced.md)：无法连上 Tor 时如何设置网桥
 - [什么是 OONI](../../tools/what-is-ooni.md)：用 OONI 检测网站是否被封锁

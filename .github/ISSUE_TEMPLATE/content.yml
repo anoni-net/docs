@@ -30,7 +30,6 @@ body:
         - scenarios 場景 / scenarios
         - advanced 進階 / advanced
         - taiwan 在地 / local
-        - reports 報告中譯 / translated reports
         - 不確定 / not sure
     validations:
       required: false

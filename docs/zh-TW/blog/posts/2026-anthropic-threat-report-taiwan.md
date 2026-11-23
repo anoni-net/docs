@@ -638,7 +638,7 @@ TechCrunch 與 CNBC 在報導當下都做過詢問。月之暗面拒絕置評，
 - [用 AI 工作時怎麼避免資料外洩](../../tools/ai-privacy.md)
 - [在中國大陸的公開平台傳播資訊](../../scenarios/mainland-speech.md)
 - [社運行動者的數位準備](../../scenarios/activist.md)
-- [技術分析報告：網路政變](../../reports/interseclab-network-coup/index.md)
+- [技術分析報告：網路政變](https://anoni.net/library/interseclab-network-coup/){target="_blank"}
 
 [^report]: [Detecting and countering misuse of AI: September 2026](https://www.anthropic.com/threat-intelligence-report-september-2026){target="_blank"} - Anthropic，2026 年 9 月 10 日。[PDF 全文](https://www-cdn.anthropic.com/e50be2e51e7695dc4b1366a37a245a597377d3b5/Anthropic-Detecting-and-countering-091026.pdf){target="_blank"}，另有一份[指標清單](https://www-cdn.anthropic.com/b5af8acd5ee681422114af7c7b6b02c1ecd074ca/20260910_Anthropic_AI_Misuse_Report_IOCs.csv){target="_blank"}。
 

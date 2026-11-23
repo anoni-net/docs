@@ -27,7 +27,7 @@ description: "文档站取消进阶层，博客的技术分析与翻译导读搬
 | Arti、Tails、OONI Probe 旧版本的发布公告 | 并入[更新日志](../../changelog/index.md) |
 | 《虚拟资产服务法》行政院草案的整理 | 并入[台湾 VASP 法 2026](../../taiwan/vasp-2026.md) |
 
-「严选报告」改名为[研究报告中译](../../reports/index.md)，MADLink 报告的编辑观察改成一篇社区动态，以 2026 年 5 月的快照保存。
+「严选报告」改名为[研究报告中译](https://anoni.net/zh-cn/library/){target="_blank"}，MADLink 报告的编辑观察改成一篇社区动态，以 2026 年 5 月的快照保存。
 
 ## 旧网址
 
