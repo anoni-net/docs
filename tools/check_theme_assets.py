@@ -23,7 +23,9 @@ Promise.allSettled 容忍個別失敗，404 被靜靜跳過，install 照樣成�
 
 第一層不需要建置產物，PR 階段就能跑：docs/uv.lock 解出來的 mkdocs-material 版本，
 要等於 base.html 檔頭 theme-assets-from 記的版本。升級套件而沒回來換雜湊，這裡
-就會紅燈。
+就會紅燈。同一層也比對 <meta name="generator"> 寫的版本，那一行同樣寫死在
+base.html，#338 升級時一起漏改，線上一直標示 9.7.6。資安掃描工具依這一行判斷版本，
+會把網站誤判成還有 9.7.7 修掉的搜尋建議 XSS（anoni-net/docs#691）。
 
 第二層要有 docs/output（sh run.sh、run_zh-cn.sh、run_en.sh 建過），驗的是產物本身：
 三個語系的首頁 HTML 裡每一個指向 assets/ 的網址，在產物裡都要有對應的檔案。驗產物
@@ -50,6 +52,7 @@ OUT = DOCS / "output"
 LANG_ROOTS = ["", "en", "zh-cn"]
 
 VERSION_MARK = re.compile(r"theme-assets-from:\s*mkdocs-material\s+(\S+)")
+GENERATOR = re.compile(r'<meta name="generator" content="[^"]*mkdocs-material-([^"\s,]+)"')
 
 
 def locked_version(lock_path=LOCK):
@@ -64,6 +67,12 @@ def locked_version(lock_path=LOCK):
 def recorded_version(base_path=BASE):
     """base.html 檔頭記著「這些雜湊來自哪一版」，找不到回 None。"""
     match = VERSION_MARK.search(base_path.read_text(encoding="utf-8"))
+    return match.group(1) if match else None
+
+
+def generator_version(base_path=BASE):
+    """base.html 的 <meta name="generator"> 寫的 mkdocs-material 版本，找不到回 None。"""
+    match = GENERATOR.search(base_path.read_text(encoding="utf-8"))
     return match.group(1) if match else None
 
 
@@ -125,6 +134,20 @@ def main():
         )
     else:
         print(f"  mkdocs-material {locked}，base.html 的資產雜湊標記一致。")
+
+    generator = generator_version()
+    if locked is not None:
+        if generator is None:
+            problems.append(
+                'docs/overrides/base.html 找不到 <meta name="generator"> 的 mkdocs-material 版本'
+            )
+        elif generator != locked:
+            problems.append(
+                f"mkdocs-material 鎖在 {locked}，但 base.html 的 generator 寫的是 {generator}。\n"
+                f"    把 <meta name=\"generator\"> 那一行的版本改成 {locked}。"
+            )
+        else:
+            print(f"  base.html 的 generator 也標示 {locked}。")
 
     if OUT.exists():
         missing = missing_assets()

@@ -586,6 +586,8 @@ markdown_extensions:
           format: !!python/name:mkdocs_charts_plugin.fences.fence_vegalite
   - pymdownx.snippets:
       base_path: [".", ".."]
+      # 預設 false，被引用的檔案改名或刪掉時只插入空白，-s 也擋不下來（#691）
+      check_paths: true
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist:
