@@ -38,6 +38,22 @@ def page(stem, body, devices=("windows",), name=None, **kw):
                        entries=cd.parse_entries(stem, body), **kw)
 
 
+# --- 搜尋權重 ---
+
+meta = {"title": "瀏覽器安全更新", "digest": {"name": "瀏覽器"}}
+cd.apply_search_boost(meta)
+check("產品頁補上較低的搜尋權重", meta.get("search"), {"boost": cd.SEARCH_BOOST})
+check("權重低於預設的 1，但不是排除", 0 < cd.SEARCH_BOOST < 1, True)
+
+meta = {"title": "Tor Browser", "digest": {"name": "Tor Browser"}, "search": {"boost": 2}}
+cd.apply_search_boost(meta)
+check("頁面自己寫了 search 就不覆蓋", meta["search"], {"boost": 2})
+
+meta = {"title": "軟體更新日誌", "changelog_digest": {"days": 45}}
+cd.apply_search_boost(meta)
+check("首頁沒有 digest，維持預設權重", "search" in meta, False)
+
+
 # --- 條目切分與日期 ---
 
 body = f"""
