@@ -86,8 +86,6 @@ nav:
           - scenarios/travel-ai-briefing.md
           - scenarios/shutdown.md
           - scenarios/org-website-vulnerability.md
-      - !ENV [NAV_REPORTS, "Translated Reports"]:
-          - reports/index.md
   # Groups follow the article list in regional/index.md.
   - !ENV [NAV_REGIONAL, "Regional"]:
       - regional/index.md
@@ -506,22 +504,25 @@ plugins:
         'blog/2026/02/ooni-全新的匿名憑證系統.md': 'https://anoni.net/en/articles/ooni-anonymous-credentials/'
         'blog/2026/03/arti_2_1_0_released.md': 'changelog/arti.md'
         'blog/2026/04/ooni-probe-desktop-beta-2026.md': 'changelog/ooni.md'
-        'report/interseclab-the-internet-coup.md': 'reports/index.md'
-        'report/interseclab-the-internet-coup/index_3.md': 'reports/index.md'
-        'report/interseclab-the-internet-coup/index_5.md': 'reports/index.md'
-        'report/interseclab-the-internet-coup/index_8.md': 'reports/index.md'
-        'reports/interseclab-madlink.md': 'reports/index.md'
-        'reports/interseclab-madlink/index_3.md': 'reports/index.md'
+        'report/interseclab-the-internet-coup.md': 'https://anoni.net/en/library/interseclab-network-coup/'
+        'report/interseclab-the-internet-coup/index_3.md': 'https://anoni.net/en/library/interseclab-network-coup/'
+        'report/interseclab-the-internet-coup/index_5.md': 'https://anoni.net/en/library/interseclab-network-coup/'
+        'report/interseclab-the-internet-coup/index_8.md': 'https://anoni.net/en/library/interseclab-network-coup/'
+        'reports/interseclab-madlink.md': 'https://anoni.net/en/library/interseclab-madlink/'
+        'reports/interseclab-madlink/index_3.md': 'https://anoni.net/en/library/interseclab-madlink/'
         'reports/interseclab-madlink/index_6.md': 'https://anoni.net/en/updates/2026/05/madlink-editorial-2026-05/'
-        'reports/interseclab-network-coup.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_1.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_2.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_3.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_4.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_5.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_6.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_7.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_8.md': 'reports/index.md'
+        # 2026-11-23 研究報告中譯搬到社群首頁的報告與指引中譯（anoni-net/www#108），
+        # 譯文只有正體中文，簡體中文與英文的列表頁導到各自語系的列表
+        'reports/index.md': 'https://anoni.net/en/library/'
+        'reports/interseclab-network-coup.md': 'https://anoni.net/en/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_1.md': 'https://anoni.net/en/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_2.md': 'https://anoni.net/en/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_3.md': 'https://anoni.net/en/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_4.md': 'https://anoni.net/en/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_5.md': 'https://anoni.net/en/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_6.md': 'https://anoni.net/en/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_7.md': 'https://anoni.net/en/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_8.md': 'https://anoni.net/en/library/interseclab-network-coup/'
         'taiwan.md': 'regional/index.md'
         'taiwan/ooni-asn-coverage.md': 'https://anoni.net/en/projects/asn-coverage/asn-diversity/'
         'taiwan/ooni-checklist.md': 'https://anoni.net/en/join/ooni-test-list/'

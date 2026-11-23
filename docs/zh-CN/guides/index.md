@@ -25,9 +25,9 @@ icon: material/compass-outline
 
     特定角色或情境的应用：一般人的日常基线、记者、社运参与者、家暴幸存者、LGBTQ+ 与性少数、选举观察员、匿名捐款、出差与跨境、在中国大陆的公开平台发声。
 
-- [:material-file-pdf-box: 研究报告中译](../reports/index.md)
+- [:material-file-pdf-box: 报告与指引中译](https://anoni.net/zh-cn/library/){target="_blank"}
 
-    外部研究报告的完整中译：InterSecLab 的「网络政变」与 MADLink 两份报告。
+    外部研究报告与指引的正体中文全文译本，2026-11 起收在社区首页，包含 InterSecLab 的「网络政变」与 MADLink 两份报告。
 
 </div>
 
@@ -39,6 +39,6 @@ icon: material/compass-outline
 - **第一次接触匿名网络**：从[概念](../basics/index.md)开始，依序读完建立词汇与动机
 - **想找特定工具**：直接到[工具](../tools/index.md)找对应工具的介绍与威胁模型
 - **有具体需求**：到[场景](../scenarios/index.md)找最接近自己的角色，看完整流程
-- **想看外部研究**：到[研究报告中译](../reports/index.md)读完整的中译
+- **想看外部研究**：到[报告与指引中译](https://anoni.net/zh-cn/library/){target="_blank"}读完整的中译
 
 延伸到本地的法规与观测，可以接着看[在地脉络](../taiwan/index.md)。协议与密码学的原理（后量子密码、去中心化网站发布、零知识身份验证等）写给技术读者，收在社区首页的[技术文章](https://anoni.net/zh-cn/articles/){target="_blank"}。想加入社区协作，见[社区参与](https://anoni.net/zh-cn/join/){target="_blank"}。

@@ -27,7 +27,7 @@ description: "文件站取消進階層，部落格的技術分析與翻譯導讀
 | Arti、Tails、OONI Probe 舊版本的發布公告 | 併進[更新日誌](../../changelog/index.md) |
 | 《虛擬資產服務法》行政院草案的整理 | 併進[台灣 VASP 法 2026](../../taiwan/vasp-2026.md) |
 
-「嚴選報告」改名為[研究報告中譯](../../reports/index.md)，MADLink 報告的編輯觀察改成一篇社群動態，以 2026 年 5 月的快照保存。
+「嚴選報告」改名為[研究報告中譯](https://anoni.net/library/){target="_blank"}，MADLink 報告的編輯觀察改成一篇社群動態，以 2026 年 5 月的快照保存。
 
 ## 舊網址
 

@@ -29,7 +29,7 @@ anoni-net-docs/
 
 | 分區 | 內容 |
 |------|------|
-| 指南 | 概念、工具、場景、進階、報告五組。工具依「連線層」、「環境層」、「觀測層」、「日常隱私基本功」分類 |
+| 指南 | 概念、工具、場景三組。工具依「連線層」、「環境層」、「觀測層」、「日常隱私基本功」分類。外部研究報告與指引的中譯 2026-11 搬到社群首頁的[報告與指引中譯](https://anoni.net/library/) |
 | 在地脈絡 | 台灣的觀測資料與法規制度（個資法、VASP、揭弊者保護） |
 | 小工具 | 在瀏覽器內執行的隱私工具：威脅模型盤點、密語產生、QR code 產生與讀取、metadata 清除、網址清理、隱形字元偵測、瀏覽器指紋示範 |
 | 互動與呈現 | 洋蔥路由與會合點的動畫，以及 Tor 中繼地球儀 |
@@ -200,7 +200,7 @@ A multilingual site built on [MkDocs Material](https://squidfunk.github.io/mkdoc
 
 | Section | Content |
 |---------|---------|
-| Guides | Concepts, tools, scenarios, advanced topics, and reports. Tools are grouped by connection layer, environment layer, measurement layer, and everyday privacy basics |
+| Guides | Concepts, tools, and scenarios. Tools are grouped by connection layer, environment layer, measurement layer, and everyday privacy basics. Translations of external research reports and guidance moved to [Translated Reports and Guidance](https://anoni.net/en/library/) on the community homepage in 2026-11 |
 | Local Context | Taiwan-specific measurement data and regulation (PDPA, VASP, whistleblower protection) |
 | Utilities | Privacy tools that run entirely in the browser: threat-model inventory, passphrase generator, QR code generator and reader, metadata stripper, URL cleaner, invisible-character detector, browser fingerprint demo |
 | Interactive | Onion routing and rendezvous animations, plus the Tor relay globe |

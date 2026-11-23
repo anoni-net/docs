@@ -2434,27 +2434,23 @@
 	#Who-is-covered
 	#Why-an-anonymity-community-tracks-whistleblower-law
 /en/regional/tor-relay-watcher/ -> https://anoni.net/en/projects/pulse/
-/en/report/interseclab-the-internet-coup/ -> /en/reports/
-/en/report/interseclab-the-internet-coup/index_3/ -> /en/reports/
-/en/report/interseclab-the-internet-coup/index_5/ -> /en/reports/
-/en/report/interseclab-the-internet-coup/index_8/ -> /en/reports/
-/en/reports/
-	#Curated-Reports
-	#MADLink-A-Taiwanese-Vestige-in-the-Geedge-Supply-Chain
-	#Selected-reports
-	#The-Internet-Coup
-/en/reports/interseclab-madlink/ -> /en/reports/
-/en/reports/interseclab-madlink/index_3/ -> /en/reports/
+/en/report/interseclab-the-internet-coup/ -> https://anoni.net/en/library/interseclab-network-coup/
+/en/report/interseclab-the-internet-coup/index_3/ -> https://anoni.net/en/library/interseclab-network-coup/
+/en/report/interseclab-the-internet-coup/index_5/ -> https://anoni.net/en/library/interseclab-network-coup/
+/en/report/interseclab-the-internet-coup/index_8/ -> https://anoni.net/en/library/interseclab-network-coup/
+/en/reports/ -> https://anoni.net/en/library/
+/en/reports/interseclab-madlink/ -> https://anoni.net/en/library/interseclab-madlink/
+/en/reports/interseclab-madlink/index_3/ -> https://anoni.net/en/library/interseclab-madlink/
 /en/reports/interseclab-madlink/index_6/ -> https://anoni.net/en/updates/2026/05/madlink-editorial-2026-05/
-/en/reports/interseclab-network-coup/ -> /en/reports/
-/en/reports/interseclab-network-coup/index_1/ -> /en/reports/
-/en/reports/interseclab-network-coup/index_2/ -> /en/reports/
-/en/reports/interseclab-network-coup/index_3/ -> /en/reports/
-/en/reports/interseclab-network-coup/index_4/ -> /en/reports/
-/en/reports/interseclab-network-coup/index_5/ -> /en/reports/
-/en/reports/interseclab-network-coup/index_6/ -> /en/reports/
-/en/reports/interseclab-network-coup/index_7/ -> /en/reports/
-/en/reports/interseclab-network-coup/index_8/ -> /en/reports/
+/en/reports/interseclab-network-coup/ -> https://anoni.net/en/library/interseclab-network-coup/
+/en/reports/interseclab-network-coup/index_1/ -> https://anoni.net/en/library/interseclab-network-coup/
+/en/reports/interseclab-network-coup/index_2/ -> https://anoni.net/en/library/interseclab-network-coup/
+/en/reports/interseclab-network-coup/index_3/ -> https://anoni.net/en/library/interseclab-network-coup/
+/en/reports/interseclab-network-coup/index_4/ -> https://anoni.net/en/library/interseclab-network-coup/
+/en/reports/interseclab-network-coup/index_5/ -> https://anoni.net/en/library/interseclab-network-coup/
+/en/reports/interseclab-network-coup/index_6/ -> https://anoni.net/en/library/interseclab-network-coup/
+/en/reports/interseclab-network-coup/index_7/ -> https://anoni.net/en/library/interseclab-network-coup/
+/en/reports/interseclab-network-coup/index_8/ -> https://anoni.net/en/library/interseclab-network-coup/
 /en/scenarios/
 	#Available-now
 	#How-to-suggest-a-scenario
@@ -3611,156 +3607,33 @@
 /ooni-weblists/ -> https://anoni.net/join/ooni-test-list/
 /regional/ -> /taiwan/
 /regional/tor-relay-watcher/ -> https://anoni.net/projects/pulse/
-/report/ -> /reports/
-/report/interseclab-the-internet-coup/ -> /reports/interseclab-network-coup/
-/report/interseclab-the-internet-coup/index_1/ -> /reports/interseclab-network-coup/index_1/
-/report/interseclab-the-internet-coup/index_2/ -> /reports/interseclab-network-coup/index_2/
-/report/interseclab-the-internet-coup/index_3/ -> /reports/interseclab-network-coup/index_3/
-/report/interseclab-the-internet-coup/index_4/ -> /reports/interseclab-network-coup/index_4/
-/report/interseclab-the-internet-coup/index_5/ -> /reports/interseclab-network-coup/index_5/
-/report/interseclab-the-internet-coup/index_6/ -> /reports/interseclab-network-coup/index_6/
-/report/interseclab-the-internet-coup/index_7/ -> /reports/interseclab-network-coup/index_7/
-/report/interseclab-the-internet-coup/index_8/ -> /reports/interseclab-network-coup/index_8/
-/reports/
-	#MADLink--台灣在-Geedge-供應鏈中的遺留
-	#The-Internet-Coup--網路政變
-	#嚴選報告
-	#已收錄的報告
-/reports/interseclab-madlink/
-	#MADLink台灣在-Geedge-供應鏈中的遺留---InterSecLab
-	#參與討論
-	#更新紀錄
-	#相關閱讀
-	#編輯立場聲明
-	#關於-InterSecLab
-/reports/interseclab-madlink/index_1/
-	#主要發現
-	#摘要
-	#摘要與主要發現
-	#為什麼這件事重要
-/reports/interseclab-madlink/index_2/
-	#Geedge-Networks-的供應鏈深入探究
-	#Geedge-供應鏈深入解析三代-TSG-硬體
-	#現行版本TSG-X衣索比亞巴基斯坦緬甸
-	#第一代TSG-ADC哈薩克
-	#第二代TSG-9140衣索比亞
-/reports/interseclab-madlink/index_3/
-	#EtherFabric-與-ADLINK-的角色和回應
-	#EtherFabricGeedge-自家的網路封包經紀
-	#凌華科技的角色與回應
-/reports/interseclab-madlink/index_4/
-	#結論
-/reports/interseclab-madlink/index_5/
-	#凌華科技完整聲明
-	#經濟部國際貿易署回應
-	#附錄凌華科技與經濟部完整聲明
+/report/ -> https://anoni.net/library/
+/report/interseclab-the-internet-coup/ -> https://anoni.net/library/interseclab-network-coup/
+/report/interseclab-the-internet-coup/index_1/ -> https://anoni.net/library/interseclab-network-coup/chapter-1/
+/report/interseclab-the-internet-coup/index_2/ -> https://anoni.net/library/interseclab-network-coup/chapter-2/
+/report/interseclab-the-internet-coup/index_3/ -> https://anoni.net/library/interseclab-network-coup/chapter-3/
+/report/interseclab-the-internet-coup/index_4/ -> https://anoni.net/library/interseclab-network-coup/chapter-4/
+/report/interseclab-the-internet-coup/index_5/ -> https://anoni.net/library/interseclab-network-coup/chapter-5/
+/report/interseclab-the-internet-coup/index_6/ -> https://anoni.net/library/interseclab-network-coup/chapter-6/
+/report/interseclab-the-internet-coup/index_7/ -> https://anoni.net/library/interseclab-network-coup/chapter-7/
+/report/interseclab-the-internet-coup/index_8/ -> https://anoni.net/library/interseclab-network-coup/chapter-8/
+/reports/ -> https://anoni.net/library/
+/reports/interseclab-madlink/ -> https://anoni.net/library/interseclab-madlink/
+/reports/interseclab-madlink/index_1/ -> https://anoni.net/library/interseclab-madlink/chapter-1/
+/reports/interseclab-madlink/index_2/ -> https://anoni.net/library/interseclab-madlink/chapter-2/
+/reports/interseclab-madlink/index_3/ -> https://anoni.net/library/interseclab-madlink/chapter-3/
+/reports/interseclab-madlink/index_4/ -> https://anoni.net/library/interseclab-madlink/chapter-4/
+/reports/interseclab-madlink/index_5/ -> https://anoni.net/library/interseclab-madlink/chapter-5/
 /reports/interseclab-madlink/index_6/ -> https://anoni.net/updates/2026/05/madlink-editorial-2026-05/
-/reports/interseclab-network-coup/
-	#使命
-	#參與討論
-	#專家團隊包括
-	#更新紀錄
-	#網路政變---InterSecLab
-	#關於-InterSecLab
-/reports/interseclab-network-coup/index_1/
-	#網路政變---摘要
-/reports/interseclab-network-coup/index_2/
-	#中國防火長城模式的大量出口
-	#主要發現
-	#國際資助的網路服務供應商涉入其中
-	#在中國內部推動防火長城的區域化
-	#在資料共享和使用上沒有內建的法律或道德限制
-	#對資料主權的重大影響
-	#監控能力的商品化
-	#複製並改進現有商業產品和開源程式碼
-	#設計與商用硬體廠商的互操作性使得針對性制裁更加困難
-	#辨識-VPN-和翻牆工具
-	#透過定期操作系統更新擴展數位威權主義
-/reports/interseclab-network-coup/index_3/
-	#引言
-/reports/interseclab-network-coup/index_4/
-	#方法論
-/reports/interseclab-network-coup/index_5/
-	#Cyber-Narrator全視之眼
-	#DDoS-作為一項服務
-	#Ether-Fabric
-	#MARSIO
-	#Network-Zodiac-監控網路硬體
-	#TSG-GALAXY聚合分析以進行大規模監控
-	#TSG-OS
-	#TSG-的功能能力
-	#TSG-的運作方式
-	#TSGXGeedge-的整合硬體解決方案
-	#天狗安全閘道審查與控制中心
-	#深度封包檢測
-	#產品與服務
-	#用惡意軟體感染使用者
-	#識別和封鎖個別網路使用者
-	#賦予使用者聲譽分數
-	#阻擋-VPN-和翻牆工具
-	#限制流量
-/reports/interseclab-network-coup/index_6/
-	#A24處於初期階段的未知客戶
-	#E21衣索比亞
-	#Geedge-在其他地區的存在福建和江蘇
-	#Geedge-平台在舊硬體上的運行與令人擔憂的隱私問題
-	#Geedge-產品的部署方式
-	#Geedge-的運營與客戶
-	#Geedge-監控與合法攔截的區別
-	#ISP-否認使用-Geedge-硬體及專注於封鎖-VPN
-	#J24新疆
-	#K18-和-K24哈薩克
-	#M22緬甸
-	#P19巴基斯坦
-	#中國
-	#中國與俄羅斯系統的差異
-	#作為壓制社會動盪的工具
-	#哈薩克與-Geedge
-	#國內系統架構
-	#在洩漏文件中辨識客戶政府
-	#客戶樣態Geedge-在各國的運營
-	#巴基斯坦與-Geedge
-	#新疆與-Geedge
-	#新疆計劃
-	#日常運營
-	#服務導入與日常運營
-	#系統模式審查與監控
-	#緬甸與-Geedge
-	#背景
-	#背景_1
-	#背景_2
-	#背景_3
-	#背景_4
-	#衣索比亞與-Geedge
-	#西方公司的共謀
-	#透過-J24-計劃測試額外功能
-	#運營效率
-/reports/interseclab-network-coup/index_7/
-	#封鎖-Tor
-	#封鎖-VPN
-	#封鎖網路隱私與規避工具
-	#繞過-Psiphon-的保護措施
-/reports/interseclab-network-coup/index_8/
-	#AppLogic-Networks前身為-Sandvine
-	#Investcom-HoldingATOM-前-Telenor-Myanmar的母公司
-	#Thales-集團
-	#三井物產Campana-的股東
-	#人權盡職調查
-	#以TSG封鎖-VPN網站與應用程式
-	#出版資訊
-	#在採購進口安裝與啟用中的角色以及第三方的參與
-	#對-Geedge-客戶國家網路使用者的影響
-	#對以-Geedge-產品為-MOTC-實施大規模監控與審查的知情程度
-	#對國際社會的影響
-	#對法證研究人員的影響
-	#對關注自由和開放網路的技術社群的影響
-	#技術研究人員
-	#相關-Geedge-技術的安裝或啟用時間
-	#終端使用者的安全疑慮
-	#結論反思與未來步驟反擊作為服務的數位威權主義
-	#編輯團隊
-	#致謝
-	#附錄
+/reports/interseclab-network-coup/ -> https://anoni.net/library/interseclab-network-coup/
+/reports/interseclab-network-coup/index_1/ -> https://anoni.net/library/interseclab-network-coup/chapter-1/
+/reports/interseclab-network-coup/index_2/ -> https://anoni.net/library/interseclab-network-coup/chapter-2/
+/reports/interseclab-network-coup/index_3/ -> https://anoni.net/library/interseclab-network-coup/chapter-3/
+/reports/interseclab-network-coup/index_4/ -> https://anoni.net/library/interseclab-network-coup/chapter-4/
+/reports/interseclab-network-coup/index_5/ -> https://anoni.net/library/interseclab-network-coup/chapter-5/
+/reports/interseclab-network-coup/index_6/ -> https://anoni.net/library/interseclab-network-coup/chapter-6/
+/reports/interseclab-network-coup/index_7/ -> https://anoni.net/library/interseclab-network-coup/chapter-7/
+/reports/interseclab-network-coup/index_8/ -> https://anoni.net/library/interseclab-network-coup/chapter-8/
 /scenarios/
 	#場景層
 	#如何參與
@@ -6316,27 +6189,23 @@
 /zh-cn/ooni-weblists/ -> https://anoni.net/zh-cn/join/ooni-test-list/
 /zh-cn/regional/ -> /zh-cn/taiwan/
 /zh-cn/regional/tor-relay-watcher/ -> https://anoni.net/zh-cn/projects/pulse/
-/zh-cn/report/interseclab-the-internet-coup/ -> /zh-cn/reports/
-/zh-cn/report/interseclab-the-internet-coup/index_3/ -> /zh-cn/reports/
-/zh-cn/report/interseclab-the-internet-coup/index_5/ -> /zh-cn/reports/
-/zh-cn/report/interseclab-the-internet-coup/index_8/ -> /zh-cn/reports/
-/zh-cn/reports/
-	#MADLink--台湾在-Geedge-供应链中的遗留
-	#The-Internet-Coup--网络政变
-	#严选报告
-	#已收录报告
-/zh-cn/reports/interseclab-madlink/ -> /zh-cn/reports/
-/zh-cn/reports/interseclab-madlink/index_3/ -> /zh-cn/reports/
+/zh-cn/report/interseclab-the-internet-coup/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
+/zh-cn/report/interseclab-the-internet-coup/index_3/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
+/zh-cn/report/interseclab-the-internet-coup/index_5/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
+/zh-cn/report/interseclab-the-internet-coup/index_8/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
+/zh-cn/reports/ -> https://anoni.net/zh-cn/library/
+/zh-cn/reports/interseclab-madlink/ -> https://anoni.net/zh-cn/library/interseclab-madlink/
+/zh-cn/reports/interseclab-madlink/index_3/ -> https://anoni.net/zh-cn/library/interseclab-madlink/
 /zh-cn/reports/interseclab-madlink/index_6/ -> https://anoni.net/zh-cn/updates/2026/05/madlink-editorial-2026-05/
-/zh-cn/reports/interseclab-network-coup/ -> /zh-cn/reports/
-/zh-cn/reports/interseclab-network-coup/index_1/ -> /zh-cn/reports/
-/zh-cn/reports/interseclab-network-coup/index_2/ -> /zh-cn/reports/
-/zh-cn/reports/interseclab-network-coup/index_3/ -> /zh-cn/reports/
-/zh-cn/reports/interseclab-network-coup/index_4/ -> /zh-cn/reports/
-/zh-cn/reports/interseclab-network-coup/index_5/ -> /zh-cn/reports/
-/zh-cn/reports/interseclab-network-coup/index_6/ -> /zh-cn/reports/
-/zh-cn/reports/interseclab-network-coup/index_7/ -> /zh-cn/reports/
-/zh-cn/reports/interseclab-network-coup/index_8/ -> /zh-cn/reports/
+/zh-cn/reports/interseclab-network-coup/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
+/zh-cn/reports/interseclab-network-coup/index_1/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
+/zh-cn/reports/interseclab-network-coup/index_2/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
+/zh-cn/reports/interseclab-network-coup/index_3/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
+/zh-cn/reports/interseclab-network-coup/index_4/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
+/zh-cn/reports/interseclab-network-coup/index_5/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
+/zh-cn/reports/interseclab-network-coup/index_6/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
+/zh-cn/reports/interseclab-network-coup/index_7/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
+/zh-cn/reports/interseclab-network-coup/index_8/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
 /zh-cn/scenarios/
 	#场景层
 	#如何参与

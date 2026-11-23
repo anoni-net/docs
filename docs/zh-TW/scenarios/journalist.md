@@ -403,7 +403,7 @@ fixer、翻譯、司機、幫忙介紹受訪者的朋友，法律風險不比受
 
 境內受訪者或協作者本身也在公開平台發聲時，另見 [在中國大陸的公開平台傳播資訊](./mainland-speech.md)。
 
-查證來源（2026-08）：[FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"} - Freedom House。防火長城的技術本體與對外輸出見 [網路政變報告](../reports/interseclab-network-coup/index.md)。
+查證來源（2026-08）：[FOTN 2025 China](https://freedomhouse.org/country/china/freedom-net/2025){target="_blank"} - Freedom House。防火長城的技術本體與對外輸出見 [網路政變報告](https://anoni.net/library/interseclab-network-coup/){target="_blank"}。
 
 ## 國際求助管道
 

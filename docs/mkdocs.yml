@@ -87,25 +87,6 @@ nav:
           - scenarios/election-observer.md
           - scenarios/shutdown.md
           - scenarios/org-website-vulnerability.md
-      - !ENV [NAV_REPORTS, "研究報告中譯"]:
-          - reports/index.md
-          - !ENV [NAV_INTERNETCOUP, "網路政變 - InterSecLab"]:
-              - reports/interseclab-network-coup/index.md
-              - reports/interseclab-network-coup/index_1.md
-              - reports/interseclab-network-coup/index_2.md
-              - reports/interseclab-network-coup/index_3.md
-              - reports/interseclab-network-coup/index_4.md
-              - reports/interseclab-network-coup/index_5.md
-              - reports/interseclab-network-coup/index_6.md
-              - reports/interseclab-network-coup/index_7.md
-              - reports/interseclab-network-coup/index_8.md
-          - !ENV [NAV_MADLINK, "MADLink - InterSecLab"]:
-              - reports/interseclab-madlink/index.md
-              - reports/interseclab-madlink/index_1.md
-              - reports/interseclab-madlink/index_2.md
-              - reports/interseclab-madlink/index_3.md
-              - reports/interseclab-madlink/index_4.md
-              - reports/interseclab-madlink/index_5.md
   # taiwan/index.md 把法規那三篇分成「個資與身分」「金流」「制度與技術交界」，各自
   # 只有一篇。側邊欄做成三個單頁分組只會更難掃，所以合併成「法規與制度」一組。
   - !ENV [NAV_TAIWAN, "在地脈絡"]:
@@ -408,6 +389,24 @@ plugins:
         'advanced/zk-identity-payments.md': 'https://anoni.net/articles/zk-identity-payments/'
         'advanced/post-quantum.md': 'https://anoni.net/articles/post-quantum/'
         'reports/interseclab-madlink/index_6.md': 'https://anoni.net/updates/2026/05/madlink-editorial-2026-05/'
+        # 2026-11-23 研究報告中譯搬到社群首頁的報告與指引中譯（anoni-net/www#108），
+        # 譯文只有正體中文，簡體中文與英文的列表頁導到各自語系的列表
+        'reports/index.md': 'https://anoni.net/library/'
+        'reports/interseclab-network-coup/index.md': 'https://anoni.net/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_1.md': 'https://anoni.net/library/interseclab-network-coup/chapter-1/'
+        'reports/interseclab-network-coup/index_2.md': 'https://anoni.net/library/interseclab-network-coup/chapter-2/'
+        'reports/interseclab-network-coup/index_3.md': 'https://anoni.net/library/interseclab-network-coup/chapter-3/'
+        'reports/interseclab-network-coup/index_4.md': 'https://anoni.net/library/interseclab-network-coup/chapter-4/'
+        'reports/interseclab-network-coup/index_5.md': 'https://anoni.net/library/interseclab-network-coup/chapter-5/'
+        'reports/interseclab-network-coup/index_6.md': 'https://anoni.net/library/interseclab-network-coup/chapter-6/'
+        'reports/interseclab-network-coup/index_7.md': 'https://anoni.net/library/interseclab-network-coup/chapter-7/'
+        'reports/interseclab-network-coup/index_8.md': 'https://anoni.net/library/interseclab-network-coup/chapter-8/'
+        'reports/interseclab-madlink/index.md': 'https://anoni.net/library/interseclab-madlink/'
+        'reports/interseclab-madlink/index_1.md': 'https://anoni.net/library/interseclab-madlink/chapter-1/'
+        'reports/interseclab-madlink/index_2.md': 'https://anoni.net/library/interseclab-madlink/chapter-2/'
+        'reports/interseclab-madlink/index_3.md': 'https://anoni.net/library/interseclab-madlink/chapter-3/'
+        'reports/interseclab-madlink/index_4.md': 'https://anoni.net/library/interseclab-madlink/chapter-4/'
+        'reports/interseclab-madlink/index_5.md': 'https://anoni.net/library/interseclab-madlink/chapter-5/'
         # 部落格文章同一天分流（#406）：寫給技術讀者的分析與翻譯導讀搬到社群首頁的技術文章，
         # 活動與上線公告搬到社群動態，舊版發布公告與過時的文章轉到承接的頁面。
         'blog/2026/04/a-server-that-forgets-exploring-stateless-relays.md': 'https://anoni.net/articles/stateless-relays/'
@@ -479,16 +478,16 @@ plugins:
         'blog/2025/02/rightscon25-tor-tails-ooni.md': 'https://anoni.net/updates/2025/02/rightscon25-tor-tails-ooni/'
         'blog/2025/03/rightscon25-tor-tails-ooni-after.md': 'https://anoni.net/updates/2025/03/rightscon25-tor-tails-ooni-after/'
         'blog/2026/08/tianjian-digital-privacy.md': 'https://anoni.net/updates/2026/08/tianjian-digital-privacy/'
-        'report/index.md': 'reports/index.md'
-        'report/interseclab-the-internet-coup/index.md': 'reports/interseclab-network-coup/index.md'
-        'report/interseclab-the-internet-coup/index_1.md': 'reports/interseclab-network-coup/index_1.md'
-        'report/interseclab-the-internet-coup/index_2.md': 'reports/interseclab-network-coup/index_2.md'
-        'report/interseclab-the-internet-coup/index_3.md': 'reports/interseclab-network-coup/index_3.md'
-        'report/interseclab-the-internet-coup/index_4.md': 'reports/interseclab-network-coup/index_4.md'
-        'report/interseclab-the-internet-coup/index_5.md': 'reports/interseclab-network-coup/index_5.md'
-        'report/interseclab-the-internet-coup/index_6.md': 'reports/interseclab-network-coup/index_6.md'
-        'report/interseclab-the-internet-coup/index_7.md': 'reports/interseclab-network-coup/index_7.md'
-        'report/interseclab-the-internet-coup/index_8.md': 'reports/interseclab-network-coup/index_8.md'
+        'report/index.md': 'https://anoni.net/library/'
+        'report/interseclab-the-internet-coup/index.md': 'https://anoni.net/library/interseclab-network-coup/'
+        'report/interseclab-the-internet-coup/index_1.md': 'https://anoni.net/library/interseclab-network-coup/chapter-1/'
+        'report/interseclab-the-internet-coup/index_2.md': 'https://anoni.net/library/interseclab-network-coup/chapter-2/'
+        'report/interseclab-the-internet-coup/index_3.md': 'https://anoni.net/library/interseclab-network-coup/chapter-3/'
+        'report/interseclab-the-internet-coup/index_4.md': 'https://anoni.net/library/interseclab-network-coup/chapter-4/'
+        'report/interseclab-the-internet-coup/index_5.md': 'https://anoni.net/library/interseclab-network-coup/chapter-5/'
+        'report/interseclab-the-internet-coup/index_6.md': 'https://anoni.net/library/interseclab-network-coup/chapter-6/'
+        'report/interseclab-the-internet-coup/index_7.md': 'https://anoni.net/library/interseclab-network-coup/chapter-7/'
+        'report/interseclab-the-internet-coup/index_8.md': 'https://anoni.net/library/interseclab-network-coup/chapter-8/'
         # 2026 扁平結構 → 7 分類改版（ddad3ca）舊網址止血
         'internet-freedom-matter.md': 'basics/internet-freedom.md'
         'intro/index.md': 'basics/index.md'

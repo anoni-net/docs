@@ -87,8 +87,6 @@ nav:
           - scenarios/election-observer.md
           - scenarios/shutdown.md
           - scenarios/org-website-vulnerability.md
-      - !ENV [NAV_REPORTS, "研究报告中译"]:
-          - reports/index.md
   # taiwan/index.md 把法规那三篇分成「个资与身分」「金流」「制度与技术交界」，各自
   # 只有一篇。侧边栏做成三个单页分组只会更难扫，所以合并成「法规与制度」一组。
   - !ENV [NAV_TAIWAN, "在地脉络"]:
@@ -479,22 +477,25 @@ plugins:
         'blog/2026/02/ooni-全新的匿名憑證系統.md': 'blog/index.md'
         'regional.md': 'taiwan/index.md'
         'regional/tor-relay-watcher.md': 'https://anoni.net/zh-cn/projects/pulse/'
-        'report/interseclab-the-internet-coup.md': 'reports/index.md'
-        'report/interseclab-the-internet-coup/index_3.md': 'reports/index.md'
-        'report/interseclab-the-internet-coup/index_5.md': 'reports/index.md'
-        'report/interseclab-the-internet-coup/index_8.md': 'reports/index.md'
-        'reports/interseclab-madlink.md': 'reports/index.md'
-        'reports/interseclab-madlink/index_3.md': 'reports/index.md'
+        'report/interseclab-the-internet-coup.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
+        'report/interseclab-the-internet-coup/index_3.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
+        'report/interseclab-the-internet-coup/index_5.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
+        'report/interseclab-the-internet-coup/index_8.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
+        'reports/interseclab-madlink.md': 'https://anoni.net/zh-cn/library/interseclab-madlink/'
+        'reports/interseclab-madlink/index_3.md': 'https://anoni.net/zh-cn/library/interseclab-madlink/'
         'reports/interseclab-madlink/index_6.md': 'https://anoni.net/zh-cn/updates/2026/05/madlink-editorial-2026-05/'
-        'reports/interseclab-network-coup.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_1.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_2.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_3.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_4.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_5.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_6.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_7.md': 'reports/index.md'
-        'reports/interseclab-network-coup/index_8.md': 'reports/index.md'
+        # 2026-11-23 研究報告中譯搬到社群首頁的報告與指引中譯（anoni-net/www#108），
+        # 譯文只有正體中文，簡體中文與英文的列表頁導到各自語系的列表
+        'reports/index.md': 'https://anoni.net/zh-cn/library/'
+        'reports/interseclab-network-coup.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_1.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_2.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_3.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_4.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_5.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_6.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_7.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
+        'reports/interseclab-network-coup/index_8.md': 'https://anoni.net/zh-cn/library/interseclab-network-coup/'
   # 社群分享卡，說明見 mkdocs.yml 的同一段
   - social:
       # 產卡片吃掉大半的建置時間，而 PR 上的網址合約檢查只看網址與錨點，卡片對它

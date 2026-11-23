@@ -64,10 +64,11 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 | `tools/` | 工具層，具體的工具介紹與比較 |
 | `scenarios/` | 場景層，特定角色或情境的應用 |
 | `taiwan/` | 在地脈絡，台灣的法規、觀測、研究 |
-| `reports/` | 研究報告中譯，外部研究報告的正體中文翻譯 |
 | `community/` | 貢獻與翻譯規範、開發環境準備、技能自評與視覺指南 |
 
 社群本身的頁面與公告不放在文件站。關於我們、參與方式、自架服務、活動與社群動態在 [anoni.net](https://anoni.net/){target="_blank"}，原始碼是 [`anoni-net/www`](https://github.com/anoni-net/www){target="_blank"}，活動公告、專案上線、工作進度這類社群公告發在該 repo 的 `updates/`。架設 Tor 中繼節點、橋接與 onion 服務的指南，以及讀懂 OONI 觀測資料的方法，寫給已經熟悉 Tor 的技術讀者，2026-10 起也放在 anoni.net。文件站的 `blog/` 放外部文章的翻譯、技術分析、觀測報告與文件站自己的更新回顧。
+
+外部長篇文件（研究報告、標準機構的指引）的正體中文全文譯本也不放在文件站，2026-11 起收在社群首頁的[報告與指引中譯](https://anoni.net/library/){target="_blank"}，原始檔在 `anoni-net/www` 的 `pages/zh-TW/library/`。
 
 如果你的新文章不確定該放哪一類，先在 Matrix 上問一聲，避免直接 PR 後又要搬。
 
@@ -97,7 +98,6 @@ redirect 管不到內容搬移。頁面留著、只有其中一段被拆到新�
 截圖（操作畫面、網站畫面）放在 `docs/<lang>/assets/images/`：
 
 - 在 markdown 引用：對於 `basics/`、`tools/` 等深度 1 的目錄，用 `../../assets/images/檔名`
-- 對於 `reports/interseclab-network-coup/` 等深度 2 的目錄，用 `../../assets/images/檔名`（剛好一樣）
 - 優先使用 webp 或最佳化過的 png，不直接放手機原始大檔
 - 有 lightbox（點擊放大）時，HTML 用 `<figure>` + `<a href>` 包 `<img>`，兩個的相對路徑都要對齊
 - 三個語系的 `assets/images/` 各自獨立，補了一個語系記得補另外兩個。漏掉的話建置不會報錯，站上就是一頁破圖，執行 `python3 tools/check_image_refs.py` 掃得出來

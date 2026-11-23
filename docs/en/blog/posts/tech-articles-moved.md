@@ -27,7 +27,7 @@ The docs site is written for people new to anonymity networks and privacy, who m
 | Release notes for older Arti and Tails versions | Folded into the [changelogs](../../changelog/index.md) |
 | Notes on the Cabinet draft of Taiwan's Virtual Asset Service Act | Folded into [Taiwan's 2026 Virtual Asset Service Act](../../regional/taiwan-vasp-2026.md) |
 
-The report index is now called [Translated Reports](../../reports/index.md), and the editorial observation on the MADLink report has become a community update, kept as a snapshot from May 2026.
+The report index is now called [Translated Reports](https://anoni.net/en/library/){target="_blank"}, and the editorial observation on the MADLink report has become a community update, kept as a snapshot from May 2026.
 
 ## Old Addresses
 

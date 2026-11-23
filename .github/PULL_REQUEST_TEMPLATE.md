@@ -10,7 +10,7 @@
 ## 改動範圍 / Scope
 
 - 語系 / Language：<!-- zh-TW / zh-CN / en -->
-- 分類 / Category：<!-- basics / tools / scenarios / advanced / taiwan / reports / community -->
+- 分類 / Category：<!-- basics / tools / scenarios / advanced / taiwan / community -->
 - 對讀者的影響 / Reader impact：<!-- 連結是否會壞、URL 是否變更。 / broken links, URL changes. -->
 
 ## 自我檢查 / Self-check

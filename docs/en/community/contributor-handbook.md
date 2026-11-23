@@ -64,13 +64,14 @@ The structure stays flat. New articles go into an existing section:
 | `tools/` | Specific tools, comparisons, and hardening guidance |
 | `scenarios/` | Situations and roles, and what they change |
 | `regional/` | Regional observation and local regulatory context across the Sinophone Asia-Pacific |
-| `reports/` | Translated Reports: external research translated into Traditional Chinese, indexed with links to the originals |
 | `community/` | Contribution and translation guidelines, development environment setup, skill self-assessment and the visual guide |
 | `blog/` | Translations of outside articles, technical analysis, measurement reports and updates about the docs site |
 
 The English site uses `regional/` where the Chinese site uses `taiwan/`. An English reader who sees `taiwan/` assumes a site about Taiwan, while the content spans several jurisdictions with Taiwan as the anchor point.
 
 Pages and announcements about the community itself are not on the docs site. About, how to take part, community services, events and community updates live on [anoni.net](https://anoni.net/en/){target="_blank"}, with the source in [`anoni-net/www`](https://github.com/anoni-net/www). Community announcements such as events, project launches and progress reports go in that repository's `updates/` directory. Since 2026-10, the guides to running Tor relays, bridges and onion services, and to reading OONI measurement data, are written for technical readers who already know Tor and also live on anoni.net.
+
+Full Traditional Chinese translations of long external documents, such as research reports and guidance from standards bodies, are not on the docs site either. Since 2026-11 they live in [Translated Reports and Guidance](https://anoni.net/en/library/){target="_blank"} on the community homepage, with the source in `pages/zh-TW/library/` of `anoni-net/www`.
 
 If you are not sure where an article belongs, ask on Matrix before opening a PR, rather than moving it afterwards.
 

@@ -14,7 +14,7 @@ description: "Our Traditional Chinese translation of The Internet Coup has been 
 
 ![The Internet Coup report cover](https://assets.anoni.net/the-internet-coup/The-Internet-Coup-InterSecLab-2048x986.png){style="border-radius: 10px;box-shadow:1px 1px 0.6rem #00aeff;"}
 
-In September 2025 InterSecLab published [The Internet Coup](https://interseclab.org/research/the-internet-coup/){target="_blank"}, an analysis of more than 100,000 leaked documents from Geedge Networks, the Chinese company selling Great Firewall technology to governments in Kazakhstan, Ethiopia, Pakistan and Myanmar. A month later we released a [Traditional Chinese translation](https://anoni.net/docs/reports/interseclab-network-coup/){target="_blank"} for readers in Taiwan, Hong Kong, Macau and elsewhere. That first version had gaps that could mislead readers about the risks, so we have retranslated all eight chapters from the original PDF. The addresses have not changed.
+In September 2025 InterSecLab published [The Internet Coup](https://interseclab.org/research/the-internet-coup/){target="_blank"}, an analysis of more than 100,000 leaked documents from Geedge Networks, the Chinese company selling Great Firewall technology to governments in Kazakhstan, Ethiopia, Pakistan and Myanmar. A month later we released a [Traditional Chinese translation](https://anoni.net/library/interseclab-network-coup/){target="_blank"} for readers in Taiwan, Hong Kong, Macau and elsewhere. That first version had gaps that could mislead readers about the risks, so we have retranslated all eight chapters from the original PDF. The addresses have not changed.
 
 <!-- more -->
 
@@ -37,7 +37,7 @@ Old links and section anchors still resolve. If you spot an error, every page ha
 
 ## Related Reading
 
-- [Translated Reports](../../reports/index.md): our translations of InterSecLab's The Internet Coup and MADLink
+- [Translated Reports and Guidance](https://anoni.net/en/library/){target="_blank"}: our translations of InterSecLab's The Internet Coup and MADLink
 - [Tor Browser advanced settings](../../tools/tor-browser-advanced.md): setting up bridges when Tor cannot connect
 - [Metadata, and why it matters](../../basics/metadata.md): what an encrypted connection still reveals
 - [The original launch note](https://anoni.net/en/updates/2025/10/report-the-internet-coup/){target="_blank"} from October 2025
