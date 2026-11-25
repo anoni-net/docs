@@ -40,6 +40,8 @@ on:
       # 一篇的症狀是斷網的讀者打不開，線上與 CI 一路正常。
       - "tools/check_core_pages.py"
       - "tools/test_check_core_pages.py"
+      # 指南三區的 nav 分組與索引頁小標題。理由同上，新增文章的 PR 只碰 md。
+      - "tools/test_guides_nav_groups.mjs"
       - ".github/workflows/docs-style-lint.yml"
 
 permissions:
@@ -74,6 +76,11 @@ jobs:
       # Documentation built）。整區都是連結，斷了讀者只會落在文章開頭。
       - name: start 三語系對齊
         run: python3 tools/check_start_parity.py
+
+      # 概念、工具、場景的 nav 分組要跟索引頁的小標題一致，新文章也要進 nav。
+      # 不一致時建置照樣成功，讀者只會看到側邊欄與索引頁給出兩套分法。
+      - name: 指南三區的分組
+        run: node tools/test_guides_nav_groups.mjs
 
       - name: 測試自動存清單的檢查
         run: python3 tools/test_check_core_pages.py

@@ -7,7 +7,7 @@ icon: material/toolbox-outline
 
 # :material-toolbox-outline: 工具层
 
-读完[概念层](../basics/index.md)后，这个分类介绍几个在匿名网络讨论中最常被提到的工具。25 篇文章按连线、环境、观测、日常基本功四个层次排列，每个层次解决一类问题，挑跟你情境相关的那一群开始读就好，不必整本看完。动工具之前可以先看 [威胁模型如何建立](../basics/threat-model.md)，确认自己在抗谁，避免「工具当答案」的误区。
+读完[概念层](../basics/index.md)后，这个分类介绍几个在匿名网络讨论中最常被提到的工具。31 篇文章按连线、环境、观测、日常基本功四个层次排列，每个层次解决一类问题，挑跟你情境相关的那一群开始读就好，不必整本看完。动工具之前可以先看 [威胁模型如何建立](../basics/threat-model.md)，确认自己在抗谁，避免「工具当答案」的误区。
 
 ## 先看这篇
 
@@ -34,7 +34,7 @@ icon: material/toolbox-outline
 - [Tails、Whonix、Qubes 的差别](./tails-vs-whonix-vs-qubes.md)：三套常见匿名作业系统的取舍，依角色推荐适合的选择。
 - [GrapheneOS：高度隐私的行动作业系统](./grapheneos.md)：把 Android 安全强化并去 Google 化的手机系统，以及 Google 收紧 AOSP 后它面临的处境。
 
-## 观测层：网络审查的可验证记录
+## 观测层：审查的可验证记录 { #观测层网络审查的可验证记录 }
 
 想把「连不上」、「跑很慢」变成可引用的公开数据，或想做封锁测量活动的人，从这群开始。
 
@@ -46,20 +46,31 @@ icon: material/toolbox-outline
 
 想从通讯、协作、账号、金流、AI 使用先补齐基础的人，从这群开始。各篇主题各自独立，不必照顺序。
 
+### 手机与设备
+
 - [手机隐私设置逐步指引](./phone-privacy-settings.md)：拿着自己的手机照编号调整，iPhone、Android、Samsung Galaxy 各有对照的路径，约三十分钟。
-- [社交平台的隐私设置](./social-media-settings.md)：LINE、Facebook、Instagram、Threads 与微信上决定同事、前任、家人与陌生人能不能找到你、看得到你什么的设置，以及 Facebook 社团的管理方式。
 - [蓝牙追踪器的检测与处理](./bluetooth-tracker.md)：AirTag 这类追踪器被偷放进包里或车上时，iPhone 与 Android 检测得到哪些、收到提醒后如何找出来，以及找到之后先顾安全再决定是否停用。
-- [网络钓鱼的辨识与防范](./phishing.md)：假登录页与鱼叉式钓鱼如何运作，更新、密码管理器、passkey、附件与邮件图片这几项防范，以及输入了密码之后的处理。
 - [设备加密与数据抹除](./device-encryption.md)：Windows、Mac、Linux、iPhone、Android 的全盘加密，恢复密钥存在哪里，以及出售或送出设备前的清除。
 - [恶意软件的防范与处理](./malware.md)：常见的传播方式、杀毒与安装来源、入侵迹象，以及发现之后先断网、换设备改密码、重装系统的顺序。
+
+### 账号与密码
+
+- [网络钓鱼的辨识与防范](./phishing.md)：假登录页与鱼叉式钓鱼如何运作，更新、密码管理器、passkey、附件与邮件图片这几项防范，以及输入了密码之后的处理。
+- [密码管理器入门](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取舍，加上 TOTP、Passkey、硬件金钥。
+- [Asian Diceware 密语字典](./asian-diceware.md)：社区参考 EFF 做的 7776 字密语词表，混入亚洲外来语，教你怎么用骰子或安全随机数产生好记又够强的密语。
+- [什么是 passkey](./what-is-passkey.md)：存在密码管理器里的凭证，站上拿它当数据的钥匙。两种机制各靠什么、跟密语差在哪、绑域名与遗失的限制。
+- [邮件别名怎么用，以及它把信任交给谁](./email-alias.md)：转发服务、自有域名 catch-all 与加号子地址的差别，别名把往来记录集中到谁手上，以及哪些场合用得上、哪些场合接不上。
+
+### 消息与文件
+
 - [匿名通讯工具比较](./messaging-comparison.md)：Signal、SimpleX、Session、Briar、Matrix 的端对端加密、Metadata 与身分模型差异。
 - [Signal 的设置与群组管理](./signal-guide.md)：注册锁定、电话号码的显示、阅后即焚、通知与备份这几项值得调整的设置，以及大型群组的权限、管理员与群组规则。
 - [什么是 CryptPad](./what-is-cryptpad.md)：服务器读不到内容的在线协作办公套件，文档在浏览器端就完成加密，社区自建站点内建简体与正体中文界面。
-- [密码管理器入门](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取舍，加上 TOTP、Passkey、硬件金钥。
-- [Asian Diceware 密语字典](./asian-diceware.md)：社区参考 EFF 做的 7776 字密语词表，混入亚洲外来语，教你怎么用骰子或安全随机数产生好记又够强的密语。
 - [什么是 age](./what-is-age.md)：规范一页、密钥一行、没有选项的文件加密格式。怎么用、格式长什么样、跟 PGP 差在哪，以及站上的文件加密工具为什么选它。
-- [什么是 passkey](./what-is-passkey.md)：存在密码管理器里的凭证，站上拿它当数据的钥匙。两种机制各靠什么、跟密语差在哪、绑域名与遗失的限制。
-- [邮件别名怎么用，以及它把信任交给谁](./email-alias.md)：转发服务、自有域名 catch-all 与加号子地址的差别，别名把往来记录集中到谁手上，以及哪些场合用得上、哪些场合接不上。
+
+### 平台与日常服务
+
+- [社交平台的隐私设置](./social-media-settings.md)：LINE、Facebook、Instagram、Threads 与微信上决定同事、前任、家人与陌生人能不能找到你、看得到你什么的设置，以及 Facebook 社团的管理方式。
 - [RSS 订阅入门](./rss.md)：不必注册账号、按发布时间排列的网站追踪方式，阅读器如何挑选、本地与云端阅读器的取舍，以及经由 Tor 读取 onion 版本的 feed。
-- [加密货币的隐私光谱](./crypto-privacy-spectrum.md)：BTC、Monero、Zcash、稳定币的隐私差异与自管钱包、multisig。
 - [用 AI 工作时怎么避免数据外泄](./ai-privacy.md)：贴进去的内容去了哪里、消费版与企业版的分野、删除对话为什么不等于数据消失、你没有主动贴却也送出去的那些，以及境内服务的另一套框架。
+- [加密货币的隐私光谱](./crypto-privacy-spectrum.md)：BTC、Monero、Zcash、稳定币的隐私差异与自管钱包、multisig。

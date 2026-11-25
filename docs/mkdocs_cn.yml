@@ -24,22 +24,29 @@ nav:
       - guides/index.md
       - help/index.md
       - community/skill-level.md
+      # 概念、工具、场景三区在桌面版的侧边栏常驻展开，分组之前概念 13 篇加场景 16 篇整排
+      # 摊开，「指南」这一栏超过一个屏幕高。三区的组名都跟各自索引页的小标题是同一组字，
+      # 读者从侧边栏与从索引页看到同一套分法，tools/test_guides_nav_groups.mjs 比对两边。
       - !ENV [NAV_BASICS, "概念"]:
           - basics/index.md
-          - basics/internet-freedom.md
-          - basics/anonymity-vs-privacy.md
-          - basics/threat-model.md
-          - basics/metadata.md
-          - basics/platform-tracking.md
-          - basics/browser-fingerprinting.md
-          - basics/surveillance-capability.md
-          - basics/phone-surveillance.md
-          - basics/network-censorship.md
-          - basics/multiple-identities.md
-          - basics/payments-anonymity.md
-          - basics/e2ee.md
-          - basics/mistaken-for-anonymity.md
-      # 子分组沿用 tools/index.md 的四层分法，侧边栏与索引页看到的是同一套结构。
+          - "基本词汇与框架":
+              - basics/internet-freedom.md
+              - basics/anonymity-vs-privacy.md
+              - basics/threat-model.md
+              - basics/e2ee.md
+              - basics/mistaken-for-anonymity.md
+          - "数据留下的痕迹":
+              - basics/metadata.md
+              - basics/platform-tracking.md
+              - basics/browser-fingerprinting.md
+              - basics/payments-anonymity.md
+              - basics/multiple-identities.md
+          - "监控与封锁":
+              - basics/surveillance-capability.md
+              - basics/phone-surveillance.md
+              - basics/network-censorship.md
+      # 子分组沿用 tools/index.md 的小标题：连线、环境、观测三层各一组，日常隐私基本功
+      # 依该节底下的四个 ### 小标题拆成四组，17 篇挤在一组太长。
       # 改这里的分组时同步改那一页，不要各写各的。
       - !ENV [NAV_TOOLS, "工具"]:
           - tools/index.md
@@ -60,43 +67,51 @@ nav:
           - "观测层：审查的可验证记录":
               - tools/what-is-ooni.md
               - tools/ooni-run-v2.md
-          - "日常隐私基本功":
+          - "手机与设备":
               - tools/phone-privacy-settings.md
-              - tools/social-media-settings.md
               - tools/bluetooth-tracker.md
-              - tools/phishing.md
               - tools/device-encryption.md
               - tools/malware.md
+          - "账号与密码":
+              - tools/phishing.md
+              - tools/password-manager.md
+              - tools/asian-diceware.md
+              - tools/what-is-passkey.md
+              - tools/email-alias.md
+          - "消息与文件":
               - tools/messaging-comparison.md
               - tools/signal-guide.md
               - tools/what-is-cryptpad.md
-              - tools/password-manager.md
-              - tools/asian-diceware.md
               - tools/what-is-age.md
-              - tools/what-is-passkey.md
-              - tools/email-alias.md
+          - "平台与日常服务":
+              - tools/social-media-settings.md
               - tools/rss.md
-              - tools/crypto-privacy-spectrum.md
               - tools/ai-privacy.md
-      # 顺序跟着 scenarios/index.md 的清单走。
+              - tools/crypto-privacy-spectrum.md
+      # 分组与顺序跟着 scenarios/index.md 的 ### 小标题走。「共同基准」只有一篇，留在
+      # 分组外排在最前面，单页分组反而难扫。
       - !ENV [NAV_SCENARIOS, "场景"]:
           - scenarios/index.md
           - scenarios/everyday-baseline.md
-          - scenarios/journalist.md
-          - scenarios/activist.md
-          - scenarios/election-observer.md
-          - scenarios/nonprofit-anonymous-donation.md
-          - scenarios/lgbtq.md
-          - scenarios/domestic-violence.md
-          - scenarios/parents-youth.md
-          - scenarios/students.md
-          - scenarios/mainland-speech.md
-          - scenarios/singapore-malaysia-speech.md
-          - scenarios/asia-travel.md
-          - scenarios/travel-connectivity.md
-          - scenarios/travel-ai-briefing.md
-          - scenarios/shutdown.md
-          - scenarios/org-website-vulnerability.md
+          - "依你的角色":
+              - scenarios/journalist.md
+              - scenarios/activist.md
+              - scenarios/election-observer.md
+              - scenarios/nonprofit-anonymous-donation.md
+          - "依你的处境":
+              - scenarios/lgbtq.md
+              - scenarios/domestic-violence.md
+              - scenarios/parents-youth.md
+              - scenarios/students.md
+          - "依你在哪里发言":
+              - scenarios/mainland-speech.md
+              - scenarios/singapore-malaysia-speech.md
+          - "依移动与外部事件":
+              - scenarios/asia-travel.md
+              - scenarios/travel-connectivity.md
+              - scenarios/travel-ai-briefing.md
+              - scenarios/shutdown.md
+              - scenarios/org-website-vulnerability.md
   # taiwan/index.md 把法规那三篇分成「个资与身分」「金流」「制度与技术交界」，各自
   # 只有一篇。侧边栏做成三个单页分组只会更难扫，所以合并成「法规与制度」一组。
   - !ENV [NAV_TAIWAN, "在地脉络"]:

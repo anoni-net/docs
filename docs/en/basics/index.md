@@ -13,18 +13,27 @@ What we do publish, at the conceptual layer, is the framing that makes the rest 
 
 ## Articles
 
+### Vocabulary and frameworks
+
 - [Why networked freedom matters](./internet-freedom.md) — the East Asia and Southeast Asia regional framing, with anoni.net's three observation axes (connection layer, personal-data and identity layer, financial-flow layer).
 - [Anonymity, privacy, pseudonymity, and confidentiality](./anonymity-vs-privacy.md) — four words used interchangeably that protect different things; a single side-by-side comparison for picking the right tool, with Asia-Pacific examples.
-- [Metadata, and why it matters](./metadata.md) — the data about your communication (who, when, how often, where) that encryption does not hide, with the regional twist that real-name SIM regimes tie it to a legal identity.
 - [Threat modeling](./threat-model.md) — the five questions to ask before picking a tool, and why the adversary and the stakes shift as you move across the region. We point to EFF's canonical guide for the walkthrough.
+- [The Scope of End-to-End Encryption](./e2ee.md) — what transport, end-to-end and at-rest encryption each protect you from, and the records that remain once a conversation is encrypted.
+- [Networks Mistaken for Anonymity](./mistaken-for-anonymity.md) — why encrypted DNS, IPFS, and similar tools do not make you anonymous, and four questions for judging any tool.
+
+### The traces you leave
+
+- [Metadata, and why it matters](./metadata.md) — the data about your communication (who, when, how often, where) that encryption does not hide, with the regional twist that real-name SIM regimes tie it to a legal identity.
 - [How platforms collect your data, and the microphone question](./platform-tracking.md) — what social platforms actually collect, why targeted ads feel like eavesdropping, what the research says about apps recording your microphone, and why real-name registration makes an ad profile resolve to a named person here.
 - [A browser fingerprint cannot be cleared the way a cookie can](./browser-fingerprinting.md) — what the fingerprint is made of, the three reasons it resists a clean fix, and where Tor Browser, Brave, Safari, Firefox, and Chrome each stand by default.
+- [Why anonymous payments matter](./payments-anonymity.md) — a money trail ties to a real identity, a social graph, and a pattern of movement, and cash, the most mature anonymous payment, keeps narrowing.
+- [Maintaining multiple online identities](./multiple-identities.md) — how many layers you need, the tool boundary for each, how observers correlate accounts, and the long-haul maintenance and exit that most introductory material stops short of.
+
+### Surveillance and blocking
+
 - [What surveillance can actually do](./surveillance-capability.md) — a layer-by-layer account of what platforms, telecoms, states, and commercial spyware can and cannot currently do, each claim dated and sourced, with a table of which measure stops which layer.
 - [How phones are tracked and monitored](./phone-surveillance.md) — cell towers, fake base stations, Wi-Fi and Bluetooth, apps and ad IDs, plus sensors, biometrics, burner phones, and seized phones.
 - [How network blocking works and how to get around it](./network-censorship.md) — where blocking happens, how DNS, IP, domain-name, and protocol blocking work, checking with OONI Probe, and what encrypted DNS, VPNs, Tor, and messaging-app proxies can get around.
-- [Maintaining multiple online identities](./multiple-identities.md) — how many layers you need, the tool boundary for each, how observers correlate accounts, and the long-haul maintenance and exit that most introductory material stops short of.
-- [The Scope of End-to-End Encryption](./e2ee.md) — what transport, end-to-end and at-rest encryption each protect you from, and the records that remain once a conversation is encrypted.
-- [Networks Mistaken for Anonymity](./mistaken-for-anonymity.md) — why encrypted DNS, IPFS, and similar tools do not make you anonymous, and four questions for judging any tool.
 
 ## Where to go from here
 
