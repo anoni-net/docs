@@ -65,6 +65,8 @@ Hong Kong is a concrete instance of exactly this shift. WhatsApp, not LINE, is t
 
 [Signal](https://signal.org/){target="_blank"} is the consensus default for everyday encrypted messaging: a mature protocol, mainstream usability, and metadata minimized by design through sealed sender and private contact discovery. One-to-one chats use the Double Ratchet (a fresh key per message); groups use Sender Keys. The catch is the one above. Registration runs on a phone number, and the optional username changes only what your *contacts* see, not what the operator and carrier know[^1]. Use Signal where confidentiality is the goal and the phone-number anchor is acceptable: a long-term work channel, a first contact with a journalist who can take your username instead of your number.
 
+For Registration Lock, usernames, disappearing messages, and group settings, see [Signal settings and group management](./signal-guide.md).
+
 ### SimpleX
 
 [SimpleX Chat](https://simplex.chat/){target="_blank"} makes the most aggressive identifier choice on the list: there is no user identifier at all, not even a random one[^2]. Instead of accounts, it uses temporary per-connection message queues, each with its own disposable address, rotated over time. The relay sees a message arriving for a queue and nothing about who owns it. You add a contact by exchanging an invitation link or QR code, which is exactly the property the [LGBTQ+ guide](../scenarios/lgbtq.md) leans on when neither party wants to hand over a phone number. The cost is a learning curve (people raised on contact lists find "no account" disorienting), a smaller user base, and multi-device that you manage by moving keys yourself.

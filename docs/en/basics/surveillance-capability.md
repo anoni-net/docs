@@ -224,6 +224,7 @@ Both capability and law keep moving, and the facial-recognition legislative trac
 - [How platforms collect your data](./platform-tracking.md) — the full mechanics of the first layer
 - [Threat modeling](./threat-model.md) — turning these capability limits into your own judgment
 - [Why metadata matters](./metadata.md) — why communication records are often worth more than content
+- [How phones are tracked and monitored](./phone-surveillance.md) — cell towers, fake base stations, Wi-Fi, and apps, seen from the phone itself
 - [Networks mistaken for anonymity](mistaken-for-anonymity.md) — changing tools does not by itself reduce the number of observers
 - [VPN risks and how to choose one](../tools/vpn-guide.md) — what the VPN row in the table above does and does not buy you
 - [Four cases in Anthropic's September 2026 threat report involve Taiwan](../blog/posts/2026-anthropic-threat-report-taiwan.md) — an operation outside the four layers on this page: open-source profiling whose labor cost has dropped to what a single operator can sustain

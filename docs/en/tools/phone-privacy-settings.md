@@ -419,6 +419,7 @@ If you follow along and can't find an option, search for its name in Settings fi
 
 - [What an ordinary person should actually do](../scenarios/everyday-baseline.md) — why each step on this page matters, and what tier two and tier three add
 - [How platforms collect your data](../basics/platform-tracking.md) — what platforms collect beyond the advertising identifier and permissions
+- [How phones are tracked and monitored](../basics/phone-surveillance.md) — cell towers, fake base stations, Wi-Fi, and Bluetooth, which these settings cannot reach
 - [Phone numbers and connectivity abroad](../scenarios/travel-connectivity.md) — roaming, travel eSIMs, local SIM cards, and hotel networks
 - [My preparation checklist](../utils/checklist.md) — tick off what you've done and compare a year later
 

@@ -174,6 +174,21 @@
 	#線上訂閱
 	#跨境
 	#金流也會被拿來當審查工具
+/basics/phone-surveillance/
+	#App-與網頁洩漏的位置
+	#Wi-Fi-與藍牙
+	#一次性手機的限制
+	#一般電話與簡訊
+	#偽基地台
+	#基地台的定位
+	#廣告識別碼與行為資料
+	#惡意軟體與關機
+	#手機的位置追蹤與監控手法
+	#手機被扣押時的鑑識
+	#手機裡的元件與感測器
+	#本頁的來源與核對
+	#生物辨識解鎖
+	#相關閱讀
 /basics/platform-tracking/
 	#中國境內平台另有一套
 	#中成本要花一點時間
@@ -1363,6 +1378,17 @@
 	#Whats-next
 	#Why-anonymous-payments-matter
 	#Why-payment-is-a-distinct-dimension-of-metadata
+/en/basics/phone-surveillance/
+	#Apps-ads-and-web-browsing
+	#Calls-and-texts
+	#Cell-towers
+	#Fake-base-stations
+	#How-phones-are-tracked-and-monitored
+	#Malware-burners-and-seized-phones
+	#Sensors-and-biometrics
+	#Sources-and-review
+	#Where-to-go-from-here
+	#Wi-Fi-and-Bluetooth
 /en/basics/platform-tracking/
 	#Data-brokers-have-names-and-enforcement-records
 	#How-platforms-collect-your-data-and-the-microphone-question
@@ -2653,6 +2679,16 @@
 	#When-something-looks-wrong
 	#Where-the-site-lives-and-who-is-responsible-for-each-layer
 	#Where-to-get-help
+/en/scenarios/parents-youth/
+	#A-family-security-plan
+	#Getting-help-in-Taiwan
+	#Media-literacy-together
+	#Online-privacy-for-parents-and-youth
+	#Quick-wins-and-bigger-projects
+	#School-devices-and-software
+	#Sources-and-review
+	#What-parental-controls-can-and-cannot-do
+	#Where-to-go-from-here
 /en/scenarios/shutdown/
 	#Agree-who-does-what-with-the-people-you-live-with
 	#Agreeing-things-with-other-people-in-advance
@@ -3061,6 +3097,14 @@
 	#Thunderbird
 	#What-the-site-can-still-see
 	#anoninet-feeds
+/en/tools/signal-guide/
+	#Higher-risk-situations
+	#Recommended-settings
+	#Running-groups
+	#Setup-and-everyday-use
+	#Signal-settings-and-group-management
+	#Sources-and-review
+	#Where-to-go-from-here
 /en/tools/signal-proxy/
 	#After-you-have-a-link
 	#Assessing-the-risk-of-running-one
@@ -3961,6 +4005,21 @@
 	#組織網站遇到重大漏洞時的確認與應對
 	#給主機商或外包商的問題
 	#網站放在哪裡誰負責哪一層
+/scenarios/parents-youth/
+	#App遊戲與影音平台
+	#一起學習網路素養
+	#先想清楚要保護什麼
+	#孩子準備好了沒
+	#學校發的平板與軟體
+	#家長監護能做與不能做的
+	#家長與孩子的網路隱私
+	#幾分鐘就能做的設定
+	#本頁的來源與核對
+	#求助管道
+	#相關閱讀
+	#裝置與作業系統
+	#路由器
+	#願意多花時間的家長
 /scenarios/shutdown/
 	#一要談好的六件事
 	#三驗證的人必須先知道答案
@@ -4530,6 +4589,26 @@
 	#與社群平台電子報的差別
 	#訂閱的步驟
 	#閱讀器的選擇
+/tools/signal-guide/
+	#Signal-的設定與群組管理
+	#username-與電話號碼的顯示
+	#備份
+	#先知道技術的限制
+	#加入群組之前先檢查自己的個人資料
+	#安裝與註冊
+	#建議調整的設定
+	#情況比較敏感時
+	#日常使用
+	#本頁的來源與核對
+	#權限與管理員
+	#相關閱讀
+	#移除成員
+	#群組的建立與管理
+	#自動銷毀訊息
+	#註冊鎖
+	#通知與辨識成員
+	#通知顯示的內容
+	#邀請成員
 /tools/signal-proxy/
 	#Proxy-怎麼運作
 	#Signal-Proxy
@@ -5164,6 +5243,21 @@
 	#组织收款
 	#跨境
 	#金流也会被拿来当审查工具
+/zh-cn/basics/phone-surveillance/
+	#App-与网页泄漏的位置
+	#Wi-Fi-与蓝牙
+	#一次性手机的限制
+	#一般电话与短信
+	#伪基站
+	#基站的定位
+	#广告标识符与行为数据
+	#恶意软件与关机
+	#手机的位置追踪与监控手法
+	#手机被扣押时的取证
+	#手机里的组件与传感器
+	#本页的来源与核对
+	#生物辨识解锁
+	#相关阅读
 /zh-cn/basics/platform-tracking/
 	#中成本要花一点时间
 	#位置数据流到掮客手上的三条管道
@@ -6594,6 +6688,21 @@
 	#组织网站遇到重大漏洞时的确认与应对
 	#给主机商或外包商的问题
 	#网站放在哪里谁负责哪一层
+/zh-cn/scenarios/parents-youth/
+	#App游戏与影音平台
+	#一起学习网络素养
+	#先想清楚要保护什么
+	#几分钟就能做的设置
+	#学校发的平板与软件
+	#孩子准备好了没
+	#家长与孩子的网络隐私
+	#家长监护能做与不能做的
+	#愿意多花时间的家长
+	#本页的来源与核对
+	#求助管道
+	#相关阅读
+	#设备与操作系统
+	#路由器
 /zh-cn/scenarios/shutdown/
 	#一要谈好的六件事
 	#三验证的人必须先知道答案
@@ -7165,6 +7274,26 @@
 	#网站仍然看得到的部分
 	#订阅的步骤
 	#阅读器的选择
+/zh-cn/tools/signal-guide/
+	#Signal-的设置与群组管理
+	#username-与电话号码的显示
+	#先知道技术的限制
+	#加入群组之前先检查自己的个人资料
+	#备份
+	#安装与注册
+	#建议调整的设置
+	#情况比较敏感时
+	#日常使用
+	#本页的来源与核对
+	#权限与管理员
+	#注册锁
+	#相关阅读
+	#移除成员
+	#群组的创建与管理
+	#通知与辨识成员
+	#通知显示的内容
+	#邀请成员
+	#阅后即焚消息
 /zh-cn/tools/signal-proxy/
 	#Proxy-怎么运作
 	#Signal-Proxy

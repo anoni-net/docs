@@ -419,6 +419,7 @@ SIM 卡被拔走插到另一支手機，對方就能收到寄給你的簡訊驗�
 
 - [一般人平常該做到什麼](../scenarios/everyday-baseline.md)：本頁各步驟為什麼重要，以及第二層、第三層的做法
 - [社群平台怎麼收集你的資料](../basics/platform-tracking.md)：廣告識別碼與權限之外，平台還收集了什麼
+- [手機的位置追蹤與監控手法](../basics/phone-surveillance.md)：基地台、偽基地台、Wi-Fi 與藍牙這些設定管不到的追蹤
 - [出國的門號與網路連線](../scenarios/travel-connectivity.md)：漫遊、旅遊 eSIM、當地 SIM 卡與旅館網路
 - [我的準備清單](../utils/checklist.md)：把做過的項目勾起來，一年後回來對照
 

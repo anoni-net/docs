@@ -33,6 +33,7 @@ nav:
           - basics/platform-tracking.md
           - basics/browser-fingerprinting.md
           - basics/surveillance-capability.md
+          - basics/phone-surveillance.md
           - basics/multiple-identities.md
           - basics/payments-anonymity.md
           - basics/e2ee.md
@@ -65,6 +66,7 @@ nav:
               - tools/device-encryption.md
               - tools/malware.md
               - tools/messaging-comparison.md
+              - tools/signal-guide.md
               - tools/what-is-cryptpad.md
               - tools/password-manager.md
               - tools/asian-diceware.md
@@ -88,6 +90,7 @@ nav:
           - scenarios/travel-connectivity.md
           - scenarios/travel-ai-briefing.md
           - scenarios/domestic-violence.md
+          - scenarios/parents-youth.md
           - scenarios/election-observer.md
           - scenarios/shutdown.md
           - scenarios/org-website-vulnerability.md

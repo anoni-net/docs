@@ -50,6 +50,11 @@ The security level starts at **Standard**. Before raising it to **Safer** or **S
 
 ## iOS means Onion Browser
 
+!!! warning "iOS IP leak disclosed in August 2026"
+
+    In August 2026, researchers disclosed three WebKit behaviors (DNS prefetching, passkey-related validation requests, and WebTransport) that bypass a browser's proxy settings and let websites see your real IP address, including in Onion Browser. Onion Browser's Silver security level turns on WebKit Lockdown Mode and disables WebTransport, but the coverage does not describe a setting that avoids the other two[^webkit-leak]. EFF recommends avoiding Onion Browser on iOS for highly sensitive browsing until Apple fixes the issue[^ssd-mobile]. As of November 2026 we have not found confirmation of a fix from Apple. See our [iOS security update log](../changelog/ios.md) for patch status.
+
+
 Onion Browser is on the App Store, open source, with contributors including Mike Tigas, Benjamin Erhart and the Guardian Project. It is not a Tor Project product.
 
 - Traffic goes over Tor, `.onion` addresses open, and your ISP cannot see which site you reached
@@ -100,3 +105,5 @@ With the browser installed, the settings themselves are in [Tor Browser advanced
 [^2]: [Tor Browser for Android](https://support.torproject.org/mobile-tor/){target="_blank"} — Tor Project Support. "Tor Browser for Android is available on the Play Store, F-Droid, the Tor Project website and GetTor", requiring Android 5.0 or newer.
 [^3]: [How do I install Tor Browser for Android from F-Droid?](https://support.torproject.org/tormobile/tormobile-7/){target="_blank"} — Tor Project Support, including the step of adding the Guardian Project repository.
 [^4]: [How can I verify Tor Browser's signature?](https://support.torproject.org/tbb/how-to-verify-signature/){target="_blank"} — Tor Project Support, which covers Windows, macOS and GNU/Linux only.
+[^webkit-leak]: [Apple WebKit privacy leaks impact Tor, Psylo, and iCloud Private Relay](https://cyberinsider.com/apple-webkit-privacy-leaks-impact-tor-psylo-and-icloud-private-relay/){target="_blank"} — CyberInsider, 2026-08-05.
+[^ssd-mobile]: [How to: Use Tor on Android and iPhone](https://ssd.eff.org/module/how-to-use-tor-on-android-and-iphone){target="_blank"} — EFF Surveillance Self-Defense, note at the top of the page.

@@ -203,6 +203,7 @@ const CORE_PAGES_ZH = [
   "basics/payments-anonymity/",
   "basics/platform-tracking/",
   "basics/surveillance-capability/",
+  "basics/phone-surveillance/",
   "basics/multiple-identities/",
   "basics/browser-fingerprinting/",
   "basics/e2ee/",
@@ -220,6 +221,7 @@ const CORE_PAGES_ZH = [
   "tools/ooni-run-v2/",
   "tools/tails-vs-whonix-vs-qubes/",
   "tools/messaging-comparison/",
+  "tools/signal-guide/",
   "tools/password-manager/",
   "tools/crypto-privacy-spectrum/",
   "tools/encrypted-dns/",
@@ -262,6 +264,8 @@ const CORE_PAGES_ZH = [
   "scenarios/",
   "scenarios/asia-travel/",
   "scenarios/travel-ai-briefing/",
+  // 家長與孩子：讀者是任何家長，不指向受威脅的身分，跟旅行類同一個判準
+  "scenarios/parents-youth/",
   "scenarios/travel-connectivity/",
   // 斷網情境頁。收進來的理由跟旅行類同一個判準：讀者是「任何可能遇到中斷的人」，
   // 不是用第二人稱指導單一受威脅身分的準備清單。而且這一頁的使用時機就是網路已經
@@ -323,6 +327,7 @@ const CORE_PAGES_EN = [
   "basics/payments-anonymity/",
   "basics/platform-tracking/",
   "basics/surveillance-capability/",
+  "basics/phone-surveillance/",
   "basics/multiple-identities/",
   "basics/browser-fingerprinting/",
   "basics/e2ee/",
@@ -341,6 +346,7 @@ const CORE_PAGES_EN = [
   "tools/ooni-run-v2/",
   "tools/tails-vs-whonix-vs-qubes/",
   "tools/messaging-comparison/",
+  "tools/signal-guide/",
   "tools/password-manager/",
   "tools/asian-diceware/",
   "tools/crypto-privacy-spectrum/",
@@ -362,6 +368,8 @@ const CORE_PAGES_EN = [
   "scenarios/",
   "scenarios/asia-travel/",
   "scenarios/travel-ai-briefing/",
+  // 家長與孩子：讀者是任何家長，不指向受威脅的身分，跟旅行類同一個判準
+  "scenarios/parents-youth/",
   "scenarios/travel-connectivity/",
   // 斷網情境頁。收進來的理由跟旅行類同一個判準：讀者是「任何可能遇到中斷的人」，
   // 不是用第二人稱指導單一受威脅身分的準備清單。而且這一頁的使用時機就是網路已經

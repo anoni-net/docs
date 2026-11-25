@@ -52,6 +52,11 @@ Tor Project 的簽章驗證說明只涵蓋 Windows、macOS 與 Linux，沒有 An
 
 ## iOS 只有 Onion Browser
 
+!!! warning "2026 年 8 月公開的 iOS IP 洩漏問題"
+
+    研究人員在 2026 年 8 月公開 WebKit 的三個行為（DNS 預先擷取、passkey 相關的驗證請求、WebTransport）會繞過瀏覽器設定的代理直接連線，讓網站取得真實的 IP 位址，Onion Browser 也受影響。Onion Browser 的 Silver 安全等級會開啟 WebKit 的封閉模式、關掉 WebTransport，但另外兩個問題的報導沒有說明可以靠設定避開[^webkit-leak]。EFF 建議在 Apple 修補之前，不要在 iOS 上用 Onion Browser 做高度敏感的瀏覽[^ssd-mobile]。截至 2026 年 11 月，我們沒有查到 Apple 修補的確認，iOS 的更新狀態見 [iOS 安全更新](../changelog/ios.md)。
+
+
 Onion Browser 在 App Store 上架，開源，貢獻者包含 Mike Tigas、Benjamin Erhart 與 Guardian Project。它不是 Tor Project 的官方產品。
 
 - 流量走 Tor，`.onion` 位址打得開，你的網路業者看不到你連了哪個站
@@ -102,3 +107,5 @@ Onion Browser 在 App Store 上架，開源，貢獻者包含 Mike Tigas、Benja
 [^2]: [Tor Browser for Android](https://support.torproject.org/mobile-tor/){target="_blank"} - Tor Project Support。原文列出 the Play Store, F-Droid, the Tor Project website and GetTor，系統需求是 Android 5.0 以上。
 [^3]: [How do I install Tor Browser for Android from F-Droid?](https://support.torproject.org/tormobile/tormobile-7/){target="_blank"} - Tor Project Support，含加入 Guardian Project 儲存庫的完整流程。
 [^4]: [How can I verify Tor Browser's signature?](https://support.torproject.org/tbb/how-to-verify-signature/){target="_blank"} - Tor Project Support，該頁只涵蓋 Windows、macOS 與 GNU/Linux。
+[^webkit-leak]: [Apple WebKit privacy leaks impact Tor, Psylo, and iCloud Private Relay](https://cyberinsider.com/apple-webkit-privacy-leaks-impact-tor-psylo-and-icloud-private-relay/){target="_blank"} - CyberInsider，2026-08-05。
+[^ssd-mobile]: [How to: Use Tor on Android and iPhone](https://ssd.eff.org/module/how-to-use-tor-on-android-and-iphone){target="_blank"} - EFF Surveillance Self-Defense，頁首的提醒。
