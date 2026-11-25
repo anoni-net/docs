@@ -79,15 +79,15 @@ nav:
       - !ENV [NAV_SCENARIOS, "Scenarios"]:
           - scenarios/index.md
           - scenarios/everyday-baseline.md
+          - scenarios/journalist.md
+          - scenarios/activist.md
+          - scenarios/election-observer.md
+          - scenarios/nonprofit-anonymous-donation.md
           - scenarios/lgbtq.md
           - scenarios/domestic-violence.md
           - scenarios/parents-youth.md
-          - scenarios/journalist.md
-          - scenarios/activist.md
-          - scenarios/singapore-malaysia-speech.md
           - scenarios/mainland-speech.md
-          - scenarios/election-observer.md
-          - scenarios/nonprofit-anonymous-donation.md
+          - scenarios/singapore-malaysia-speech.md
           - scenarios/asia-travel.md
           - scenarios/travel-connectivity.md
           - scenarios/travel-ai-briefing.md

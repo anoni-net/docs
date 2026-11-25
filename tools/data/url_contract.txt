@@ -2481,9 +2481,14 @@
 /en/reports/interseclab-network-coup/index_8/ -> https://anoni.net/en/library/interseclab-network-coup/
 /en/scenarios/
 	#Available-now
+	#By-where-you-speak
+	#By-your-role
+	#By-your-situation
 	#How-to-suggest-a-scenario
 	#Other-paths
 	#Scenarios
+	#Shared-baseline
+	#Travel-and-external-events
 /en/scenarios/activist/
 	#Activists-and-protest-digital-safety
 	#Hong-Kong-a-sharper-risk-tier
@@ -3723,6 +3728,11 @@
 /reports/interseclab-network-coup/index_7/ -> https://anoni.net/library/interseclab-network-coup/chapter-7/
 /reports/interseclab-network-coup/index_8/ -> https://anoni.net/library/interseclab-network-coup/chapter-8/
 /scenarios/
+	#依你在哪裡發言
+	#依你的處境
+	#依你的角色
+	#依移動與外部事件
+	#共同基準
 	#場景層
 	#如何參與
 	#目前的場景文章
@@ -6408,6 +6418,11 @@
 /zh-cn/reports/interseclab-network-coup/index_7/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
 /zh-cn/reports/interseclab-network-coup/index_8/ -> https://anoni.net/zh-cn/library/interseclab-network-coup/
 /zh-cn/scenarios/
+	#依你在哪里发言
+	#依你的处境
+	#依你的角色
+	#依移动与外部事件
+	#共同基准
 	#场景层
 	#如何参与
 	#目前的场景文章
