@@ -69,7 +69,7 @@ iPhone 上的資料很多也同步到 iCloud。iCloud 預設使用「標準資�
 
 在一台裝置上開啟，整個帳號都會啟用，之後可以隨時關閉。管理式 Apple 帳號與兒童帳號不能使用[^apple-adp]。2025 年 2 月起，英國尚未開啟的使用者無法再開啟進階資料保護[^apple-uk]，EFF 的說明是為了回應英國政府要求加密後門[^ssd-icloud]。
 
-本節依 EFF Surveillance Self-Defense 的〈[How to: Encrypt Your iPhone](https://ssd.eff.org/module/how-encrypt-your-iphone){target="_blank"}〉（審閱日 2025-02-25，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"}）改寫，資料類別與步驟依 Apple 2026 年的說明更新，未經 EFF 審閱。
+本節依 EFF Surveillance Self-Defense 的〈[How to: Encrypt Your iPhone](https://ssd.eff.org/module/how-encrypt-your-iphone){target="_blank"}〉（審閱日 2025-02-25，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"}）改寫，資料類別與步驟依 Apple 2026 年的說明更新，與原文不同之處由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
 
 ## LINE 與 Signal 的在地脈絡 { #在地脈絡正體中文社群為何用-Signal-與-Matrix }
 

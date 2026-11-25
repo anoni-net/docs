@@ -9,7 +9,7 @@ SSD 是寫給一般讀者的個人數位安全指南，讀者與範圍跟文件�
 ## 改寫的慣例
 
 - 依 SSD 現行版的內容改寫，不逐句翻譯。截圖用正體中文介面重拍，步驟對照 Apple、Google、Microsoft 等廠商當下的官方說明
-- 每頁的「本頁的來源與核對」寫明 SSD 篇名、審閱日、CC BY 4.0、未經 EFF 審閱，以及跟原文不同的地方。只改寫一節的頁面，在該節末尾寫同樣的資訊
+- 每頁的「本頁的來源與核對」寫明 SSD 篇名、審閱日、CC BY 4.0、跟原文不同的地方，以及「與原文不同之處由匿名網路社群 anoni.net 負責，不代表 EFF 的立場」。只改寫一節的頁面，在該節末尾寫同樣的資訊
 - SSD 與文件站都是 CC BY 4.0，不需要另外取得授權。SSD 裡的介面截圖不屬於 EFF 原創，不沿用
 - zh-CN 可以參考 SSD 站上的簡體中文版（`ssd.eff.org/zh-hans/`），但簡中版有幾篇落後英文版，要對過英文版的審閱日。en 寫短版，連回 SSD 原文
 - 不要把「已經改寫」寫成「已經翻譯」，對 EFF 與讀者都是部分改寫
@@ -39,7 +39,19 @@ SSD 每篇指南的頁首都有 `Last Reviewed`，跟下表「改寫依據」那
 | `basics/phone-surveillance` | [Mobile Phones: Other Surveillance Techniques](https://ssd.eff.org/module/mobile-phones-malware) | 2024-11-05 | 2026-11 |
 | `scenarios/parents-youth` | [Online Privacy for Parents and Youth](https://ssd.eff.org/module/online-privacy-for-parents-and-youth) | 2026-10-21 | 2026-11 |
 
-`tools/tor-browser-mobile` 不是依 SSD 改寫，但依〈How to: Use Tor on Android and iPhone〉頁首的提醒，加上了 2026-08 公開的 iOS WebKit IP 洩漏警示（[anoni-net/docs#698](https://github.com/anoni-net/docs/pull/698)），Apple 修補之後要回頭更新或拿掉。
+`tools/tor-browser-mobile` 的 iOS 警示（[anoni-net/docs#698](https://github.com/anoni-net/docs/pull/698)）見下一節，Apple 修補之後要回頭更新或拿掉。
+
+## 補強的既有頁面
+
+這些頁面不是依 SSD 改寫，只有標明的段落依 SSD 補充，段落結尾寫了出處。SSD 改版時一併對照。
+
+| 文件站頁面 | 補充的段落 | SSD 指南 | 依據的審閱日 | 補充日期 |
+|---|---|---|---|---|
+| `tools/what-is-tor` | 使用 Tor Browser 的注意事項 | [How to: Use Tor](https://ssd.eff.org/module/how-to-use-tor) | 2025-01-28 | 2026-11 |
+| `tools/phone-privacy-settings` | 第 3 步的解鎖密碼、選做：關閉 2G、做完之後的備份 | [How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings)、[How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings) | 2025-06-23、2025-09-15 | 2026-11 |
+| `tools/password-manager` | 瀏覽器內建的密碼管理與自動填入、被要求交出密碼的情況、passphrase 字數、裝置保持乾淨、家庭方案 | [Choosing a Password Manager](https://ssd.eff.org/module/choosing-the-password-manager-that-s-right-for-you)、[Creating Strong Passwords](https://ssd.eff.org/module/creating-strong-passwords) | 2025-03-06、2023-08-18 | 2026-11 |
+| `tools/ai-privacy` | 代理型 AI 的存取範圍、暫時對話與分享連結、執法與政府調取、帳號的設定、混合式助理 | [Privacy Considerations with AI Tools](https://ssd.eff.org/module/privacy-considerations-with-ai-tools) | 2026-08-05 | 2026-11 |
+| `tools/tor-browser-mobile` | iOS 的 IP 洩漏警示 | [How to: Use Tor on Android and iPhone](https://ssd.eff.org/module/how-to-use-tor-on-android-and-iphone) 頁首的提醒 | 2026-08 的提醒 | 2026-11 |
 
 ## 全部篇目的對照
 
@@ -114,4 +126,4 @@ SSD 每篇指南的頁首都有 `Last Reviewed`，跟下表「改寫依據」那
 
 - 沒有專頁的兩篇：Facebook Groups: Reducing Risks、Privacy for Students
 - 「一節」的主題（雙因素驗證、金鑰驗證、參加抗議、WhatsApp 等），可以拿 SSD 的現行版回頭補強既有頁面
-- 2026-11 的差距盤點（見 [anoni-net/docs#696](https://github.com/anoni-net/docs/issues/696)）列出既有專頁相對 SSD 的缺口，優先的是 `tools/tor-browser-mobile`、`tools/phone-privacy-settings`、`tools/what-is-tor` 與 `tools/tor-browser-advanced`、`tools/password-manager`、`tools/ai-privacy`
+- 2026-11 的差距盤點（見 [anoni-net/docs#696](https://github.com/anoni-net/docs/issues/696)）列出既有專頁相對 SSD 的缺口，第三批補完了 Tor、手機設定、密碼管理器與 AI 隱私四頁。還沒處理的是同平台其他使用者的防範設定（`basics/platform-tracking`、`basics/multiple-identities`），以及從受審查讀者角度寫的網路審查總覽頁

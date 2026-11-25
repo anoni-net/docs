@@ -109,7 +109,7 @@ iPhone 的 App 要先取得你的同意才能讀取廣告識別碼，Android 預
 - 〈[Mobile Phones: Device-Bound Biometrics](https://ssd.eff.org/module/mobile-phones-device-bound-biometrics){target="_blank"}〉，審閱日 2026-10-28
 - 〈[Mobile Phones: Other Surveillance Techniques](https://ssd.eff.org/module/mobile-phones-malware){target="_blank"}〉，審閱日 2024-11-05
 
-改寫時加入台灣偽基地台的案例與 NCC 的提醒、Android 關閉 2G 的官方說明，美國的法院判決、計畫名稱與個案改為概述，並連到文件站既有的設定與情境頁。本頁未經 EFF 審閱，內容與原文不同之處由匿名網路社群 anoni.net 負責。
+改寫時加入台灣偽基地台的案例與 NCC 的提醒、Android 關閉 2G 的官方說明，美國的法院判決、計畫名稱與個案改為概述，並連到文件站既有的設定與情境頁。與原文不同之處由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
 
 ## 相關閱讀
 

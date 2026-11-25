@@ -58,7 +58,7 @@ For group design in organizing work, see [activists and protest digital safety](
 
 ## Sources and review
 
-Adapted from two guides in EFF's [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, both licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}: [How to: Use Signal](https://ssd.eff.org/module/how-to-use-signal){target="_blank"} (last reviewed 2026-06-15) and [Creating and Managing Signal Groups](https://ssd.eff.org/module/creating-and-managing-signal-groups){target="_blank"} (last reviewed 2026-04-24). We merged the settings into one list, generalized the US neighborhood example in the group guide, and linked our existing pages on phone numbers, safety numbers, and Signal Proxy. This page has not been reviewed by EFF, and anoni.net is responsible for any differences from the original.
+Adapted from two guides in EFF's [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, both licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}: [How to: Use Signal](https://ssd.eff.org/module/how-to-use-signal){target="_blank"} (last reviewed 2026-06-15) and [Creating and Managing Signal Groups](https://ssd.eff.org/module/creating-and-managing-signal-groups){target="_blank"} (last reviewed 2026-04-24). We merged the settings into one list, generalized the US neighborhood example in the group guide, and linked our existing pages on phone numbers, safety numbers, and Signal Proxy. anoni.net is responsible for any differences from the original, and this page does not represent EFF's views.
 
 ## Where to go from here
 

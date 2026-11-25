@@ -140,7 +140,7 @@ Signal 常被用在社運、互助與工會的組織工作。大型群組如果�
 - 〈[How to: Use Signal](https://ssd.eff.org/module/how-to-use-signal){target="_blank"}〉，審閱日 2026-06-15
 - 〈[Creating and Managing Signal Groups](https://ssd.eff.org/module/creating-and-managing-signal-groups){target="_blank"}〉，審閱日 2026-04-24
 
-改寫時把兩篇的設定合併成一份清單，把原文以美國社區為例的群組管理情境改成通則，並連到文件站既有的門號、安全碼與 Signal Proxy 說明。選單名稱依 Signal 官方 Android 與 iOS 原始碼裡的正體中文介面字串，Android 的無痕鍵盤沒有在字串檔裡找到對應的設定名稱，以原文描述為準。本頁未經 EFF 審閱，內容與原文不同之處由匿名網路社群 anoni.net 負責。
+改寫時把兩篇的設定合併成一份清單，把原文以美國社區為例的群組管理情境改成通則，並連到文件站既有的門號、安全碼與 Signal Proxy 說明。選單名稱依 Signal 官方 Android 與 iOS 原始碼裡的正體中文介面字串，Android 的無痕鍵盤沒有在字串檔裡找到對應的設定名稱，以原文描述為準。與原文不同之處由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
 
 選單名稱 2026 年 11 月核對。Signal 改版頻繁，照著做卻找不到選項，歡迎到社群的線上聊天室（[Matrix 公開 room](https://anoni.net/services/){target="_blank"}）告訴我們。
 

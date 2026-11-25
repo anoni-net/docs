@@ -160,6 +160,8 @@ icon: material/cellphone-cog
 
 設好鎖定之後，iPhone 與近年的 Android 手機都會加密手機裡的資料，手機遺失時，別人拆下儲存裝置也讀不出內容。當場被要求解鎖時，加密幫不上忙。
 
+回家之後，把解鎖密碼換成 8 到 12 個隨機字元的密碼，太短的密碼讓加密比較容易被暴力破解[^ssd-android]。臉部或指紋解鎖很方便，但被要求當場解鎖時比密碼更難拒絕，處境涉及執法單位時只用密碼解鎖（見 [手機的位置追蹤與監控手法](../basics/phone-surveillance.md) 的〈生物辨識解鎖〉）[^ssd-iphone]。
+
 ### 4. 位置權限
 
 住處、工作地點與常去的地方，從一週的位置紀錄就推得出來。多數 App 只需要在你使用時知道大略位置。精確位置可以準到幾公尺內，大略位置只知道你在哪一區，Google 的說明是約 3 平方公里的範圍[^google-location]，天氣、新聞、購物 App 用大略位置就夠了。
@@ -395,12 +397,31 @@ SIM 卡被拔走插到另一支手機，對方就能收到寄給你的簡訊驗�
 
     搜尋「SIM 卡鎖定」，開啟鎖定並輸入目前的 PIN 碼。
 
+## 選做：關閉 2G
+
+偽基地台會引誘附近的手機改連到假的 2G 基地台，藉此定位、攔截通訊或發送詐騙簡訊[^ssd-android]。台灣的 2G 網路已經關閉，關掉手機的 2G 不會影響一般使用，手機出現 2G 訊號反而代表可能遇到偽基地台（見 [手機的位置追蹤與監控手法](../basics/phone-surveillance.md) 的〈偽基地台〉）。出國到還有 2G 網路的地方，只有 2G 訊號時會無法連線。
+
+=== "iPhone"
+
+    我們沒有在 Apple 的說明裡找到單獨關閉 2G 的開關。開啟「封閉模式」會關閉 2G 與 3G 行動網路支援[^ios-lockdown-2g]，但也會限制很多其他功能，位置與取捨見下方的〈做完之後〉。
+
+=== "Android"
+
+    打開「設定」>「網路和網際網路」>「SIM 卡」，點你的電信業者，關閉允許 2G 的選項（英文介面是 Allow 2G，名稱依系統版本不同）。同一頁如果有要求加密連線的選項，也一併開啟[^ssd-android]。
+
+    選項是否出現，依系統版本、手機品牌與電信業者而定。其他品牌搜尋「2G」。
+
+=== "Samsung Galaxy"
+
+    搜尋「2G」，找到允許 2G 的選項就關閉。找不到的話，代表手機或電信業者沒有開放此設定。
+
 ## 做完之後
 
-十個步驟做完，手機出廠時預設開著的資料流向，大部分已經關上。接下來可以往三個方向走：
+十個步驟做完，手機出廠時預設開著的資料流向，大部分已經關上。接下來可以往四個方向走：
 
 - 一年回來看一次：權限清單、位置分享與登入中的裝置會慢慢長回來，[我的準備清單](../utils/checklist.md) 的「一年一次」收了這幾項
 - 要出國：門號、eSIM、旅館網路各自暴露什麼，見 [出國的門號與網路連線](../scenarios/travel-connectivity.md)
+- 備份：iPhone 的 iCloud 備份預設不是端對端加密，開啟「進階資料保護」才是（見 [端對端加密的保護範圍](../basics/e2ee.md) 的〈iCloud 的進階資料保護〉）。Android 備份到 Google 相簿的照片與影片也不是端對端加密[^ssd-android][^ssd-iphone]
 - 處境的風險比一般人高，例如可能被間諜軟體鎖定的記者與倡議工作者：iPhone 的「封閉模式」與 Android 的「進階保護」會關掉部分功能，換來更小的被攻擊範圍，一般人不需要開。要不要開，先從 [威脅模型如何建立](../basics/threat-model.md) 想清楚
 
 封閉模式在 iPhone 的「設定」>「隱私權與安全性」>「封閉模式」，開啟之後 App、網站與部分功能會受到嚴格限制[^ios-lockdown]。進階保護在 Android 16 以上的「設定」>「安全性與隱私權」，「其他設定」下方的「進階保護」，開啟「裝置保護」，需要先設好螢幕鎖定[^google-ap]。
@@ -412,6 +433,8 @@ SIM 卡被拔走插到另一支手機，對方就能收到寄給你的簡訊驗�
 - iPhone：iOS 26、iOS 27，依 Apple 的 iPhone 使用手冊與支援文章，2026 年 10 月核對
 - Android：Google Pixel 的 Android 16 與 Android 17，依 Google 的 Android 說明中心、Pixel 說明中心與 Android 開放原始碼專案，2026 年 10 月核對
 - Samsung Galaxy：One UI 8 以上，依 Samsung 的官方支援頁，2026 年 10 月核對。部分選單名稱在官方的台灣說明頁還查不到，這些步驟以搜尋關鍵字為主
+
+解鎖密碼長度、關閉 2G 與備份的建議，依 EFF Surveillance Self-Defense 的〈[How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"}〉（審閱日 2025-06-23）與〈[How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"}〉（審閱日 2025-09-15）補充，兩篇以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權，補充的內容由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
 
 照著做卻找不到選項，先用設定裡的搜尋欄位找名稱。仍然找不到的話，歡迎到社群的線上聊天室（[Matrix 公開 room](https://anoni.net/services/){target="_blank"}）告訴我們手機型號與系統版本，我們會查證後更新。
 
@@ -442,3 +465,6 @@ SIM 卡被拔走插到另一支手機，對方就能收到寄給你的簡訊驗�
 [^google-ap]: [使用 Android 進階保護功能提升裝置安全性](https://support.google.com/android/answer/16339980?hl=zh-Hant){target="_blank"} - Android 說明。
 [^samsung-theft]: [How to use security settings on your phone](https://www.samsung.com/uk/support/mobile-devices/how-to-use-security-settings/){target="_blank"} - Samsung 英國支援頁。
 [^samsung-puk]: [手機顯示需要輸入 PUK 碼](https://www.samsung.com/tw/support/mobile-devices/my-mobile-is-locked-could-you-tell-me-what-is-puk-code/){target="_blank"} - Samsung 台灣支援頁。
+[^ssd-android]: [How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"} - EFF Surveillance Self-Defense，審閱日 2025-06-23。
+[^ssd-iphone]: [How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"} - EFF Surveillance Self-Defense，審閱日 2025-09-15。
+[^ios-lockdown-2g]: [關於「封閉模式」](https://support.apple.com/zh-tw/105120){target="_blank"} - Apple 支援。開啟後 iPhone 與 iPad 會關閉 2G 和 3G 行動網路支援。

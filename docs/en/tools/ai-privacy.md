@@ -32,6 +32,14 @@ This one is widely misunderstood, and the published retention periods make the p
 
 The practical consequence: set the training controls when you open the account, not after you've pasted something sensitive.
 
+### Retention in temporary and private modes
+
+"Temporary," "incognito," or "private" chat modes generally promise that those chats won't train the model or appear in your history. The provider still stores them for a while: as of SSD's August 2026 review, Gemini kept Temporary Chats for 72 hours, and ChatGPT and Claude kept them for 30 days[^ssd-ai]. These periods change, so check the current figure. Because the data still sits on the provider's servers, don't treat these modes as private.
+
+### Shared chat links
+
+"Share chat" features usually create a public link, sometimes showing your name next to the conversation, and shared chats have turned up in search engine results more than once[^ssd-ai]. Don't share sensitive conversations this way. If someone needs to see part of one, de-identify it and send only the relevant passage over an end-to-end encrypted messenger.
+
 ### Human review is normal
 
 Quality evaluation and abuse detection generally involve people. Google states that a subset of conversations is reviewed by humans, including trained service providers, with chats disconnected from the account before review[^google]. The arrangement is reasonable; the assumption that "only a machine sees it" is not.
@@ -39,6 +47,10 @@ Quality evaluation and abuse detection generally involve people. Google states t
 ### Your employer can see the business-tier logs
 
 A business tier solves the vendor-training problem, not internal visibility. Administrators can typically access usage records, which is necessary for compliance and is a separate exposure for you. Using the company AI account for personal matters is the same category of mistake as using the company laptop for them.
+
+### Law enforcement requests
+
+Whatever an AI company stores can be requested by law enforcement like any other tech company's data: chat history, generated notes, transcripts, basic subscriber information, and identifiers. None of it has to be public for police to obtain it with a subpoena or search warrant. Chat transcripts have already appeared in court cases, and OpenAI and Anthropic, among others, publish transparency reports counting the requests they receive[^ssd-ai]. The request may go to the maker of the chatbot, the meeting transcriber, or the email summarizer, and when AI is embedded in another product it can be hard to tell which company holds the data. If law enforcement is in your [threat model](../basics/threat-model.md), list what each AI tool you use keeps. This applies to services outside mainland China as much as inside: the difference there is statutory retention, not whether stored data can be compelled.
 
 ## Services inside mainland China run on a different framework
 
@@ -79,8 +91,19 @@ The sections above assume you copy and paste. The more common leak is the materi
 - **Meeting transcription and summary tools** capture the whole conversation once enabled. Other people in the room may not have agreed to that.
 - **Predictive and rewriting features in keyboards** send what you type to a server.
 - **Assistants built into office software** take your documents, mail, and spreadsheets as default input.
+- **Software you've used for years** may have added AI along the way. Grammarly has become an AI-first tool that collects and stores much of what you type, and Adobe Acrobat's AI features can send the contents of private PDFs to the cloud[^ssd-ai].
 
 These are configuration problems rather than habit problems: check what an extension reads before installing, disable it on specific sites or repositories, and ask the room before turning on a transcriber. For organizations, this category deserves an inventory before anyone worries about staff pasting by hand.
+
+## Agentic AI tools
+
+Agentic AI combines a language model with external tools to carry out multi-step tasks on its own, such as researching and then booking a flight. Its privacy risks are larger, and different in kind, than those of AI confined to one app[^ssd-ai].
+
+- **Full device access**: Many agents need it to work, which means they can operate otherwise secure tools such as an end-to-end encrypted messenger or an offline notes app. End-to-end encryption protects messages in transit and on the server; once they are decrypted on your device, an agent with full access there can read them (see [what end-to-end encryption covers](../basics/e2ee.md)).
+- **More personal data in one place**: Agents that browse, shop, or book travel usually need your name, address, email, calendar, and card numbers, which raises the stakes of a breach or misuse. The agents themselves can have serious security flaws, as happened with OpenClaw[^ssd-ai].
+- **Pseudonyms erode**: For those reasons, an agent can undermine any anonymity or pseudonym practices you rely on, and upload information you never meant to send[^ssd-ai]. See [maintaining multiple online identities](../basics/multiple-identities.md).
+
+Guardrails around an agent are hard to set[^ssd-ai]. Keep conversations you need to protect, pseudonymous accounts, and source material off any device or account an agent can reach, and refuse permissions it doesn't need.
 
 ## What should not go in
 
@@ -96,6 +119,8 @@ These are configuration problems rather than habit problems: check what an exten
 De-identify: real names to labels, company names to sector descriptions, exact figures to magnitudes, precise dates to relative ones, addresses to city level, and strip endpoints, keys, and internal hostnames from code. Then reread what's left and check whether it still points back to the source. Note that de-identification treats the content, not the account: the provider still knows it is you asking, and the subject of the question is itself information.
 
 Paste only the passage the task needs, rather than the whole document.
+
+On the account itself: use guest or accountless modes where offered; otherwise use a unique password and two-step verification, switch off whatever data sharing and training settings you can, and turn off ad personalization on chatbots that show ads[^ssd-ai].
 
 And apply one test: if this text appeared in public search results tomorrow, what happens? If the answer is "nothing," paste it. If the answer is "that's a problem," de-identify first or handle it another way.
 
@@ -121,7 +146,9 @@ Actors compromised self-hosted LiteLLM deployments with prompt injection to extr
 
 Running a model on your own machine keeps content on the device, which suits genuinely sensitive work: client data, unpublished material, source-related content, or an environment where sending data abroad is itself the risk. The costs are real hardware requirements (memory is the practical ceiling), quality below the contemporary large commercial models, and setup you maintain yourself.
 
-Local is not automatically safe. The conversation log still sits on your machine and is exposed if the device is seized or compromised, so full-disk encryption and device hygiene still apply. Self-hosted or organization-hosted deployments sit between the two options, moving the trust boundary from an external vendor to your own operations team.
+Local is not automatically safe. The conversation log still sits on your machine and is exposed if the device is seized or compromised, so full-disk encryption and device hygiene still apply. A local model wired up to other tools on your computer or to web search can still leak data to third parties through them[^ssd-ai]. Self-hosted or organization-hosted deployments sit between the two options, moving the trust boundary from an external vendor to your own operations team.
+
+Assistants built into phones and computers, such as Apple's Siri and Gemini on Pixel phones, are usually hybrid: simple requests stay on the device and harder ones go to the cloud. The interface rarely says which is which. Check the vendor's documentation, and if that doesn't settle it, try the feature with the network off; if it still works, it probably runs on the device[^ssd-ai].
 
 ## The regional angle
 
@@ -150,6 +177,8 @@ Beyond leakage, wrong answers cause harm. Language models state incorrect things
 
 AI terms and settings change quickly. Verified 2026-08. The mechanisms and the question list are built to last longer than any specific policy; check each vendor's current pages before relying on a detail, and tell us via the [Community](https://anoni.net/en/join/){target="_blank"} page if something here no longer matches.
 
+The sections on agentic AI, temporary chats, shared links, law enforcement requests, account settings, and hybrid assistants are adapted from EFF Surveillance Self-Defense's [Privacy Considerations with AI Tools](https://ssd.eff.org/module/privacy-considerations-with-ai-tools){target="_blank"} (last reviewed 2026-08-05, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}). anoni.net is responsible for any differences from the original, and these sections do not represent EFF's views.
+
 ## Where to go from here
 
 - [Pre-departure digital safety](../scenarios/travel-ai-briefing.md) — prompts for briefing yourself on a destination, with the same caution about what you reveal in the query
@@ -163,3 +192,4 @@ AI terms and settings change quickly. Verified 2026-08. The mechanisms and the q
 [^openai]: [How your data is used to improve model performance](https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/){target="_blank"} — OpenAI, on the consumer/business distinction (ChatGPT Team, Enterprise, and the API excluded by default) and where the data controls sit. Verified 2026-08.
 [^anthropic]: [Anthropic Privacy Center](https://privacy.anthropic.com/){target="_blank"} — Anthropic, on commercial services not being used for training, consumer services being a user choice, and de-identified content persisting up to five years in training pipelines once opted in. Verified 2026-08.
 [^google]: [Gemini Apps Privacy Hub](https://support.google.com/gemini/answer/13594961){target="_blank"} — Google, on the scope of human review, disconnection from the account before review, and human-reviewed conversations being retained up to three years regardless of activity deletion. Verified 2026-08.
+[^ssd-ai]: [Privacy Considerations with AI Tools](https://ssd.eff.org/module/privacy-considerations-with-ai-tools){target="_blank"} — EFF Surveillance Self-Defense, last reviewed 2026-08-05.

@@ -160,6 +160,8 @@ If you already have an unlock passcode, don't change it now. If the phone has no
 
 Once a lock is set, iPhones and recent Android phones encrypt the data on the device, so if the phone is lost, nobody can read its contents by pulling out the storage. Encryption is no help when you are made to unlock the phone on the spot.
 
+Later, at home, switch to an unlock passcode of 8 to 12 random characters, since short passcodes make the encryption easier to brute-force[^ssd-android]. Face and fingerprint unlock are convenient but harder to refuse when someone demands you unlock on the spot, so use a passcode alone if law enforcement is part of your situation (see [how phones are tracked and monitored](../basics/phone-surveillance.md))[^ssd-iphone].
+
 ### 4. Location permissions
 
 A week of location history is enough to work out where you live, where you work, and where you go regularly. Most apps only need a rough location, and only while you are using them. Precise location can be accurate to within a few meters, while approximate location only shows which area you are in; Google describes it as an area of about 3 square kilometers[^google-location]. Weather, news, and shopping apps manage fine with approximate location.
@@ -395,12 +397,31 @@ Have two numbers ready before you start. The PIN unlocks the SIM card; enter it 
 
     Search Settings for `SIM lock`, turn the lock on, and enter the current PIN.
 
+## Disabling 2G (optional)
+
+Fake base stations lure nearby phones onto a fake 2G tower to locate them, intercept communications, or send scam texts[^ssd-android]. Where 2G has been shut down, as in Taiwan, disabling it costs nothing in everyday use, and a 2G signal on your phone suggests a fake base station (see [how phones are tracked and monitored](../basics/phone-surveillance.md)). Where 2G still exists, you may lose service in places that only have a 2G signal.
+
+=== "iPhone"
+
+    We have not found a separate 2G switch in Apple's documentation. Lockdown Mode turns off 2G and 3G cellular support[^ios-lockdown-2g] but also restricts many other features; see After the ten steps below.
+
+=== "Android"
+
+    Open **Settings** → **Network & internet** → **SIMs**, tap your carrier, and turn off **Allow 2G** (the name varies by version). If the same page offers an option to require encryption, turn it on too[^ssd-android].
+
+    Whether the option appears depends on the system version, phone maker, and carrier. On other brands, search for "2G".
+
+=== "Samsung Galaxy"
+
+    Search for "2G" and turn off the option that allows it. If nothing comes up, this phone or carrier does not offer the setting.
+
 ## After the ten steps
 
-With all ten steps done, most of the data flows a phone ships with turned on are now closed. From here, three directions:
+With all ten steps done, most of the data flows a phone ships with turned on are now closed. From here, four directions:
 
 - Come back once a year. Permissions, location sharing, and signed-in devices creep back over time, and the yearly review in [my preparation checklist](../utils/checklist.md) covers them
 - Traveling abroad: what your home number, a travel eSIM, and hotel Wi-Fi each expose is in [phone numbers and connectivity abroad](../scenarios/travel-connectivity.md)
+- Backups: iCloud backups on the iPhone are not end-to-end encrypted unless you turn on Advanced Data Protection (see [the scope of end-to-end encryption](../basics/e2ee.md)), and photos and videos Android backs up to Google Photos are not end-to-end encrypted either[^ssd-android][^ssd-iphone]
 - If your risk is higher than most people's, for example as a journalist or advocate who might be targeted with spyware, the iPhone's Lockdown Mode and Android's Advanced Protection switch off some features in exchange for a smaller attack surface. Most people don't need them. Work out whether you do with [threat modeling](../basics/threat-model.md) first
 
 Lockdown Mode is under **Settings** → **Privacy & Security** → **Lockdown Mode** on the iPhone; once it is on, apps, websites, and some features are strictly limited[^ios-lockdown]. Advanced Protection is on Android 16 and later under **Settings** → **Security & privacy** → **Other settings** → **Advanced Protection**, where you turn on **Device protection**. A screen lock has to be set first[^google-ap].
@@ -412,6 +433,8 @@ Phone systems change every year, and setting names and locations move with them.
 - iPhone: iOS 26 and iOS 27, from Apple's iPhone User Guide and support articles, checked October 2026
 - Android: Android 16 and Android 17 on Google Pixel, from Google's Android Help, Pixel Help, and the Android Open Source Project, checked October 2026
 - Samsung Galaxy: One UI 8 and later, from Samsung's official support pages, checked October 2026. Where a menu name couldn't be confirmed in official documentation, the step relies on search keywords
+
+The advice on passcode length, disabling 2G, and backups draws on EFF Surveillance Self-Defense's [How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"} (last reviewed 2025-06-23) and [How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"} (last reviewed 2025-09-15), both licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}. anoni.net is responsible for these additions, which do not represent EFF's views.
 
 If you follow along and can't find an option, search for its name in Settings first. If it still isn't there, tell us your phone model and system version in the community chat (the [public Matrix room](https://anoni.net/en/services/){target="_blank"}), and we'll check and update the page.
 
@@ -442,3 +465,6 @@ If you follow along and can't find an option, search for its name in Settings fi
 [^google-ap]: [Improve device security with Advanced Protection for Android](https://support.google.com/android/answer/16339980?hl=en){target="_blank"} - Android Help.
 [^samsung-theft]: [How to use security settings on your phone](https://www.samsung.com/uk/support/mobile-devices/how-to-use-security-settings/){target="_blank"} - Samsung UK support.
 [^samsung-puk]: [What is a PUK code?](https://www.samsung.com/africa_en/support/mobile-devices/what-is-a-puk-code/){target="_blank"} - Samsung Africa support.
+[^ssd-android]: [How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"} - EFF Surveillance Self-Defense, last reviewed 2025-06-23.
+[^ssd-iphone]: [How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"} - EFF Surveillance Self-Defense, last reviewed 2025-09-15.
+[^ios-lockdown-2g]: [About Lockdown Mode](https://support.apple.com/en-us/105120){target="_blank"} - Apple Support. 2G and 3G cellular support is turned off on iPhone and iPad.

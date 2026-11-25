@@ -69,7 +69,7 @@ iPhone 上的数据很多也同步到 iCloud。iCloud 默认使用「标准数�
 
 在一台设备上打开，整个账户都会启用，之后可以随时关闭。管理式 Apple 账户与儿童账户不能使用[^apple-adp]。2025 年 2 月起，英国尚未开启的用户无法再打开高级数据保护[^apple-uk]，EFF 的说明是为了回应英国政府要求加密后门[^ssd-icloud]。
 
-本节依 EFF Surveillance Self-Defense 的〈[How to: Encrypt Your iPhone](https://ssd.eff.org/module/how-encrypt-your-iphone){target="_blank"}〉（审阅日 2025-02-25，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"}）改写，数据类别与步骤依 Apple 2026 年的说明更新，未经 EFF 审阅。
+本节依 EFF Surveillance Self-Defense 的〈[How to: Encrypt Your iPhone](https://ssd.eff.org/module/how-encrypt-your-iphone){target="_blank"}〉（审阅日 2025-02-25，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"}）改写，数据类别与步骤依 Apple 2026 年的说明更新，与原文不同之处由匿名网络社区 anoni.net 负责，不代表 EFF 的立场。
 
 ## LINE 与 Signal 的在地脉络 { #在地脈絡正體中文社群為何用-Signal-與-Matrix }
 

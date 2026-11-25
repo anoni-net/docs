@@ -91,7 +91,7 @@ This page is adapted from [How to: Detect Bluetooth Trackers](https://ssd.eff.or
 - Since iOS 17.5, iPhone detects compatible third-party trackers. The original's body says automatic alerts cover only AirTags, with a note at the top about the May 2024 cross-platform standard. We describe the system requirements from Apple's documentation and keep EFF's test results for newly supported trackers
 - Some trackers reset to factory settings when disabled, so police can no longer look up the owner. The original does not mention this
 
-This page has not been reviewed by EFF, and anoni.net is responsible for any differences from the original.
+anoni.net is responsible for any differences from the original, and this page does not represent EFF's views.
 
 Steps were checked in November 2026 against Apple Support's "What to do if you get an alert that an AirTag, AirPods, Find My network accessory, or compatible Bluetooth location-tracking device is with you" (published 2026-09-24), the Android Help page "Find unknown trackers", and Samsung's US support page. If an option is not where this page says, let us know in our [public Matrix room](https://anoni.net/services/){target="_blank"} with your phone model and OS version.
 

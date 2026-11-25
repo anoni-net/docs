@@ -94,7 +94,7 @@ icon: material/hook
 
 ## 本页的来源与核对
 
-本页依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[How to: Avoid Phishing Attacks](https://ssd.eff.org/module/how-avoid-phishing-attacks){target="_blank"}〉改写，原文的审阅日是 2024-06-21，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"} 授权。改写时把例子换成台湾常见的情境，加入短信验证码、`165` 与「已经点了链接或输入了密码」一节，邮件图片的设置步骤依 Google 与 Apple 的官方说明更新。本页未经 EFF 审阅，内容与原文不同之处由匿名网络社区 anoni.net 负责。
+本页依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[How to: Avoid Phishing Attacks](https://ssd.eff.org/module/how-avoid-phishing-attacks){target="_blank"}〉改写，原文的审阅日是 2024-06-21，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"} 授权。改写时把例子换成台湾常见的情境，加入短信验证码、`165` 与「已经点了链接或输入了密码」一节，邮件图片的设置步骤依 Google 与 Apple 的官方说明更新。与原文不同之处由匿名网络社区 anoni.net 负责，不代表 EFF 的立场。
 
 设置步骤 2026 年 11 月依 Gmail 帮助中心与 iPhone 使用手册核对。照着做却找不到选项，欢迎到社区的在线聊天室（[Matrix 公开 room](https://anoni.net/services/){target="_blank"}）告诉我们。
 

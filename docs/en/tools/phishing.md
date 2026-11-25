@@ -43,7 +43,7 @@ From another device you trust, go directly to the real site and change the passw
 
 ## Sources and review
 
-Adapted from [How to: Avoid Phishing Attacks](https://ssd.eff.org/module/how-avoid-phishing-attacks){target="_blank"} in EFF's [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, last reviewed on 2024-06-21 and licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}. We replaced the examples with ones common in Taiwan and added the verification-code warning and the section on what to do after clicking. Settings were checked in November 2026 against Gmail Help and the iPhone User Guide. This page has not been reviewed by EFF, and anoni.net is responsible for any differences from the original.
+Adapted from [How to: Avoid Phishing Attacks](https://ssd.eff.org/module/how-avoid-phishing-attacks){target="_blank"} in EFF's [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, last reviewed on 2024-06-21 and licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}. We replaced the examples with ones common in Taiwan and added the verification-code warning and the section on what to do after clicking. Settings were checked in November 2026 against Gmail Help and the iPhone User Guide. anoni.net is responsible for any differences from the original, and this page does not represent EFF's views.
 
 ## Where to go from here
 

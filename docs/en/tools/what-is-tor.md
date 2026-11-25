@@ -84,6 +84,20 @@ Tor is not a general-purpose anonymity switch. Used in the wrong situation, it c
 - Peer-to-peer file sharing such as BitTorrent. Exit bandwidth is limited, this traffic damages capacity for everyone else, and it readily exposes your real IP anyway
 - The expectation that routing everything through Tor makes everything safer. Tor addresses anonymity at the connection layer, which is a different problem from browser fingerprinting, logged-in identity, and file [metadata](../basics/metadata.md)
 
+## Things to keep in mind with Tor Browser
+
+Perfect anonymity is generally out of reach, and knowing Tor's limits avoids most surprises[^ssd-tor]:
+
+- **Only browsing inside Tor Browser is anonymized**: other browsers and apps on the same computer still connect directly
+- **Downloaded documents**: files downloaded over Tor can contain internet-connected resources that load when you open them outside Tor, revealing your IP address. Be especially careful while Tor Browser is running
+- **Logging in and filling in forms**: a site can identify you, and may know you use Tor, once you log in or enter identifying details
+- **Others can see that you use Tor**: anyone who can watch your network traffic cannot see where you go, but can see that you use Tor. Use a bridge if that matters (see [Tor Browser advanced settings](./tor-browser-advanced.md))
+- **Do not add extensions**: Tor Browser already ships privacy protections, so ad or tracker blockers are unnecessary and extra extensions can make you stand out
+
+Download Tor Browser only from the [official site](https://www.torproject.org/download/){target="_blank"}, checking the address if you found it through a search engine, and stop if you are asked to accept a different HTTPS certificate. If you are unsure whether a download is genuine, [verify Tor Browser's signature](https://support.torproject.org/tbb/how-to-verify-signature/){target="_blank"}[^ssd-tor]. For phones, see [Tor on a phone](./tor-browser-mobile.md).
+
+This section is adapted from EFF Surveillance Self-Defense's [How to: Use Tor](https://ssd.eff.org/module/how-to-use-tor){target="_blank"} (last reviewed 2025-01-28, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}). anoni.net is responsible for any differences from the original, and this section does not represent EFF's views.
+
 ## Common questions
 
 ??? question "Is Tor or a VPN more anonymous?"
@@ -135,3 +149,4 @@ If you want to go further, [how to run a Tor relay](https://anoni.net/en/join/se
 - [:material-server-network: Tor Relay Setup Guide](https://anoni.net/en/join/setup-tor-relay/){target="_blank"}
 
 </div>
+[^ssd-tor]: [How to: Use Tor](https://ssd.eff.org/module/how-to-use-tor){target="_blank"} - EFF Surveillance Self-Defense, last reviewed 2025-01-28.
