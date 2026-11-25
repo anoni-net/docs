@@ -111,7 +111,7 @@ Windows 與 macOS 都內建免費的全碟加密，不必另外安裝軟體。�
 - 〈[How to: Encrypt Your Windows, Mac, or Linux Computer](https://ssd.eff.org/module/how-encrypt-your-windows-device){target="_blank"}〉，審閱日 2025-02-06
 - 〈[How to: Delete Your Computer's Data Securely](https://ssd.eff.org/module/how-delete-your-data-securely-windows){target="_blank"}〉，審閱日 2025-05-08
 
-改寫時加入手機的加密、出售裝置前的重置步驟，並依官方說明更新了 Windows 裝置加密的行為（使用 Microsoft 帳戶登入時自動開啟、復原金鑰存入帳戶）。原文 BleachBit 的逐步安裝說明沒有收錄。本頁未經 EFF 審閱，內容與原文不同之處由匿名網路社群 anoni.net 負責。
+改寫時加入手機的加密、出售裝置前的重置步驟，並依官方說明更新了 Windows 裝置加密的行為（使用 Microsoft 帳戶登入時自動開啟、復原金鑰存入帳戶）。原文 BleachBit 的逐步安裝說明沒有收錄。與原文不同之處由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
 
 設定步驟 2026 年 11 月依 Microsoft 支援、Apple 的 Mac 與 iPhone 使用手冊、Apple 支援、Android 說明中心與 Android 開放原始碼專案核對。照著做卻找不到選項，歡迎到社群的線上聊天室（[Matrix 公開 room](https://anoni.net/services/){target="_blank"}）告訴我們。
 

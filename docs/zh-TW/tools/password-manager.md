@@ -187,7 +187,7 @@ Tails 使用者：把 `.kdbx` 存進 Persistent Storage 並另外備份到加密
 
 ## 本頁的來源與核對
 
-本頁部分內容依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[Choosing a Password Manager](https://ssd.eff.org/module/choosing-the-password-manager-that-s-right-for-you){target="_blank"}〉（審閱日 2025-03-06）與〈[Creating Strong Passwords](https://ssd.eff.org/module/creating-strong-passwords){target="_blank"}〉（審閱日 2023-08-18）改寫，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權。依 SSD 補上的是主密碼至少 6 個字、間諜軟體會側錄主密碼、家庭方案的管理者、瀏覽器內建密碼管理的取捨與被要求交出密碼的情況。Google 裝置端加密的說明 2026 年 11 月依 Google 帳戶說明核對。本頁未經 EFF 審閱，內容與原文不同之處由匿名網路社群 anoni.net 負責。
+本頁部分內容依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[Choosing a Password Manager](https://ssd.eff.org/module/choosing-the-password-manager-that-s-right-for-you){target="_blank"}〉（審閱日 2025-03-06）與〈[Creating Strong Passwords](https://ssd.eff.org/module/creating-strong-passwords){target="_blank"}〉（審閱日 2023-08-18）改寫，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權。依 SSD 補上的是主密碼至少 6 個字、間諜軟體會側錄主密碼、家庭方案的管理者、瀏覽器內建密碼管理的取捨與被要求交出密碼的情況。Google 裝置端加密的說明 2026 年 11 月依 Google 帳戶說明核對。與原文不同之處由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
 
 ## :material-chat-question: 一同瞭解
 

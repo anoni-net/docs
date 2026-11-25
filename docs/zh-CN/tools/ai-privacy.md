@@ -220,7 +220,7 @@ AI 代理（agentic AI，结合语言模型与外部工具、自行完成多步�
 
 AI 服务的条款与设定界面变动很快，本页的查证日是 2026 年 8 月。上面描述的机制与提问清单设计成能撑久一点，具体的政策内容请以各家官方页当下的版本为准。发现本页描述与现况不符，欢迎到 [社区 Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 回报。
 
-本页的 AI 代理、临时对话、分享链接、执法调取、账号设定与混合式助理等段落，依 EFF Surveillance Self-Defense 的〈[Privacy Considerations with AI Tools](https://ssd.eff.org/module/privacy-considerations-with-ai-tools){target="_blank"}〉（审阅日 2026-08-05，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"}）改写，未经 EFF 审阅。
+本页的 AI 代理、临时对话、分享链接、执法调取、账号设定与混合式助理等段落，依 EFF Surveillance Self-Defense 的〈[Privacy Considerations with AI Tools](https://ssd.eff.org/module/privacy-considerations-with-ai-tools){target="_blank"}〉（审阅日 2026-08-05，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"}）改写，与原文不同之处由匿名网络社区 anoni.net 负责，不代表 EFF 的立场。
 
 ## 接下来
 

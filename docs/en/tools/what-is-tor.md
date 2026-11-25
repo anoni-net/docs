@@ -96,7 +96,7 @@ Perfect anonymity is generally out of reach, and knowing Tor's limits avoids mos
 
 Download Tor Browser only from the [official site](https://www.torproject.org/download/){target="_blank"}, checking the address if you found it through a search engine, and stop if you are asked to accept a different HTTPS certificate. If you are unsure whether a download is genuine, [verify Tor Browser's signature](https://support.torproject.org/tbb/how-to-verify-signature/){target="_blank"}[^ssd-tor]. For phones, see [Tor on a phone](./tor-browser-mobile.md).
 
-This section is adapted from EFF Surveillance Self-Defense's [How to: Use Tor](https://ssd.eff.org/module/how-to-use-tor){target="_blank"} (last reviewed 2025-01-28, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}) and has not been reviewed by EFF.
+This section is adapted from EFF Surveillance Self-Defense's [How to: Use Tor](https://ssd.eff.org/module/how-to-use-tor){target="_blank"} (last reviewed 2025-01-28, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}). anoni.net is responsible for any differences from the original, and this section does not represent EFF's views.
 
 ## Common questions
 

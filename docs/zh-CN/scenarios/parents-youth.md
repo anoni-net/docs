@@ -128,7 +128,7 @@ iPhone 与 iPad 的设置见 Apple 的〈设置家长控制管理孩子的 iPhon
 
 ## 本页的来源与核对
 
-本页依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[Online Privacy for Parents and Youth](https://ssd.eff.org/module/online-privacy-for-parents-and-youth){target="_blank"}〉改写，原文的审阅日是 2026-10-21，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"} 授权。改写时加入台湾的生生用平板、iWIN 与求助管道，原文列出的美国资源与各平台的设置链接没有收录，改连到文档站既有的设置页与 Apple、Google 的官方说明。本页未经 EFF 审阅，内容与原文不同之处由匿名网络社区 anoni.net 负责。
+本页依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[Online Privacy for Parents and Youth](https://ssd.eff.org/module/online-privacy-for-parents-and-youth){target="_blank"}〉改写，原文的审阅日是 2026-10-21，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"} 授权。改写时加入台湾的生生用平板、iWIN 与求助管道，原文列出的美国资源与各平台的设置链接没有收录，改连到文档站既有的设置页与 Apple、Google 的官方说明。与原文不同之处由匿名网络社区 anoni.net 负责，不代表 EFF 的立场。
 
 ## 相关阅读
 

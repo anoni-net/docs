@@ -177,7 +177,7 @@ Beyond leakage, wrong answers cause harm. Language models state incorrect things
 
 AI terms and settings change quickly. Verified 2026-08. The mechanisms and the question list are built to last longer than any specific policy; check each vendor's current pages before relying on a detail, and tell us via the [Community](https://anoni.net/en/join/){target="_blank"} page if something here no longer matches.
 
-The sections on agentic AI, temporary chats, shared links, law enforcement requests, account settings, and hybrid assistants are adapted from EFF Surveillance Self-Defense's [Privacy Considerations with AI Tools](https://ssd.eff.org/module/privacy-considerations-with-ai-tools){target="_blank"} (last reviewed 2026-08-05, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}). They have not been reviewed by EFF.
+The sections on agentic AI, temporary chats, shared links, law enforcement requests, account settings, and hybrid assistants are adapted from EFF Surveillance Self-Defense's [Privacy Considerations with AI Tools](https://ssd.eff.org/module/privacy-considerations-with-ai-tools){target="_blank"} (last reviewed 2026-08-05, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}). anoni.net is responsible for any differences from the original, and these sections do not represent EFF's views.
 
 ## Where to go from here
 

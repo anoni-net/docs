@@ -109,7 +109,7 @@ iPhone 的 App 要先取得你的同意才能读取广告标识符，Android 默
 - 〈[Mobile Phones: Device-Bound Biometrics](https://ssd.eff.org/module/mobile-phones-device-bound-biometrics){target="_blank"}〉，审阅日 2026-10-28
 - 〈[Mobile Phones: Other Surveillance Techniques](https://ssd.eff.org/module/mobile-phones-malware){target="_blank"}〉，审阅日 2024-11-05
 
-改写时加入台湾伪基站的案例与 NCC 的提醒、Android 关闭 2G 的官方说明，美国的法院判决、计划名称与个案改为概述，并连到文档站既有的设置与情境页。本页未经 EFF 审阅，内容与原文不同之处由匿名网络社区 anoni.net 负责。
+改写时加入台湾伪基站的案例与 NCC 的提醒、Android 关闭 2G 的官方说明，美国的法院判决、计划名称与个案改为概述，并连到文档站既有的设置与情境页。与原文不同之处由匿名网络社区 anoni.net 负责，不代表 EFF 的立场。
 
 ## 相关阅读
 

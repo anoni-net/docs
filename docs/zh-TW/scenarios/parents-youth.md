@@ -128,7 +128,7 @@ iPhone 與 iPad 的設定見 Apple 的〈設定分級保護控制管理來孩子
 
 ## 本頁的來源與核對
 
-本頁依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[Online Privacy for Parents and Youth](https://ssd.eff.org/module/online-privacy-for-parents-and-youth){target="_blank"}〉改寫，原文的審閱日是 2026-10-21，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權。改寫時加入台灣的生生用平板、iWIN 與求助管道，原文列出的美國資源與各平台的設定連結沒有收錄，改連到文件站既有的設定頁與 Apple、Google 的官方說明。本頁未經 EFF 審閱，內容與原文不同之處由匿名網路社群 anoni.net 負責。
+本頁依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[Online Privacy for Parents and Youth](https://ssd.eff.org/module/online-privacy-for-parents-and-youth){target="_blank"}〉改寫，原文的審閱日是 2026-10-21，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權。改寫時加入台灣的生生用平板、iWIN 與求助管道，原文列出的美國資源與各平台的設定連結沒有收錄，改連到文件站既有的設定頁與 Apple、Google 的官方說明。與原文不同之處由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
 
 ## 相關閱讀
 

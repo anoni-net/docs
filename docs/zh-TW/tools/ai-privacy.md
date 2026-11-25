@@ -220,7 +220,7 @@ DeepSeek、豆包、Kimi、通義等在中國境內提供的生成式 AI 服務�
 
 AI 服務的條款與設定介面變動很快，本頁的查證日是 2026 年 8 月。上面描述的機制與提問清單設計成能撐久一點，具體的政策內容請以各家官方頁當下的版本為準。發現本頁描述與現況不符，歡迎到 [社群 Matrix 公開 room](https://anoni.net/services/){target="_blank"} 回報。
 
-本頁的代理型 AI、暫時對話、分享連結、執法調取、帳號設定與混合式助理等段落，依 EFF Surveillance Self-Defense 的〈[Privacy Considerations with AI Tools](https://ssd.eff.org/module/privacy-considerations-with-ai-tools){target="_blank"}〉（審閱日 2026-08-05，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"}）改寫，未經 EFF 審閱。
+本頁的代理型 AI、暫時對話、分享連結、執法調取、帳號設定與混合式助理等段落，依 EFF Surveillance Self-Defense 的〈[Privacy Considerations with AI Tools](https://ssd.eff.org/module/privacy-considerations-with-ai-tools){target="_blank"}〉（審閱日 2026-08-05，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"}）改寫，與原文不同之處由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
 
 ## 接下來
 

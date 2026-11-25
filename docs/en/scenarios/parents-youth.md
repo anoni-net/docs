@@ -53,7 +53,7 @@ Harmful content online can be reported to [iWIN](https://i.win.org.tw/iWIN/){tar
 
 ## Sources and review
 
-Adapted from [Online Privacy for Parents and Youth](https://ssd.eff.org/module/online-privacy-for-parents-and-youth){target="_blank"} in EFF's [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, last reviewed on 2026-10-21 and licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}. We added Taiwan's school tablet program and support resources, and left out the US resources and per-platform setup links, which the original lists in full. This page has not been reviewed by EFF, and anoni.net is responsible for any differences from the original.
+Adapted from [Online Privacy for Parents and Youth](https://ssd.eff.org/module/online-privacy-for-parents-and-youth){target="_blank"} in EFF's [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, last reviewed on 2026-10-21 and licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}. We added Taiwan's school tablet program and support resources, and left out the US resources and per-platform setup links, which the original lists in full. anoni.net is responsible for any differences from the original, and this page does not represent EFF's views.
 
 ## Where to go from here
 

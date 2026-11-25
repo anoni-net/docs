@@ -440,7 +440,7 @@ SIM 卡被拔走插到另一部手机，对方就能收到发给你的短信验�
 - Android：Google Pixel 的 Android 16 与 Android 17，依 Google 的 Android 帮助中心、Pixel 帮助中心与 Android 开放源代码项目，2026 年 10 月核对。部分上层菜单的简体中文名称还没有核对到，那几步以描述为主
 - Samsung Galaxy：One UI 8 以上，依 Samsung 的官方支持页，2026 年 10 月核对。简体中文界面的菜单名称没有逐一核对，这个分页以描述与搜索关键词为主
 
-解锁密码长度、关闭 2G 与备份的建议，依 EFF Surveillance Self-Defense 的〈[How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"}〉（审阅日 2025-06-23）与〈[How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"}〉（审阅日 2025-09-15）补充，两篇以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"} 授权，补充的内容未经 EFF 审阅。
+解锁密码长度、关闭 2G 与备份的建议，依 EFF Surveillance Self-Defense 的〈[How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"}〉（审阅日 2025-06-23）与〈[How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"}〉（审阅日 2025-09-15）补充，两篇以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"} 授权，补充的内容由匿名网络社区 anoni.net 负责，不代表 EFF 的立场。
 
 照着做却找不到选项，先用设置里的搜索栏找名称。仍然找不到的话，欢迎到社区的线上聊天室（[Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"}）告诉我们手机型号、系统版本与销售地区，我们会查证后更新。
 

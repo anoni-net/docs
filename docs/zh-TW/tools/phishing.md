@@ -94,7 +94,7 @@ icon: material/hook
 
 ## 本頁的來源與核對
 
-本頁依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[How to: Avoid Phishing Attacks](https://ssd.eff.org/module/how-avoid-phishing-attacks){target="_blank"}〉改寫，原文的審閱日是 2024-06-21，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權。改寫時把例子換成台灣常見的情境，加入簡訊認證碼、`165` 與「已經點了連結或輸入了密碼」一節，郵件圖片的設定步驟依 Google 與 Apple 的官方說明更新。本頁未經 EFF 審閱，內容與原文不同之處由匿名網路社群 anoni.net 負責。
+本頁依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[How to: Avoid Phishing Attacks](https://ssd.eff.org/module/how-avoid-phishing-attacks){target="_blank"}〉改寫，原文的審閱日是 2024-06-21，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權。改寫時把例子換成台灣常見的情境，加入簡訊認證碼、`165` 與「已經點了連結或輸入了密碼」一節，郵件圖片的設定步驟依 Google 與 Apple 的官方說明更新。與原文不同之處由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
 
 設定步驟 2026 年 11 月依 Gmail 說明中心與 iPhone 使用手冊核對。照著做卻找不到選項，歡迎到社群的線上聊天室（[Matrix 公開 room](https://anoni.net/services/){target="_blank"}）告訴我們。
 

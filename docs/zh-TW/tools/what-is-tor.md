@@ -91,7 +91,7 @@ Tor 很難做到完全匿名，知道它的限制，可以避開多數意外[^ss
 
 下載 Tor Browser 只從[官方網站](https://www.torproject.org/zh-TW/download/){target="_blank"}，用搜尋引擎找的話先確認網址正確。下載過程中要求你接受其他的 HTTPS 憑證時，不要繼續。不確定下載的檔案是不是正版，可以照 Tor Project 的說明[驗證 Tor Browser 的簽章](https://support.torproject.org/zh-TW/tbb/how-to-verify-signature/){target="_blank"}[^ssd-tor]。手機版的安裝見 [手機上的 Tor](./tor-browser-mobile.md)。
 
-本節依 EFF Surveillance Self-Defense 的〈[How to: Use Tor](https://ssd.eff.org/module/how-to-use-tor){target="_blank"}〉（審閱日 2025-01-28，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"}）改寫，未經 EFF 審閱。
+本節依 EFF Surveillance Self-Defense 的〈[How to: Use Tor](https://ssd.eff.org/module/how-to-use-tor){target="_blank"}〉（審閱日 2025-01-28，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"}）改寫，與原文不同之處由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
 
 ## 常見問題
 

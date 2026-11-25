@@ -434,7 +434,7 @@ SIM 卡被拔走插到另一支手機，對方就能收到寄給你的簡訊驗�
 - Android：Google Pixel 的 Android 16 與 Android 17，依 Google 的 Android 說明中心、Pixel 說明中心與 Android 開放原始碼專案，2026 年 10 月核對
 - Samsung Galaxy：One UI 8 以上，依 Samsung 的官方支援頁，2026 年 10 月核對。部分選單名稱在官方的台灣說明頁還查不到，這些步驟以搜尋關鍵字為主
 
-解鎖密碼長度、關閉 2G 與備份的建議，依 EFF Surveillance Self-Defense 的〈[How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"}〉（審閱日 2025-06-23）與〈[How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"}〉（審閱日 2025-09-15）補充，兩篇以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權，補充的內容未經 EFF 審閱。
+解鎖密碼長度、關閉 2G 與備份的建議，依 EFF Surveillance Self-Defense 的〈[How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"}〉（審閱日 2025-06-23）與〈[How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"}〉（審閱日 2025-09-15）補充，兩篇以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權，補充的內容由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
 
 照著做卻找不到選項，先用設定裡的搜尋欄位找名稱。仍然找不到的話，歡迎到社群的線上聊天室（[Matrix 公開 room](https://anoni.net/services/){target="_blank"}）告訴我們手機型號與系統版本，我們會查證後更新。
 
