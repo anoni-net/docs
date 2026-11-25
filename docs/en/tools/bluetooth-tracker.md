@@ -8,7 +8,7 @@ icon: material/bluetooth
 
 Bluetooth trackers such as AirTag, Tile, and Samsung SmartTag are sold for finding keys and luggage. They are about the size of a coin, easy to hide in a bag lining, a coat pocket, or a car, and whoever planted one can follow its location on their own phone without the tracked person ever knowing.
 
-This page is adapted from EFF Surveillance Self-Defense's [How to: Detect Bluetooth Trackers](https://ssd.eff.org/module/how-to-detect-bluetooth-trackers){target="_blank"}, which walks through each step with screenshots. The EFF guide was last reviewed in July 2024, so this page updates the steps against Apple's and Google's 2026 documentation and adds resources for East Asia. What changed is listed under [Sources and review](#sources-and-review).
+This page is adapted from EFF Surveillance Self-Defense's [How to: Detect Bluetooth Trackers](https://ssd.eff.org/module/how-to-detect-bluetooth-trackers){target="_blank"}, which walks through each step with screenshots. The EFF guide was last reviewed in July 2024, so this page updates the steps against Apple's and Google's 2026 documentation and adds resources for East Asia. What changed is listed under [Sources and review](#Sources-and-review).
 
 !!! warning "If a partner, ex-partner, or family member may have planted it"
 
@@ -35,7 +35,7 @@ An AirTag owner sees only the current location, not a movement history. Tile and
 | Detects | AirTag, AirPods, Find My accessories, compatible Bluetooth trackers | AirTag, Find Hub-compatible trackers and headphones |
 | Needs something else | Samsung SmartTag, Tile | Samsung SmartTag, Tile |
 
-Neither Apple nor Google lists Samsung SmartTag or Tile as compatible[^apple][^google]. Phones sold in mainland China often ship without Google Play services and may not have Android's built-in alerts. In both cases, use AirGuard (see [manual scans](#manual-scans)). When the shared standard launched in May 2024, EFF found newly supported third-party trackers were not always detected, and still recommends AirGuard alongside the built-in alerts[^ssd].
+Neither Apple nor Google lists Samsung SmartTag or Tile as compatible[^apple][^google]. Phones sold in mainland China often ship without Google Play services and may not have Android's built-in alerts. In both cases, use AirGuard (see [manual scans](#Manual-scans)). When the shared standard launched in May 2024, EFF found newly supported third-party trackers were not always detected, and still recommends AirGuard alongside the built-in alerts[^ssd].
 
 Neither company publishes how long a tracker must travel with you before an alert appears. In EFF's testing it took up to 24 hours[^ssd]. Borrowed keys or a companion's tracker can also trigger an alert.
 

@@ -205,6 +205,7 @@ Google 圖片搜尋、Yandex、TinEye 都能用一張照片找出網路上其他
 - [威脅模型如何建立](./threat-model.md)：決定要幾層之前，先回答保護什麼、防誰、能付多少成本
 - [Metadata 是什麼，為什麼重要](./metadata.md)：時間、位置、裝置這些外圍資訊怎麼把兩層接起來
 - [社群平台怎麼收集你的資料](./platform-tracking.md)：平台側用哪些訊號把兩個帳號放進同一個檔案
+- [社群平台的隱私設定](../tools/social-media-settings.md)：LINE、Facebook、Instagram、Threads 上決定別人能不能找到你的設定
 - [為什麼匿名支付重要](./payments-anonymity.md)：金流是最難切乾淨的一條線
 - [LGBTQ+ 與性少數的匿名社交](../scenarios/lgbtq.md)：出櫃節奏下的分層實例，含交友 app 與家人共用裝置的處理
 - [在新加坡與馬來西亞的網路發言](../scenarios/singapore-malaysia-speech.md)：實名身分層讓分層更難維持的地方

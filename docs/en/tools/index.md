@@ -31,6 +31,7 @@ Introductions with the regional context built in, for readers new to a tool or w
 - [GrapheneOS](./grapheneos.md) — hardened, de-Googled Android, what it protects, and where the line at anonymity sits.
 - [Getting started with password managers](./password-manager.md) — the four categories, TOTP, passkeys, hardware keys, and the regional situations international guides skip.
 - [Phone privacy settings, step by step](./phone-privacy-settings.md) — work through your own phone in numbered steps, with matching paths for iPhone, Android, and Samsung Galaxy, in about thirty minutes.
+- [Social media privacy settings](./social-media-settings.md) — the LINE, Facebook, Instagram, and Threads settings that decide whether coworkers, exes, family, and strangers can find you and what they see, plus running a Facebook group.
 - [Detecting and handling Bluetooth trackers](./bluetooth-tracker.md) — what iPhone and Android detect when an AirTag or similar tracker is planted on you, how to find it after an alert, and why safety comes before disabling it.
 - [Recognizing and preventing phishing](./phishing.md) — how fake login pages and spearphishing work, the defenses worth setting up, and what to do after typing your password into the wrong site.
 - [Device encryption and data erasure](./device-encryption.md) — full-disk encryption on Windows, Mac, Linux, iPhone, and Android, where to keep the recovery key, and wiping a device before it leaves your hands.

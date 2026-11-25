@@ -47,6 +47,7 @@ icon: material/toolbox-outline
 想从通讯、协作、账号、金流、AI 使用先补齐基础的人，从这群开始。各篇主题各自独立，不必照顺序。
 
 - [手机隐私设置逐步指引](./phone-privacy-settings.md)：拿着自己的手机照编号调整，iPhone、Android、Samsung Galaxy 各有对照的路径，约三十分钟。
+- [社交平台的隐私设置](./social-media-settings.md)：LINE、Facebook、Instagram、Threads 与微信上决定同事、前任、家人与陌生人能不能找到你、看得到你什么的设置，以及 Facebook 社团的管理方式。
 - [蓝牙追踪器的检测与处理](./bluetooth-tracker.md)：AirTag 这类追踪器被偷放进包里或车上时，iPhone 与 Android 检测得到哪些、收到提醒后如何找出来，以及找到之后先顾安全再决定是否停用。
 - [网络钓鱼的辨识与防范](./phishing.md)：假登录页与鱼叉式钓鱼如何运作，更新、密码管理器、passkey、附件与邮件图片这几项防范，以及输入了密码之后的处理。
 - [设备加密与数据抹除](./device-encryption.md)：Windows、Mac、Linux、iPhone、Android 的全盘加密，恢复密钥存在哪里，以及出售或送出设备前的清除。

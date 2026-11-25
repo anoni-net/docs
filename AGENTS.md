@@ -129,7 +129,7 @@ Ubuntu 的 `sh` 是 dash，一進去就中止在 `Illegal option -o pipefail`。
 
 ### 依 EFF SSD 改寫的頁面
 
-`tools/bluetooth-tracker`、`tools/phishing`、`tools/device-encryption`、`tools/malware` 與 `basics/e2ee` 的「iCloud 的進階資料保護」依 EFF 的 Surveillance Self-Defense 改寫。改這幾頁、或要再依 SSD 改寫新的頁面之前，先讀 [`docs/SSD_SOURCES.md`](./docs/SSD_SOURCES.md)，那裡記了每篇 SSD 指南對應的頁面、改寫依據的審閱日、改寫的慣例，以及如何確認 SSD 改版。
+2026-11 起有十多頁依 EFF 的 Surveillance Self-Defense 改寫或補強，例如 `tools/bluetooth-tracker`、`tools/signal-guide`、`tools/social-media-settings`、`basics/phone-surveillance`、`basics/network-censorship`，完整清單在 [`docs/SSD_SOURCES.md`](./docs/SSD_SOURCES.md)。改這些頁面、或要再依 SSD 改寫新的頁面之前，先讀那一份，那裡記了每篇 SSD 指南對應的頁面、改寫依據的審閱日、改寫的慣例，以及如何確認 SSD 改版。
 
 ## 拆出去的工具
 

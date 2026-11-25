@@ -10,7 +10,7 @@ Whether someone who gets hold of your laptop or phone, whether a thief, roommate
 
 Encryption also matters for deletion. Emptying the trash leaves files on the disk, and on the solid-state drives (SSDs) in modern computers and phones, overwriting a single file reliably is close to impossible. For an SSD, encrypting first and then resetting the device is the practical way to delete[^ssd-del].
 
-This page combines and adapts two EFF Surveillance Self-Defense guides, [How to: Encrypt Your Windows, Mac, or Linux Computer](https://ssd.eff.org/module/how-encrypt-your-windows-device){target="_blank"} and [How to: Delete Your Computer's Data Securely](https://ssd.eff.org/module/how-delete-your-data-securely-windows){target="_blank"}, adds phones, and updates the steps against vendor documentation. Changes are listed under [Sources and review](#sources-and-review).
+This page combines and adapts two EFF Surveillance Self-Defense guides, [How to: Encrypt Your Windows, Mac, or Linux Computer](https://ssd.eff.org/module/how-encrypt-your-windows-device){target="_blank"} and [How to: Delete Your Computer's Data Securely](https://ssd.eff.org/module/how-delete-your-data-securely-windows){target="_blank"}, adds phones, and updates the steps against vendor documentation. Changes are listed under [Sources and review](#Sources-and-review).
 
 !!! tip "Short on time? Start here"
 

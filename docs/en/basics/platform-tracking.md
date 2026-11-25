@@ -85,6 +85,7 @@ Quitting is not an option for most people. If you keep using them, these adjustm
 ## What actually helps
 
 - **Turn off the advertising identifier**: On iPhone, Settings → Privacy & Security → Tracking, then switch off "Allow Apps to Request to Track"; apps that ask are then denied the IDFA[^apple-att]. On Android 12 and later you can delete the advertising ID outright, after which apps receive a string of zeros[^google-adid].
+- **Check what other users can see**: post audience, whether people can find you by phone number, and tagging. See [social media privacy settings](../tools/social-media-settings.md)
 - **Turn off contact upload**: This one protects your contacts, who never agreed to be uploaded.
 - **Turn off precise location** where an approximate one will do, and review which apps hold microphone, camera, location, and contacts permissions.
 - **Separate browsing contexts**, block third-party cookies and trackers, and avoid federated "sign in with" buttons, which join two records together.

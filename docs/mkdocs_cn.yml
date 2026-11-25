@@ -34,6 +34,7 @@ nav:
           - basics/browser-fingerprinting.md
           - basics/surveillance-capability.md
           - basics/phone-surveillance.md
+          - basics/network-censorship.md
           - basics/multiple-identities.md
           - basics/payments-anonymity.md
           - basics/e2ee.md
@@ -61,6 +62,7 @@ nav:
               - tools/ooni-run-v2.md
           - "日常隐私基本功":
               - tools/phone-privacy-settings.md
+              - tools/social-media-settings.md
               - tools/bluetooth-tracker.md
               - tools/phishing.md
               - tools/device-encryption.md

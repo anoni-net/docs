@@ -161,6 +161,25 @@
 	#金流是最黏的那條線
 	#長期維持才是難點
 	#頭像反查
+/basics/network-censorship/
+	#DNS-封鎖
+	#IP-封鎖
+	#Tor-Browser-與橋接
+	#VPN
+	#使用繞過工具本身的風險
+	#依網域名稱過濾-HTTPS-連線
+	#加密-DNS
+	#協定與連接埠封鎖
+	#封鎖發生在哪裡
+	#封鎖的手法
+	#斷網與限速
+	#本頁的來源與核對
+	#相關閱讀
+	#確認是否被封鎖
+	#網路封鎖的手法與繞過方式
+	#繞過的方法
+	#通訊軟體的-Proxy
+	#關鍵字過濾
 /basics/payments-anonymity/
 	#匿名支付的法規範圍
 	#接下來
@@ -1365,6 +1384,15 @@
 	#When-the-layers-are-already-mixed
 	#Where-to-go-from-here
 	#Who-needs-separate-identities
+/en/basics/network-censorship/
+	#Checking-whether-you-are-blocked
+	#How-blocking-works
+	#How-network-blocking-works-and-how-to-get-around-it
+	#Risks-of-circumvention
+	#Sources-and-review
+	#Ways-around-blocking
+	#Where-blocking-happens
+	#Where-to-go-from-here
 /en/basics/payments-anonymity/
 	#Anonymous-payment-and-the-law
 	#Cash-is-the-most-mature-anonymous-payment
@@ -3139,6 +3167,16 @@
 	#What-you-need
 	#Which-kinds-of-blocking-it-defeats
 	#Why-Signal-stops-working-in-some-places
+/en/tools/social-media-settings/
+	#Creating-an-account
+	#Facebook
+	#Facebook-groups
+	#Instagram-and-Threads
+	#LINE
+	#Privacy-is-a-team-sport
+	#Social-media-privacy-settings
+	#Sources-and-review
+	#Where-to-go-from-here
 /en/tools/tails-vs-whonix-vs-qubes/
 	#A-note-on-Apple-Silicon
 	#Tails-vs-Whonix-vs-Qubes
@@ -4658,6 +4696,27 @@
 	#維運紀律
 	#自己架一台
 	#需要準備的東西
+/tools/social-media-settings/
+	#Facebook
+	#Facebook-社團
+	#Instagram
+	#LINE
+	#Threads
+	#個人檔案與生日
+	#別人如何找到你
+	#密碼鎖定與其他裝置
+	#建立帳號時
+	#朋友之間的隱私
+	#本頁的來源與核對
+	#標註與上線狀態
+	#用-ID-或電話號碼加你
+	#相關閱讀
+	#社群平台的隱私設定
+	#社群用另一個個人檔案
+	#貼文的分享對象
+	#通訊錄與您可能認識的人
+	#隱藏封鎖與已讀
+	#非好友的訊息與群組邀請
 /tools/tails-vs-whonix-vs-qubes/
 	#Qubes-OS
 	#Tails
@@ -5260,6 +5319,25 @@
 	#身分退场
 	#金流是最黏的那条线
 	#长期维持才是难点
+/zh-cn/basics/network-censorship/
+	#DNS-封锁
+	#IP-封锁
+	#Tor-Browser-与网桥
+	#VPN
+	#使用绕过工具本身的风险
+	#依域名过滤-HTTPS-连接
+	#关键字过滤
+	#加密-DNS
+	#协议与端口封锁
+	#封锁发生在哪里
+	#封锁的手法
+	#断网与限速
+	#本页的来源与核对
+	#相关阅读
+	#确认是否被封锁
+	#绕过的方法
+	#网络封锁的手法与绕过方式
+	#通信软件的-Proxy
 /zh-cn/basics/payments-anonymity/
 	#为什么匿名支付重要
 	#为什么支付是-metadata-的独立维度
@@ -7358,6 +7436,33 @@
 	#自己架一台
 	#运维纪律
 	#需要准备的东西
+/zh-cn/tools/social-media-settings/
+	#Facebook
+	#Facebook-社团
+	#Instagram
+	#LINE
+	#Threads
+	#个人文件与生日
+	#仅聊天
+	#别人如何找到你
+	#密码锁定与其他设备
+	#建立账号时
+	#微信
+	#微信运动视频号与附近的人
+	#朋友之间的隐私
+	#朋友圈的可见范围
+	#本页的来源与核对
+	#标注与上线状态
+	#用-ID-或电话号码加你
+	#相关阅读
+	#社交平台的隐私设置
+	#社区用另一个个人文件
+	#群聊
+	#谁可以加你
+	#贴文的分享对象
+	#通讯录与您可能认识的人
+	#隐藏封锁与已读
+	#非好友的消息与群组邀请
 /zh-cn/tools/tails-vs-whonix-vs-qubes/
 	#Qubes-OS
 	#Tails

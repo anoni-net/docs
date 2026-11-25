@@ -27,7 +27,7 @@ icon: material/chat-question
 
 連線層的自由，在於你能不能連上想連的服務、用信任的工具，過程中不留下能識別到你的痕跡。
 
-這是社群既有工作的核心。我們長期推廣 [Tor](../tools/what-is-tor.md)（多層路由的匿名連線）、[Tails](../tools/what-is-tails.md)（即用即丟的隨身作業系統）、[OONI](../tools/what-is-ooni.md)（公開的網路審查觀測），也協助 [Tor Snowflake](../tools/tor-snowflake.md) 橋接、[OONI Run v2](../tools/ooni-run-v2.md) 客製化檢測等工具的在地推廣。長期工作線之一是 [Tor Relay 校園建立](https://anoni.net/join/roadmap-2026/){target="_blank"}，把台灣的頻寬納入全球 Tor 網路的基礎建設。在香港這類國安監控升高的地區，公開架設或宣傳 Tor relay 的政治風險與台灣不同，參與前要按在地處境分開評估。
+這是社群既有工作的核心。我們長期推廣 [Tor](../tools/what-is-tor.md)（多層路由的匿名連線）、[Tails](../tools/what-is-tails.md)（即用即丟的隨身作業系統）、[OONI](../tools/what-is-ooni.md)（公開的網路審查觀測），也協助 [Tor Snowflake](../tools/tor-snowflake.md) 橋接、[OONI Run v2](../tools/ooni-run-v2.md) 客製化檢測等工具的在地推廣。長期工作線之一是 [Tor Relay 校園建立](https://anoni.net/join/roadmap-2026/){target="_blank"}，把台灣的頻寬納入全球 Tor 網路的基礎建設。在香港這類國安監控升高的地區，公開架設或宣傳 Tor relay 的政治風險與台灣不同，參與前要按在地處境分開評估。遇到封鎖時的確認與繞過方式，見 [網路封鎖的手法與繞過方式](./network-censorship.md)。
 
 ### 個資與身分的自由
 
