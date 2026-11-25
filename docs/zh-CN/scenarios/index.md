@@ -15,30 +15,129 @@ icon: material/account-group-outline
 
     本分类多数文章目前以台湾的法规与求助资源脉络撰写，阅读各篇「台湾的脉络」一节时，请对照自身处境自行评估差异。香港在 2020 年《国安法》、2024 年《维护国家安全条例》后，社运、记者、捐款这类场景的法律风险层级远高于台湾，台湾列出的求助管道也多半不适用，[社运行动者的数字准备](./activist.md)、[记者保护消息来源](./journalist.md) 已补上「香港的脉络」小节。澳门的法规环境与香港不同，需另行评估。更多地区细节见 [出差与研讨会的数字准备](./asia-travel.md)。
 
-<figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/scenario-map-v5.zh-CN.svg"
-        alt="上方是共同基准「一般人平常该做到什么」，所有读者从这篇开始，其余各篇都假设你已经做到它。往下分成四组场景。第一组依你的角色：记者保护消息来源、社运行动者的数字准备、选举观察员的自保、倡议组织的匿名捐款渠道。第二组依你的处境：LGBTQ+ 与性少数的匿名社交、家暴受害者的数字准备。第三组依你在哪里发言：在中国大陆的公开平台传播信息、在新加坡与马来西亚的网络发言。第四组依移动与外部事件：出差与研讨会的数字准备、出国前用 AI 自助产生目的地概况、网络中断时的准备与应对、组织网站遇到重大漏洞时的应对。同一个人可能同时落在好几组，各篇之间互相引用，可以照需要挑着读。">
-    <figcaption>先做到共同基准，再依身份与处境往上走。看不懂某个名词时，回头看概念层与工具层补背景知识。各篇之间互相引用，照需要挑着读即可。</figcaption>
-</figure>
-
 ## 目前的场景文章
 
-- [一般人平常该做到什么](./everyday-baseline.md)：没有特殊身分的读者从这篇开始。三种对手的差别、依实际效果排序的做法、被高估的做法，以及什么时候该把标准拉高。
-- [记者保护消息来源](./journalist.md)：第一次接触、确认身分、引用层级与知情同意、不熟数字工具的来源、文件交换、多来源之间的区隔、报导刊出后的整理，含台湾、香港与中国大陆的脉络。
-- [社运行动者的数字准备](./activist.md)：动员前准备、行动现场、行动之后、跨组织协作的逐步建议。有固定会址、办公开聚会的教会、协会与 NGO，活动公开信息的披露节奏与跨国协作群组的成员验证两节同样适用。
-- [LGBTQ+ 与性少数的匿名社交](./lgbtq.md)：出柜节奏下的账号分层、交友 app 风险、家人控管下的本机痕迹、跨国旅行装置准备，以及华语地区（中国大陆、港澳、新马、台湾）的在地脉络。分层的通用设定见 [怎么维持多个网络身分](../basics/multiple-identities.md)。
-- [倡议组织的匿名捐款管道](./nonprofit-anonymous-donation.md)：给组织方与捐款人双角色的合法匿名捐款流程，含台湾公益劝募条例、政治献金法、VASP 与税务脉络。
-- [在中国大陆的公开平台传播信息](./mainland-speech.md)：实名与网号网证之后的环境、风险落在哪些层次、有效与安全为什么互相拉扯、跟身边的人怎么谈，以及已经有人在承担的存档工作。
-- [在新加坡与马来西亚的网络发言](./singapore-malaysia-speech.md)：新加坡与马来西亚各自的网络言论法条、实名身份体系怎么让假名失效、转发与留言同样算数，以及离散社区跨境发言的暴露面。
-- [出差与研讨会的数字准备（东亚与东南亚）](./asia-travel.md)：十四地的网络审查、VPN 与 Tor 可达性、SIM 实名与入境查机对照，搭配分层的行前准备清单，以及干净机、境外购卡与跨境携带的取舍。
-- [出国的手机号与网络连接](./travel-connectivity.md)：原号码漫游、旅游 eSIM、当地 SIM 卡各自由谁登记身份、流量从哪里出去，加上双卡手机、酒店 Wi-Fi 与旅行路由器。适用任何目的地，与「东亚东南亚出差」篇互补。
-- [出国前数字安全：用 AI 自助生成目的地概况](./travel-ai-briefing.md)：适用任何目的地，复制 prompt 问你自己的 AI，产出审查、法律、SIM、紧急联络的行前概况。与「东亚东南亚出差」篇互补。
-- [家暴受害者的数字准备](./domestic-violence.md)：技术滥用的实际管道、怎么在不惊动对方的前提下确认、账号与密码分离的顺序、保全证据的方式，以及离开前后这段最高风险期该怎么安排。含华语地区（中国大陆、港澳、新马、台湾）的在地脉络。
-- [家长与孩子的网络隐私](./parents-youth.md)：从家庭的安全计划出发，判断孩子准备好了没、一起学网络素养、路由器、设备与 App 三层家长控制的能与不能，以及学校发的平板。
-- [选举观察员的自保](./election-observer.md)：本地投开票所志愿者与跨境国际任务两种角色的准备强度差异、现场记录的 metadata 取舍、回报通道的设计、装置被搜查或扣押时的应对。含华语地区的在地脉络。
-- [网络中断时的准备与应对](./shutdown.md)：断网分四级的判断方式与各级还剩下的选项、中断前要完成的准备、跟人事先约好的事的完整程序、恢复连线那一刻的风险，以及台湾的海缆与电网脉络。
-- [组织网站遇到重大漏洞时的确认与应对](./org-website-vulnerability.md)：网站各层由谁更新、要问主机商或外包商的问题、版本号的判读、修补前后与发现异常时的做法，以 2026 年 10 月的 PHP 漏洞为例。
+先做到共同基准，再依身份与处境挑需要的那几篇。同一个人可能落在好几组，各篇之间互相引用。
 
+### 共同基准
+
+<div class="grid cards" markdown>
+
+- :material-account-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[一般人平常该做到什么](./everyday-baseline.md)**
+
+    ---
+
+    没有特殊身份的读者从这篇开始，其余各篇都假设你已经做到它。内容是三种对手的差别、依实际效果排序的做法，以及什么时候该把标准拉高。
+
+</div>
+
+### 依你的角色
+
+<div class="grid cards" markdown>
+
+- :material-newspaper-variant-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[记者保护消息来源](./journalist.md)**
+
+    ---
+
+    从第一次接触到报导刊出之后，消息来源在每个阶段需要的保护，含台湾、香港与中国大陆的脉络。
+
+- :material-bullhorn-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[社运行动者的数字准备](./activist.md)**
+
+    ---
+
+    动员前、行动现场、行动之后与跨组织协作的准备，有固定会址的教会、协会与 NGO 同样适用。
+
+- :material-vote-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[选举观察员的自保](./election-observer.md)**
+
+    ---
+
+    本地投开票所志愿者与跨境国际任务的准备差异、现场记录的 metadata，以及装置被扣押时的应对。
+
+- :material-hand-coin-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[倡议组织的匿名捐款管道](./nonprofit-anonymous-donation.md)**
+
+    ---
+
+    组织方与捐款人两边的合法匿名捐款流程，含公益劝募、政治献金、VASP 与税务的脉络。
+
+</div>
+
+### 依你的处境
+
+<div class="grid cards" markdown>
+
+- :material-heart-multiple-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[LGBTQ+ 与性少数的匿名社交](./lgbtq.md)**
+
+    ---
+
+    依出柜节奏分层的账号、交友 app 的风险、家人控管下的本机痕迹，以及华语地区的在地脉络。
+
+- :material-shield-account-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[家暴受害者的数字准备](./domestic-violence.md)**
+
+    ---
+
+    技术滥用的管道、不惊动对方的确认方式、证据保全，以及离开前后风险最高的那段期间。
+
+- :material-human-male-child:{ .lg .middle style="color: var(--cat-privacy);" } **[家长与孩子的网络隐私](./parents-youth.md)**
+
+    ---
+
+    从家庭的安全计划出发，家长控制在路由器、设备与 App 三层的能与不能，以及学校发的平板。
+
+</div>
+
+### 依你在哪里发言
+
+<div class="grid cards" markdown>
+
+- :material-broadcast:{ .lg .middle style="color: var(--cat-privacy);" } **[在中国大陆的公开平台传播信息](./mainland-speech.md)**
+
+    ---
+
+    实名与网号网证之后的环境、风险落在哪些层次，以及有效与安全之间的取舍。
+
+- :material-comment-alert-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[在新加坡与马来西亚的网络发言](./singapore-malaysia-speech.md)**
+
+    ---
+
+    两国的网络言论法条、让假名失效的实名身份体系，以及转发与留言同样算数。
+
+</div>
+
+### 依移动与外部事件
+
+<div class="grid cards" markdown>
+
+- :material-bag-suitcase-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[出差与研讨会的数字准备](./asia-travel.md)**
+
+    ---
+
+    东亚与东南亚十四地的网络审查、VPN 与 Tor 可达性、SIM 实名与入境查机对照。
+
+- :material-sim-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[出国的手机号与网络连接](./travel-connectivity.md)**
+
+    ---
+
+    原号码漫游、旅游 eSIM 与当地 SIM 卡各由谁登记身份、流量从哪里出去，适用任何目的地。
+
+- :material-shield-airplane-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[出国前用 AI 自助生成目的地概况](./travel-ai-briefing.md)**
+
+    ---
+
+    复制 prompt 问你自己的 AI，产出任何目的地的审查、法律、SIM 与紧急联络概况。
+
+- :material-lan-disconnect:{ .lg .middle style="color: var(--cat-privacy);" } **[网络中断时的准备与应对](./shutdown.md)**
+
+    ---
+
+    断网分四级的判断方式、中断前要完成的准备，以及恢复连线那一刻的风险。
+
+- :material-web-check:{ .lg .middle style="color: var(--cat-privacy);" } **[组织网站遇到重大漏洞时的确认与应对](./org-website-vulnerability.md)**
+
+    ---
+
+    网站各层由谁更新、要问主机商或外包商的问题，以及修补前后与发现异常时的做法。
+
+</div>
 ## 如何参与
 
 - **想看哪个场景**：到 [Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"} 表达需求，会帮助我们判断哪些主题优先写

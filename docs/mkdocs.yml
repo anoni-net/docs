@@ -82,16 +82,16 @@ nav:
           - scenarios/everyday-baseline.md
           - scenarios/journalist.md
           - scenarios/activist.md
-          - scenarios/lgbtq.md
+          - scenarios/election-observer.md
           - scenarios/nonprofit-anonymous-donation.md
+          - scenarios/lgbtq.md
+          - scenarios/domestic-violence.md
+          - scenarios/parents-youth.md
           - scenarios/mainland-speech.md
           - scenarios/singapore-malaysia-speech.md
           - scenarios/asia-travel.md
           - scenarios/travel-connectivity.md
           - scenarios/travel-ai-briefing.md
-          - scenarios/domestic-violence.md
-          - scenarios/parents-youth.md
-          - scenarios/election-observer.md
           - scenarios/shutdown.md
           - scenarios/org-website-vulnerability.md
   # taiwan/index.md 把法規那三篇分成「個資與身分」「金流」「制度與技術交界」，各自

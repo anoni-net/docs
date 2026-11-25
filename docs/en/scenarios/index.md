@@ -7,7 +7,7 @@ icon: material/account-group-outline
 
 # :material-account-group-outline: Scenarios
 
-Tools are neither good nor bad in the abstract. Their value depends on whether they map to a specific situation, threat model, and set of people the writer cares about. The scenarios in this section are written for readers whose situations sit across, between, or in the shadow of Sinophone Asia-Pacific jurisdictions — diaspora, cross-border travelers, people with family in less open environments, and people moving across the region for work, study, or refuge.
+Tools are neither good nor bad in the abstract. Their value depends on whether they map to a specific situation, threat model, and set of people the writer cares about. The scenarios in this section are written for readers whose situations sit across, between, or in the shadow of Sinophone Asia-Pacific jurisdictions: diaspora, cross-border travelers, people with family in less open environments, and people moving across the region for work, study, or refuge.
 
 Scenarios connect the [conceptual frame](../basics/internet-freedom.md) and the [regional observatory](../regional/index.md) to specific lived practice.
 
@@ -17,30 +17,129 @@ If none of them matches your situation, [what an ordinary person should actually
 
     Most of the scenarios below default to Taiwan or general Sinophone Asia-Pacific examples. Read that framing as a floor, not a ceiling, for Hong Kong. Since the 2020 National Security Law and the 2024 Safeguarding National Security Ordinance, national-security offenses carry sentences measured in years rather than fines, national-security police can seize and forensically examine a device under warrant, and the local civil-society organizations that once absorbed this kind of risk have largely dissolved since 2021. Where a scenario below assumes a functioning local NGO safety net, that assumption often no longer holds; the [activists](./activist.md) and [journalists](./journalist.md) pages route Hong Kong readers to international organizations instead. Macau's environment differs again and is comparatively under-documented here.
 
-<figure markdown="span">
-    <img class="diagram-tall" src="https://assets.anoni.net/diagrams/scenario-map-v5.en.svg"
-        alt="At the top sits the shared baseline, what an ordinary person should have in place, which every reader starts from and which every other article assumes. Below it the scenarios split into four groups. The first goes by your role: journalists protecting sources, activists preparing for mobilisation, election observers protecting themselves, and advocacy organisations building anonymous donation channels. The second goes by your situation: anonymous socialising for LGBTQ+ people, and digital preparation for survivors of domestic violence. The third goes by where you speak: publishing on mainland Chinese platforms, and posting online in Singapore and Malaysia. The fourth goes by travel and external events: preparing for business trips and conferences, generating a destination briefing with AI before you go, preparing for network shutdowns, and responding when a critical flaw hits your organisation's website. One person can fall into several groups at once, and the articles cross-reference each other.">
-    <figcaption>Start from the shared baseline, then move up by role and situation. No tool is good or bad on its own. What matters is whether it answers a specific situation and threat. Each article pairs its advice with the tools and settings it relies on. When a term is unfamiliar, go back to the concepts and tools sections for the background. The articles cross-reference each other, so read what you need.</figcaption>
-</figure>
-
 ## :material-check-circle-outline: Available now
 
-- [What an ordinary person should actually do](./everyday-baseline.md) — start here if none of the roles below is yours. Three kinds of adversary and why they need different answers, the common advice ordered by how much it actually blocks, what is overrated, and the triggers that mean you should move to one of the pages below.
-- [LGBTQ+ and sexual minorities — anonymous social life across the Sinophone region](./lgbtq.md) — account layering paced to disclosure, dating-app risk, family-controlled device traces, cross-border travel preparation, and a full regional context section covering Mainland China, Hong Kong & Macau, Singapore, Malaysia, Taiwan, and the diaspora. The general layering setup is in [maintaining multiple online identities](../basics/multiple-identities.md).
-- [Domestic violence and tech-enabled abuse](./domestic-violence.md) — how abusers use shared accounts, location tracking, and stalkerware, how to check and respond without escalating, and why leaving is the highest-risk moment; written for survivors and the people helping them, with regional helplines.
-- [Online privacy for parents and youth](./parents-youth.md) — a family security plan, media literacy, what parental controls can and cannot do, and school-issued devices.
-- [Journalists and source protection](./journalist.md) — the source-protection lifecycle and why communication metadata can burn a source even when content is encrypted; consent and what a source actually agreed to, sources who can't use the standard tools, and keeping multiple sources apart from each other; concise, routing depth to Freedom of the Press Foundation and EFF, with the regional angle of sources inside less open jurisdictions including mainland China.
-- [Activists and protest digital safety](./activist.md) — a brief regional companion to EFF's protest guide: real-name SIM, border device searches, network-level observation, coordination metadata, and pre-event venue detail. The last two apply equally to churches, associations, and anything else with a fixed meeting place.
-- [Posting on mainland Chinese platforms](./mainland-speech.md) — the environment after real-name registration and the 2025 national Cyberspace ID, why reach and safety pull against each other, where the risk lands (including group administrators and onward forwarders), and the archiving work already carried by CDT, GreatFire, and Citizen Lab.
-- [Speaking online from Singapore and Malaysia](./singapore-malaysia-speech.md) — the Singapore–Malaysia online-speech laws (POFMA, FICA, CMA Section 233, sedition) and real-name identity layers, and how to reduce legal and identification exposure, for the Sinophone community and diaspora.
-- [Election observer self-protection](./election-observer.md) — the individual operational-security layer that org-level guidance from GNDEM, NDI, and ANFREL leaves open: device prep, secure reporting, seized-device exposure, harassment, and cross-border accreditation.
-- [Cross-border travel and device searches in Asia](./asia-travel.md) — general device-minimization OPSEC plus Asia-specific border-search context and the burner question (whether you need one, whether buying abroad buys anonymity, and what changes when you bring it home), because the canonical English guide describes only US law and misleads travelers in Asia.
-- [Phone numbers and connectivity abroad](./travel-connectivity.md) — roaming on your home number, a travel eSIM, or a local SIM card: who registers your identity and where your traffic exits, plus dual-SIM phones, hotel Wi-Fi, and travel routers. Works for any destination and complements the Asia border page.
-- [Pre-departure digital safety — brief yourself with AI prompts](./travel-ai-briefing.md) — copy-paste prompts you feed to your own AI to get a destination's censorship, legal, SIM, and emergency-contact picture before you travel; works for any country, and no query reaches us.
-- [Preparing for and responding to a network shutdown](./shutdown.md) — four levels of outage and how to tell them apart, what to finish beforehand, the full process for agreeing arrangements with other people, the risks in the moment connectivity returns, and Taiwan's undersea cable and grid context.
-- [Checking and responding to a critical vulnerability on your organisation's website](./org-website-vulnerability.md) — who updates each layer of the site, the questions to put to your host or contractor, how to read version numbers, and what to do before and after patching and when something looks wrong, using the October 2026 PHP vulnerabilities as the example.
-- [Anonymous donation channels for advocacy organizations](./nonprofit-anonymous-donation.md) — a working design for legally anonymous giving that protects donors while keeping the organization accountable, for both organizers and donors, with Sinophone Asia-Pacific banking, crypto, and cross-border context.
+Start from the shared baseline, then pick the pages that match your role and situation. One person can fall into several groups, and the articles cross-reference each other.
 
+### Shared baseline
+
+<div class="grid cards" markdown>
+
+- :material-account-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[What an ordinary person should actually do](./everyday-baseline.md)**
+
+    ---
+
+    Start here if none of the roles below is yours. Every other page assumes you have done this one. Three kinds of adversary, the common advice ordered by how much it actually blocks, and when to raise the bar.
+
+</div>
+
+### By your role
+
+<div class="grid cards" markdown>
+
+- :material-newspaper-variant-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[Journalists and source protection](./journalist.md)**
+
+    ---
+
+    What a source needs at each stage, from first contact to after publication, including sources inside mainland China.
+
+- :material-bullhorn-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[Activists and protest digital safety](./activist.md)**
+
+    ---
+
+    A regional companion to EFF's protest guide: real-name SIMs, border device searches, coordination metadata, and venue details.
+
+- :material-vote-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[Election observer self-protection](./election-observer.md)**
+
+    ---
+
+    Device prep, secure reporting, seized-device exposure, harassment, and cross-border accreditation.
+
+- :material-hand-coin-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[Anonymous donation channels for advocacy organizations](./nonprofit-anonymous-donation.md)**
+
+    ---
+
+    Legally anonymous giving that protects donors and keeps the organization accountable, with regional banking and crypto context.
+
+</div>
+
+### By your situation
+
+<div class="grid cards" markdown>
+
+- :material-heart-multiple-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[LGBTQ+ anonymous social life across the Sinophone region](./lgbtq.md)**
+
+    ---
+
+    Account layering paced to disclosure, dating-app risk, family-controlled device traces, and regional context.
+
+- :material-shield-account-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[Domestic violence and tech-enabled abuse](./domestic-violence.md)**
+
+    ---
+
+    Shared accounts, location tracking, and stalkerware, how to check without escalating, and why leaving is the riskiest moment.
+
+- :material-human-male-child:{ .lg .middle style="color: var(--cat-privacy);" } **[Online privacy for parents and youth](./parents-youth.md)**
+
+    ---
+
+    A family security plan, media literacy, what parental controls can and cannot do, and school-issued devices.
+
+</div>
+
+### By where you speak
+
+<div class="grid cards" markdown>
+
+- :material-broadcast:{ .lg .middle style="color: var(--cat-privacy);" } **[Posting on mainland Chinese platforms](./mainland-speech.md)**
+
+    ---
+
+    Real-name registration and the national Cyberspace ID, where the risk lands, and why reach and safety pull against each other.
+
+- :material-comment-alert-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[Speaking online from Singapore and Malaysia](./singapore-malaysia-speech.md)**
+
+    ---
+
+    POFMA, FICA, CMA Section 233, and sedition law, real-name identity layers, and how to reduce exposure.
+
+</div>
+
+### Travel and external events
+
+<div class="grid cards" markdown>
+
+- :material-bag-suitcase-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[Cross-border travel and device searches in Asia](./asia-travel.md)**
+
+    ---
+
+    Device minimization plus Asia-specific border searches, and whether you need a burner.
+
+- :material-sim-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[Phone numbers and connectivity abroad](./travel-connectivity.md)**
+
+    ---
+
+    Roaming, a travel eSIM, or a local SIM: who registers your identity and where your traffic exits.
+
+- :material-shield-airplane-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[Brief yourself with AI before you travel](./travel-ai-briefing.md)**
+
+    ---
+
+    Copy-paste prompts for your own AI to get a destination's censorship, legal, SIM, and emergency-contact picture.
+
+- :material-lan-disconnect:{ .lg .middle style="color: var(--cat-privacy);" } **[Preparing for and responding to a network shutdown](./shutdown.md)**
+
+    ---
+
+    Four levels of outage, what to finish beforehand, and the risks in the moment connectivity returns.
+
+- :material-web-check:{ .lg .middle style="color: var(--cat-privacy);" } **[A critical vulnerability on your organisation's website](./org-website-vulnerability.md)**
+
+    ---
+
+    Who updates each layer, what to ask your host or contractor, and what to do before and after patching.
+
+</div>
 ## :material-help-circle-outline: How to suggest a scenario
 
 If you work with a population whose situation isn't well covered by existing English-language privacy sites, especially groups with significant cross-border or Sinophone-region context, let us know via the channels on the [Community](https://anoni.net/en/join/){target="_blank"} page. We are particularly interested in scenarios where the regional framing is load-bearing: the same situation in a different jurisdiction would call for materially different practice.
