@@ -986,6 +986,7 @@
 	#OnionShare-27
 	#OnionShare-271
 	#OnionShare-272
+	#OnionShare-273
 	#OnionShare-更新日誌
 	#急迫程度怎麼判斷
 /changelog/ooni/
@@ -1019,6 +1020,7 @@
 	#Tails-716
 	#Tails-717
 	#Tails-7171
+	#Tails-718
 	#Tails-76
 	#Tails-771
 	#Tails-772
@@ -1065,6 +1067,7 @@
 	#Tor-Browser-15026
 	#Tor-Browser-160
 	#Tor-Browser-1601
+	#Tor-Browser-1603
 	#Tor-Browser-160a10Alpha-測試通道
 	#Tor-Browser-160a11Alpha-測試通道
 	#Tor-Browser-160a12Alpha-測試通道
@@ -2016,6 +2019,7 @@
 	#OnionShare-27
 	#OnionShare-271
 	#OnionShare-272
+	#OnionShare-273
 	#OnionShare-Changelog
 /en/changelog/ooni/
 	#OONI-Changelog
@@ -2046,6 +2050,7 @@
 	#Tails-716
 	#Tails-717
 	#Tails-7171
+	#Tails-718
 	#Tails-76
 	#Tails-78
 	#Tails-781
@@ -2084,6 +2089,7 @@
 	#Tor-Browser-15026
 	#Tor-Browser-160
 	#Tor-Browser-1601
+	#Tor-Browser-1603
 	#Tor-Browser-160a10-alpha
 	#Tor-Browser-160a11-alpha
 	#Tor-Browser-160a12-alpha
@@ -6143,6 +6149,7 @@
 	#OnionShare-27
 	#OnionShare-271
 	#OnionShare-272
+	#OnionShare-273
 	#OnionShare-更新日志
 	#紧急程度怎么判断
 /zh-cn/changelog/ooni/
@@ -6177,6 +6184,7 @@
 	#Tails-716
 	#Tails-717
 	#Tails-7171
+	#Tails-718
 	#Tails-76
 	#Tails-78
 	#Tails-781
@@ -6216,6 +6224,7 @@
 	#Tor-Browser-15026
 	#Tor-Browser-160
 	#Tor-Browser-1601
+	#Tor-Browser-1603
 	#Tor-Browser-160a10Alpha-测试通道
 	#Tor-Browser-160a11Alpha-测试通道
 	#Tor-Browser-160a12Alpha-测试通道

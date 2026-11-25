@@ -62,6 +62,7 @@ Apple 同時維護最新版與前兩代，安全修補三條線都發，但只�
 - 位置資訊這一側，Wi-Fi 一個 app 可以讀取敏感的位置資訊（CVE-2026-112537），三條線都有，Golden Gate 27.2 與 Tahoe 26.7.2 另有 AirPort 的同類問題（CVE-2026-112551）。
 - 瀏覽器引擎的修補，Golden Gate 27.2 直接包在系統更新裡，30 個 WebKit 相關的 CVE 有 8 個可能導致任意程式碼執行。Tahoe 與 Sequoia 要另外裝 Safari 27.2，它列出的 33 個就是同一批 WebKit 修補，加上 LinkPresentation 與 WebRTC 的 3 個。只裝了系統更新的話，WebKit 那一組還沒補上，要確認 Safari 也升上去。
 - 三份清單不是包含關係，Tahoe 26.7.2 有 30 個、Sequoia 15.8.2 有 31 個沒有出現在 Golden Gate 27.2 的清單裡，其中分別有 25 個與 21 個是 Apple 同一天補進 9 月 Golden Gate 27 公告的項目，代表 Golden Gate 那一側早就修好。
+- Apple 在 11 月 20 日修訂三份公告，Golden Gate 27.2 從 263 個增加到 274 個，Tahoe 26.7.2 從 213 個增加到 219 個，Sequoia 15.8.2 從 197 個增加到 203 個，上面的數字是初版的。三條線都補進了 App Store 一個處理網頁內容可能執行任意程式碼的問題（CVE-2026-114023），以及 Kernel 一個連到惡意 NFS 伺服器可能損毀核心記憶體的問題（CVE-2026-114021）。修訂後沒有出現在 Golden Gate 27.2 清單裡的，Tahoe 26.7.2 有 31 個、Sequoia 15.8.2 有 32 個，屬於 9 月 Golden Gate 27 公告的仍是 25 個與 21 個。Safari 27.2 公告同日也有更新，數量維持 33 個。修訂後仍然沒有標注任何一項已被實際利用。
 - iPhone 與 iPad 的對應版本整理在 [iOS 安全更新](./ios.md)。Sonoma 14.x 這一輪仍然沒有對應版本。
 
 ## macOS Tahoe 26.7.1、Sequoia 15.8.1（同日另有 Golden Gate 27.0.1）

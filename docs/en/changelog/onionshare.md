@@ -23,6 +23,15 @@ OnionShare ships far less often than Tor Browser or Tails: fifteen months passed
 
 Releases are infrequent and none so far has warranted same-day installation, so this page has no "Now" entries yet.
 
+## OnionShare 2.7.3
+
+> 2026-11-23 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.7.3){target="_blank"} · [GHSA-c2xx-7wjr-f25x](https://github.com/onionshare/onionshare/security/advisories/GHSA-c2xx-7wjr-f25x){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>Fixes one security issue in Receive mode, covered by advisory GHSA-c2xx-7wjr-f25x, with no CVE identifier and a moderate severity rating, affecting 2.6.4 through 2.7.2. The advisory includes reproduction steps verified against a real running instance and does not mention active exploitation.
+- The issue arises when Receive mode is set to accept text messages only. Before refusing a file upload, OnionShare read the entire request body into memory, and the upload size limit defaults to no limit, so a sender with the receive address could make the computer running Receive mode use a large amount of memory. The release notes put the impact per request at a maximum of 1 GB. This release rejects the upload without reading the whole body; until you upgrade, setting an upload size limit (added in 2.7) also blocks it.
+- The rest are bug fixes. Non-ASCII characters in filenames received in Receive mode are now transliterated so the files keep a proper name. The automatic Tor controller port fallback no longer loops, the Tails URL is updated, and there are translation updates for Persian, Albanian, French and Simplified Chinese plus dependency updates.
+- Tails ships Debian's 2.6.3, which falls outside the advisory's range. Tails 7.18 on 24 November separately fixed chat not working in Tails (see the [Tails changelog](./tails.md)).
+
 ## OnionShare 2.7.2
 
 > 2026-11-07 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.7.2){target="_blank"} · [GHSA-vc3q-8pwp-9hw6](https://github.com/onionshare/onionshare/security/advisories/GHSA-vc3q-8pwp-9hw6){target="_blank"}
@@ -84,10 +93,11 @@ Releases are infrequent and none so far has warranted same-day installation, so 
 
 ## OnionShare 2.6.2
 
-> 2024-03-21 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.6.2){target="_blank"}
+> 2024-03-21 · [Upstream release](https://github.com/onionshare/onionshare/releases/tag/v2.6.2){target="_blank"} · [Upstream security advisories](https://github.com/onionshare/onionshare/security/advisories){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">Soon</span>An all-security release, concentrated on input handling in Receive mode and Chat mode.The advisories mention no active exploitation.
+- <span class="urg-tag urg-tag--soon">Soon</span>An all-security release, concentrated on input handling in Receive mode and Chat mode. The advisories mention no active exploitation.
 - Newlines are stripped from History item paths.
 - Text messages in Receive mode are capped at 524288 characters.
 - Usernames are restricted to specific ASCII characters with control characters removed, and username validation exceptions are handled so users can no longer join silently.
 - Users are forcefully disconnected from chat on a `disconnect` event.
+- On 23 November 2026 upstream published advisories for the five fixes above, which came from a Cure53 security audit (report code TTP-03); none has a CVE identifier. Two are rated high: a chat participant could fake a disconnect event and keep sending and receiving messages under the same name (GHSA-wh24-f3hg-r3h2), and someone could join a chat room to listen in without appearing in the user list or broadcasting a join message (GHSA-r78w-rpvr-g57q). One is rated moderate: control characters in usernames allowed impersonating others (GHSA-9mxm-qp84-xgx6). Two are rated low: a denial of service from unlimited text message length in Receive mode, and newline handling in History. If you still run chat rooms on 2.6.1 or earlier, the participant list may be incomplete.

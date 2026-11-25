@@ -45,7 +45,7 @@ Several entries below fix conflux. It lets a client send one connection's data o
 - The keys for the bastet directory authority have been removed. The ChangeLog gives the reason as a "potential compromise" and says it can be reinstated with new keys later. Another directory authority, maatuska, changed its IP address. Both are part of the directory authority list built into tor, so clients only pick up the new list by upgrading.
 - Clients also get a stream isolation fix. HTTPTunnelPort recorded the length of its isolation header (X-Tor-Stream-Isolation) in only 8 bits, so two values longer than 251 bytes whose lengths matched modulo 256 were treated as the same and could share a circuit (bug 41474). Ordinary Tor Browser users do not use this port.
 - The remaining two fixes make relays actually enforce the intended check on ntor-v3 subprotocol requests (bug 41475) and remove a latent client assertion that cannot occur with the current consensus (bug 41476). The fallback directory list and geoip data are also refreshed as of 13 November.
-- As of 21 November neither Tor Browser nor Tails includes this release; the latest Tor Browser 16.0.1 and Tails 7.17.1 use 0.4.9.16. People running relays, bridges and onion services need to upgrade on their own.
+- If you reach Tor through the browser, Tor Browser 16.0.3 on 24 November includes this release (see the [Tor changelog](./tor.md)), and Tails 7.18 followed the same day (see the [Tails changelog](./tails.md)). People running relays, bridges and onion services need to upgrade on their own.
 
 ## tor 0.4.9.16
 
