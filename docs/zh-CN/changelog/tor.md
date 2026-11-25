@@ -23,9 +23,9 @@ Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小
 > 2026-11-24 · [上游公告](https://blog.torproject.org/new-release-tor-browser-1603/){target="_blank"}
 
 - <span class="chan-tag chan-tag--stable">稳定版</span>主要带进 Firefox 的安全修补，桌面版与 Android 版都更新到这一版。基础换到 153.8.0esr（tor-browser#45494），Android 版的 GeckoView 同步，另外从 Firefox 161 backport 安全修补（tor-browser#45499）。Mozilla 11 月 24 日的 ESR 153.8 公告列了 85 个 CVE，High 54 个、Moderate 19 个、Low 12 个（见[浏览器安全更新](./browsers.md)）。Mozilla 没有标注任何一项已被实际利用，Tor Project 的公告也没有提到。
-- 公告的变更清单另列了四项 Tor Browser 自己的修补，公告没有说明影响范围。两项标了 (H1)，都跟网页的后台线程（worker）有关，SharedWorker 加载时的重定向没有被追踪（tor-browser#45429），以及从 `blob:` 上层页面创建的嵌套 worker 有传递上的问题（tor-browser#45432）。另外两项是防范 xray 包装层以外的执行环境篡改（tor-browser#45472），以及 worker 在静态导入之前就要套用修补（tor-browser#45428）。
+- 公告的变更清单另列了四项 Tor Browser 自己的修补，公告没有说明影响范围。两项标了 (H1)，都跟网页的后台线程（worker）有关。一项是 SharedWorker 加载时的重定向没有被追踪（tor-browser#45429），另一项是从 `blob:` 上层页面创建的嵌套 worker 有传递上的问题（tor-browser#45432）。另外两项是防范 xray 包装层以外的执行环境篡改（tor-browser#45472），以及 worker 在静态导入之前就要套用修补（tor-browser#45428）。
 - Windows 版另修一项，特定写法的 Windows 路径可以绕过防止网页借事件探测本机文件的保护（tor-browser#45473）。
-- 内置的 tor 升到 11 月 13 日的 0.4.9.17，那是主要影响中继的紧急发布，客户端这一侧有 RESOLVED 数据元与流隔离两项修正（见 [tor daemon 更新日志](./tor-daemon.md)）。NoScript 升至 13.6.39.1984，构建环境的 apt 套用安全更新（tor-browser-build#41910），Go 升到 1.26.11。
+- 内置的 tor 升到 11 月 13 日的 0.4.9.17，那是主要影响中继的紧急发布，客户端这一侧有 RESOLVED 信元与流隔离两项修正（见 [tor daemon 更新日志](./tor-daemon.md)）。NoScript 升至 13.6.39.1984，构建环境的 apt 套用安全更新（tor-browser-build#41910），Go 升到 1.26.11。
 - 用 Android 版的人会从 16.0.2 升上来，桌面版从 16.0.1 升上来，两边在这一版重新同步。签名子密钥维持 `022DA248432D2A0E0F54E65E316C1FACD62D07D9`，已用 16.0.3 的 `sha256sums-signed-build.txt.asc` 核对。截至 11 月 25 日，Alpha 通道仍停在 10 月 15 日的 16.0a14。
 
 ## Tor Browser 16.0.1

@@ -56,9 +56,9 @@ Chrome 每周都有带安全修补的小版本，大版本原本约四周一版�
 > 2026-11-24 · [Mozilla 安全公告](https://www.mozilla.org/security/advisories/){target="_blank"}
 
 - <span class="urg-tag urg-tag--soon">尽快</span>11 月 24 日的 Firefox 161 修复了 110 个问题，High 59 个、Moderate 30 个、Low 21 个，没有 Critical。Mozilla 没有标注任何一项已被实际利用，公告里也没有出现 in the wild 的字样。目前最新的是 161。
-- 161 标题写明沙箱逃逸的有 20 个，High 13 个、Moderate 4 个、Low 3 个。High 里另有 5 个提权（CVE-2026-135500、CVE-2026-135504、CVE-2026-135505、CVE-2026-135531、CVE-2026-135546），数量最多的是 DOM 核心（5 个）与 HTTP 网络组件（4 个）。只影响 Android 的有 3 个，下载组件的伪冒（CVE-2026-135561，Moderate）与扩展组件的两个问题（Low）。
-- ESR 153.8 与 115.46 同日发布，分别修复了 85 个与 44 个，ESR 140 这一轮同样没有对应的版本。Tor Browser 16.0.3 在同一天换到 153.8.0esr 为基础（见 [Tor 更新日志](./tor.md)）。
-- 11 月 10 日的 Firefox 160 修复了 99 个问题，High 57 个、Moderate 24 个、Low 18 个，没有 Critical。Mozilla 没有标注任何一项已被实际利用，公告里也没有出现 in the wild 的字样。11 月 17 日另有 160.0.1。Mozilla 在 11 月 24 日把其中一项（WebRender 的 use-after-free，CVE-2026-124906）从 High 调降为 Moderate，修订后是 High 56 个、Moderate 25 个，同日的 ESR 153.7 也一起调整。
+- 161 的公告里，标题写明是沙箱逃逸的有 20 个，High 13 个、Moderate 4 个、Low 3 个。High 里另有 5 个提权（CVE-2026-135500、CVE-2026-135504、CVE-2026-135505、CVE-2026-135531、CVE-2026-135546）。59 个 High 分布最多的组件是 DOM 核心（5 个）与 HTTP 网络组件（4 个）。只影响 Android 的有 3 个，下载组件的伪冒（CVE-2026-135561，Moderate）与扩展组件的两个问题（Low）。
+- ESR 153.8 与 115.46 同日发布，分别修复了 85 个与 44 个，ESR 140 这一轮同样没有对应的版本。Tor Browser 16.0.3 在同一天改以 153.8.0esr 为基础（见 [Tor 更新日志](./tor.md)）。
+- 11 月 10 日的 Firefox 160 修复了 99 个问题，High 57 个、Moderate 24 个、Low 18 个，没有 Critical。Mozilla 没有标注任何一项已被实际利用，公告里也没有出现 in the wild 的字样。11 月 17 日另有 160.0.1。Mozilla 在 11 月 24 日把其中一项（WebRender 的 use-after-free，CVE-2026-124906）从 High 调降为 Moderate，修订后是 High 56 个、Moderate 25 个，11 月 10 日的 ESR 153.7 公告也一并修订。
 - 160.0.1 修复了 2 个 High，音视频播放组件的 use-after-free（CVE-2026-130021），以及只影响 Android 的 WebGL 图形组件边界条件错误，可以用来提权（CVE-2026-130020）。Mozilla 同样没有标注已被实际利用。
 - 160 的 High 里有 9 个沙箱逃逸（沙箱是浏览器隔开网页与操作系统的那道隔离），落在 Service Worker（服务工作线程）、页面导航、IPC、Cache API、图形与音频组件，Moderate 另有 4 个。High 里还有 2 个同源策略绕过（CVE-2026-124874、CVE-2026-124902）与 2 个提权（CVE-2026-124854、CVE-2026-124907），其余多是 DOM、CSS 解析与文字排版组件的 use-after-free。
 - Android 版另有两项只影响 Android 的问题，自动填充的点击劫持（CVE-2026-124911，Moderate）与音视频组件的问题（CVE-2026-124937，Low），同样在 160 修复。
