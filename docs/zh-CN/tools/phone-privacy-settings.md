@@ -177,7 +177,7 @@ App 很多的话，现场只处理标着「始终」或「始终允许」的那�
     1. 打开「设置」>「隐私与安全性」>「定位服务」，App 列表右边写着各自的权限
     2. 点开标着「始终」的 App，改成「使用 App 期间」（打开 App 时才能用位置）或「下次询问或在我共享时」（每次要用都先问你）。完全用不到位置的 App 选「永不」
     3. 同一页的「精确位置」，地图、打车、外卖以外的 App 都关掉
-    4. 回家再做：滚到列表最下面，点「系统服务」，关闭「重要地点与路线」。iPhone 会用它记住你常去的地点，用来在地图与日历提供建议，关掉之后这些建议会少一些
+    4. 回家再做：滚到列表最下面，点「系统服务」，看一下「重要地点与路线」。iPhone 用它记住你常去的地点，在地图与日历提供建议。建议保持开启，第 10 步的「失窃设备保护」靠它判断熟悉地点，关掉就无法开启失窃设备保护[^ios-sdp-req]，有人偷放 AirTag 这类追踪器时的跟踪通知也需要它
 
     做完的样子：定位服务列表里，只剩确实需要的 App 标着「始终」。
 
@@ -435,6 +435,7 @@ SIM 卡被拔走插到另一部手机，对方就能收到发给你的短信验�
 [^ios-ads]: [在 iPhone 上控制 Apple 向你发送广告的方式](https://support.apple.com/zh-cn/guide/iphone/iphf60a6a256/ios){target="_blank"} - iPhone 使用手册。
 [^ios-safety]: [运行 iOS 16 或更高版本的 iPhone 上的安全检查](https://support.apple.com/zh-cn/guide/personal-safety/ips2aad835e1/web){target="_blank"} - Apple 个人安全使用手册。
 [^ios-sdp]: [在 iPhone 上使用“失窃设备保护”](https://support.apple.com/zh-cn/guide/iphone/iph17105538b/ios){target="_blank"} - iPhone 使用手册。
+[^ios-sdp-req]: [关于 iPhone 的“失窃设备保护”](https://support.apple.com/zh-cn/120340){target="_blank"} - Apple 支持。打开失窃设备保护需要启用“重要地点”。
 [^ios-simpin]: [在 iPhone 或 iPad 上使用 SIM 卡 PIN 码](https://support.apple.com/zh-cn/118228){target="_blank"} - Apple 支持。
 [^ios-lockdown]: [通过锁定模式使 iPhone 抵御网络攻击](https://support.apple.com/zh-cn/guide/iphone/iph845f6f40c/ios){target="_blank"} - iPhone 使用手册。
 [^aosp-name]: [DeviceNamePreferenceController.java](https://android.googlesource.com/platform/packages/apps/Settings/+/refs/heads/main/src/com/android/settings/deviceinfo/DeviceNamePreferenceController.java){target="_blank"} - Android 开放源代码项目。改设备名称时一并设置蓝牙名称与无线热点名称。

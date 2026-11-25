@@ -171,7 +171,7 @@ App 很多的話，現場只處理標著「永遠」或「一律允許」的那�
     1. 打開「設定」>「隱私權與安全性」>「定位服務」，App 清單右邊寫著各自的權限
     2. 點開標著「永遠」的 App，改成「使用 App 期間」（打開 App 時才能用位置）或「下次詢問或在我分享時」（每次要用都先問你）。完全用不到位置的 App 選「永不」
     3. 同一頁的「準確位置」，地圖、叫車、外送以外的 App 都關掉
-    4. 回家再做：捲到清單最下面，點「系統服務」，關閉「重要位置與路線」。iPhone 會用它記住你常去的地點，用來在地圖與行事曆提供建議，關掉之後這些建議會少一些
+    4. 回家再做：捲到清單最下面，點「系統服務」，看一下「重要位置與路線」。iPhone 用它記住你常去的地點，在地圖與行事曆提供建議。建議保持開啟，第 10 步的「遭竊裝置防護」靠它判斷熟悉地點，關掉就無法開啟遭竊裝置防護[^ios-sdp-req]，有人偷放 AirTag 這類追蹤器時的追蹤通知也需要它
 
     做完的樣子：定位服務清單裡，只剩下確實需要的 App 標著「永遠」。
 
@@ -429,6 +429,7 @@ SIM 卡被拔走插到另一支手機，對方就能收到寄給你的簡訊驗�
 [^ios-ads]: [在 iPhone 上控制 Apple 向你投放廣告的方式](https://support.apple.com/zh-tw/guide/iphone/iphf60a6a256/ios){target="_blank"} - iPhone 使用手冊。
 [^ios-safety]: [iOS 16 或以上版本 iPhone 的「安全檢查」](https://support.apple.com/zh-tw/guide/personal-safety/ips2aad835e1/web){target="_blank"} - Apple 個人安全使用手冊。
 [^ios-sdp]: [在 iPhone 上使用「遭竊裝置防護」](https://support.apple.com/zh-tw/guide/iphone/iph17105538b/ios){target="_blank"} - iPhone 使用手冊。
+[^ios-sdp-req]: [關於 iPhone 的「遭竊裝置防護」](https://support.apple.com/zh-tw/120340){target="_blank"} - Apple 支援。開啟遭竊裝置防護需要開啟「重要位置」。
 [^ios-simpin]: [在 iPhone 或 iPad 上使用 SIM PIN](https://support.apple.com/zh-tw/118228){target="_blank"} - Apple 支援。
 [^ios-lockdown]: [使用「封閉模式」強化你的 iPhone 免受網路攻擊](https://support.apple.com/zh-tw/guide/iphone/iph845f6f40c/ios){target="_blank"} - iPhone 使用手冊。
 [^aosp-name]: [DeviceNamePreferenceController.java](https://android.googlesource.com/platform/packages/apps/Settings/+/refs/heads/main/src/com/android/settings/deviceinfo/DeviceNamePreferenceController.java){target="_blank"} - Android 開放原始碼專案。改裝置名稱時一併設定藍牙名稱與無線基地台名稱。

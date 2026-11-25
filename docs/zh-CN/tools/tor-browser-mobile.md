@@ -50,13 +50,18 @@ Tor Project 的签名验证说明只涵盖 Windows、macOS 与 Linux，没有 An
 
 ## iOS 只有 Onion Browser
 
+!!! warning "2026 年 8 月公开的 iOS IP 泄露问题"
+
+    研究人员在 2026 年 8 月公开 WebKit 的三个行为（DNS 预获取、passkey 相关的验证请求、WebTransport）会绕过浏览器设置的代理直接连接，让网站取得真实的 IP 地址，Onion Browser 也受影响。Onion Browser 的 Silver 安全等级会开启 WebKit 的锁定模式、关掉 WebTransport，但另外两个问题的报道没有说明可以靠设置避开[^webkit-leak]。EFF 建议在 Apple 修补之前，不要在 iOS 上用 Onion Browser 做高度敏感的浏览[^ssd-mobile]。截至 2026 年 11 月，我们没有查到 Apple 修补的确认，iOS 的更新状态见 [iOS 安全更新](../changelog/ios.md)。
+
+
 Onion Browser 在 App Store 上架，开源，贡献者包含 Mike Tigas、Benjamin Erhart 与 Guardian Project。它不是 Tor Project 的官方产品。
 
 - 流量走 Tor，`.onion` 地址打得开，你的网络运营商看不到你连了哪个站
 - 指纹抗性做不到桌面版的程度。同一个网站在不同时间把你的浏览器指纹比对成同一人的概率，比在桌面版 Tor Browser 上高
 - 更新节奏跟 Tor Project 的桌面版与 Android 版各自独立
 
-在 iOS 上只想读一个 `.onion` 页面，Onion Browser 够用。想在手机上维持一个不被关联的身分，iOS 给不了那个保证。
+在 iOS 上只想读一个 `.onion` 页面，Onion Browser 够用，但在上方的 IP 泄露问题修补之前，敏感的浏览请改用电脑或 Android。想在手机上维持一个不被关联的身分，iOS 给不了那个保证。
 
 ## 怎么确认真的走在 Tor 上
 
@@ -100,3 +105,5 @@ Onion Browser 在 App Store 上架，开源，贡献者包含 Mike Tigas、Benja
 [^2]: [Tor Browser for Android](https://support.torproject.org/mobile-tor/){target="_blank"} - Tor Project Support。原文列出 the Play Store, F-Droid, the Tor Project website and GetTor，系统需求是 Android 5.0 以上。
 [^3]: [How do I install Tor Browser for Android from F-Droid?](https://support.torproject.org/tormobile/tormobile-7/){target="_blank"} - Tor Project Support，含加入 Guardian Project 仓库的完整流程。
 [^4]: [How can I verify Tor Browser's signature?](https://support.torproject.org/tbb/how-to-verify-signature/){target="_blank"} - Tor Project Support，该页只涵盖 Windows、macOS 与 GNU/Linux。
+[^webkit-leak]: [Apple WebKit privacy leaks impact Tor, Psylo, and iCloud Private Relay](https://cyberinsider.com/apple-webkit-privacy-leaks-impact-tor-psylo-and-icloud-private-relay/){target="_blank"} - CyberInsider，2026-08-05。
+[^ssd-mobile]: [How to: Use Tor on Android and iPhone](https://ssd.eff.org/module/how-to-use-tor-on-android-and-iphone){target="_blank"} - EFF Surveillance Self-Defense，页首的提醒。

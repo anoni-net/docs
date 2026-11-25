@@ -171,7 +171,7 @@ If you have a lot of apps, deal only with the ones set to **Always** or **Allowe
     1. Open **Settings** → **Privacy & Security** → **Location Services**. Each app's permission is listed to the right of its name
     2. Tap each app marked **Always** and change it to **While Using the App** (location only while the app is open) or **Ask Next Time Or When I Share** (it asks you every time). For apps that never need your location, choose **Never**
     3. On the same screen, turn off **Precise Location** for every app other than maps, ride-hailing, and food delivery
-    4. Later, at home: scroll to the bottom of the list, tap **System Services**, and turn off **Significant Locations & Routes**. The iPhone uses it to remember places you go often and to make suggestions in Maps and Calendar; turning it off means fewer of those suggestions
+    4. Later, at home: scroll to the bottom of the list, tap **System Services**, and check **Significant Locations & Routes**. The iPhone uses it to remember places you go often and to make suggestions in Maps and Calendar. Leave it on: Stolen Device Protection in step 10 relies on it to recognize familiar locations and cannot be turned on without it[^ios-sdp-req], and tracking notifications for planted AirTags and similar trackers need it too
 
     When it's done: in the Location Services list, only apps that truly need it are marked **Always**.
 
@@ -429,6 +429,7 @@ If you follow along and can't find an option, search for its name in Settings fi
 [^ios-ads]: [Control how Apple delivers advertising to you on iPhone](https://support.apple.com/guide/iphone/iphf60a6a256/ios){target="_blank"} - iPhone User Guide.
 [^ios-safety]: [Safety Check for an iPhone with iOS 16 or later](https://support.apple.com/guide/personal-safety/ips2aad835e1/web){target="_blank"} - Apple Personal Safety User Guide.
 [^ios-sdp]: [Use Stolen Device Protection on iPhone](https://support.apple.com/guide/iphone/iph17105538b/ios){target="_blank"} - iPhone User Guide.
+[^ios-sdp-req]: [About Stolen Device Protection for iPhone](https://support.apple.com/en-us/120340){target="_blank"} - Apple Support. Turning on Stolen Device Protection requires Significant Locations.
 [^ios-simpin]: [Use a SIM PIN for your iPhone or iPad](https://support.apple.com/en-us/118228){target="_blank"} - Apple Support.
 [^ios-lockdown]: [Harden your iPhone from a cyberattack with Lockdown Mode](https://support.apple.com/guide/iphone/iph845f6f40c/ios){target="_blank"} - iPhone User Guide.
 [^aosp-name]: [DeviceNamePreferenceController.java](https://android.googlesource.com/platform/packages/apps/Settings/+/refs/heads/main/src/com/android/settings/deviceinfo/DeviceNamePreferenceController.java){target="_blank"} - Android Open Source Project. Renaming the device also sets the Bluetooth name and the hotspot name.
