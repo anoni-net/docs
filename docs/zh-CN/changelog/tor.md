@@ -18,11 +18,22 @@ digest:
 
 Alpha 从 16.0a6（2026 年 5 月）起改以 Firefox beta 为基底，逐版小步 rebase。追的那条 beta 线在 7 月成为新的 Firefox ESR 153，所以 16.0a9 之后的版号标示又回到 esr，那是同一条线的延续，不是换回旧基底。稳定版几乎每次发布都带 Firefox 或 tor daemon 的安全修补，看到新版就更新即可。Firefox 从 2026 年 9 月起改为两周发布一次，Tor Browser 跟着改，稳定版的更新会比过去更密。
 
+## Tor Browser 16.0.3
+
+> 2026-11-24 · [上游公告](https://blog.torproject.org/new-release-tor-browser-1603/){target="_blank"}
+
+- <span class="chan-tag chan-tag--stable">稳定版</span>主要带进 Firefox 的安全修补，桌面版与 Android 版都更新到这一版。基础换到 153.8.0esr（tor-browser#45494），Android 版的 GeckoView 同步，另外从 Firefox 161 backport 安全修补（tor-browser#45499）。Mozilla 11 月 24 日的 ESR 153.8 公告列了 85 个 CVE，High 54 个、Moderate 19 个、Low 12 个（见[浏览器安全更新](./browsers.md)）。Mozilla 没有标注任何一项已被实际利用，Tor Project 的公告也没有提到。
+- 公告的变更清单另列了四项 Tor Browser 自己的修补，公告没有说明影响范围。两项标了 (H1)，都跟网页的后台线程（worker）有关。一项是 SharedWorker 加载时的重定向没有被追踪（tor-browser#45429），另一项是从 `blob:` 上层页面创建的嵌套 worker 有传递上的问题（tor-browser#45432）。另外两项是防范 xray 包装层以外的执行环境篡改（tor-browser#45472），以及 worker 在静态导入之前就要套用修补（tor-browser#45428）。
+- Windows 版另修一项，特定写法的 Windows 路径可以绕过防止网页借事件探测本机文件的保护（tor-browser#45473）。
+- 内置的 tor 升到 11 月 13 日的 0.4.9.17，那是主要影响中继的紧急发布，客户端这一侧有 RESOLVED 信元与流隔离两项修正（见 [tor daemon 更新日志](./tor-daemon.md)）。NoScript 升至 13.6.39.1984，构建环境的 apt 套用安全更新（tor-browser-build#41910），Go 升到 1.26.11。
+- 用 Android 版的人会从 16.0.2 升上来，桌面版从 16.0.1 升上来，两边在这一版重新同步。签名子密钥维持 `022DA248432D2A0E0F54E65E316C1FACD62D07D9`，已用 16.0.3 的 `sha256sums-signed-build.txt.asc` 核对。截至 11 月 25 日，Alpha 通道仍停在 10 月 15 日的 16.0a14。
+
 ## Tor Browser 16.0.1
 
 > 2026-11-10 · [上游公告](https://blog.torproject.org/new-release-tor-browser-1601/){target="_blank"}
 
 - <span class="chan-tag chan-tag--stable">稳定版</span>16.0 之后的第一个维护版，主要带进 Firefox 的安全修补。桌面版的基础换到 153.7.0esr（tor-browser#45439），Android 版的 GeckoView 同步，另外从 Firefox 160 backport 安全修补（tor-browser#45442）。Mozilla 11 月 10 日的 ESR 153.7 公告列了 81 个 CVE，High 51 个、Moderate 21 个、Low 9 个（见[浏览器安全更新](./browsers.md)）。Mozilla 没有标注任何一项已被实际利用，Tor Project 的公告也没有提到。
+- Mozilla 在 11 月 24 日把其中一项（WebRender 的 use-after-free，CVE-2026-124906）从 High 调降为 Moderate，修订后是 High 50 个、Moderate 22 个，总数不变。
 - 内置的 tor 升到 11 月 4 日的 0.4.9.16。那是只影响目录权威的紧急发布，处理 0.4.9.15 新规定的协议版本让旧版客户端直接退出运行的问题（细节见 [tor daemon 更新日志](./tor-daemon.md)）。浏览器这一侧多的是重新生成的备用目录列表。
 - NoScript 升至 13.6.38.1984，zlib 升到 1.4。Android 的签名流程改用新版的 apksigner（tor-browser-build#41814、tor-browser-build#41912），没有界面与行为上的变更。
 - 发布文件的签名子密钥维持 `022DA248432D2A0E0F54E65E316C1FACD62D07D9`，已用 16.0.1 的 `sha256sums-signed-build.txt.asc` 核对。16.0 公告预告的新电路显示要先在 Alpha 推出，截至 11 月 14 日 Alpha 通道仍停在 10 月 15 日的 16.0a14。

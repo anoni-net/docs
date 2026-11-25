@@ -24,6 +24,17 @@ Tails 上的漏洞后果跟一般操作系统不同。取得管理员权限等�
 
 Tails 官方只区分紧急发布与排程发布，中间那一层是社区志愿者读完公告后补的判断。判断不确定时以较高一级为准。
 
+## Tails 7.18
+
+> 2026-11-24 · [上游公告](https://tails.net/news/version_7.18/){target="_blank"} · [7.17.1 已知漏洞公告](https://tails.net/security/known_security_vulnerabilities_in_7.17.1/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">尽快</span>例行排程版本，带进 Tor Browser 的安全更新。Tails 另外发了一份 7.17.1 的已知漏洞公告，要求尽快升级。上游没有提到已被实际利用。
+- Tor Browser 升至 16.0.3，基础更新到 153.8.0esr，Mozilla 的 ESR 153.8 公告列了 85 个 CVE（见 [Tor 更新日志](./tor.md)）。Tor 客户端升至 0.4.9.17，那是主要影响中继的紧急发布，带两个 TROVE 编号（见 [tor daemon 更新日志](./tor-daemon.md)）。
+- 修好 OnionShare 的聊天功能（issue 21833）。回报的内容是从 7.14 起，在 Tails 里开启聊天室、再用 Tor Browser 连进去就会出错。上游 11 月 23 日发布的 OnionShare 2.7.3 修了接收模式的问题，影响范围是 2.6.4 到 2.7.2（见 [OnionShare 更新日志](./onionshare.md)），不包含 Tails 内置、Debian 打包的 2.6.3。
+- 内核升到 6.12.118，涵盖 Debian 11 月 22 日的内核安全公告（DSA-6652-1）。构建记录写明 Debian 安全更新取自 11 月 24 日的快照，比对软件包清单后，Kerberos（DSA-6650-1）、WebKitGTK（DSA-6647-1）、GPGME（DSA-6646-1）与 LibreOffice（DSA-6635-1）都是修补后的版本。
+- 同一天发布的 Zstandard 压缩库公告（DSA-6657-1）没有赶上，7.18 装的仍是修补前的 libzstd。7.17.1 暂时移除的 uBlock Origin，7.18 的公告没有提到是否加回来。
+- 可从 Tails 7.0 以后版本自动升级。全新安装会清除既有的 Persistent Storage。
+
 ## Tails 7.17.1
 
 > 2026-11-17 · [上游公告](https://tails.net/news/version_7.17.1/){target="_blank"} · [uBlock Origin 安全公告](https://github.com/gorhill/uBlock/security/advisories/GHSA-cmqw-9r2w-6wv2){target="_blank"}

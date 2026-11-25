@@ -35,14 +35,15 @@ Chrome 每週都有帶安全修補的小版本，大版本原本約四週一版�
 
 ## Chrome 2026 年 11 月
 
-> 2026-11-17 · [Chrome Releases](https://chromereleases.googleblog.com/2026/11/){target="_blank"}
+> 2026-11-23 · [Chrome Releases](https://chromereleases.googleblog.com/2026/11/){target="_blank"}
 
-- <span class="urg-tag urg-tag--now">立刻</span>11 月 9 日的 157.0.8103.50/.51（Linux 是 157.0.8103.50）修了 9 個安全問題，其中 CVE-2026-125350 已被利用。Google 在公告裡寫明知道這個漏洞的利用程式在外流傳（exists in the wild），嚴重度評為 High。之後的 157.0.8103.78 與 11 月 17 日的 158 都涵蓋這一項，目前最新的是 158，請更新後重新啟動瀏覽器。
+- <span class="urg-tag urg-tag--now">立刻</span>11 月 9 日的 157.0.8103.50/.51（Linux 是 157.0.8103.50）修了 9 個安全問題，其中 CVE-2026-125350 已被利用。Google 在公告裡寫明知道這個漏洞的利用程式在外流傳（exists in the wild），嚴重度評為 High。之後的 157.0.8103.78 與 11 月 17 日的 158 都涵蓋這一項，目前最新的是 11 月 23 日的 158.0.8127.88，請更新後重新啟動瀏覽器。
 - CVE-2026-125350 是 XML 處理元件的 use-after-free（程式把記憶體還回去之後又拿來用），11 月 6 日回報，三天後修掉。CISA 在 11 月 10 日把它收進已知遭利用漏洞目錄（KEV）。
 - 同一版其餘 6 個 High 分布在 WebGL、FileSystem、Compositing、GPU、V8 與 XML 各一個，另有 2 個 Medium 在 GPU。
 - 延長穩定版（Extended Stable，只有 Windows 與 Mac）同日更新到 156.0.8078.96，修補清單裡也有 CVE-2026-125350。Android 版同日發布 157.0.8103.50，公告寫明修補內容跟桌面版相同。Edge、Brave 這類以 Chromium 為基底的瀏覽器要等各自的更新，Tor Browser 以 Firefox 為基底，不受這一項影響。
+- 11 月 23 日的 158.0.8127.88/.89（Linux 是 158.0.8127.88）只修 1 個安全問題，是 Critical 等級的 Variations（Chrome 用來分批推出實驗功能的設定機制）輸入驗證不當（CVE-2026-134401），由 Google 在 8 月 28 日回報。Google 沒有標注它已被實際利用，單看這一版是儘快。延長穩定版同日更新到 156.0.8078.114，修的是同一項。Android 版同日發布 158.0.8127.92，公告寫明修補內容跟桌面版相同。
 - 11 月 17 日的大版本 158.0.8127.36/.37（Linux 是 158.0.8127.36）修了 204 個安全問題，Critical 6 個、High 62 個、Medium 82 個、Low 54 個。Google 沒有標注其中任何一項已被實際利用。6 個 Critical 落在 WebView、GPU、Media、記憶體回收（GarbageCollection）、ANGLE 與 WebAudio（CVE-2026-130963、CVE-2026-131031、CVE-2026-131060、CVE-2026-131008、CVE-2026-131054、CVE-2026-130975），High 裡 GPU 有 7 個、ANGLE 有 6 個。
-- 延長穩定版同日更新到 156.0.8078.108/.109，修了 79 個，Critical 3 個。Android 版同日發布 158.0.8127.42。159 在 11 月 18 日以搶先穩定版推給一小部分 Windows 與 Mac 使用者，Android 版同日跟進，兩份公告都沒有列出安全修補。
+- 延長穩定版同日更新到 156.0.8078.108/.109，修了 79 個，Critical 3 個。Android 版同日發布 158.0.8127.42。159 在 11 月 18 日以搶先穩定版推給一小部分 Windows 與 Mac 使用者，Android 版同日跟進，兩份公告都沒有列出安全修補。11 月 24 日搶先穩定版更新到 159.0.8154.33/.34，Android 版同日跟進，同樣沒有列出安全修補。
 - 11 月 11 日的 157.0.8103.78/.79（Linux 是 157.0.8103.78）修了 83 個安全問題，Critical 5 個、High 78 個。Google 沒有標注其中任何一項已被實際利用，單看這一版是儘快。5 個 Critical 都是 use-after-free，落在 ServiceWorker、CSS、Layout、Skia 與無障礙元件（CVE-2026-126885、CVE-2026-126895、CVE-2026-126879、CVE-2026-126846、CVE-2026-126911）。High 裡 V8（Chrome 的 JavaScript 引擎）有 17 個、它的編譯器 Turbolev 另有 2 個，繪圖函式庫 Skia 有 16 個。
 - 延長穩定版同日更新到 156.0.8078.100，修了 72 個，Critical 4 個。Android 版同日發布 157.0.8103.78，公告寫明修補內容跟桌面版相同。
 - 11 月 3 日的大版本 157.0.8103.38/.39 修了 213 個安全問題，Critical 7 個、High 77 個、Medium 75 個、Low 54 個。Google 沒有標注其中任何一項已被實際利用。
@@ -52,9 +53,12 @@ Chrome 每週都有帶安全修補的小版本，大版本原本約四週一版�
 
 ## Firefox 2026 年 11 月
 
-> 2026-11-17 · [Mozilla 安全公告](https://www.mozilla.org/security/advisories/){target="_blank"}
+> 2026-11-24 · [Mozilla 安全公告](https://www.mozilla.org/security/advisories/){target="_blank"}
 
-- <span class="urg-tag urg-tag--soon">儘快</span>11 月 10 日的 Firefox 160 修了 99 個問題，High 57 個、Moderate 24 個、Low 18 個，沒有 Critical。Mozilla 沒有標注任何一項已被實際利用，公告裡也沒有出現 in the wild 的字樣。11 月 17 日另有 160.0.1，目前最新的是那一版。
+- <span class="urg-tag urg-tag--soon">儘快</span>11 月 24 日的 Firefox 161 修了 110 個問題，High 59 個、Moderate 30 個、Low 21 個，沒有 Critical。Mozilla 沒有標注任何一項已被實際利用，公告裡也沒有出現 in the wild 的字樣。目前最新的是 161。
+- 161 的公告裡，標題寫明是沙箱逃逸的有 20 個，High 13 個、Moderate 4 個、Low 3 個。High 裡另有 5 個提權（CVE-2026-135500、CVE-2026-135504、CVE-2026-135505、CVE-2026-135531、CVE-2026-135546）。59 個 High 分布最多的元件是 DOM 核心（5 個）與 HTTP 網路元件（4 個）。只影響 Android 的有 3 個，下載元件的偽冒（CVE-2026-135561，Moderate）與擴充套件元件的兩個問題（Low）。
+- ESR 153.8 與 115.46 同日發布，分別修了 85 個與 44 個，ESR 140 這一輪同樣沒有對應的版本。Tor Browser 16.0.3 在同一天改以 153.8.0esr 為基底（見 [Tor 更新日誌](./tor.md)）。
+- 11 月 10 日的 Firefox 160 修了 99 個問題，High 57 個、Moderate 24 個、Low 18 個，沒有 Critical。Mozilla 沒有標注任何一項已被實際利用，公告裡也沒有出現 in the wild 的字樣。11 月 17 日另有 160.0.1。Mozilla 在 11 月 24 日把其中一項（WebRender 的 use-after-free，CVE-2026-124906）從 High 調降為 Moderate，修訂後是 High 56 個、Moderate 25 個，11 月 10 日的 ESR 153.7 公告也一併修訂。
 - 160.0.1 修了 2 個 High，影音播放元件的 use-after-free（CVE-2026-130021），以及只影響 Android 的 WebGL 繪圖元件邊界條件錯誤，可以用來提權（CVE-2026-130020）。Mozilla 同樣沒有標注已被實際利用。
 - 160 的 High 裡有 9 個沙箱逃逸（沙箱是瀏覽器隔開網頁與作業系統的那道隔離），落在服務工作執行緒（Service Workers）、頁面導覽、IPC、Cache API、圖形與音訊元件，Moderate 另有 4 個。High 裡還有 2 個同源政策繞過（CVE-2026-124874、CVE-2026-124902）與 2 個提權（CVE-2026-124854、CVE-2026-124907），其餘多是 DOM、CSS 解析與文字排版元件的 use-after-free。
 - Android 版另有兩項只影響 Android 的問題，自動填入的點擊劫持（CVE-2026-124911，Moderate）與影音元件的問題（CVE-2026-124937，Low），同樣在 160 修掉。

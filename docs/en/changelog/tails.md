@@ -24,6 +24,17 @@ A compromise on Tails means something different from a compromise on an ordinary
 
 The Tails project only distinguishes emergency from scheduled releases. The middle tier is a judgement community volunteers add after reading each advisory. Where the call is unclear, we round up.
 
+## Tails 7.18
+
+> 2026-11-24 · [Upstream announcement](https://tails.net/news/version_7.18/){target="_blank"} · [Known vulnerabilities in 7.17.1](https://tails.net/security/known_security_vulnerabilities_in_7.17.1/){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">Soon</span>A scheduled release that brings in Tor Browser security updates. Tails also published a known-vulnerabilities notice for 7.17.1 asking users to upgrade as soon as possible. Upstream does not mention active exploitation.
+- Tor Browser moves to 16.0.3, rebased on 153.8.0esr; Mozilla's ESR 153.8 advisory lists 85 CVEs (see the [Tor changelog](./tor.md)). The Tor client moves to 0.4.9.17, an emergency release mainly affecting relays that carries two TROVE identifiers (see the [tor daemon changelog](./tor-daemon.md)).
+- OnionShare's chat feature works again (issue 21833). The report says that since 7.14, starting a chat room in Tails and then opening it in Tor Browser failed with an error. Tails ships Debian's OnionShare 2.6.3; the Receive mode issue fixed upstream in 2.7.3 on 23 November affects 2.6.4 through 2.7.2 (see the [OnionShare changelog](./onionshare.md)), so it does not apply here.
+- The kernel moves to 6.12.118, covering Debian's kernel security advisory of 22 November (DSA-6652-1). The build manifest states that Debian security updates were taken from the 24 November snapshot, and the package list shows Kerberos (DSA-6650-1), WebKitGTK (DSA-6647-1), GPGME (DSA-6646-1) and LibreOffice (DSA-6635-1) at fixed versions.
+- The Zstandard compression library advisory from the same day (DSA-6657-1) did not make it in, and 7.18 still ships the unpatched libzstd. The 7.18 announcement does not say whether uBlock Origin, temporarily removed in 7.17.1, is back.
+- Automatic upgrades are available from Tails 7.0 or later. A fresh install wipes any existing Persistent Storage.
+
 ## Tails 7.17.1
 
 > 2026-11-17 · [Upstream announcement](https://tails.net/news/version_7.17.1/){target="_blank"} · [uBlock Origin advisory](https://github.com/gorhill/uBlock/security/advisories/GHSA-cmqw-9r2w-6wv2){target="_blank"}

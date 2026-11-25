@@ -23,6 +23,15 @@ OnionShare 的发版节奏比 Tor Browser 与 Tails 慢很多，2.6.3 到 2.6.4 
 
 发版节奏慢，目前没有出现过需要当天更新的等级，所以这一页还没有「立刻」。
 
+## OnionShare 2.7.3
+
+> 2026-11-23 · [上游发布页](https://github.com/onionshare/onionshare/releases/tag/v2.7.3){target="_blank"} · [GHSA-c2xx-7wjr-f25x](https://github.com/onionshare/onionshare/security/advisories/GHSA-c2xx-7wjr-f25x){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">尽快</span>修补一个接收模式的安全问题，影响 2.6.4 到 2.7.2。安全公告 GHSA-c2xx-7wjr-f25x 没有 CVE 编号，严重程度评为中等。公告附了在实际运行的服务上验证过的重现步骤，没有提到已被实际利用。
+- 接收模式设成只收文本消息、不收文件时，OnionShare 拒收文件之前会先把整个请求内容读进内存，上传大小上限的默认值又是不限制，取得接收网址的发送者可以让开着接收模式的电脑占用大量内存。发布说明写明单次请求的影响上限是 1 GB。这一版改成不必读完请求内容就直接拒收。公告附的测试里，设了上传大小上限（2.7 新增）的服务会直接返回错误（HTTP 413），不会把整个请求内容读进内存。
+- 其余的错误修正包括接收模式收到含非 ASCII 字符的文件名时改用转写保留可读的文件名，以及自动改用其他 Tor 控制端口时陷入循环的问题。另外更新了 Tails 的网址、波斯文、阿尔巴尼亚文、法文与简体中文的翻译，以及依赖包。
+- Tails 内置 Debian 打包的 2.6.3，不在这则公告的影响范围。11 月 24 日的 Tails 7.18 另外修好了聊天功能在 Tails 上无法使用的问题（见 [Tails 更新日志](./tails.md)）。
+
 ## OnionShare 2.7.2
 
 > 2026-11-07 · [上游发布页](https://github.com/onionshare/onionshare/releases/tag/v2.7.2){target="_blank"} · [GHSA-vc3q-8pwp-9hw6](https://github.com/onionshare/onionshare/security/advisories/GHSA-vc3q-8pwp-9hw6){target="_blank"}
@@ -84,10 +93,11 @@ OnionShare 的发版节奏比 Tor Browser 与 Tails 慢很多，2.6.3 到 2.6.4 
 
 ## OnionShare 2.6.2
 
-> 2024-03-21 · [上游发布页](https://github.com/onionshare/onionshare/releases/tag/v2.6.2){target="_blank"}
+> 2024-03-21 · [上游发布页](https://github.com/onionshare/onionshare/releases/tag/v2.6.2){target="_blank"} · [上游的安全公告列表](https://github.com/onionshare/onionshare/security/advisories){target="_blank"}
 
 - <span class="urg-tag urg-tag--soon">尽快</span>全部是安全修补，集中在接收模式与聊天模式的输入处理。安全公告没有提到已被实际利用。
 - 历史记录项目的路径移除换行字符。
 - 接收模式的文本消息长度上限设为 524288 字符。
 - 用户名只允许特定 ASCII 字符并移除控制字符，另补上名称验证的异常处理，避免无声加入聊天室。
 - 收到 `disconnect` 事件时强制断开该用户的连接。
+- 上游在 2026 年 11 月 23 日为这一版的安全修正补发了五则安全公告，来源是 Cure53 的安全审计（报告编号 TTP-03），都没有 CVE 编号。两项评为高，聊天室的参与者可以伪造断线事件、继续用原本的名称收发消息（GHSA-wh24-f3hg-r3h2），以及不出现在用户清单、也不广播加入消息就进入聊天室旁听（GHSA-r78w-rpvr-g57q）。一项评为中等，用户名夹带控制字符冒充他人（GHSA-9mxm-qp84-xgx6）。两项评为低，是接收模式的文本消息不限长度造成的拒绝服务，以及历史记录的换行处理。还在用 2.6.1 以前版本开聊天室的人，参与者名单可能不完整。

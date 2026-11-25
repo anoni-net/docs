@@ -23,6 +23,15 @@ OnionShare 的發版節奏比 Tor Browser 與 Tails 慢很多，2.6.3 到 2.6.4 
 
 發版節奏慢，目前沒有出現過需要當天更新的等級，所以這一頁還沒有「立刻」。
 
+## OnionShare 2.7.3
+
+> 2026-11-23 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.7.3){target="_blank"} · [GHSA-c2xx-7wjr-f25x](https://github.com/onionshare/onionshare/security/advisories/GHSA-c2xx-7wjr-f25x){target="_blank"}
+
+- <span class="urg-tag urg-tag--soon">儘快</span>修補一個接收模式的安全問題，影響 2.6.4 到 2.7.2。安全公告 GHSA-c2xx-7wjr-f25x 沒有 CVE 編號，嚴重度評為中等。公告附了在實際執行的服務上驗證過的重現步驟，沒有提到已被實際利用。
+- 接收模式設成只收文字訊息、不收檔案時，OnionShare 拒收檔案之前會先把整個請求內容讀進記憶體，上傳大小上限的預設值又是不限制，取得接收網址的寄件人可以讓開著接收模式的電腦耗用大量記憶體。發布說明寫明單次請求的影響上限是 1 GB。這一版改成不必讀完請求內容就直接拒收。公告附的測試裡，有設上傳大小上限（2.7 新增）的服務會直接回應錯誤（HTTP 413），不會把整個請求內容讀進記憶體。
+- 其餘的錯誤修正包含接收模式收到含非 ASCII 字元的檔名時改用轉寫保留可讀的檔名，以及自動改用其他 Tor 控制連接埠時陷入迴圈的問題。另外更新了 Tails 的網址、波斯文、阿爾巴尼亞文、法文與簡體中文的翻譯，以及相依套件。
+- Tails 內建 Debian 打包的 2.6.3，不在這則公告的影響範圍。11 月 24 日的 Tails 7.18 另外修好了聊天功能在 Tails 上無法使用的問題（見 [Tails 更新日誌](./tails.md)）。
+
 ## OnionShare 2.7.2
 
 > 2026-11-07 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.7.2){target="_blank"} · [GHSA-vc3q-8pwp-9hw6](https://github.com/onionshare/onionshare/security/advisories/GHSA-vc3q-8pwp-9hw6){target="_blank"}
@@ -84,10 +93,11 @@ OnionShare 的發版節奏比 Tor Browser 與 Tails 慢很多，2.6.3 到 2.6.4 
 
 ## OnionShare 2.6.2
 
-> 2024-03-21 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.6.2){target="_blank"}
+> 2024-03-21 · [上游發布頁](https://github.com/onionshare/onionshare/releases/tag/v2.6.2){target="_blank"} · [上游的安全公告列表](https://github.com/onionshare/onionshare/security/advisories){target="_blank"}
 
 - <span class="urg-tag urg-tag--soon">儘快</span>全部是安全修補，集中在接收模式與聊天模式的輸入處理。上游沒有提到這些問題已被實際利用。
 - 歷史紀錄項目的路徑移除換行字元。
 - 接收模式的文字訊息長度上限設為 524288 字元。
 - 使用者名稱只允許特定 ASCII 字元並移除控制字元，另補上名稱驗證的例外處理，避免無聲加入聊天室。
 - 收到 `disconnect` 事件時強制中斷該使用者的連線。
+- 上游在 2026 年 11 月 23 日為這一版的安全修正補發了五則安全公告，來源是 Cure53 的安全審計（報告編號 TTP-03），都沒有 CVE 編號。兩項評為高，聊天室的參與者可以偽造斷線事件、繼續用原本的名稱收發訊息（GHSA-wh24-f3hg-r3h2），以及不出現在使用者清單、也不廣播加入訊息就進入聊天室旁聽（GHSA-r78w-rpvr-g57q）。一項評為中等，使用者名稱夾帶控制字元冒充他人（GHSA-9mxm-qp84-xgx6）。兩項評為低，是接收模式的文字訊息不限長度造成的阻斷服務，以及歷史紀錄的換行處理。還在用 2.6.1 以前版本開聊天室的人，參與者名單可能不完整。
