@@ -399,11 +399,11 @@ Have two numbers ready before you start. The PIN unlocks the SIM card; enter it 
 
 ## Disabling 2G (optional)
 
-Fake base stations lure nearby phones onto a fake 2G tower to locate them, intercept communications, or send scam texts. Where 2G has been shut down, as in Taiwan, disabling it costs nothing in everyday use, and a 2G signal on your phone suggests a fake base station (see [how phones are tracked and monitored](../basics/phone-surveillance.md))[^ssd-android].
+Fake base stations lure nearby phones onto a fake 2G tower to locate them, intercept communications, or send scam texts[^ssd-android]. Where 2G has been shut down, as in Taiwan, disabling it costs nothing in everyday use, and a 2G signal on your phone suggests a fake base station (see [how phones are tracked and monitored](../basics/phone-surveillance.md)). Where 2G still exists, you may lose service in places that only have a 2G signal.
 
 === "iPhone"
 
-    The iPhone has no separate 2G switch. Lockdown Mode disables 2G but also restricts many other features; see After the ten steps below.
+    We have not found a separate 2G switch in Apple's documentation. Lockdown Mode turns off 2G and 3G cellular support[^ios-lockdown-2g] but also restricts many other features; see After the ten steps below.
 
 === "Android"
 
@@ -467,3 +467,4 @@ If you follow along and can't find an option, search for its name in Settings fi
 [^samsung-puk]: [What is a PUK code?](https://www.samsung.com/africa_en/support/mobile-devices/what-is-a-puk-code/){target="_blank"} - Samsung Africa support.
 [^ssd-android]: [How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"} - EFF Surveillance Self-Defense, last reviewed 2025-06-23.
 [^ssd-iphone]: [How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"} - EFF Surveillance Self-Defense, last reviewed 2025-09-15.
+[^ios-lockdown-2g]: [About Lockdown Mode](https://support.apple.com/en-us/105120){target="_blank"} - Apple Support. 2G and 3G cellular support is turned off on iPhone and iPad.

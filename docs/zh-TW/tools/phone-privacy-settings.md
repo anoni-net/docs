@@ -399,11 +399,11 @@ SIM 卡被拔走插到另一支手機，對方就能收到寄給你的簡訊驗�
 
 ## 選做：關閉 2G
 
-偽基地台會引誘附近的手機改連到假的 2G 基地台，藉此定位、攔截通訊或發送詐騙簡訊。台灣的 2G 網路已經關閉，關掉手機的 2G 不會影響一般使用，手機出現 2G 訊號反而代表可能遇到偽基地台（見 [手機的位置追蹤與監控手法](../basics/phone-surveillance.md) 的〈偽基地台〉）[^ssd-android]。
+偽基地台會引誘附近的手機改連到假的 2G 基地台，藉此定位、攔截通訊或發送詐騙簡訊[^ssd-android]。台灣的 2G 網路已經關閉，關掉手機的 2G 不會影響一般使用，手機出現 2G 訊號反而代表可能遇到偽基地台（見 [手機的位置追蹤與監控手法](../basics/phone-surveillance.md) 的〈偽基地台〉）。出國到還有 2G 網路的地方，只有 2G 訊號時會無法連線。
 
 === "iPhone"
 
-    iPhone 沒有單獨的 2G 開關，開啟「封閉模式」會停用 2G，但也會限制很多其他功能，位置與取捨見下方的〈做完之後〉。
+    我們沒有在 Apple 的說明裡找到單獨關閉 2G 的開關。開啟「封閉模式」會關閉 2G 與 3G 行動網路支援[^ios-lockdown-2g]，但也會限制很多其他功能，位置與取捨見下方的〈做完之後〉。
 
 === "Android"
 
@@ -467,3 +467,4 @@ SIM 卡被拔走插到另一支手機，對方就能收到寄給你的簡訊驗�
 [^samsung-puk]: [手機顯示需要輸入 PUK 碼](https://www.samsung.com/tw/support/mobile-devices/my-mobile-is-locked-could-you-tell-me-what-is-puk-code/){target="_blank"} - Samsung 台灣支援頁。
 [^ssd-android]: [How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"} - EFF Surveillance Self-Defense，審閱日 2025-06-23。
 [^ssd-iphone]: [How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"} - EFF Surveillance Self-Defense，審閱日 2025-09-15。
+[^ios-lockdown-2g]: [關於「封閉模式」](https://support.apple.com/zh-tw/105120){target="_blank"} - Apple 支援。開啟後 iPhone 與 iPad 會關閉 2G 和 3G 行動網路支援。

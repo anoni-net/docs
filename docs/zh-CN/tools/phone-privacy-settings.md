@@ -405,11 +405,11 @@ SIM 卡被拔走插到另一部手机，对方就能收到发给你的短信验�
 
 ## 选做：关闭 2G
 
-伪基站会引诱附近的手机改连到假的 2G 基站，借此定位、拦截通讯或发送诈骗短信。在已经关闭 2G 的地区（例如台湾），关掉手机的 2G 不会影响一般使用，手机出现 2G 信号反而代表可能遇到伪基站（见 [手机的位置追踪与监控手法](../basics/phone-surveillance.md) 的〈伪基站〉）。仍有 2G 网络的地区，关掉之后在只有 2G 信号的地方会无法上网[^ssd-android]。
+伪基站会引诱附近的手机改连到假的 2G 基站，借此定位、拦截通讯或发送诈骗短信[^ssd-android]。在已经关闭 2G 的地区（例如台湾），关掉手机的 2G 不会影响一般使用，手机出现 2G 信号反而代表可能遇到伪基站（见 [手机的位置追踪与监控手法](../basics/phone-surveillance.md) 的〈伪基站〉）。仍有 2G 网络的地区，关掉之后在只有 2G 信号的地方会无法上网。
 
 === "iPhone"
 
-    iPhone 没有单独的 2G 开关，开启「锁定模式」会停用 2G，但也会限制很多其他功能，位置与取舍见下方的〈做完之后〉。
+    我们没有在 Apple 的说明里找到单独关闭 2G 的开关。开启「锁定模式」会关闭 2G 和 3G 蜂窝网络支持[^ios-lockdown-2g]，但也会限制很多其他功能，位置与取舍见下方的〈做完之后〉。
 
 === "Android"
 
@@ -473,3 +473,4 @@ SIM 卡被拔走插到另一部手机，对方就能收到发给你的短信验�
 [^samsung-puk]: [手機顯示需要輸入 PUK 碼](https://www.samsung.com/tw/support/mobile-devices/my-mobile-is-locked-could-you-tell-me-what-is-puk-code/){target="_blank"} - Samsung 台湾支持页（正体中文）。
 [^ssd-android]: [How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"} - EFF Surveillance Self-Defense，审阅日 2025-06-23。
 [^ssd-iphone]: [How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"} - EFF Surveillance Self-Defense，审阅日 2025-09-15。
+[^ios-lockdown-2g]: [关于“锁定模式”](https://support.apple.com/zh-cn/105120){target="_blank"} - Apple 支持。打开后 iPhone 和 iPad 的 2G 和 3G 蜂窝网络支持会关闭。
