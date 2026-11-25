@@ -2772,6 +2772,14 @@
 	#What-this-means-for-you
 	#Where-to-go-from-here
 	#Why-the-regional-frame-is-load-bearing
+/en/scenarios/students/
+	#Keeping-school-and-personal-life-apart
+	#Privacy-for-students
+	#Raising-concerns
+	#Searches-and-confiscated-phones
+	#Sources-and-review
+	#What-schools-can-see
+	#Where-to-go-from-here
 /en/scenarios/travel-ai-briefing/
 	#1-Digital-environment-censorship-Tor-VPN-device-search
 	#2-Legal-and-political-risk
@@ -4128,6 +4136,19 @@
 	#為什麼在地的法規框架是關鍵
 	#相關閱讀
 	#馬來西亞的法規環境
+/scenarios/students/
+	#學校帳號
+	#學校發的平板
+	#學校看得到的資料
+	#學校與私人的分開
+	#學生的校園隱私
+	#學生證與監視器
+	#常聽到的理由與回應
+	#提出疑問的管道
+	#書包與手機的檢查規定
+	#本頁的來源與核對
+	#校園網路
+	#相關閱讀
 /scenarios/travel-ai-briefing/
 	#一手來源請自行核對-AI-的答案
 	#一數位環境審查TorVPN設備搜查
@@ -6869,6 +6890,19 @@
 	#新加坡的法规环境
 	#相关阅读
 	#马来西亚的法规环境
+/zh-cn/scenarios/students/
+	#书包与手机的检查规定
+	#学校与私人的分开
+	#学校发的平板
+	#学校看得到的数据
+	#学校账号
+	#学生的校园隐私
+	#学生证与监视器
+	#常听到的理由与回应
+	#提出疑问的管道
+	#本页的来源与核对
+	#校园网络
+	#相关阅读
 /zh-cn/scenarios/travel-ai-briefing/
 	#一手来源请自行核对-AI-的答案
 	#一数字环境审查TorVPN设备搜查

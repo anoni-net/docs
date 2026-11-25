@@ -83,6 +83,12 @@ icon: material/account-group-outline
 
     從家庭的安全計畫出發，家長監護在路由器、裝置與 App 三層的能與不能，以及學校發的平板。
 
+- :material-school-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[學生的校園隱私](./students.md)**
+
+    ---
+
+    寫給國高中生與大學生，學校的平板、帳號、網路與學生證看得到什麼，如何把學校與私人分開，以及提出疑問的管道。
+
 </div>
 
 ### 依你在哪裡發言

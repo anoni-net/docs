@@ -83,6 +83,12 @@ icon: material/account-group-outline
 
     从家庭的安全计划出发，家长控制在路由器、设备与 App 三层的能与不能，以及学校发的平板。
 
+- :material-school-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[学生的校园隐私](./students.md)**
+
+    ---
+
+    写给国高中生与大学生，学校的平板、账号、网络与学生证看得到什么，如何把学校与私人分开，以及提出疑问的管道（以台湾的学校为例）。
+
 </div>
 
 ### 依你在哪里发言
