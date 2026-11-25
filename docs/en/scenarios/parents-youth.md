@@ -49,7 +49,7 @@ Treat school-issued devices as monitoring tools and keep personal accounts off t
 
 ## Getting help in Taiwan
 
-Harmful content online can be reported to [iWIN](https://i.win.org.tw/iWIN/){target="_blank"}, Taiwan's internet content protection institution, hotline `(02)2577-5118`. For bullying, threats, or sexual exploitation, call the `113` protection hotline or the police.
+Harmful content online can be reported to [iWIN](https://i.win.org.tw/iWIN/){target="_blank"}, Taiwan's internet content protection institution, advice line `02-2577-5118` (weekday office hours, per its website as of November 2026). For bullying, threats, or sexual exploitation, call the `113` protection hotline or the police.
 
 ## Sources and review
 

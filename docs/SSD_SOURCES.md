@@ -39,7 +39,7 @@ SSD 每篇指南的頁首都有 `Last Reviewed`，跟下表「改寫依據」那
 | `basics/phone-surveillance` | [Mobile Phones: Other Surveillance Techniques](https://ssd.eff.org/module/mobile-phones-malware) | 2024-11-05 | 2026-11 |
 | `scenarios/parents-youth` | [Online Privacy for Parents and Youth](https://ssd.eff.org/module/online-privacy-for-parents-and-youth) | 2026-10-21 | 2026-11 |
 
-`tools/tor-browser-mobile` 不是依 SSD 改寫，但依〈How to: Use Tor on Android and iPhone〉頁首的提醒，加上了 2026-08 公開的 iOS WebKit IP 洩漏警示，Apple 修補之後要回頭更新或拿掉。
+`tools/tor-browser-mobile` 不是依 SSD 改寫，但依〈How to: Use Tor on Android and iPhone〉頁首的提醒，加上了 2026-08 公開的 iOS WebKit IP 洩漏警示（[anoni-net/docs#698](https://github.com/anoni-net/docs/pull/698)），Apple 修補之後要回頭更新或拿掉。
 
 ## 全部篇目的對照
 

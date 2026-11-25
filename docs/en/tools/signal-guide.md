@@ -13,7 +13,7 @@ This page is adapted from two EFF Surveillance Self-Defense guides, [How to: Use
 !!! tip "Short on time? Start here"
 
     - Turn on Registration Lock and write down your Signal PIN
-    - Set a username and change "Who can find me by number" to Nobody, so people you chat with do not see your number
+    - Set a username and check that "Who can see my number" is Nobody. To stop people who have your number from finding you, set "Who can find me by number" to Nobody too
     - Use disappearing messages for sensitive chats, remembering that anyone can still take a screenshot
     - In a large group, set permissions and admins first, and require admin approval for the group link
 

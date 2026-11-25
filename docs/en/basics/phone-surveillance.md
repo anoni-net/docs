@@ -23,7 +23,7 @@ Carriers can calculate a phone's location from the signal its towers receive, to
 
 ## Fake base stations
 
-Cell-site simulators (IMSI catchers, or Stingrays) are portable fake towers that make nearby phones connect to them, often by exploiting weaknesses in 2G[^ssd-loc]. Scam rings use them in Taiwan too: in 2024 police arrested people driving around with a transmitter that sent phishing texts spoofing the government's "111" short code, and the National Communications Commission reminded the public that Taiwan has shut down 2G, so a 2G signal is abnormal[^cna]. Android 12 and later let you disable 2G, usually in the SIM or mobile network settings[^aosp-2g]. On iPhone, Lockdown Mode disables 2G along with many other features. End-to-end encrypted messaging keeps content safe even through a fake tower[^ssd-loc].
+Cell-site simulators (IMSI catchers, or Stingrays) are portable fake towers that make nearby phones connect to them, often by exploiting weaknesses in 2G[^ssd-loc]. Scam rings use them in Taiwan too: in 2024 police arrested people driving around with a transmitter that sent phishing texts spoofing the government's "111" short code, and the National Communications Commission reminded the public that Taiwan has shut down 2G, so a 2G signal is abnormal[^cna]. Supported Android phones can disable 2G, so they no longer scan for or connect to 2G networks except for emergency calls, and Android's documentation notes this still matters where carriers have dropped 2G. The switch is usually in the SIM or mobile network settings[^aosp-2g]. On iPhone, Lockdown Mode disables 2G along with many other features. End-to-end encrypted messaging keeps content safe even through a fake tower[^ssd-loc].
 
 ## Wi-Fi and Bluetooth
 
