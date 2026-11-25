@@ -24,21 +24,28 @@ nav:
       - guides/index.md
       - help/index.md
       - community/skill-level.md
+      # Concepts and Scenarios sit permanently expanded in the desktop sidebar. Before
+      # grouping, their 13 and 16 pages made the Guides column taller than a screen.
+      # Group names are the same strings as the headings on each index page, and
+      # tools/test_guides_nav_groups.mjs compares the two (Tools excepted, see below).
       - !ENV [NAV_BASICS, "Concepts"]:
           - basics/index.md
-          - basics/internet-freedom.md
-          - basics/anonymity-vs-privacy.md
-          - basics/metadata.md
-          - basics/threat-model.md
-          - basics/platform-tracking.md
-          - basics/browser-fingerprinting.md
-          - basics/surveillance-capability.md
-          - basics/phone-surveillance.md
-          - basics/network-censorship.md
-          - basics/multiple-identities.md
-          - basics/payments-anonymity.md
-          - basics/e2ee.md
-          - basics/mistaken-for-anonymity.md
+          - "Vocabulary and framing":
+              - basics/internet-freedom.md
+              - basics/anonymity-vs-privacy.md
+              - basics/threat-model.md
+              - basics/e2ee.md
+              - basics/mistaken-for-anonymity.md
+          - "The traces you leave":
+              - basics/metadata.md
+              - basics/platform-tracking.md
+              - basics/browser-fingerprinting.md
+              - basics/payments-anonymity.md
+              - basics/multiple-identities.md
+          - "Surveillance and blocking":
+              - basics/surveillance-capability.md
+              - basics/phone-surveillance.md
+              - basics/network-censorship.md
       # Groups mirror the three sections in tools/index.md. The en split is its own
       # (Start here / Comparisons / Contribute), not a translation of the zh-TW
       # four-layer one; keep this in step with that page rather than with mkdocs.yml.
@@ -78,24 +85,30 @@ nav:
               - tools/tor-snowflake.md
               - tools/signal-proxy.md
               - tools/ooni-run-v2.md
+      # Groups and order follow the ### headings in scenarios/index.md. The shared
+      # baseline is a single page, so it stays outside the groups, first in line.
       - !ENV [NAV_SCENARIOS, "Scenarios"]:
           - scenarios/index.md
           - scenarios/everyday-baseline.md
-          - scenarios/journalist.md
-          - scenarios/activist.md
-          - scenarios/election-observer.md
-          - scenarios/nonprofit-anonymous-donation.md
-          - scenarios/lgbtq.md
-          - scenarios/domestic-violence.md
-          - scenarios/parents-youth.md
-          - scenarios/students.md
-          - scenarios/mainland-speech.md
-          - scenarios/singapore-malaysia-speech.md
-          - scenarios/asia-travel.md
-          - scenarios/travel-connectivity.md
-          - scenarios/travel-ai-briefing.md
-          - scenarios/shutdown.md
-          - scenarios/org-website-vulnerability.md
+          - "By your role":
+              - scenarios/journalist.md
+              - scenarios/activist.md
+              - scenarios/election-observer.md
+              - scenarios/nonprofit-anonymous-donation.md
+          - "By your situation":
+              - scenarios/lgbtq.md
+              - scenarios/domestic-violence.md
+              - scenarios/parents-youth.md
+              - scenarios/students.md
+          - "By where you speak":
+              - scenarios/mainland-speech.md
+              - scenarios/singapore-malaysia-speech.md
+          - "Travel and external events":
+              - scenarios/asia-travel.md
+              - scenarios/travel-connectivity.md
+              - scenarios/travel-ai-briefing.md
+              - scenarios/shutdown.md
+              - scenarios/org-website-vulnerability.md
   # Groups follow the article list in regional/index.md.
   - !ENV [NAV_REGIONAL, "Regional"]:
       - regional/index.md

@@ -7,7 +7,7 @@ icon: material/toolbox-outline
 
 # :material-toolbox-outline: 工具層
 
-這個分類介紹幾個在匿名網路討論中最常被提到的工具（還沒看過[概念層](../basics/index.md)的話，可以先翻一下打底）。25 篇文章按連線、環境、觀測、日常基本功四個層次排列，每個層次解決一類問題，挑跟你情境相關的那一群開始讀就好，不必整本看完。動工具之前可以先看 [威脅模型如何建立](../basics/threat-model.md)，確認自己在抗誰，避免把工具直接當答案的誤區。
+這個分類介紹幾個在匿名網路討論中最常被提到的工具（還沒看過[概念層](../basics/index.md)的話，可以先翻一下打底）。31 篇文章按連線、環境、觀測、日常基本功四個層次排列，每個層次解決一類問題，挑跟你情境相關的那一群開始讀就好，不必整本看完。動工具之前可以先看 [威脅模型如何建立](../basics/threat-model.md)，確認自己在抗誰，避免把工具直接當答案的誤區。
 
 ## 先看這篇
 
@@ -34,7 +34,7 @@ icon: material/toolbox-outline
 - [Tails、Whonix、Qubes 的差別](./tails-vs-whonix-vs-qubes.md)：三套常見匿名作業系統的取捨，依角色推薦適合的選擇。
 - [GrapheneOS：高度隱私的行動作業系統](./grapheneos.md)：把 Android 安全強化並去 Google 化的手機系統，以及 Google 收緊 AOSP 後它面臨的處境。
 
-## 觀測層：網路審查的可驗證紀錄
+## 觀測層：審查的可驗證紀錄 { #觀測層網路審查的可驗證紀錄 }
 
 想把「連不上」、「跑很慢」變成可引用的公開資料，或想做封鎖測量活動的人，從這群開始。
 
@@ -46,20 +46,31 @@ icon: material/toolbox-outline
 
 想從通訊、協作、帳號、金流、AI 使用先補齊基礎的人，從這群開始。各篇主題彼此獨立，不必照順序。
 
+### 手機與裝置
+
 - [手機隱私設定逐步指引](./phone-privacy-settings.md)：拿著自己的手機照編號調整，iPhone、Android、Samsung Galaxy 各有對照的路徑，約三十分鐘。
-- [社群平台的隱私設定](./social-media-settings.md)：LINE、Facebook、Instagram、Threads 上決定同事、前任、家人與陌生人能不能找到你、看得到你什麼的設定，以及 Facebook 社團的管理方式。
 - [藍牙追蹤器的偵測與處理](./bluetooth-tracker.md)：AirTag 這類追蹤器被偷放進包包或車上時，iPhone 與 Android 偵測得到哪些、收到警示後如何找出來，以及找到之後先顧安全再決定是否停用。
-- [網路釣魚的辨識與防範](./phishing.md)：假登入頁與魚叉式釣魚如何運作，更新、密碼管理器、passkey、附件與郵件圖片這幾項防範，以及輸入了密碼之後的處理。
 - [裝置加密與資料抹除](./device-encryption.md)：Windows、Mac、Linux、iPhone、Android 的全碟加密，復原金鑰存在哪裡，以及出售或送出裝置前的清除。
 - [惡意軟體的防範與處理](./malware.md)：常見的傳播方式、防毒與安裝來源、入侵跡象，以及發現之後先斷網、換裝置改密碼、重灌系統的順序。
+
+### 帳號與密碼
+
+- [網路釣魚的辨識與防範](./phishing.md)：假登入頁與魚叉式釣魚如何運作，更新、密碼管理器、passkey、附件與郵件圖片這幾項防範，以及輸入了密碼之後的處理。
+- [密碼管理器入門](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取捨，加上 TOTP、Passkey、硬體金鑰。
+- [Asian Diceware 密語字典](./asian-diceware.md)：社群參考 EFF 做的 7776 字密語詞表，混入亞洲外來語，教你怎麼用骰子或安全亂數產生好記又夠強的密語。
+- [什麼是 passkey](./what-is-passkey.md)：存在密碼管理器裡的憑證，站上拿它當資料的鑰匙。兩種機制各靠什麼、跟密語差在哪、綁網域與遺失的限制。
+- [郵件別名怎麼用，以及它把信任交給誰](./email-alias.md)：轉寄服務、自有網域 catch-all 與加號子地址的差別，別名把往來紀錄集中到誰手上，以及台灣哪些場合用得上、哪些場合接不上。
+
+### 訊息與檔案
+
 - [匿名通訊工具比較](./messaging-comparison.md)：Signal、SimpleX、Session、Briar、Matrix 的端對端加密、Metadata 與身分模型差異。
 - [Signal 的設定與群組管理](./signal-guide.md)：註冊鎖、電話號碼的顯示、自動銷毀訊息、通知與備份這幾項值得調整的設定，以及大型群組的權限、管理員與群組規則。
 - [什麼是 CryptPad](./what-is-cryptpad.md)：伺服器讀不到內容的線上協作辦公套件，文件在瀏覽器端就完成加密，社群自架網站有完整正體中文介面。
-- [密碼管理器入門](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取捨，加上 TOTP、Passkey、硬體金鑰。
-- [Asian Diceware 密語字典](./asian-diceware.md)：社群參考 EFF 做的 7776 字密語詞表，混入亞洲外來語，教你怎麼用骰子或安全亂數產生好記又夠強的密語。
 - [什麼是 age](./what-is-age.md)：規格一頁、金鑰一行、沒有選項的檔案加密格式。怎麼用、格式長什麼樣、跟 PGP 差在哪，以及站上的檔案加密工具為什麼選它。
-- [什麼是 passkey](./what-is-passkey.md)：存在密碼管理器裡的憑證，站上拿它當資料的鑰匙。兩種機制各靠什麼、跟密語差在哪、綁網域與遺失的限制。
-- [郵件別名怎麼用，以及它把信任交給誰](./email-alias.md)：轉寄服務、自有網域 catch-all 與加號子地址的差別，別名把往來紀錄集中到誰手上，以及台灣哪些場合用得上、哪些場合接不上。
+
+### 平台與日常服務
+
+- [社群平台的隱私設定](./social-media-settings.md)：LINE、Facebook、Instagram、Threads 上決定同事、前任、家人與陌生人能不能找到你、看得到你什麼的設定，以及 Facebook 社團的管理方式。
 - [RSS 訂閱入門](./rss.md)：不必註冊帳號、依發布時間排列的網站追蹤方式，閱讀器如何挑選、本機與雲端閱讀器的取捨，以及經由 Tor 讀取 onion 版本的 feed。
-- [加密貨幣的隱私光譜](./crypto-privacy-spectrum.md)：BTC、Monero、Zcash、穩定幣的隱私差異與自管錢包、multisig。
 - [用 AI 工作時怎麼避免資料外洩](./ai-privacy.md)：貼進去的內容去了哪裡、消費版與企業版的分野、刪除對話為什麼不等於資料消失、你沒有主動貼卻也送出去的那些，以及中國境內服務的另一套框架。
+- [加密貨幣的隱私光譜](./crypto-privacy-spectrum.md)：BTC、Monero、Zcash、穩定幣的隱私差異與自管錢包、multisig。

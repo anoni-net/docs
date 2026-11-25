@@ -23,11 +23,12 @@ GitHub Actions 各個 workflow 的觸發條件、建置與部署流程，以及�
   - 觸發路徑：`docs/zh-TW/**/*.md`、`docs/zh-CN/**/*.md`、`docs/en/**/*.md` 與 linter 本身
   - 只掃這次 PR 變更的檔案，避免舊文的遺留違規擋住新貢獻
   - 這個 job 會擋 merge。error 級規則讓 linter 回 exit 1，job 就紅。warn 級規則仍只以 annotation 標在變更行上，不影響 exit code
+  - 同一支也執行 `tools/test_guides_nav_groups.mjs`，比對概念、工具、場景三區的 nav 分組與索引頁小標題。新增文章的 PR 只改 md，掛在這裡才能涵蓋
   - 待辦：repo 設定尚未把這個 check 列為 branch protection 必過，所以目前擋得住 PR 的紅燈，擋不住有權限的人直接合併
 
 - **tools-tests.yml**: 執行 `tools/` 底下那幾支零相依的測試
   - 觸發路徑：`tools/**`、`docs/zh-TW/sw.js`、`docs/overrides/base.html`、`docs/hooks/**`
-  - 內容：`test_sw_offline.mjs`（service worker 的離線行為）、`test_lang_preference.mjs`（語言偏好導向）、`test_offline_index.py`（離線內容索引的分組與排序）、`test_offline_library.mjs`（離線內容管理頁的介面）、`test_passphrase.mjs`（密語與密碼產生器的取樣與熵）、`test_qrcode.mjs`（QR code 的編碼往返）、`test_leaks.mjs`（指紋示範頁不送資料）、`test_cf_purge.py`（快取清除映射）、`test_layers.mjs`（地球儀的圖層清單，這邊涵蓋「改了 `sw.js` 或 `tools/`、沒碰地球儀」那個方向）
+  - 內容：`test_sw_offline.mjs`（service worker 的離線行為）、`test_lang_preference.mjs`（語言偏好導向）、`test_offline_index.py`（離線內容索引的分組與排序）、`test_offline_library.mjs`（離線內容管理頁的介面）、`test_passphrase.mjs`（密語與密碼產生器的取樣與熵）、`test_qrcode.mjs`（QR code 的編碼往返）、`test_leaks.mjs`（指紋示範頁不送資料）、`test_cf_purge.py`（快取清除映射）、`test_layers.mjs`（地球儀的圖層清單，這邊涵蓋「改了 `sw.js` 或 `tools/`、沒碰地球儀」那個方向）、`test_utils_index_order.mjs` 與 `test_guides_nav_groups.mjs`（小工具與指南三區的 nav 分組跟索引頁一致，這邊涵蓋改 nav 但沒改文章的方向）
   - 不需要建置產物，執行完不到十秒。`test_docs_style_lint.py` 不在這裡，由 `docs-style-lint.yml` 執行
   - `check_precache.mjs` 需要 `docs/output`，不在這一支裡，由 `build_docs.yml` 在建完 standard 版之後執行
 

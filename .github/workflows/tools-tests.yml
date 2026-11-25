@@ -182,6 +182,10 @@ jobs:
       - name: 小工具索引順序
         run: node tools/test_utils_index_order.mjs
 
+      # 指南三區（概念、工具、場景）同一件事，改 nav 沒碰文章的 PR 由這裡涵蓋
+      - name: 指南三區的分組
+        run: node tools/test_guides_nav_groups.mjs
+
       - name: PDF 頁面整理
         run: node tools/test_pdfpages.mjs
 

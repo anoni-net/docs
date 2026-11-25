@@ -46,8 +46,11 @@
 /advanced/post-quantum/ -> https://anoni.net/articles/post-quantum/
 /advanced/zk-identity-payments/ -> https://anoni.net/articles/zk-identity-payments/
 /basics/
+	#你留下的痕跡
+	#基本詞彙與框架
 	#文章一覽
 	#概念層
+	#監控與封鎖
 /basics/anonymity-vs-privacy/
 	#一個工具通常做不到全部
 	#一個常見的誤判把機密當成匿名
@@ -1288,6 +1291,9 @@
 /en/basics/
 	#Articles
 	#Concepts
+	#Surveillance-and-blocking
+	#The-traces-you-leave
+	#Vocabulary-and-framing
 	#Where-to-go-from-here
 /en/basics/anonymity-vs-privacy/
 	#Anonymity-privacy-pseudonymity-and-confidentiality
@@ -4399,9 +4405,13 @@
 /tools/
 	#先看這篇
 	#工具層
+	#帳號與密碼
+	#平台與日常服務
+	#手機與裝置
 	#日常隱私基本功
 	#環境層匿名作業系統
 	#觀測層網路審查的可驗證紀錄
+	#訊息與檔案
 	#連線層Tor-工具家族
 /tools/ai-privacy/
 	#AI-會編造也是安全問題
@@ -5234,8 +5244,11 @@
 /zh-cn/advanced/post-quantum/ -> https://anoni.net/zh-cn/articles/post-quantum/
 /zh-cn/advanced/zk-identity-payments/ -> https://anoni.net/zh-cn/articles/zk-identity-payments/
 /zh-cn/basics/
+	#你留下的痕迹
+	#基本词汇与框架
 	#文章一览
 	#概念层
+	#监控与封锁
 /zh-cn/basics/anonymity-vs-privacy/
 	#一个工具通常做不到全部
 	#一个常见的误判把机密当成匿名
@@ -7153,9 +7166,13 @@
 /zh-cn/tools/
 	#先看这篇
 	#工具层
+	#平台与日常服务
+	#手机与设备
 	#日常隐私基本功
+	#消息与文件
 	#环境层匿名作业系统
 	#观测层网络审查的可验证记录
+	#账号与密码
 	#连线层Tor-工具家族
 /zh-cn/tools/ai-privacy/
 	#AI-代理的访问范围
