@@ -45,7 +45,7 @@ Many steps protect you as well as your child: install EFF's Privacy Badger, disa
 
 ## School devices and software
 
-Treat school-issued devices as monitoring tools and keep personal accounts off them. Ask the school what software it uses, and work with other parents to push for better settings or opting out[^ssd]. In Taiwan, tablets issued under the Ministry of Education's "a tablet for every student" program report usage to a mobile device management (MDM) system[^udn].
+Treat school-issued devices as monitoring tools and keep personal accounts off them. Ask the school what software it uses, and work with other parents to push for better settings or opting out[^ssd]. In Taiwan, tablets issued under the Ministry of Education's "a tablet for every student" program report usage to a mobile device management (MDM) system[^udn]. What school tablets, accounts, and networks record is covered from the student's side in [privacy for students](./students.md).
 
 ## Getting help in Taiwan
 

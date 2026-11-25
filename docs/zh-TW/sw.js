@@ -268,6 +268,8 @@ const CORE_PAGES_ZH = [
   "scenarios/travel-ai-briefing/",
   // 家長與孩子：讀者是任何家長，不指向受威脅的身分，跟旅行類同一個判準
   "scenarios/parents-youth/",
+  // 學生的校園隱私：讀者是任何學生，不指向受威脅的身分，跟家長頁同一個判準
+  "scenarios/students/",
   "scenarios/travel-connectivity/",
   // 斷網情境頁。收進來的理由跟旅行類同一個判準：讀者是「任何可能遇到中斷的人」，
   // 不是用第二人稱指導單一受威脅身分的準備清單。而且這一頁的使用時機就是網路已經
@@ -374,6 +376,8 @@ const CORE_PAGES_EN = [
   "scenarios/travel-ai-briefing/",
   // 家長與孩子：讀者是任何家長，不指向受威脅的身分，跟旅行類同一個判準
   "scenarios/parents-youth/",
+  // 學生的校園隱私：讀者是任何學生，不指向受威脅的身分，跟家長頁同一個判準
+  "scenarios/students/",
   "scenarios/travel-connectivity/",
   // 斷網情境頁。收進來的理由跟旅行類同一個判準：讀者是「任何可能遇到中斷的人」，
   // 不是用第二人稱指導單一受威脅身分的準備清單。而且這一頁的使用時機就是網路已經

@@ -85,6 +85,12 @@ Start from the shared baseline, then pick the pages that match your role and sit
 
     A family security plan, media literacy, what parental controls can and cannot do, and school-issued devices.
 
+- :material-school-outline:{ .lg .middle style="color: var(--cat-privacy);" } **[Privacy for students](./students.md)**
+
+    ---
+
+    For students in Taiwan: what school tablets, accounts, networks, and ID cards record, keeping school and personal life apart, and how to raise concerns.
+
 </div>
 
 ### By where you speak

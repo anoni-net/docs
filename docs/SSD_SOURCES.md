@@ -38,6 +38,7 @@ SSD 每篇指南的頁首都有 `Last Reviewed`，跟下表「改寫依據」那
 | `basics/phone-surveillance` | [Mobile Phones: Device-Bound Biometrics](https://ssd.eff.org/module/mobile-phones-device-bound-biometrics) | 2026-10-28 | 2026-11 |
 | `basics/phone-surveillance` | [Mobile Phones: Other Surveillance Techniques](https://ssd.eff.org/module/mobile-phones-malware) | 2024-11-05 | 2026-11 |
 | `scenarios/parents-youth` | [Online Privacy for Parents and Youth](https://ssd.eff.org/module/online-privacy-for-parents-and-youth) | 2026-10-21 | 2026-11 |
+| `scenarios/students` | [Privacy for Students](https://ssd.eff.org/module/privacy-students) | 2020-03-01 | 2026-11 |
 | `tools/social-media-settings` | [Protecting Yourself on Social Networks](https://ssd.eff.org/module/protecting-yourself-social-networks) | 2023-10-13 | 2026-11 |
 | `tools/social-media-settings` 的「Facebook 社團」 | [Facebook Groups: Reducing Risks](https://ssd.eff.org/module/facebook-groups-reducing-risks) | 2023-10-13 | 2026-11 |
 | `basics/network-censorship` | [How to: Understand and Circumvent Network Censorship](https://ssd.eff.org/module/understanding-and-circumventing-network-censorship) | 2024-02-01 | 2026-11 |
@@ -90,7 +91,7 @@ SSD 每篇指南的頁首都有 `Last Reviewed`，跟下表「改寫依據」那
 | Protecting Yourself on Social Networks | 2023-10-13 | 有 | 有，`tools/social-media-settings`（改寫）、`basics/platform-tracking`、`basics/multiple-identities` |
 | Facebook Groups: Reducing Risks | 2023-10-13 | 有 | 一節，`tools/social-media-settings` 的「Facebook 社團」（改寫） |
 | Key Concepts in Encryption | 2025-01-01 | 有 | 一節，`basics/e2ee` |
-| Privacy for Students | 2020-03-01 | 無 | 無 |
+| Privacy for Students | 2020-03-01 | 無 | 有，`scenarios/students`（參考改寫，台灣的學校系統與法規另外查證） |
 | What Is Fingerprinting? | 2024-08-27 | 有 | 有，`basics/browser-fingerprinting` |
 
 ### 工具指南（Tool Guides）
@@ -123,10 +124,10 @@ SSD 每篇指南的頁首都有 `Last Reviewed`，跟下表「改寫依據」那
 | Mobile Phones: Device-Bound Biometrics | 2026-10-28 | 無 | 有，`basics/phone-surveillance`（改寫） |
 | Mobile Phones: Other Surveillance Techniques | 2024-11-05 | 有 | 有，`basics/phone-surveillance`（改寫） |
 
-42 篇文字指南裡，文件站有專頁的 30 篇（其中 16 篇依 SSD 改寫），一節帶到的 11 篇（其中 1 篇依 SSD 改寫），沒有的 1 篇。
+42 篇文字指南裡，文件站有專頁的 31 篇（其中 17 篇依 SSD 改寫），一節帶到的 11 篇（其中 1 篇依 SSD 改寫），沒有專頁也沒有成段內容的已經沒有。
 
 ## 之後的候選
 
-- 沒有專頁的一篇：Privacy for Students（審閱日 2020-03-01，內容以美國學校為主）
+- `scenarios/students` 依據的〈Privacy for Students〉審閱日是 2020-03-01，SSD 改版時優先對照
 - 「一節」的主題（雙因素驗證、金鑰驗證、參加抗議、WhatsApp 等），可以拿 SSD 的現行版回頭補強既有頁面
 - 2026-11 的差距盤點（見 [anoni-net/docs#696](https://github.com/anoni-net/docs/issues/696)）列出既有專頁相對 SSD 的缺口，第三批補完了 Tor、手機設定、密碼管理器與 AI 隱私四頁，第四批新增社群平台的隱私設定與網路審查總覽兩頁，盤點列出的缺口都已處理
