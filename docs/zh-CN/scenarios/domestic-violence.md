@@ -36,7 +36,7 @@ icon: material/shield-account-outline
 ### 位置追踪
 
 - **查找（Find My）与地图类应用的位置共享**：当初以「彼此都知道对方在哪」为由开启的共享会一直持续，对方看得到你的实时位置，而且不会再有任何通知
-- **蓝牙追踪器**：AirTag、Tile 或类似装置放进包里、车内或孩子的物品里就能持续回报位置。2024 年 5 月起 Apple 与 Google 推出跨平台的共同标准，iPhone 与 Android 都能在检测到不明追踪器长时间跟着你时发出警示[^2]。iPhone 会自动检测兼容的追踪器，Android 可以用内建的「不明追踪器警示」或 Apple 的 Tracker Detect App
+- **蓝牙追踪器**：AirTag、Tile 或类似装置放进包里、车内或孩子的物品里就能持续回报位置。2024 年 5 月起 Apple 与 Google 推出跨平台的共同标准，iPhone 与 Android 都能在检测到不明追踪器长时间跟着你时发出警示[^2]。iPhone 会自动检测兼容的追踪器，Android 可以用内建的「不明追踪器警示」或 Apple 的 Tracker Detect App。检测与处理的步骤见 [蓝牙追踪器的检测与处理](../tools/bluetooth-tracker.md)
 - **车联网 App**：许多车款有对应的 App，掌握账号的人看得到车辆实时位置与行程记录
 - **共用日历与照片的地理标记**：共用日历会透露你接下来会在哪里。照片上传或同步时经常带着 GPS 坐标，足以定位一个原本以为保密的新住处
 

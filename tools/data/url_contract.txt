@@ -2861,6 +2861,15 @@
 	#What-we-made
 	#When-to-use-it
 	#You-have-already-seen-this-idea
+/en/tools/bluetooth-tracker/
+	#After-you-find-a-tracker
+	#Automatic-alerts
+	#Detecting-and-handling-Bluetooth-trackers
+	#How-trackers-report-location
+	#Limits-of-detection
+	#Manual-scans
+	#Sources-and-review
+	#Where-to-go-from-here
 /en/tools/crypto-privacy-spectrum/
 	#Pointers-Lightning-CoinJoin-and-mixers
 	#Privacy-by-default-Monero
@@ -4263,6 +4272,19 @@
 	#如何使用
 	#我們做了什麼帶亞洲味的英文字典
 	#隨機性才是關鍵
+/tools/bluetooth-tracker/
+	#保留證據
+	#停用
+	#偵測的限制
+	#報案與求助
+	#常見的追蹤器
+	#手動掃描
+	#手機的自動警示
+	#找到追蹤器之後
+	#本頁的來源與核對
+	#相關閱讀
+	#藍牙追蹤器的偵測與處理
+	#藍牙追蹤器的運作方式
 /tools/crypto-privacy-spectrum/
 	#CoinJoin-與-mixers為什麼社群不再主推
 	#monero
@@ -6843,6 +6865,19 @@
 	#如何使用
 	#我们做了什么带亚洲味的英文字典
 	#随机性才是关键
+/zh-cn/tools/bluetooth-tracker/
+	#保留证据
+	#停用
+	#常见的追踪器
+	#手动扫描
+	#手机的自动提醒
+	#找到追踪器之后
+	#报警与求助
+	#本页的来源与核对
+	#检测的限制
+	#相关阅读
+	#蓝牙追踪器的检测与处理
+	#蓝牙追踪器的运作方式
 /zh-cn/tools/crypto-privacy-spectrum/
 	#CoinJoin-与-mixers为什么社群不再主推
 	#monero

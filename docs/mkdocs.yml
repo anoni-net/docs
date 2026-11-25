@@ -60,6 +60,7 @@ nav:
               - tools/ooni-run-v2.md
           - "日常隱私基本功":
               - tools/phone-privacy-settings.md
+              - tools/bluetooth-tracker.md
               - tools/messaging-comparison.md
               - tools/what-is-cryptpad.md
               - tools/password-manager.md

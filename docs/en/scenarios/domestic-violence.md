@@ -40,7 +40,7 @@ Most of these methods do not require special skill. They use ordinary consumer f
 ### Location tracking
 
 - **Find My (Apple) and Find My Device / Google Maps location sharing**: Location sharing that was set up "so we always know where each other is" continues silently. The other person sees your live location without any further notification.
-- **Bluetooth trackers**: An AirTag, Tile, or similar tracker slipped into a bag, a car, or a child's belongings reports location continuously. Since May 2024, Apple and Google ship a shared cross-platform standard so that both iPhones and Android phones can alert you when an unknown tracker is moving with you over time.[^2] iPhones detect compatible trackers automatically; Android users can use the built-in "Unknown tracker alerts" or Apple's Tracker Detect app.
+- **Bluetooth trackers**: An AirTag, Tile, or similar tracker slipped into a bag, a car, or a child's belongings reports location continuously. Since May 2024, Apple and Google ship a shared cross-platform standard so that both iPhones and Android phones can alert you when an unknown tracker is moving with you over time.[^2] iPhones detect compatible trackers automatically; Android users can use the built-in "Unknown tracker alerts" or Apple's Tracker Detect app. Step-by-step detection and handling is in [detecting and handling Bluetooth trackers](../tools/bluetooth-tracker.md).
 - **Connected-car apps**: Many vehicles have an app that shows the car's live location and trip history to whoever controls the account.
 - **Shared calendars and photo geotags**: A shared calendar reveals where you will be. Photos posted or synced often carry GPS coordinates in their metadata, which can pinpoint a new, supposedly secret, address.
 
