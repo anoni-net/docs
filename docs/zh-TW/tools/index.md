@@ -48,6 +48,9 @@ icon: material/toolbox-outline
 
 - [手機隱私設定逐步指引](./phone-privacy-settings.md)：拿著自己的手機照編號調整，iPhone、Android、Samsung Galaxy 各有對照的路徑，約三十分鐘。
 - [藍牙追蹤器的偵測與處理](./bluetooth-tracker.md)：AirTag 這類追蹤器被偷放進包包或車上時，iPhone 與 Android 偵測得到哪些、收到警示後如何找出來，以及找到之後先顧安全再決定是否停用。
+- [網路釣魚的辨識與防範](./phishing.md)：假登入頁與魚叉式釣魚如何運作，更新、密碼管理器、passkey、附件與郵件圖片這幾項防範，以及輸入了密碼之後的處理。
+- [裝置加密與資料抹除](./device-encryption.md)：Windows、Mac、Linux、iPhone、Android 的全碟加密，復原金鑰存在哪裡，以及出售或送出裝置前的清除。
+- [惡意軟體的防範與處理](./malware.md)：常見的傳播方式、防毒與安裝來源、入侵跡象，以及發現之後先斷網、換裝置改密碼、重灌系統的順序。
 - [匿名通訊工具比較](./messaging-comparison.md)：Signal、SimpleX、Session、Briar、Matrix 的端對端加密、Metadata 與身分模型差異。
 - [什麼是 CryptPad](./what-is-cryptpad.md)：伺服器讀不到內容的線上協作辦公套件，文件在瀏覽器端就完成加密，社群自架網站有完整正體中文介面。
 - [密碼管理器入門](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取捨，加上 TOTP、Passkey、硬體金鑰。

@@ -26,7 +26,7 @@ App 標示「已加密」，服務商仍可能讀取你的訊息。加密有好�
 
 ### 儲存加密
 
-手機與電腦的裝置加密，在裝置遺失或被偷時保護裡面的檔案。雲端硬碟多半也會加密存放的檔案，但金鑰由業者保管，業者自己仍然可以讀取。要讓業者也無法讀取，需要改用端對端加密的服務，例如 [CryptPad](../tools/what-is-cryptpad.md)，或是上傳前先用 [age](../tools/what-is-age.md) 這類工具在自己的裝置上加密。
+手機與電腦的裝置加密，在裝置遺失或被偷時保護裡面的檔案（各裝置的開啟方式見[裝置加密與資料抹除](../tools/device-encryption.md)）。雲端硬碟多半也會加密存放的檔案，但金鑰由業者保管，業者自己仍然可以讀取。要讓業者也無法讀取，需要改用端對端加密的服務，例如 [CryptPad](../tools/what-is-cryptpad.md)，或是上傳前先用 [age](../tools/what-is-age.md) 這類工具在自己的裝置上加密。
 
 ## 雙方共用金鑰的產生方式
 
@@ -49,6 +49,27 @@ Signal 這類工具每傳一則訊息就換一把金鑰，今天的金鑰被偷�
 Telegram 的秘密聊天（Secret Chats）走相反的路，只存在參與對話的兩台裝置上，沒有雲端備份，換手機就無法帶走。
 
 Signal 在 2025 年 9 月推出加密備份（Secure Backups），先在 Android 的 beta 版提供，2026 年 9 月 iOS 版上線時各平台都已提供[^1]。解開備份的是一組在你的裝置上產生的 64 字元復原金鑰，Signal 的伺服器不會取得這組金鑰，遺失時 Signal 也無法替你找回。免費方案涵蓋全部的文字訊息與最近 45 天的媒體，更早的媒體需要每月 US$1.99 的付費方案。
+
+## iCloud 的進階資料保護
+
+iPhone 上的資料很多也同步到 iCloud。iCloud 預設使用「標準資料保護」，資料在傳輸與存放時都有加密，但多數資料的金鑰存放在 Apple 的資料中心，Apple 可以替你解密，換新手機、從備份回復、忘記密碼時才救得回資料，也代表 Apple 有能力在依法被要求時提供[^apple-icloud]。健康資料、iCloud 鑰匙圈裡的密碼等 15 個類別，即使在標準資料保護下也是端對端加密[^apple-icloud]。
+
+標準資料保護下，iCloud 備份不是端對端加密。備份裡包含「訊息」的紀錄，所以 iMessage 本身雖然是端對端加密，開了 iCloud 備份，Apple 仍然有能力讀取備份裡的對話[^ssd-icloud]。
+
+開啟「進階資料保護」之後，端對端加密的類別增加到 25 個，包括 iCloud 備份（含裝置與「訊息」的備份）、iCloud 雲碟、照片與備忘錄，金鑰只在你的受信任裝置上[^apple-icloud]。以下幾項仍然不是端對端加密：
+
+- iCloud 郵件、聯絡人與行事曆，這三項要跟其他郵件與行事曆系統的標準相容[^apple-icloud]
+- iWork 的合作文件、「照片」的共享相簿，以及用「任何擁有連結的使用者」分享的內容[^apple-adp]
+- Apple 仍會保留備份、iCloud 雲碟檔案、照片、備忘錄等的部分 metadata[^ssd-icloud]
+
+代價是 Apple 無法再協助你復原這些資料。開啟之前，系統會要求設定至少一個復原聯絡人或復原密鑰。復原聯絡人是你信任的親友，可以提供一組代碼協助你復原帳號，但看不到你的資料。所有 Apple 裝置也要更新到支援的軟體版本[^apple-adp]。
+
+- **iPhone**：「設定」> 你的姓名 >「iCloud」>「進階資料保護」>「開啟進階資料保護」，照螢幕上的指示檢查復原方式
+- **Mac**：「蘋果」選單 >「系統設定」> 你的姓名 >「iCloud」>「進階資料保護」>「開啟」
+
+在一台裝置上開啟，整個帳號都會啟用，之後可以隨時關閉。管理式 Apple 帳號與兒童帳號不能使用[^apple-adp]。英國的使用者在 2025 年之後無法使用進階資料保護，Apple 以此回應英國政府要求加密後門[^ssd-icloud]。
+
+本節依 EFF Surveillance Self-Defense 的〈[How to: Encrypt Your iPhone](https://ssd.eff.org/module/how-encrypt-your-iphone){target="_blank"}〉（審閱日 2025-02-25，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"}）改寫，資料類別與步驟依 Apple 2026 年的說明更新，未經 EFF 審閱。
 
 ## LINE 與 Signal 的在地脈絡 { #在地脈絡正體中文社群為何用-Signal-與-Matrix }
 
@@ -87,6 +108,7 @@ Signal 在 2026 年 8 月推出自動金鑰驗證，由 App 與第三方稽核�
 
 - [匿名通訊工具比較](../tools/messaging-comparison.md)：Signal、SimpleX、Session、Briar、Matrix 的身分綁定、metadata 與群組設計
 - [Metadata 是什麼，為什麼重要](./metadata.md)：訊息加密之後仍然暴露的通聯關係
+- [裝置加密與資料抹除](../tools/device-encryption.md)：電腦與手機的全碟加密，以及出售裝置前的清除
 - [什麼是匿名網路？](../tools/what-is-anonymity-network.md)：隱藏連線來源的另一層保護
 - [端對端加密的協定機制](https://anoni.net/articles/e2ee-protocols/){target="_blank"}：Double Ratchet、Sender Keys、MLS 與四種協定的對照
 - [後量子密碼概觀](https://anoni.net/articles/post-quantum/){target="_blank"}：量子電腦對現有加密的威脅與轉換時程
@@ -99,3 +121,6 @@ Signal 在 2026 年 8 月推出自動金鑰驗證，由 App 與第三方稽核�
 [^3]: [Keep your phone number private with Signal usernames](https://signal.org/blog/phone-number-privacy-usernames/){target="_blank"} - Signal Blog
 [^4]: [Phone Numberless Registration for Android](https://support.signal.org/hc/en-us/articles/11197884108826-Phone-Numberless-Registration-for-Android){target="_blank"} - Signal Support
 [^hk]: 香港《國安法》後的監控與言論起訴脈絡見 [Internet censorship in Hong Kong](https://hongkongfp.com/2024/10/12/internet-censorship-in-hong-kong/){target="_blank"} - Hong Kong Free Press、[Hong Kong: New Security Law a Full-Scale Assault on Rights](https://www.hrw.org/news/2024/03/19/hong-kong-new-security-law-full-scale-assault-on-rights){target="_blank"} - Human Rights Watch。
+[^apple-icloud]: [iCloud 資料安全性概覽](https://support.apple.com/zh-tw/102651){target="_blank"} - Apple 支援，2026-01-08。
+[^apple-adp]: [如何開啟「iCloud 進階資料保護」](https://support.apple.com/zh-tw/108756){target="_blank"} - Apple 支援，2026-04-24。
+[^ssd-icloud]: [How to: Encrypt Your iPhone](https://ssd.eff.org/module/how-encrypt-your-iphone){target="_blank"} - EFF Surveillance Self-Defense，審閱日 2025-02-25。
