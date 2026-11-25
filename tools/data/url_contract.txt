@@ -82,6 +82,7 @@
 	#高成本
 /basics/e2ee/
 	#Signal-的門號與免門號註冊
+	#iCloud-的進階資料保護
 	#三種加密的界線
 	#傳輸加密
 	#儲存加密
@@ -1284,6 +1285,7 @@
 	#What-each-browser-does-by-default-as-of-August-2026
 	#Where-to-go-from-here
 /en/basics/e2ee/
+	#Advanced-Data-Protection-for-iCloud
 	#Boundaries-of-the-three-kinds-of-encryption
 	#Encryption-at-rest
 	#End-to-end-encryption
@@ -2861,6 +2863,15 @@
 	#What-we-made
 	#When-to-use-it
 	#You-have-already-seen-this-idea
+/en/tools/bluetooth-tracker/
+	#After-you-find-a-tracker
+	#Automatic-alerts
+	#Detecting-and-handling-Bluetooth-trackers
+	#How-trackers-report-location
+	#Limits-of-detection
+	#Manual-scans
+	#Sources-and-review
+	#Where-to-go-from-here
 /en/tools/crypto-privacy-spectrum/
 	#Pointers-Lightning-CoinJoin-and-mixers
 	#Privacy-by-default-Monero
@@ -2871,6 +2882,15 @@
 	#The-regional-picture
 	#What-chain-analysis-actually-sees
 	#Where-to-go-from-here
+/en/tools/device-encryption/
+	#Before-selling-giving-away-or-discarding
+	#Device-encryption-and-data-erasure
+	#Sources-and-review
+	#Turning-it-on
+	#What-full-disk-encryption-protects-against
+	#Where-to-go-from-here
+	#Where-to-keep-the-recovery-key
+	#Why-deleted-files-are-not-gone
 /en/tools/email-alias/
 	#Aliases-built-into-your-mailbox
 	#Catch-all-on-your-own-domain
@@ -2936,6 +2956,13 @@
 	#What-this-looks-like-in-the-Asia-Pacific
 	#Where-to-go-next
 	#Why-it-is-effectively-Pixel-only
+/en/tools/malware/
+	#Defenses
+	#How-malware-gets-in
+	#If-you-find-malware
+	#Preventing-and-handling-malware
+	#Sources-and-review
+	#Where-to-go-from-here
 /en/tools/messaging-comparison/
 	#At-a-glance
 	#Briar
@@ -2991,6 +3018,13 @@
 	#Use-a-passphrase-not-a-word
 	#Where-to-go-next
 	#Why-you-need-one
+/en/tools/phishing/
+	#Common-techniques
+	#Defenses
+	#If-you-already-clicked-or-typed-your-password
+	#Recognizing-and-preventing-phishing
+	#Sources-and-review
+	#Where-to-go-from-here
 /en/tools/phone-privacy-settings/
 	#1-System-updates
 	#10-Loss-and-theft
@@ -4263,6 +4297,19 @@
 	#如何使用
 	#我們做了什麼帶亞洲味的英文字典
 	#隨機性才是關鍵
+/tools/bluetooth-tracker/
+	#保留證據
+	#停用
+	#偵測的限制
+	#報案與求助
+	#常見的追蹤器
+	#手動掃描
+	#手機的自動警示
+	#找到追蹤器之後
+	#本頁的來源與核對
+	#相關閱讀
+	#藍牙追蹤器的偵測與處理
+	#藍牙追蹤器的運作方式
 /tools/crypto-privacy-spectrum/
 	#CoinJoin-與-mixers為什麼社群不再主推
 	#monero
@@ -4281,6 +4328,17 @@
 	#組織跨境收款
 	#緊急資金調度家暴倖存者準備離開
 	#誰持有私鑰託管-vs-自管
+/tools/device-encryption/
+	#全碟加密擋得住什麼
+	#出售送人或丟棄之前
+	#刪除單一檔案
+	#刪除檔案為什麼刪不乾淨
+	#刪除的其他限制
+	#各裝置的開啟方式
+	#復原金鑰存在哪裡
+	#本頁的來源與核對
+	#相關閱讀
+	#裝置加密與資料抹除
 /tools/email-alias/
 	#一同瞭解
 	#三種做法
@@ -4346,6 +4404,17 @@
 	#為什麼幾乎只支援-Pixel
 	#納入實體與脅迫風險
 	#縮減攻擊面
+/tools/malware/
+	#可疑的附件與安裝來源
+	#惡意軟體如何進到裝置
+	#惡意軟體的防範與處理
+	#本頁的來源與核對
+	#留意入侵跡象
+	#發現惡意軟體之後
+	#相關閱讀
+	#軟體更新
+	#防毒軟體
+	#防範的做法
 /tools/messaging-comparison/
 	#Briar
 	#LINE
@@ -4408,6 +4477,23 @@
 	#系統整合Apple-Passwords--iCloud-Keychain
 	#離線金庫KeePassXC與-GNOME-Secrets
 	#雲端同步Bitwarden
+/tools/phishing/
+	#假登入頁
+	#可疑附件的開啟方式
+	#密碼管理器的自動填入
+	#已經點了連結或輸入了密碼
+	#常見的釣魚手法
+	#換一個管道確認
+	#本頁的來源與核對
+	#相關閱讀
+	#硬體金鑰與-passkey
+	#簡訊與通訊軟體
+	#網路釣魚的辨識與防範
+	#要你提供密碼或遠端操作的訊息
+	#軟體保持更新
+	#郵件的外部圖片
+	#防範的做法
+	#魚叉式釣魚
 /tools/phone-privacy-settings/
 	#1-系統更新
 	#10-遺失與遭竊
@@ -4989,6 +5075,7 @@
 	#高成本
 /zh-cn/basics/e2ee/
 	#Signal-的手机号与免手机号注册
+	#iCloud-的高级数据保护
 	#三种加密的界线
 	#传输加密
 	#加密范围外的-metadata
@@ -6843,6 +6930,19 @@
 	#如何使用
 	#我们做了什么带亚洲味的英文字典
 	#随机性才是关键
+/zh-cn/tools/bluetooth-tracker/
+	#保留证据
+	#停用
+	#常见的追踪器
+	#手动扫描
+	#手机的自动提醒
+	#找到追踪器之后
+	#报警与求助
+	#本页的来源与核对
+	#检测的限制
+	#相关阅读
+	#蓝牙追踪器的检测与处理
+	#蓝牙追踪器的运作方式
 /zh-cn/tools/crypto-privacy-spectrum/
 	#CoinJoin-与-mixers为什么社群不再主推
 	#monero
@@ -6861,6 +6961,17 @@
 	#紧急资金调度家暴幸存者准备离开
 	#组织跨境收款
 	#谁持有私钥托管-vs-自管
+/zh-cn/tools/device-encryption/
+	#全盘加密挡得住什么
+	#出售送人或丢弃之前
+	#删除单一文件
+	#删除文件为什么删不干净
+	#删除的其他限制
+	#各设备的打开方式
+	#恢复密钥存在哪里
+	#本页的来源与核对
+	#相关阅读
+	#设备加密与数据抹除
 /zh-cn/tools/email-alias/
 	#一同了解
 	#三种做法
@@ -6926,6 +7037,17 @@
 	#接下来
 	#纳入实体与胁迫风险
 	#缩减攻击面
+/zh-cn/tools/malware/
+	#发现恶意软件之后
+	#可疑的附件与安装来源
+	#恶意软件如何进到设备
+	#恶意软件的防范与处理
+	#本页的来源与核对
+	#杀毒软件
+	#留意入侵迹象
+	#相关阅读
+	#软件更新
+	#防范的做法
 /zh-cn/tools/messaging-comparison/
 	#Briar
 	#LINE
@@ -6990,6 +7112,23 @@
 	#硬件密钥YubiKeySolo
 	#离线密钥库KeePassXC与-GNOME-Secrets
 	#系统整合Apple-Passwords--iCloud-Keychain
+/zh-cn/tools/phishing/
+	#假登录页
+	#可疑附件的打开方式
+	#密码管理器的自动填入
+	#已经点了链接或输入了密码
+	#常见的钓鱼手法
+	#换一个管道确认
+	#本页的来源与核对
+	#相关阅读
+	#短信与通讯软件
+	#硬件密钥与-passkey
+	#网络钓鱼的辨识与防范
+	#要你提供密码或远程操作的消息
+	#软件保持更新
+	#邮件的外部图片
+	#防范的做法
+	#鱼叉式钓鱼
 /zh-cn/tools/phone-privacy-settings/
 	#1-系统更新
 	#10-丢失与被盗

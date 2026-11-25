@@ -127,6 +127,10 @@ Ubuntu 的 `sh` 是 dash，一進去就中止在 `Illegal option -o pipefail`。
 
 首頁 `changelog/index.md` 的「最近的更新」與 `changelog/feed*.xml` 的 RSS 由 `docs/hooks/changelog_digest.py` 在建置時產生，資料來自各頁的條目（`## 標題` 加上 `> 日期` 那一行），不要手寫。各頁的顯示名稱、對應的篩選項與分級判準寫在該頁 front matter 的 `digest`，首頁的文字與篩選項寫在 `index.md` 的 `changelog_digest`。新增一頁時兩邊都要補，漏了 `digest` 建置會出 warning。「現在要處理的」最上面固定一列 Tor Browser 目前的穩定版，由 `changelog_digest.pinned` 指定頁面、`pinned_note` 寫旁邊的說明，取的是該頁最新一則非 Alpha 的條目，不受 45 天的期間限制。每個篩選項各有一份 feed，登記在網址合約裡，拿掉篩選項等於讓訂閱的人收不到東西，CI 會擋。三語系都接上了，篩選項的 id 三邊要一致。一頁收兩個產品時（瀏覽器頁的 Chrome 與 Firefox、通訊軟體頁的 WhatsApp 與 Signal），在 `digest.tracks` 列出產品名、條目標題以產品名開頭，首頁會每個產品各取最新一則，否則同一頁的另一個產品會從「現在要處理的」消失。
 
+### 依 EFF SSD 改寫的頁面
+
+`tools/bluetooth-tracker`、`tools/phishing`、`tools/device-encryption`、`tools/malware` 與 `basics/e2ee` 的「iCloud 的進階資料保護」依 EFF 的 Surveillance Self-Defense 改寫。改這幾頁、或要再依 SSD 改寫新的頁面之前，先讀 [`docs/SSD_SOURCES.md`](./docs/SSD_SOURCES.md)，那裡記了每篇 SSD 指南對應的頁面、改寫依據的審閱日、改寫的慣例，以及如何確認 SSD 改版。
+
 ## 拆出去的工具
 
 文件站原本放在 repo 裡的兩個觀測工具在 2026-10 拆成獨立的 repo，commit 歷史一併帶過去，開發說明各自寫在那邊的 `AGENTS.md` 與 README。

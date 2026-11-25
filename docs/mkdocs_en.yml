@@ -52,6 +52,10 @@ nav:
               - tools/grapheneos.md
               - tools/password-manager.md
               - tools/phone-privacy-settings.md
+              - tools/bluetooth-tracker.md
+              - tools/phishing.md
+              - tools/device-encryption.md
+              - tools/malware.md
           - "Comparisons and hardening":
               - tools/messaging-comparison.md
               - tools/asian-diceware.md

@@ -146,7 +146,7 @@ Licenses are expensive and operating the tooling takes staff, so buyers choose t
 
 ### The one thing an ordinary person can do
 
-Lockdown Mode on iPhone and Advanced Protection on Android switch off a batch of commonly exploited features, at the cost of some functionality. Apple's own guidance is explicit: most people do not need it, and it exists for people who may be targeted by state-level or mercenary spyware, such as journalists, activists, and government officials[^lockdown]. To decide whether that includes you, start from [threat modeling](./threat-model.md).
+Lockdown Mode on iPhone and Advanced Protection on Android switch off a batch of commonly exploited features, at the cost of some functionality. Apple's own guidance is explicit: most people do not need it, and it exists for people who may be targeted by state-level or mercenary spyware, such as journalists, activists, and government officials[^lockdown]. To decide whether that includes you, start from [threat modeling](./threat-model.md). Defending against ordinary malware, and what to do after an infection, is in [preventing and handling malware](../tools/malware.md).
 
 ## Open-source intelligence profiling
 

@@ -106,7 +106,7 @@ When a message claims to come from your bank, a courier, customer support, or a 
 
 The previous three stop your account being taken. This one stops you being talked into handing it over. They cover different losses and are not interchangeable.
 
-It does not block a fake site you go looking for — a fake support page in a search engine's ad slot, for instance. Reach official channels by typing the address or using a bookmark.
+It does not block a fake site you go looking for — a fake support page in a search engine's ad slot, for instance. Reach official channels by typing the address or using a bookmark. How to spot fake login pages, and how password managers and passkeys stop them, is in [recognizing and preventing phishing](../tools/phishing.md).
 
 ## Tier two is worth the time
 
@@ -124,7 +124,7 @@ What it doesn't block: behavioral signals inside a platform you actively use, an
 
 Protects against someone pulling the storage out of a lost or stolen device. On iPhone, setting a passcode enables it; on Android, check Settings → Security.
 
-It is no help when you are compelled to unlock the device in front of someone, which is a separate problem covered in [cross-border travel and device searches](./asia-travel.md).
+It is no help when you are compelled to unlock the device in front of someone, which is a separate problem covered in [cross-border travel and device searches](./asia-travel.md). Steps for computers, where to keep the recovery key, and wiping a device before selling it are in [device encryption and data erasure](../tools/device-encryption.md).
 
 ### Move everyday messaging to end-to-end encryption
 

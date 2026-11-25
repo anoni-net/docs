@@ -26,7 +26,7 @@ The message is encrypted on your device and only the recipient's device can decr
 
 ### Encryption at rest
 
-Device encryption on phones and computers protects the files on a device that is lost or stolen. Most cloud drives also encrypt stored files, but the provider holds the key and can still read them. To keep the provider out as well, use an end-to-end encrypted service such as [CryptPad](../tools/what-is-cryptpad.md), or encrypt files on your own device with a tool like [age](../tools/what-is-age.md) before uploading.
+Device encryption on phones and computers protects the files on a device that is lost or stolen (how to turn it on is in [device encryption and data erasure](../tools/device-encryption.md)). Most cloud drives also encrypt stored files, but the provider holds the key and can still read them. To keep the provider out as well, use an end-to-end encrypted service such as [CryptPad](../tools/what-is-cryptpad.md), or encrypt files on your own device with a tool like [age](../tools/what-is-age.md) before uploading.
 
 ## Shared keys between two devices
 
@@ -49,6 +49,18 @@ When a phone, tablet, and computer all need the same conversation, or old messag
 Telegram's secret chats work the opposite way. They stay on the two devices involved with no cloud backup, and do not move to a new phone.
 
 Signal introduced encrypted backups (Secure Backups) in September 2025, first in the Android beta; by the time the iOS version shipped in September 2026 they were available on every platform[^1]. The backup is unlocked by a 64-character recovery key generated on your device. Signal's servers never receive it, so Signal cannot recover it for you if it is lost. The free tier covers all text messages and the last 45 days of media, and older media needs the US$1.99 monthly plan.
+
+## Advanced Data Protection for iCloud
+
+Much of what is on an iPhone also syncs to iCloud. By default iCloud uses Standard Data Protection: data is encrypted in transit and at rest, but Apple holds the keys for most of it, which is what lets Apple restore your data on a new phone or after a forgotten password, and also what lets it hand data over when legally required. Fifteen categories, including Health data and passwords in iCloud Keychain, are end-to-end encrypted even under Standard Data Protection[^apple-icloud].
+
+Under Standard Data Protection, iCloud Backup is not end-to-end encrypted. Backups include Messages, so even though iMessage itself is end-to-end encrypted, Apple can read conversations stored in an iCloud backup[^ssd-icloud].
+
+Turning on Advanced Data Protection raises the end-to-end encrypted categories to 25, including iCloud Backup (device and Messages backups), iCloud Drive, Photos, and Notes, with keys held only on your trusted devices[^apple-icloud]. Still not end-to-end encrypted: iCloud Mail, Contacts, and Calendars, which must work with other systems' standards[^apple-icloud]; iWork collaboration, Shared Albums in Photos, and anything shared with "anyone with the link"[^apple-adp]; and some metadata about backups, iCloud Drive files, photos, and notes, which Apple still keeps[^ssd-icloud].
+
+The trade-off is that Apple can no longer help you recover that data. Before you can turn it on, you must set up at least one recovery contact, a trusted person who can give you a code but cannot see your data, or a recovery key, and update all your Apple devices[^apple-adp]. On iPhone, go to Settings > your name > iCloud > Advanced Data Protection > Turn on Advanced Data Protection. On a Mac, go to System Settings > your name > iCloud > Advanced Data Protection > Turn On. Turning it on for one device turns it on for the whole account, and you can turn it off at any time. Managed Apple Accounts and child accounts are not eligible[^apple-adp]. Since February 2025, UK users who had not already turned it on can no longer do so[^apple-uk], which EFF describes as Apple's response to the UK government's demand for a backdoor[^ssd-icloud].
+
+This section is adapted from EFF Surveillance Self-Defense's [How to: Encrypt Your iPhone](https://ssd.eff.org/module/how-encrypt-your-iphone){target="_blank"} (last reviewed 2025-02-25, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}), with data categories and steps updated against Apple's 2026 documentation. It has not been reviewed by EFF.
 
 ## LINE, WhatsApp, WeChat, and Signal across the region { #what-this-looks-like-across-the-region }
 
@@ -89,6 +101,7 @@ In August 2026 Signal added automatic key verification, in which the app and thi
 
 - [Secure messaging compared](../tools/messaging-comparison.md): identity, metadata, and group design across Signal, SimpleX, Session, Briar, and Matrix
 - [Metadata, and why it matters](./metadata.md): the contact patterns encryption leaves exposed
+- [Device encryption and data erasure](../tools/device-encryption.md): full-disk encryption on computers and phones, and wiping a device before selling it
 - [What is an anonymity network?](../tools/what-is-anonymity-network.md): a separate layer that hides where a connection comes from
 - [End-to-end encryption protocols](https://anoni.net/en/articles/e2ee-protocols/){target="_blank"}: the Double Ratchet, Sender Keys, MLS, and four protocols compared
 - [Post-quantum cryptography](https://anoni.net/en/articles/post-quantum/){target="_blank"}: the quantum threat to current encryption and the migration timeline
@@ -103,3 +116,7 @@ In August 2026 Signal added automatic key verification, in which the app and thi
 [^5]: [What is a safety number and why do I see that it changed?](https://support.signal.org/hc/en-us/articles/360007060632-What-is-a-safety-number-and-why-do-I-see-that-it-changed){target="_blank"}, Signal Support
 [^6]: [Introducing Automatic Key Verification](https://signal.org/blog/automatic-key-verification/){target="_blank"}, Signal
 [^hk]: On surveillance and speech prosecutions after Hong Kong's National Security Law, see [Internet censorship in Hong Kong](https://hongkongfp.com/2024/10/12/internet-censorship-in-hong-kong/){target="_blank"}, Hong Kong Free Press, and [Hong Kong: New Security Law a Full-Scale Assault on Rights](https://www.hrw.org/news/2024/03/19/hong-kong-new-security-law-full-scale-assault-on-rights){target="_blank"}, Human Rights Watch.
+[^apple-icloud]: [iCloud data security overview](https://support.apple.com/en-us/102651){target="_blank"} - Apple Support, 2026-01-05.
+[^apple-adp]: [How to turn on Advanced Data Protection for iCloud](https://support.apple.com/en-us/108756){target="_blank"} - Apple Support, 2026-04-17.
+[^ssd-icloud]: [How to: Encrypt Your iPhone](https://ssd.eff.org/module/how-encrypt-your-iphone){target="_blank"} - EFF Surveillance Self-Defense, last reviewed 2025-02-25.
+[^apple-uk]: [Apple can no longer offer Advanced Data Protection in the United Kingdom to new users](https://support.apple.com/en-gb/122234){target="_blank"} - Apple Support (UK), 2025-09-23.

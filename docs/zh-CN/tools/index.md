@@ -47,6 +47,10 @@ icon: material/toolbox-outline
 想从通讯、协作、账号、金流、AI 使用先补齐基础的人，从这群开始。各篇主题各自独立，不必照顺序。
 
 - [手机隐私设置逐步指引](./phone-privacy-settings.md)：拿着自己的手机照编号调整，iPhone、Android、Samsung Galaxy 各有对照的路径，约三十分钟。
+- [蓝牙追踪器的检测与处理](./bluetooth-tracker.md)：AirTag 这类追踪器被偷放进包里或车上时，iPhone 与 Android 检测得到哪些、收到提醒后如何找出来，以及找到之后先顾安全再决定是否停用。
+- [网络钓鱼的辨识与防范](./phishing.md)：假登录页与鱼叉式钓鱼如何运作，更新、密码管理器、passkey、附件与邮件图片这几项防范，以及输入了密码之后的处理。
+- [设备加密与数据抹除](./device-encryption.md)：Windows、Mac、Linux、iPhone、Android 的全盘加密，恢复密钥存在哪里，以及出售或送出设备前的清除。
+- [恶意软件的防范与处理](./malware.md)：常见的传播方式、杀毒与安装来源、入侵迹象，以及发现之后先断网、换设备改密码、重装系统的顺序。
 - [匿名通讯工具比较](./messaging-comparison.md)：Signal、SimpleX、Session、Briar、Matrix 的端对端加密、Metadata 与身分模型差异。
 - [什么是 CryptPad](./what-is-cryptpad.md)：服务器读不到内容的在线协作办公套件，文档在浏览器端就完成加密，社区自建站点内建简体与正体中文界面。
 - [密码管理器入门](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取舍，加上 TOTP、Passkey、硬件金钥。
