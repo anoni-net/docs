@@ -71,6 +71,8 @@ python3 tools/docs_style_lint.py --changed-since origin/main docs/en/tools/vpn-g
 
 如果你的新文章不确定该放哪一类，先在 Matrix 上问一声，避免直接 PR 后又要搬。
 
+`basics/`、`tools/`、`scenarios/` 三区的侧边栏依各自索引页的小标题分组。新文章要加进 mkdocs 设定的 nav 与索引页的同一组，顺序也要一致，已有译本的语系同样要加。`tools/test_guides_nav_groups.mjs` 比对两边，只加了一边的 PR 会被 CI 挡下。
+
 ### 搬档、改名、删页要补 redirect
 
 移动、改名或删除已上线的页面时，在同一个 PR 补上 redirect，让旧网址不会变成 404。旧网址会长期活在搜索引擎、书签与外部链接里，少了 redirect 就流失既有读者与累积的 SEO 权重。

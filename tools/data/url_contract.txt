@@ -1293,7 +1293,7 @@
 	#Concepts
 	#Surveillance-and-blocking
 	#The-traces-you-leave
-	#Vocabulary-and-frameworks
+	#Vocabulary-and-framing
 	#Where-to-go-from-here
 /en/basics/anonymity-vs-privacy/
 	#Anonymity-privacy-pseudonymity-and-confidentiality

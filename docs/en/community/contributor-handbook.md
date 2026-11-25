@@ -75,6 +75,8 @@ Full Traditional Chinese translations of long external documents, such as resear
 
 If you are not sure where an article belongs, ask on Matrix before opening a PR, rather than moving it afterwards.
 
+The sidebars for `basics/`, `tools/` and `scenarios/` are grouped by the headings on each section's index page. A new article goes into the same group, in the same position, in both the mkdocs nav and the index page, for every language it exists in. `tools/test_guides_nav_groups.mjs` compares the two, and CI blocks a PR that updates only one side.
+
 ### Moving, renaming, or deleting a page needs a redirect
 
 When you move, rename, or delete a page that is already live, add the redirect in the same PR so the old URL does not turn into a 404. Old URLs live on in search engines, bookmarks, and other people's links.

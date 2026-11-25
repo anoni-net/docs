@@ -13,7 +13,7 @@ What we do publish, at the conceptual layer, is the framing that makes the rest 
 
 ## Articles
 
-### Vocabulary and frameworks
+### Vocabulary and framing
 
 - [Why networked freedom matters](./internet-freedom.md) — the East Asia and Southeast Asia regional framing, with anoni.net's three observation axes (connection layer, personal-data and identity layer, financial-flow layer).
 - [Anonymity, privacy, pseudonymity, and confidentiality](./anonymity-vs-privacy.md) — four words used interchangeably that protect different things; a single side-by-side comparison for picking the right tool, with Asia-Pacific examples.

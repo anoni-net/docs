@@ -30,7 +30,7 @@ nav:
       # tools/test_guides_nav_groups.mjs compares the two (Tools excepted, see below).
       - !ENV [NAV_BASICS, "Concepts"]:
           - basics/index.md
-          - "Vocabulary and frameworks":
+          - "Vocabulary and framing":
               - basics/internet-freedom.md
               - basics/anonymity-vs-privacy.md
               - basics/threat-model.md

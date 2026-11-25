@@ -15,7 +15,7 @@ Guides collects the docs site's core reading paths, from foundational concepts t
 
 - [:material-school-outline: Concepts](../basics/index.md)
 
-    The ideas behind anonymity and privacy, in three groups: vocabulary and frameworks, the traces you leave, and surveillance and blocking. Start here for the shared vocabulary.
+    The ideas behind anonymity and privacy, in three groups: vocabulary and framing, the traces you leave, and surveillance and blocking. Start here for the shared vocabulary.
 
 - [:material-toolbox-outline: Tools](../tools/index.md)
 
