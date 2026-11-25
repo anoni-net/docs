@@ -17,7 +17,7 @@ icon: material/wall-fire
     - VPN 與 Tor 擋得住更多種封鎖，但網路管理者通常看得出你在使用它們
     - 在中國大陸，條文禁止個人自行使用其他通道連上國際網路，有個人被罰款的案例，出發或使用前先評估
 
-## 封鎖發生在哪裡
+## 封鎖發生的位置
 
 從你的裝置到網站之間，有三個地方可以擋[^ssd-cens]：
 
@@ -25,7 +25,7 @@ icon: material/wall-fire
 - **區域網路**：學校、公司、咖啡店的 Wi-Fi，管理者可以過濾或記錄你連到哪裡、搜尋了哪些關鍵字
 - **網路服務業者（ISP）**：許多國家的政府要求業者過濾，業者也可能把過濾當成服務賣給家庭與公司
 
-台灣也有業者層級的封鎖，對象是詐騙網站與經法院扣押的盜版網站。依《詐欺犯罪危害防制條例》第 42 條，主管機關可以命令網路業者對涉詐網站「停止解析」或「限制接取」[^xhs]。數位發展部的參考程序由 TWNIC 協調各家業者以 DNS RPZ（讓業者的 DNS 伺服器對清單上的網域不回應）執行，觸發條件限定法院裁定或合法的行政命令，程序文件也記載了誤擋 Instagram、wordpress.com 這類案例[^moda-rpz]。2025 年 12 月，刑事警察局依同一條對小紅書實施停止解析與限制接取[^xhs]。
+台灣也有業者層級的封鎖，對象是詐騙網站。依《詐欺犯罪危害防制條例》第 42 條，主管機關可以命令網路業者對涉詐網站「停止解析」或「限制接取」[^xhs]。數位發展部的參考程序由 TWNIC 協調各家業者以 DNS RPZ（讓業者的 DNS 伺服器對清單上的網域不回應）執行，觸發條件限定法院裁定或合法的行政命令，程序文件也記載了誤擋 Instagram、wordpress.com 這類案例[^moda-rpz]。2025 年 12 月，刑事警察局依同一條對小紅書實施停止解析與限制接取[^xhs]。
 
 ## 封鎖的手法
 
@@ -55,7 +55,7 @@ HTTPS 加密了網址的路徑與網頁內容，網域名稱在連線開始時�
 
 最極端的做法是拔掉實體的網路設備、切斷基地台，或擋掉全部的國外 IP、只留國內連線。另一種是限速，選擇性地讓某些服務慢到不能用，比直接封鎖難察覺，使用者常以為是自己的網路或對方的服務有問題[^ssd-cens]。斷網的分級與準備見 [網路中斷時的準備與應對](../scenarios/shutdown.md)。
 
-## 確認是否被封鎖
+## 封鎖的確認方式
 
 [OONI Probe](../tools/what-is-ooni.md) 可以幫你判斷遇到的是哪一種封鎖[^ssd-cens]。它的網站連線測試（Web Connectivity）從你的網路與 OONI 的對照伺服器各做一次 DNS 查詢、TCP 連線與 HTTP 請求，比對兩邊的結果，判斷是 DNS、TCP/IP 還是 HTTP 層的封鎖[^ooni-wc]。
 
@@ -96,11 +96,11 @@ Tor Browser 一定要從官方網站或官方管道下載。官網被封鎖時�
 
 Signal 或 WhatsApp 被封鎖時，可以透過 Proxy 連線。訊息仍然是端對端加密，Proxy 的經營者讀不到內容，但看得到你的 IP[^ssd-cens]。Signal 的 Proxy 外觀就像一般的加密網頁流量，要在手機上設定，電腦版目前不支援。公開張貼的 Proxy 位址比較容易被封鎖，私下分享比較能持久[^signal-proxy]。設定與自架方式見 [Signal Proxy](../tools/signal-proxy.md)。
 
-## 使用繞過工具本身的風險
+## 繞過工具本身的風險
 
 管理網路的人可能注意到你在使用某種繞過工具，進而對你或其他人採取行動[^ssd-cens]。工具名稱有「匿名」字樣，不代表它會隱藏你的身分，判斷前先想清楚自己要防誰（見 [威脅模型如何建立](./threat-model.md)）[^ssd-cens]。
 
-各地的法律風險差很多。台灣使用 VPN 與 Tor 完全合法。在中國大陸，《计算机信息网络国际联网管理暂行规定》第 6 條規定任何單位和個人不得自行建立或使用其他通道連上國際網路，第 14 條的罰則是警告，可併處人民幣 15,000 元以下罰款，並沒收違法所得[^cn-reg]。公開的處罰案例不多，但個人被罰的案例確實存在。2018 年廣東韶關有人因使用翻牆軟體被罰 1,000 元[^sixthtone]。2023 年河北承德一名替國外公司工作的程式設計師被罰 200 元，另被沒收三年多來約 105 萬元的收入[^cdt]。
+各地的法律風險差很多。台灣使用 VPN 與 Tor 完全合法。在中國大陸，《计算机信息网络国际联网管理暂行规定》第 6 條規定任何單位和個人不得自行建立或使用其他通道連上國際網路，第 14 條的罰則是警告，可併處人民幣 15,000 元以下罰款，並沒收違法所得[^cn-reg]。有個人因此被罰：2018 年廣東韶關有人因使用翻牆軟體被罰 1,000 元[^sixthtone]，2023 年河北承德一名替國外公司工作的程式設計師被罰 200 元，另被沒收三年多來約 105 萬元的收入[^cdt]。
 
 出入境時的手機檢查、各國 VPN 與 Tor 的可用性，見 [出差與研討會的數位準備（東亞與東南亞）](../scenarios/asia-travel.md)。
 
@@ -135,4 +135,4 @@ Signal 或 WhatsApp 被封鎖時，可以透過 Proxy 連線。訊息仍然是�
 [^signal-proxy]: [Proxy Support](https://support.signal.org/hc/en-us/articles/360056052052-Proxy-Support){target="_blank"} - Signal Support。
 [^cn-reg]: [中华人民共和国计算机信息网络国际联网管理暂行规定](https://www.cac.gov.cn/1996-02/02/c_126468621.htm){target="_blank"} - 國家互聯網信息辦公室。2024 年修訂只刪除第 6 條第 1 款的「邮电部」，第 6 條第 2 款與第 14 條未變動。
 [^sixthtone]: [Guangdong Man Fined $150 for Using a VPN](https://www.sixthtone.com/news/1003431){target="_blank"} - Sixth Tone，2019-01。
-[^cdt]: [Chengde Seizes Three Years of "Illegal Income" From Programmer Who Used VPN for Overseas Work](https://chinadigitaltimes.net/2023/09/chengde-seizes-three-years-of-illegal-income-from-programmer-who-used-vpn-for-overseas-work/){target="_blank"} - China Digital Times，2023-09。
+[^cdt]: [Chengde Seizes Three Years of "Illegal Income" from Programmer Who Used VPN for Overseas Work](https://chinadigitaltimes.net/2023/09/chengde-seizes-three-years-of-illegal-income-from-programmer-who-used-vpn-for-overseas-work/){target="_blank"} - China Digital Times，2023-09-28。

@@ -19,9 +19,9 @@ icon: material/wall-fire
 
 !!! warning "在中国大陆的读者"
 
-    在中国大陆运行 OONI Probe、使用 VPN 或 Tor 都有被注意到的风险，法规与处罚案例见[使用绕过工具本身的风险](#使用绕过工具本身的风险)。Tor Project 对中国的建议是先试 Connection Assist，再改用 WebTunnel 网桥，官网打不开时从 Telegram 的 `@gettor_bot` 下载 Tor Browser[^tor-cn]。
+    在中国大陆运行 OONI Probe、使用 VPN 或 Tor 都有被注意到的风险，法规与处罚案例见[绕过工具本身的风险](#绕过工具本身的风险)。Tor Project 对中国的建议是先试 Connection Assist，再改用 WebTunnel 网桥，官网打不开时从 Telegram 的 `@gettor_bot` 下载 Tor Browser[^tor-cn]。
 
-## 封锁发生在哪里
+## 封锁发生的位置
 
 从你的设备到网站之间，有三个地方可以挡[^ssd-cens]：
 
@@ -29,7 +29,7 @@ icon: material/wall-fire
 - **局域网**：学校、公司、咖啡店的 Wi-Fi，管理者可以过滤或记录你连到哪里、搜索了哪些关键字
 - **网络服务提供商（ISP）**：许多国家的政府要求运营商过滤，运营商也可能把过滤当成服务卖给家庭与公司
 
-台湾也有运营商层级的封锁，对象是诈骗网站与经法院扣押的盗版网站。依《诈欺犯罪危害防制条例》第 42 条，主管机关可以命令网络运营商对涉诈网站「停止解析」或「限制接取」[^xhs]。数位发展部的参考程序由 TWNIC 协调各家运营商以 DNS RPZ（让运营商的 DNS 服务器对清单上的域名不回应）运行，触发条件限定法院裁定或合法的行政命令，程序文件也记载了误挡 Instagram、wordpress.com 这类案例[^moda-rpz]。2025 年 12 月，刑事警察局依同一条对小红书实施停止解析与限制接取[^xhs]。
+台湾也有运营商层级的封锁，对象是诈骗网站。依《诈欺犯罪危害防制条例》第 42 条，主管机关可以命令网络运营商对涉诈网站「停止解析」或「限制接取」[^xhs]。数位发展部的参考程序由 TWNIC 协调各家运营商以 DNS RPZ（让运营商的 DNS 服务器对清单上的域名不回应）运行，触发条件限定法院裁定或合法的行政命令，程序文件也记载了误挡 Instagram、wordpress.com 这类案例[^moda-rpz]。2025 年 12 月，刑事警察局依同一条对小红书实施停止解析与限制接取[^xhs]。
 
 ## 封锁的手法
 
@@ -59,7 +59,7 @@ HTTPS 加密了网址的路径与网页内容，域名在连接开始时仍以�
 
 最极端的做法是拔掉物理的网络设备、切断基站，或挡掉全部的国外 IP、只留国内连接。另一种是限速，选择性地让某些服务慢到不能用，比直接封锁难察觉，用户常以为是自己的网络或对方的服务有问题[^ssd-cens]。断网的分级与准备见 [网络中断时的准备与应对](../scenarios/shutdown.md)。
 
-## 确认是否被封锁
+## 封锁的确认方式
 
 [OONI Probe](../tools/what-is-ooni.md) 可以帮你判断遇到的是哪一种封锁[^ssd-cens]。它的网站连接测试（Web Connectivity）从你的网络与 OONI 的对照服务器各做一次 DNS 查询、TCP 连接与 HTTP 请求，比对两边的结果，判断是 DNS、TCP/IP 还是 HTTP 层的封锁[^ooni-wc]。
 
@@ -100,11 +100,11 @@ Tor Browser 一定要从官方网站或官方管道下载。官网被封锁时�
 
 Signal 或 WhatsApp 被封锁时，可以通过 Proxy 连接。消息仍然是端对端加密，Proxy 的经营者读不到内容，但看得到你的 IP[^ssd-cens]。Signal 的 Proxy 外观就像一般的加密网页流量，要在手机上设置，电脑版目前不支持。公开张贴的 Proxy 地址比较容易被封锁，私下分享比较能持久[^signal-proxy]。设置与自建方式见 [Signal Proxy](../tools/signal-proxy.md)。
 
-## 使用绕过工具本身的风险
+## 绕过工具本身的风险
 
 管理网络的人可能注意到你在使用某种绕过工具，进而对你或其他人采取行动[^ssd-cens]。工具名称有「匿名」字样，不代表它会隐藏你的身份，判断前先想清楚自己要防谁（见 [威胁模型如何建立](./threat-model.md)）[^ssd-cens]。
 
-各地的法律风险差很多。台湾使用 VPN 与 Tor 完全合法。在中国大陆，《计算机信息网络国际联网管理暂行规定》第 6 条规定任何单位和个人不得自行建立或使用其他通道连上国际网络，第 14 条的罚则是警告，可并处人民币 15,000 元以下罚款，并没收违法所得[^cn-reg]。公开的处罚案例不多，但个人被罚的案例确实存在。2018 年广东韶关有人因使用翻墙软件被罚 1,000 元[^sixthtone]。2023 年河北承德一名替国外公司工作的程序员被罚 200 元，另被没收三年多来约 105 万元的收入[^cdt]。
+各地的法律风险差很多。台湾使用 VPN 与 Tor 完全合法。在中国大陆，《计算机信息网络国际联网管理暂行规定》第 6 条规定任何单位和个人不得自行建立或使用其他通道连上国际网络，第 14 条的罚则是警告，可并处人民币 15,000 元以下罚款，并没收违法所得[^cn-reg]。有个人因此被罚：2018 年广东韶关有人因使用翻墙软件被罚 1,000 元[^sixthtone]，2023 年河北承德一名替国外公司工作的程序员被罚 200 元，另被没收三年多来约 105 万元的收入[^cdt]。
 
 出入境时的手机检查、各国 VPN 与 Tor 的可用性，见 [出差与研讨会的数字准备（东亚与东南亚）](../scenarios/asia-travel.md)。
 
@@ -139,4 +139,4 @@ Signal 或 WhatsApp 被封锁时，可以通过 Proxy 连接。消息仍然是�
 [^signal-proxy]: [Proxy Support](https://support.signal.org/hc/en-us/articles/360056052052-Proxy-Support){target="_blank"} - Signal Support。
 [^cn-reg]: [中华人民共和国计算机信息网络国际联网管理暂行规定](https://www.cac.gov.cn/1996-02/02/c_126468621.htm){target="_blank"} - 国家互联网信息办公室。2024 年修订只删除第 6 条第 1 款的「邮电部」，第 6 条第 2 款与第 14 条未变动。
 [^sixthtone]: [Guangdong Man Fined $150 for Using a VPN](https://www.sixthtone.com/news/1003431){target="_blank"} - Sixth Tone，2019-01。
-[^cdt]: [Chengde Seizes Three Years of "Illegal Income" From Programmer Who Used VPN for Overseas Work](https://chinadigitaltimes.net/2023/09/chengde-seizes-three-years-of-illegal-income-from-programmer-who-used-vpn-for-overseas-work/){target="_blank"} - China Digital Times，2023-09。
+[^cdt]: [Chengde Seizes Three Years of "Illegal Income" from Programmer Who Used VPN for Overseas Work](https://chinadigitaltimes.net/2023/09/chengde-seizes-three-years-of-illegal-income-from-programmer-who-used-vpn-for-overseas-work/){target="_blank"} - China Digital Times，2023-09-28。

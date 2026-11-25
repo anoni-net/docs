@@ -14,7 +14,7 @@ It adapts two EFF Surveillance Self-Defense guides (see [Sources and review](#So
 
     - LINE: turn off adding you by ID and by phone number, and turn off auto-add friends so people in your contacts do not see you
     - Facebook: set future posts to Friends and stop people finding you by phone number or email
-    - Instagram and Threads: make your account private and approve tags manually
+    - Instagram and Threads: make your account private and limit who can tag or mention you
     - Use a different profile photo and phone number for accounts you want to keep separate
 
 ## Creating an account
@@ -24,16 +24,18 @@ Phone numbers, email addresses, and photos are what link accounts together. Give
 ## LINE
 
 - **Adding you by ID**: Home > Settings > Profile, turn off the option that lets others add you by your LINE ID[^line-add]
-- **Adding you by phone number**: Home > Settings > Friends, turn off the option that lets others add you. If your own auto-add friends option stays on, people with your number may still see you in their list of people you may know, so turn both off[^line-add][^line-pymk]
-- **Messages from non-friends**: Home > Settings > Privacy, turn on message filtering, which blocks messages from people in your "people you may know" list. LINE has no setting to refuse all group invitations, and you cannot block a group, only leave it[^line-block][^line-group]
+- **Adding you by phone number**: Home > Settings > Friends, turn off the option that lets others add you. If your own auto-add friends option stays on, people who have your number and also use auto-add may still see you in their list of people you may know, so turn both off[^line-add][^line-pymk]
+- **Messages from non-friends**: Home > Settings > Privacy, turn on message filtering, which blocks messages from people in your "people you may know" list. The help center lists no setting to refuse all group invitations, and a group cannot be blocked, only left[^line-block][^line-group]
 - **Birthday**: Home > Settings > Profile > Birthday, turn off showing it[^line-profile]
-- **Hide and block**: neither notifies the other person, and you do not disappear from their friend list. LINE has no option to turn off read receipts[^line-hide][^line-read]
+- **Hide and block**: neither notifies the other person, and you do not disappear from their friend list. The help center lists no option to turn off read receipts[^line-hide][^line-read]
 - **OpenChat**: you can join without showing your LINE name and use a different profile in each community[^line-openchat]
 - **Devices**: Home > Settings > Account shows devices logged in to your account. Log out the ones you do not recognize[^line-devices]
 
 LINE VOOM ended in Taiwan on 2026-09-30, so advice about VOOM audience settings no longer applies[^line-voom].
 
 ## Facebook
+
+Paths follow Facebook's desktop help pages. We did not check each path in the mobile app.
 
 - **Post audience**: Settings > Audience and visibility > Posts, set future posts to Friends, and use "Limit past posts" to switch older public posts to Friends in one step[^fb-past]
 - **Finding you**: under "How people find and contact you", set lookups by email and by phone number to the narrowest option ("no one"), and turn off search engine links to your profile[^fb-lookup]
@@ -47,7 +49,7 @@ Groups were not designed for secure collaboration, and Facebook can see everythi
 
 ## Instagram and Threads
 
-We could not confirm the Traditional Chinese menu names, so this follows the English help center. Make your Instagram account private, share stories with Close Friends, control read receipts per chat, and check who can tag or mention you. Instagram's map feature is off by default[^ig-private][^ig-map]. On Threads, your name, photo, username, and bio are always public, even with a private profile. Fediverse sharing lets users on other servers follow and reshare your posts, and turning it off does not guarantee they delete your data[^threads-private][^threads-fedi].
+We could not confirm the Traditional Chinese menu names, so this follows archived copies of the English help center. Make your Instagram account private, share stories with Close Friends, control read receipts per chat, and check who can tag or mention you. Instagram's map feature is off by default, and the help page does not say whether it is available in Taiwan[^ig-private][^ig-map]. On Threads, your name, photo, username, and bio are always public, even with a private profile. Fediverse sharing lets users on other servers follow and reshare your posts, and turning it off does not guarantee they delete your data[^threads-private][^threads-fedi].
 
 ## Privacy is a team sport
 
@@ -55,7 +57,7 @@ Even without an account, friends can identify you in photos, reveal where you ar
 
 ## Sources and review
 
-Adapted from two guides in EFF's [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, both licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}: [Protecting Yourself on Social Networks](https://ssd.eff.org/module/protecting-yourself-social-networks){target="_blank"} and [Facebook Groups: Reducing Risks](https://ssd.eff.org/module/facebook-groups-reducing-risks){target="_blank"} (both last reviewed 2023-10-13). We replaced the general advice with platform-by-platform settings from the LINE (Taiwan), Facebook, and Instagram help centers, and updated Facebook group rules to the 2026 help center. English menu names for LINE and Facebook are our translations of the Traditional Chinese interface. anoni.net is responsible for any differences from the original, and this page does not represent EFF's views.
+Adapted from two guides in EFF's [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, both licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}: [Protecting Yourself on Social Networks](https://ssd.eff.org/module/protecting-yourself-social-networks){target="_blank"} and [Facebook Groups: Reducing Risks](https://ssd.eff.org/module/facebook-groups-reducing-risks){target="_blank"} (both last reviewed 2023-10-13). We replaced the general advice with platform-by-platform settings from the LINE (Taiwan), Facebook (desktop), and Instagram (archived English pages) help centers, and updated Facebook group rules to the 2026 help center. English menu names for LINE and Facebook are our translations of the Traditional Chinese interface. anoni.net is responsible for any differences from the original, and this page does not represent EFF's views.
 
 ## Where to go from here
 
@@ -82,7 +84,7 @@ Adapted from two guides in EFF's [Surveillance Self-Defense](https://ssd.eff.org
 [^fb-active]: [Facebook 和 Messenger 上線狀態的運作方式](https://www.facebook.com/help/448141485230424?locale=zh_TW){target="_blank"} - Facebook Help Center (Chinese).
 [^fb-groups]: [公開與私密 Facebook 社團的差異](https://www.facebook.com/help/220336891328465?locale=zh_TW){target="_blank"} - Facebook Help Center (Chinese).
 [^fb-anon]: [在 Facebook 社團中使用暱稱參與互動](https://www.facebook.com/help/1997112804420300?locale=zh_TW){target="_blank"} - Facebook Help Center (Chinese).
-[^ig-private]: [Make your Instagram account private](https://help.instagram.com/448523408565555){target="_blank"} - Instagram Help Center.
-[^ig-map]: [Instagram Map](https://help.instagram.com/402343555458995){target="_blank"} - Instagram Help Center.
-[^threads-private]: [Public and private profiles on Threads](https://help.instagram.com/756440792648838){target="_blank"} - Threads Help Center.
-[^threads-fedi]: [Fediverse sharing on Threads](https://help.instagram.com/760878905943039){target="_blank"} - Threads Help Center.
+[^ig-private]: [Instagram Help Center: Private account](https://help.instagram.com/448523408565555){target="_blank"} - read from a 2026 web archive copy of the English page.
+[^ig-map]: [Instagram Help Center: Map](https://help.instagram.com/402343555458995){target="_blank"} - read from a 2026 web archive copy of the English page.
+[^threads-private]: [Threads Help Center: Public and private profiles](https://help.instagram.com/756440792648838){target="_blank"} - read from a 2026 web archive copy of the English page.
+[^threads-fedi]: [Threads Help Center: Fediverse sharing](https://help.instagram.com/760878905943039){target="_blank"} - read from a 2026 web archive copy of the English page.

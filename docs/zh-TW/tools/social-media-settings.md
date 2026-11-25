@@ -16,10 +16,10 @@ icon: material/account-eye-outline
 
     - LINE：關閉「允許利用ID加入好友」與「允許被加入好友」，不想讓通訊錄裡的人看到你，再關閉「自動加入好友」
     - Facebook：把未來貼文的分享對象改成朋友，關閉用電話號碼與 email 找到你
-    - Instagram 與 Threads：改成私人帳號，標註改成需要你同意
+    - Instagram 與 Threads：改成私人帳號，限制誰可以標註或提及你
     - 不同用途的帳號，頭像與電話號碼都不要重複
 
-## 建立帳號時
+## 建立帳號的注意事項
 
 帳號建立之後，最容易把你跟其他帳號串在一起的是電話號碼、email 與照片[^ssd-sn]：
 
@@ -37,7 +37,7 @@ icon: material/account-eye-outline
 
 LINE 的隱私設定集中在「主頁 > 設定」底下，多數要在手機上操作，電腦版與平板只有部分選項。2026 年 10 月改版後，好友分頁移到「聊天」頁的上方[^line-ui]。
 
-### 用 ID 或電話號碼加你
+### ID 與電話號碼的加好友設定
 
 - **允許利用ID加入好友**：主頁 > 設定 >「個人檔案」，關閉之後，包含好友在內，沒有人可以用 LINE ID 搜尋到你。LINE ID 設定之後就不能更改[^line-add]
 - **允許被加入好友**：主頁 > 設定 >「好友」，關閉之後，有你電話號碼的人無法用號碼加你[^line-add]
@@ -47,16 +47,16 @@ LINE 的隱私設定集中在「主頁 > 設定」底下，多數要在手機上
 
 「自動加入好友」在主頁 > 設定 >「好友」，開啟之後，LINE 會把你手機通訊錄裡有用 LINE 的人加成你的好友，通訊錄也會上傳到 LINE 的伺服器比對（官方說明號碼加密保存，不會顯示給其他使用者）[^line-contacts]。
 
-只關「允許被加入好友」還不夠。你的「自動加入好友」如果開著，通訊錄裡存了你號碼的人，仍然可能在他的「您可能認識的人？」名單看到你，顯示的是你在 LINE 上設的名稱[^line-pymk]。不想讓前任或同事從通訊錄找到你，兩個開關都要關。LINE 的說明也寫明，要讓自己完全不出現在別人的好友或「您可能認識的人？」名單，只能刪除帳號[^line-contacts]。
+只關「允許被加入好友」還不夠。你的「自動加入好友」如果開著，通訊錄裡存了你號碼、也開著「自動加入好友」的人，仍然可能在他的「您可能認識的人？」名單看到你，顯示的是你在 LINE 上設的名稱[^line-pymk]。不想讓前任或同事從通訊錄找到你，兩個開關都要關。LINE 的說明也寫明，要讓自己完全不出現在別人的好友或「您可能認識的人？」名單，只能刪除帳號[^line-contacts]。
 
 ### 非好友的訊息與群組邀請
 
 - **阻擋訊息**：主頁 > 設定 >「隱私設定」，開啟之後不會收到「您可能認識的人？」名單上的人傳來的訊息，已經是好友的人不受影響[^line-block]
-- **未讀聊天邀請**：非好友的訊息與群組邀請集中在「聊天」頁上方的「未讀聊天邀請」，可以逐一加入好友、封鎖、接受或拒絕群組邀請。LINE 沒有拒絕所有群組邀請的設定，也沒辦法封鎖一個群組，只能退出，退出時所有成員都會看到你已退出[^line-invite][^line-group]
+- **未讀聊天邀請**：非好友的訊息與群組邀請集中在「聊天」頁上方的「未讀聊天邀請」，可以逐一加入好友、封鎖、接受或拒絕群組邀請。支援中心沒有列出拒絕所有群組邀請的設定，群組也無法封鎖，只能退出，退出時所有成員都會看到你已退出[^line-invite][^line-group]
 
 ### 個人檔案與生日
 
-好友點你的頭像就看得到你的個人圖片、名稱、封面、狀態消息與生日，LINE 沒有分項設定誰可以看哪一欄[^line-profile]。生日在主頁 > 設定 >「個人檔案」>「生日」，關閉「顯示我的生日」之後別人就看不到[^line-profile]。
+好友點你的頭像就看得到你的個人圖片、名稱、封面、狀態消息與生日，支援中心沒有列出分項設定誰可以看哪一欄的功能[^line-profile]。生日在主頁 > 設定 >「個人檔案」>「生日」，關閉「顯示我的生日」之後別人就看不到[^line-profile]。
 
 LINE VOOM 在台灣已於 2026 年 9 月 30 日結束服務，貼文、限時動態與追蹤功能都一起停止，網路上教 VOOM 公開範圍的文章已經不適用[^line-voom]。
 
@@ -64,9 +64,9 @@ LINE VOOM 在台灣已於 2026 年 9 月 30 日結束服務，貼文、限時動
 
 在好友名單長按對方，可以選「隱藏」、「封鎖」或「刪除」。隱藏之後仍然會收到對方的訊息與通話，封鎖之後收不到。三種操作都不會通知對方，你也不會從對方的好友名單消失。被封鎖的人在你們共同的群組裡發的訊息，你仍然看得到[^line-hide]。
 
-LINE 沒有關閉已讀的設定。對方的通知跳出時，系統就可能判定為已讀，群組裡顯示的是已讀的人數[^line-read]。
+支援中心沒有列出關閉已讀的設定。對方的通知跳出時，系統就可能判定為已讀，群組裡顯示的是已讀的人數[^line-read]。
 
-### 社群用另一個個人檔案
+### 社群的個人檔案
 
 LINE 社群（OpenChat）可以不公開你的 LINE 帳號名稱加入，每個社群可以設定不同的暱稱與圖片[^line-openchat]。想在興趣社群裡發言、又不想讓人連到你的主要帳號，就在加入時換一個個人檔案，頭像也不要沿用主要帳號的照片。
 
@@ -77,7 +77,7 @@ LINE 社群（OpenChat）可以不公開你的 LINE 帳號名稱加入，每個�
 
 ## Facebook
 
-Facebook 的設定都從右上角的大頭貼照進入「設定和隱私 > 設定」，大部分在「分享對象和能見度」底下。下面的路徑依 Facebook 說明中心的電腦版說明，手機 App 的位置相近。Facebook 也有「隱私設定檢查」，用問答的方式一步步檢查分享對象與別人如何找到你，第一次調整時可以從那裡開始[^fb-checkup]。
+Facebook 的設定都從右上角的大頭貼照進入「設定和隱私 > 設定」，大部分在「分享對象和能見度」底下。下面的路徑依 Facebook 說明中心的電腦版說明，手機 App 的路徑我們沒有逐一核對。Facebook 也有「隱私設定檢查」，用問答的方式一步步檢查分享對象與別人如何找到你，第一次調整時可以從那裡開始[^fb-checkup]。
 
 ### 貼文的分享對象
 
@@ -85,7 +85,7 @@ Facebook 的設定都從右上角的大頭貼照進入「設定和隱私 > 設�
 - **舊貼文**：同一頁的「限制舊貼文分享對象」會把所有公開或朋友的朋友可見的舊貼文一次改成「朋友」，無法一鍵復原。別人發文標註你的貼文不受影響，由發文的人決定[^fb-past]
 - **打卡**：打卡的地點跟著那則貼文的分享對象。公開的打卡貼文，地點粉絲專頁的管理員也看得到[^fb-checkin]
 
-### 別人如何找到你
+### 被搜尋與被找到的途徑
 
 - **用電話號碼與 email 找到你**：分享對象和能見度 >「其他人如何尋找和聯絡你」，「擁有你電子郵件地址的用戶」與「擁有你手機號碼的用戶」兩列都改成「沒有人」。說明中心寫明，email 地址裡如果含有你的全名，仍可能被搜到[^fb-lookup]
 - **搜尋引擎**：同一頁關閉「是否要讓 Facebook 以外的搜尋引擎連結你的個人檔案？」。已經公開的資訊仍可能被搜尋引擎另外收錄[^fb-search]
@@ -118,7 +118,7 @@ Facebook 另有「鎖住個人檔案」，鎖住之後非朋友只看得到有�
 - **私人帳號**：在設定的帳號隱私開啟私人帳號，只有你核准的追蹤者看得到貼文與限時動態。未滿 18 歲的帳號預設就是私人帳號，商業帳號不能設成私人帳號[^ig-private]
 - **摯友**：限時動態可以只分享給摯友名單，加入或移出名單都不會通知對方[^ig-close]
 - **已讀**：可以對所有聊天室或單一聊天室關閉已讀回條，單一聊天室的設定優先[^ig-read]
-- **地圖**：Instagram 的地圖功能預設不分享位置。開啟之後，每次打開 App 會更新位置，分享對象在地圖的設定裡選擇，這個設定跟手機的定位權限分開[^ig-map]
+- **地圖**：Instagram 的地圖功能預設不分享位置。開啟之後，每次打開 App 會更新位置，分享對象在地圖的設定裡選擇，這個設定跟手機的定位權限分開。說明頁沒有寫台灣是否開放這個功能[^ig-map]
 - **標註與提及**：可以限制誰能標註或提及你[^ig-tags]
 
 ## Threads
@@ -142,7 +142,7 @@ Threads 也一樣，我們沒能取得正體中文的選單名稱，下面依官
 - 〈[Protecting Yourself on Social Networks](https://ssd.eff.org/module/protecting-yourself-social-networks){target="_blank"}〉，審閱日 2023-10-13
 - 〈[Facebook Groups: Reducing Risks](https://ssd.eff.org/module/facebook-groups-reducing-risks){target="_blank"}〉，審閱日 2023-10-13
 
-跟原文不同的地方：原文以通則說明各平台常見的設定，本頁改成 LINE、Facebook、Instagram、Threads 逐項的設定，選單名稱與功能依 LINE 支援中心（台灣）、Facebook 說明中心（正體中文）與 Instagram 說明中心（英文）。Facebook 社團的設定以 2026 年的說明中心為準，例如公開社團改成私密的門檻已經從原文的 5,000 名成員改成 10,000 名。原文建議讀隱私政策、封鎖第三方 cookie 與關閉廣告識別碼的段落，文件站已經寫在 [社群平台怎麼收集你的資料](../basics/platform-tracking.md) 與 [手機隱私設定逐步指引](./phone-privacy-settings.md)，本頁不重複。與原文不同之處由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
+跟原文不同的地方：原文以通則說明各平台常見的設定，本頁改成 LINE、Facebook、Instagram、Threads 逐項的設定，選單名稱與功能依 LINE 支援中心（台灣）、Facebook 說明中心（正體中文，電腦版）與 Instagram 說明中心（英文，讀取自網頁封存）。Facebook 社團的設定以 2026 年的說明中心為準，例如公開社團改成私密的門檻已經從原文的 5,000 名成員改成 10,000 名。原文建議讀隱私政策、封鎖第三方 cookie 與關閉廣告識別碼的段落，文件站已經寫在 [社群平台怎麼收集你的資料](../basics/platform-tracking.md) 與 [手機隱私設定逐步指引](./phone-privacy-settings.md)，本頁不重複。與原文不同之處由匿名網路社群 anoni.net 負責，不代表 EFF 的立場。
 
 選單名稱 2026 年 11 月核對。平台改版頻繁，照著做卻找不到選項，歡迎到社群的線上聊天室（[Matrix 公開 room](https://anoni.net/services/){target="_blank"}）告訴我們。
 
@@ -183,10 +183,10 @@ Threads 也一樣，我們沒能取得正體中文的選單名稱，下面依官
 [^fb-lock]: [鎖住您的 Facebook 個人檔案](https://www.facebook.com/help/196419427651178?locale=zh_TW){target="_blank"} - Facebook 說明中心。
 [^fb-groups]: [公開與私密 Facebook 社團的差異](https://www.facebook.com/help/220336891328465?locale=zh_TW){target="_blank"} - Facebook 說明中心。
 [^fb-anon]: [在 Facebook 社團中使用暱稱參與互動](https://www.facebook.com/help/1997112804420300?locale=zh_TW){target="_blank"} - Facebook 說明中心。
-[^ig-private]: [Make your Instagram account private](https://help.instagram.com/448523408565555){target="_blank"} - Instagram Help Center。
-[^ig-close]: [Close Friends](https://help.instagram.com/476003390920140){target="_blank"} - Instagram Help Center。
-[^ig-read]: [Read receipts](https://help.instagram.com/1586876252167004){target="_blank"} - Instagram Help Center。
-[^ig-map]: [Instagram Map](https://help.instagram.com/402343555458995){target="_blank"} - Instagram Help Center。
+[^ig-private]: [Instagram Help Center：私人帳號](https://help.instagram.com/448523408565555){target="_blank"} - 英文說明頁，讀取自 2026 年的網頁封存。
+[^ig-close]: [Instagram Help Center：摯友](https://help.instagram.com/476003390920140){target="_blank"} - 英文說明頁，讀取自 2026 年的網頁封存。
+[^ig-read]: [Instagram Help Center：已讀回條](https://help.instagram.com/1586876252167004){target="_blank"} - 英文說明頁，讀取自 2026 年的網頁封存。
+[^ig-map]: [Instagram Help Center：地圖](https://help.instagram.com/402343555458995){target="_blank"} - 英文說明頁，讀取自 2026 年的網頁封存。
 [^ig-tags]: [Who can mention or tag you on Instagram](https://help.instagram.com/345505572238391){target="_blank"} - Instagram Help Center。
-[^threads-private]: [Public and private profiles on Threads](https://help.instagram.com/756440792648838){target="_blank"} - Threads Help Center。
-[^threads-fedi]: [Fediverse sharing on Threads](https://help.instagram.com/760878905943039){target="_blank"} - Threads Help Center。
+[^threads-private]: [Threads Help Center：公開與私人個人檔案](https://help.instagram.com/756440792648838){target="_blank"} - 英文說明頁，讀取自 2026 年的網頁封存。
+[^threads-fedi]: [Threads Help Center：聯邦宇宙分享](https://help.instagram.com/760878905943039){target="_blank"} - 英文說明頁，讀取自 2026 年的網頁封存。

@@ -43,7 +43,7 @@ Blocking can happen on your device (school or work devices, or spyware), on the 
 
 ## Risks of circumvention
 
-Whoever runs your network may notice the tool you use and act against you or others[^ssd-cens]. In mainland China, Article 6 of the Interim Provisions on the Administration of International Networking of Computer Information Networks prohibits individuals from using other channels for international connections, and Article 14 allows a warning, a fine of up to 15,000 yuan, and confiscation of illegal income[^cn-reg]. Published cases are rare, but they exist: a man in Guangdong was fined 1,000 yuan in 2018[^sixthtone], and a programmer in Hebei was fined 200 yuan in 2023 and had about 1.05 million yuan of income confiscated[^cdt]. Country-by-country availability and device checks at borders are covered in [device minimization and border crossings in Asia](../scenarios/asia-travel.md).
+Whoever runs your network may notice the tool you use and act against you or others[^ssd-cens]. In mainland China, Article 6 of the Interim Provisions on the Administration of International Networking of Computer Information Networks prohibits individuals from using other channels for international connections, and Article 14 allows a warning, a fine of up to 15,000 yuan, and confiscation of illegal income[^cn-reg]. Individuals have been fined: a man in Guangdong was fined 1,000 yuan in 2018[^sixthtone], and a programmer in Hebei was fined 200 yuan in 2023 and had about 1.05 million yuan of income confiscated[^cdt]. Country-by-country availability and device checks at borders are covered in [device minimization and border crossings in Asia](../scenarios/asia-travel.md).
 
 ## Sources and review
 
@@ -69,4 +69,4 @@ Adapted from [How to: Understand and Circumvent Network Censorship](https://ssd.
 [^signal-proxy]: [Proxy Support](https://support.signal.org/hc/en-us/articles/360056052052-Proxy-Support){target="_blank"} - Signal Support.
 [^cn-reg]: [中华人民共和国计算机信息网络国际联网管理暂行规定](https://www.cac.gov.cn/1996-02/02/c_126468621.htm){target="_blank"} - Cyberspace Administration of China (Chinese).
 [^sixthtone]: [Guangdong Man Fined $150 for Using a VPN](https://www.sixthtone.com/news/1003431){target="_blank"} - Sixth Tone, January 2019.
-[^cdt]: [Chengde Seizes Three Years of "Illegal Income" From Programmer Who Used VPN for Overseas Work](https://chinadigitaltimes.net/2023/09/chengde-seizes-three-years-of-illegal-income-from-programmer-who-used-vpn-for-overseas-work/){target="_blank"} - China Digital Times, September 2023.
+[^cdt]: [Chengde Seizes Three Years of "Illegal Income" from Programmer Who Used VPN for Overseas Work](https://chinadigitaltimes.net/2023/09/chengde-seizes-three-years-of-illegal-income-from-programmer-who-used-vpn-for-overseas-work/){target="_blank"} - China Digital Times, 2023-09-28.
