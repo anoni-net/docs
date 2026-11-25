@@ -223,6 +223,7 @@ Anthropic 掌握的只有經過自家模型的那一側，其他模型上的同�
 - [社群平台怎麼收集你的資料](./platform-tracking.md)：第一層的完整機制
 - [威脅模型如何建立](./threat-model.md)：把上面的能力邊界換算成你自己的判斷
 - [Metadata 是什麼，為什麼重要](./metadata.md)：為什麼通聯紀錄常常比內容更有價值
+- [手機的位置追蹤與監控手法](./phone-surveillance.md)：從手機本身看基地台、偽基地台、Wi-Fi 與 App 的追蹤
 - [常被誤認為匿名的網路](mistaken-for-anonymity.md)：換工具不等於減少觀察者
 - [Anthropic 九月威脅報告寫到台灣的四個段落](../blog/posts/2026-anthropic-threat-report-taiwan.md)：本頁四層之外的一種作業，材料全來自公開來源的情報建檔，人力成本已降到單一操作者可維持
 

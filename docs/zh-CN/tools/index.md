@@ -52,6 +52,7 @@ icon: material/toolbox-outline
 - [设备加密与数据抹除](./device-encryption.md)：Windows、Mac、Linux、iPhone、Android 的全盘加密，恢复密钥存在哪里，以及出售或送出设备前的清除。
 - [恶意软件的防范与处理](./malware.md)：常见的传播方式、杀毒与安装来源、入侵迹象，以及发现之后先断网、换设备改密码、重装系统的顺序。
 - [匿名通讯工具比较](./messaging-comparison.md)：Signal、SimpleX、Session、Briar、Matrix 的端对端加密、Metadata 与身分模型差异。
+- [Signal 的设置与群组管理](./signal-guide.md)：注册锁定、电话号码的显示、阅后即焚、通知与备份这几项值得调整的设置，以及大型群组的权限、管理员与群组规则。
 - [什么是 CryptPad](./what-is-cryptpad.md)：服务器读不到内容的在线协作办公套件，文档在浏览器端就完成加密，社区自建站点内建简体与正体中文界面。
 - [密码管理器入门](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取舍，加上 TOTP、Passkey、硬件金钥。
 - [Asian Diceware 密语字典](./asian-diceware.md)：社区参考 EFF 做的 7776 字密语词表，混入亚洲外来语，教你怎么用骰子或安全随机数产生好记又够强的密语。

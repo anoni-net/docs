@@ -100,6 +100,7 @@ In August 2026 Signal added automatic key verification, in which the app and thi
 ## Related reading
 
 - [Secure messaging compared](../tools/messaging-comparison.md): identity, metadata, and group design across Signal, SimpleX, Session, Briar, and Matrix
+- [Signal settings and group management](../tools/signal-guide.md): Registration Lock, usernames, disappearing messages, and running large groups
 - [Metadata, and why it matters](./metadata.md): the contact patterns encryption leaves exposed
 - [Device encryption and data erasure](../tools/device-encryption.md): full-disk encryption on computers and phones, and wiping a device before selling it
 - [What is an anonymity network?](../tools/what-is-anonymity-network.md): a separate layer that hides where a connection comes from
