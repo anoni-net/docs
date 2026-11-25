@@ -425,6 +425,7 @@ SIM 卡被拔走插到另一部手机，对方就能收到发给你的短信验�
 
 - [一般人平常该做到什么](../scenarios/everyday-baseline.md)：本页各步骤为什么重要，以及第二层、第三层的做法
 - [社交平台怎么收集你的数据](../basics/platform-tracking.md)：广告标识符与权限之外，平台还收集了什么
+- [手机的位置追踪与监控手法](../basics/phone-surveillance.md)：基站、伪基站、Wi-Fi 与蓝牙这些设置管不到的追踪
 - [出国的手机号与网络连接](../scenarios/travel-connectivity.md)：漫游、旅游 eSIM、当地 SIM 卡与酒店网络
 - [我的准备清单](../utils/checklist.md)：把做过的项目勾起来，一年后回来对照
 

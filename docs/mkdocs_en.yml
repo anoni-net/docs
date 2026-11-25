@@ -33,6 +33,7 @@ nav:
           - basics/platform-tracking.md
           - basics/browser-fingerprinting.md
           - basics/surveillance-capability.md
+          - basics/phone-surveillance.md
           - basics/multiple-identities.md
           - basics/payments-anonymity.md
           - basics/e2ee.md
@@ -58,6 +59,7 @@ nav:
               - tools/malware.md
           - "Comparisons and hardening":
               - tools/messaging-comparison.md
+              - tools/signal-guide.md
               - tools/asian-diceware.md
               - tools/what-is-age.md
               - tools/what-is-passkey.md
@@ -79,6 +81,7 @@ nav:
           - scenarios/everyday-baseline.md
           - scenarios/lgbtq.md
           - scenarios/domestic-violence.md
+          - scenarios/parents-youth.md
           - scenarios/journalist.md
           - scenarios/activist.md
           - scenarios/singapore-malaysia-speech.md

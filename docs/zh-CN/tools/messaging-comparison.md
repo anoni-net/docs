@@ -61,6 +61,8 @@ icon: material/message-text-outline
 
 [Signal](https://signal.org/){target="_blank"} 是 E2EE 通讯工具的当前共识答案，协议成熟、UX 接近主流 IM。一对一用 Double Ratchet（每则消息独立密钥），群组用 Sender Keys，协议细节见 [端对端加密的保护范围](../basics/e2ee.md)。
 
+注册锁定、username、阅后即焚与大型群组的设置，见 [Signal 的设置与群组管理](./signal-guide.md)。
+
 身份模型上，Signal 注册仍需手机号码，但 2024 年正式推出 username 功能，可以在不揭露号码的情况下交换联络方式。Sealed Sender 设计让 server 看不到单则消息的寄件人，私联络人探索（private contact discovery）也让 server 不知道你的通讯录。
 
 **适合谁**：日常通讯首选、跟记者第一次接触（搭配 username 可以避开手机号码）、跨组织协作的长期通道。台湾社区多数对外联络的工作通道都是 Signal。

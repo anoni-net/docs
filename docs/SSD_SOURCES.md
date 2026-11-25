@@ -30,6 +30,16 @@ SSD 每篇指南的頁首都有 `Last Reviewed`，跟下表「改寫依據」那
 | `tools/device-encryption` | [How to: Delete Your Computer's Data Securely](https://ssd.eff.org/module/how-delete-your-data-securely-windows) | 2025-05-08 | 2026-11 |
 | `tools/malware` | [How Do I Protect Myself Against Malware?](https://ssd.eff.org/module/how-do-i-protect-myself-against-malware) | 2024-06-21 | 2026-11 |
 | `basics/e2ee` 的「iCloud 的進階資料保護」 | [How to: Encrypt Your iPhone](https://ssd.eff.org/module/how-encrypt-your-iphone) | 2025-02-25 | 2026-11 |
+| `tools/signal-guide` | [How to: Use Signal](https://ssd.eff.org/module/how-to-use-signal) | 2026-06-15 | 2026-11 |
+| `tools/signal-guide` | [Creating and Managing Signal Groups](https://ssd.eff.org/module/creating-and-managing-signal-groups) | 2026-04-24 | 2026-11 |
+| `basics/phone-surveillance` | [Mobile Phones: Location Tracking](https://ssd.eff.org/module/mobile-phones-location-tracking) | 2024-11-05 | 2026-11 |
+| `basics/phone-surveillance` | [Mobile Phones: Spying on Mobile Communications](https://ssd.eff.org/module/mobile-phones-spying-mobile-communications) | 2024-11-05 | 2026-11 |
+| `basics/phone-surveillance` | [Mobile Phones: Phone Components and Sensors](https://ssd.eff.org/module/mobile-phones-phone-components-and-sensors) | 2024-11-05 | 2026-11 |
+| `basics/phone-surveillance` | [Mobile Phones: Device-Bound Biometrics](https://ssd.eff.org/module/mobile-phones-device-bound-biometrics) | 2026-10-28 | 2026-11 |
+| `basics/phone-surveillance` | [Mobile Phones: Other Surveillance Techniques](https://ssd.eff.org/module/mobile-phones-malware) | 2024-11-05 | 2026-11 |
+| `scenarios/parents-youth` | [Online Privacy for Parents and Youth](https://ssd.eff.org/module/online-privacy-for-parents-and-youth) | 2026-10-21 | 2026-11 |
+
+`tools/tor-browser-mobile` 不是依 SSD 改寫，但依〈How to: Use Tor on Android and iPhone〉頁首的提醒，加上了 2026-08 公開的 iOS WebKit IP 洩漏警示（[anoni-net/docs#698](https://github.com/anoni-net/docs/pull/698)），Apple 修補之後要回頭更新或拿掉。
 
 ## 全部篇目的對照
 
@@ -40,7 +50,7 @@ SSD 每篇指南的頁首都有 `Last Reviewed`，跟下表「改寫依據」那
 | SSD 指南 | SSD 審閱日 | 簡中 | 文件站 |
 |---|---|---|---|
 | Your Security Plan | 2023-10-27 | 有 | 有，`basics/threat-model` |
-| Online Privacy for Parents and Youth | 2026-10-21 | 無 | 無 |
+| Online Privacy for Parents and Youth | 2026-10-21 | 無 | 有，`scenarios/parents-youth`（改寫） |
 | Creating Strong Passwords | 2023-08-18 | 有 | 有，`tools/password-manager`、`tools/asian-diceware` |
 | Keeping Your Data Safe | 2024-07-22 | 有 | 一節，`scenarios/everyday-baseline` |
 | What Should I Know About Encryption? | 2025-01-01 | 有 | 有，`basics/e2ee` |
@@ -55,7 +65,7 @@ SSD 每篇指南的頁首都有 `Last Reviewed`，跟下表「改寫依據」那
 | SSD 指南 | SSD 審閱日 | 簡中 | 文件站 |
 |---|---|---|---|
 | Privacy Considerations with AI Tools | 2026-08-05 | 無 | 有，`tools/ai-privacy` |
-| Creating and Managing Signal Groups | 2026-04-24 | 無 | 無 |
+| Creating and Managing Signal Groups | 2026-04-24 | 無 | 有，`tools/signal-guide`（改寫） |
 | Choosing a Password Manager | 2025-03-06 | 有 | 有，`tools/password-manager` |
 | How Do I Protect Myself Against Malware? | 2024-06-21 | 有 | 有，`tools/malware`（改寫） |
 | Key Verification | 2025-01-01 | 有 | 一節，`basics/e2ee` |
@@ -80,7 +90,7 @@ SSD 每篇指南的頁首都有 `Last Reviewed`，跟下表「改寫依據」那
 | How to: Detect Bluetooth Trackers | 2024-07-15 | 無 | 有，`tools/bluetooth-tracker`（改寫） |
 | How to: Use WhatsApp | 2026-03-10 | 落後（2025-04） | 一節，`tools/messaging-comparison` |
 | How to: Use Tor on Android and iPhone | 2023-11-08 | 有 | 有，`tools/tor-browser-mobile` |
-| How to: Use Signal | 2026-06-15 | 落後（2025-03） | 一節，`tools/messaging-comparison`、`tools/signal-proxy` |
+| How to: Use Signal | 2026-06-15 | 落後（2025-03） | 有，`tools/signal-guide`（改寫） |
 | How to: Encrypt Your iPhone | 2025-02-25 | 落後一週 | 有，`basics/e2ee` 的「iCloud 的進階資料保護」（改寫）、`tools/device-encryption` |
 | How to: Encrypt Your Windows, Mac, or Linux Computer | 2025-02-06 | 有 | 有，`tools/device-encryption`（改寫） |
 | How to: Delete Your Computer's Data Securely | 2025-05-08 | 有 | 有，`tools/device-encryption`（改寫） |
@@ -92,18 +102,16 @@ SSD 每篇指南的頁首都有 `Last Reviewed`，跟下表「改寫依據」那
 
 | SSD 指南 | SSD 審閱日 | 簡中 | 文件站 |
 |---|---|---|---|
-| Mobile Phones: Location Tracking | 2024-11-05 | 有 | 一節，`basics/surveillance-capability` |
-| Mobile Phones: Spying on Mobile Communications | 2024-11-05 | 有 | 一節，`basics/surveillance-capability` |
-| Mobile Phones: Phone Components and Sensors | 2024-11-05 | 有 | 無 |
-| Mobile Phones: Device-Bound Biometrics | 2026-10-28 | 無 | 一節，`tools/phone-privacy-settings` |
-| Mobile Phones: Other Surveillance Techniques | 2024-11-05 | 有 | 一節，`basics/surveillance-capability` |
+| Mobile Phones: Location Tracking | 2024-11-05 | 有 | 有，`basics/phone-surveillance`（改寫） |
+| Mobile Phones: Spying on Mobile Communications | 2024-11-05 | 有 | 有，`basics/phone-surveillance`（改寫） |
+| Mobile Phones: Phone Components and Sensors | 2024-11-05 | 有 | 有，`basics/phone-surveillance`（改寫） |
+| Mobile Phones: Device-Bound Biometrics | 2026-10-28 | 無 | 有，`basics/phone-surveillance`（改寫） |
+| Mobile Phones: Other Surveillance Techniques | 2024-11-05 | 有 | 有，`basics/phone-surveillance`（改寫） |
 
-42 篇文字指南裡，文件站有專頁的 22 篇，一節帶到的 15 篇，沒有的 5 篇。
+42 篇文字指南裡，文件站有專頁的 30 篇（其中 14 篇依 SSD 改寫），一節帶到的 10 篇，沒有的 2 篇。
 
 ## 之後的候選
 
-- Online Privacy for Parents and Youth：家長控制在路由器、作業系統、App 三層各能做什麼，以及學校發的裝置。文件站已經從受監控方的角度寫過 Family Link（`scenarios/lgbtq`、`scenarios/domestic-violence`），可以補上家長的視角
-- Creating and Managing Signal Groups
-- Privacy for Students
-- Mobile Phones: Phone Components and Sensors
-- 「一節」的主題（雙因素驗證、金鑰驗證、參加抗議、WhatsApp、Signal），可以拿 SSD 的現行版回頭補強既有頁面
+- 沒有專頁的兩篇：Facebook Groups: Reducing Risks、Privacy for Students
+- 「一節」的主題（雙因素驗證、金鑰驗證、參加抗議、WhatsApp 等），可以拿 SSD 的現行版回頭補強既有頁面
+- 2026-11 的差距盤點（見 [anoni-net/docs#696](https://github.com/anoni-net/docs/issues/696)）列出既有專頁相對 SSD 的缺口，優先的是 `tools/tor-browser-mobile`、`tools/phone-privacy-settings`、`tools/what-is-tor` 與 `tools/tor-browser-advanced`、`tools/password-manager`、`tools/ai-privacy`

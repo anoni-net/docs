@@ -52,6 +52,7 @@ icon: material/toolbox-outline
 - [裝置加密與資料抹除](./device-encryption.md)：Windows、Mac、Linux、iPhone、Android 的全碟加密，復原金鑰存在哪裡，以及出售或送出裝置前的清除。
 - [惡意軟體的防範與處理](./malware.md)：常見的傳播方式、防毒與安裝來源、入侵跡象，以及發現之後先斷網、換裝置改密碼、重灌系統的順序。
 - [匿名通訊工具比較](./messaging-comparison.md)：Signal、SimpleX、Session、Briar、Matrix 的端對端加密、Metadata 與身分模型差異。
+- [Signal 的設定與群組管理](./signal-guide.md)：註冊鎖、電話號碼的顯示、自動銷毀訊息、通知與備份這幾項值得調整的設定，以及大型群組的權限、管理員與群組規則。
 - [什麼是 CryptPad](./what-is-cryptpad.md)：伺服器讀不到內容的線上協作辦公套件，文件在瀏覽器端就完成加密，社群自架網站有完整正體中文介面。
 - [密碼管理器入門](./password-manager.md)：Bitwarden、KeePassXC、1Password、Apple Passwords 的取捨，加上 TOTP、Passkey、硬體金鑰。
 - [Asian Diceware 密語字典](./asian-diceware.md)：社群參考 EFF 做的 7776 字密語詞表，混入亞洲外來語，教你怎麼用骰子或安全亂數產生好記又夠強的密語。

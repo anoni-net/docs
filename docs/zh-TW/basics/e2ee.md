@@ -107,6 +107,7 @@ Signal 在 2026 年 8 月推出自動金鑰驗證，由 App 與第三方稽核�
 ## 相關閱讀
 
 - [匿名通訊工具比較](../tools/messaging-comparison.md)：Signal、SimpleX、Session、Briar、Matrix 的身分綁定、metadata 與群組設計
+- [Signal 的設定與群組管理](../tools/signal-guide.md)：註冊鎖、username、自動銷毀訊息與大型群組的管理
 - [Metadata 是什麼，為什麼重要](./metadata.md)：訊息加密之後仍然暴露的通聯關係
 - [裝置加密與資料抹除](../tools/device-encryption.md)：電腦與手機的全碟加密，以及出售裝置前的清除
 - [什麼是匿名網路？](../tools/what-is-anonymity-network.md)：隱藏連線來源的另一層保護

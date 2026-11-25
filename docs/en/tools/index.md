@@ -39,6 +39,7 @@ Introductions with the regional context built in, for readers new to a tool or w
 ## Comparisons and hardening
 
 - [Secure messaging compared](./messaging-comparison.md) — Signal, SimpleX, Session, Briar, and Matrix against a threat-model checklist (metadata, identifiers, network resistance), with the regional twist that phone-number registration ties to a legal identity.
+- [Signal settings and group management](./signal-guide.md) — Registration Lock, number privacy, disappearing messages, notifications, backups, and running large groups.
 - [Following sites with RSS](./rss.md) — no account, no ranking algorithm, and a subscription list that stays on your device; local versus cloud readers, reading the onion feeds over Tor, and what changes when a team pipes feeds into Slack, Discord, or Matrix.
 - [Email aliases, and who you hand your trust to](./email-alias.md) — forwarding services, catch-all on your own domain, and why plus-addressing protects nobody; which party ends up holding your correspondence record, and where aliases break.
 - [Asian Diceware passphrase wordlist](./asian-diceware.md) — a community-made, EFF-compatible Diceware list that blends in dictionary-attested Asian loanwords; how to roll up a memorable-yet-strong passphrase with dice or a secure RNG.

@@ -61,6 +61,8 @@ LINE、Telegram、WhatsApp 三家在前述三個問題上都有明顯短處，�
 
 [Signal](https://signal.org/){target="_blank"} 是 E2EE 通訊工具的當前共識答案，協議成熟、UX 接近主流 IM。一對一用 Double Ratchet（每則訊息獨立金鑰），群組用 Sender Keys，協議細節見 [端對端加密的保護範圍](../basics/e2ee.md)。
 
+註冊鎖、username、自動銷毀訊息與大型群組的設定，見 [Signal 的設定與群組管理](./signal-guide.md)。
+
 身分模型上，Signal 註冊仍需手機號碼，但 2024 年正式推出 username 功能，可以在不揭露號碼的情況下交換聯絡方式。Sealed Sender 設計讓 server 看不到單則訊息的寄件人，私聯絡人探索（private contact discovery）也讓 server 不知道你的通訊錄。
 
 **適合誰**：日常通訊首選、跟記者第一次接觸（搭配 username 可以避開手機號碼）、跨組織協作的長期通道。台灣社群多數對外聯絡的工作通道都是 Signal。
