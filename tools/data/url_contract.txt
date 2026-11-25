@@ -2865,13 +2865,17 @@
 	#Where-to-go-from-here
 /en/tools/ai-privacy/
 	#Access-credentials-are-themselves-a-target
+	#Agentic-AI-tools
 	#Before-you-paste
 	#Confabulation-is-also-a-safety-problem
 	#Deleting-the-conversation-does-not-delete-the-data
 	#Discount-resellers
 	#Human-review-is-normal
+	#Law-enforcement-requests
 	#Local-models
+	#Retention-in-temporary-and-private-modes
 	#Services-inside-mainland-China-run-on-a-different-framework
+	#Shared-chat-links
 	#The-provider-sees-plaintext
 	#The-regional-angle
 	#This-page-will-age
@@ -3039,17 +3043,21 @@
 	#Apple-Passwords-and-iCloud-Keychain-ship-with-the-system
 	#Backup-and-recovery
 	#Bitwarden-syncs-through-the-vendors-cloud
+	#Built-in-password-managers-and-autofill
 	#Common-mistakes
+	#Demands-to-disclose-a-password
 	#Do-not-store-it-on-the-computer
 	#Four-categories-and-how-to-choose
 	#Getting-Started-with-Password-Managers
 	#Hardware-keys
 	#How-TOTP-fits
 	#KeePassXC-and-GNOME-Secrets-keep-the-vault-offline
+	#Keep-the-device-clean
 	#Never-reuse-it
 	#Passkeys
 	#Regional-notes
 	#Related-concepts
+	#Sources
 	#The-master-password
 	#Use-a-passphrase-not-a-word
 	#Where-to-go-next
@@ -3074,6 +3082,7 @@
 	#9-Account-sign-in-protection
 	#After-the-ten-steps
 	#Before-you-start
+	#Disabling-2G-optional
 	#Phone-privacy-settings-step-by-step
 	#SIM-PIN-optional
 	#The-ten-steps
@@ -3257,6 +3266,7 @@
 	#Next-steps
 	#Related-concepts
 	#Relays-and-bridges
+	#Things-to-keep-in-mind-with-Tor-Browser
 	#Tracks-you-can-join
 	#What-Is-Tor
 	#What-Tor-is-good-for-and-what-it-is-not
@@ -4325,16 +4335,21 @@
 	#三條路各自的門檻
 	#中國境內的-AI-服務是另一套框架
 	#人工審查是常態
+	#代理型-AI-的存取範圍
 	#企業版的紀錄你的雇主看得到
 	#你沒有主動貼但也送出去了
 	#供應商看得到內容
+	#分享出去的對話連結
 	#刪除對話不等於資料消失
 	#去識別化
 	#只貼需要的那一段
 	#哪些內容不該貼
 	#團隊與組織
+	#執法與政府調取
+	#帳號的設定
 	#折扣代理商
 	#接下來
+	#暫時對話與私密模式的保留期間
 	#會不會被拿去訓練取決於你用的是哪一版
 	#本地模型
 	#本頁會過期
@@ -4531,9 +4546,12 @@
 	#在台灣與香港的補充
 	#密碼管理器入門
 	#常見錯誤避免踩坑
+	#本頁的來源與核對
+	#瀏覽器內建的密碼管理與自動填入
 	#為什麼需要密碼管理器
 	#硬體金鑰YubiKeySolo
 	#系統整合Apple-Passwords--iCloud-Keychain
+	#被要求交出密碼的情況
 	#離線金庫KeePassXC與-GNOME-Secrets
 	#雲端同步Bitwarden
 /tools/phishing/
@@ -4570,6 +4588,7 @@
 	#本頁的核對
 	#相關閱讀
 	#選做SIM-卡-PIN-碼
+	#選做關閉-2G
 	#開始之前
 /tools/rss/
 	#RSS-的運作方式
@@ -4771,6 +4790,7 @@
 	#下一步可參與的專案
 	#中繼點與橋接點
 	#什麼是-Tor
+	#使用-Tor-Browser-的注意事項
 	#常見問題
 	#接下來
 /tor-snowflake/ -> /tools/tor-snowflake/
@@ -7002,22 +7022,26 @@
 	#观测层网络审查的可验证记录
 	#连线层Tor-工具家族
 /zh-cn/tools/ai-privacy/
+	#AI-代理的访问范围
 	#AI-会编造也是安全问题
 	#AI-的访问凭证本身是攻击目标
 	#一个判断题
 	#三条路各自的门槛
 	#中国境内的-AI-服务是另一套框架
+	#临时对话与私密模式的保留期限
 	#人工审查是常态
 	#企业版的记录你的雇主看得到
 	#会不会被拿去训练取决于你用的是哪一版
 	#你没有主动贴但也送出去了
 	#供应商看得到内容
+	#分享出去的对话链接
 	#删除对话不等于数据消失
 	#去识别化
 	#只贴需要的那一段
 	#哪些内容不该贴
 	#团队与组织
 	#密钥是从哪里外泄的
+	#执法与政府调取
 	#折扣代理商
 	#接下来
 	#本地模型
@@ -7025,6 +7049,7 @@
 	#用-AI-工作时怎么避免数据外泄
 	#自架的代理与沙盒也是攻击面
 	#该问服务供应商的问题
+	#账号的设定
 	#贴之前可以怎么处理
 	#贴进去之后发生什么
 /zh-cn/tools/asian-diceware/
@@ -7218,9 +7243,12 @@
 	#备援与恢复策略
 	#密码管理器入门
 	#常见错误避免踩坑
+	#本页的来源与核对
+	#浏览器内置的密码管理与自动填充
 	#硬件密钥YubiKeySolo
 	#离线密钥库KeePassXC与-GNOME-Secrets
 	#系统整合Apple-Passwords--iCloud-Keychain
+	#被要求交出密码的情况
 /zh-cn/tools/phishing/
 	#假登录页
 	#可疑附件的打开方式
@@ -7256,6 +7284,7 @@
 	#本页的核对
 	#相关阅读
 	#选做SIM-卡-PIN-码
+	#选做关闭-2G
 /zh-cn/tools/rss/
 	#RSS-的运作方式
 	#RSS-的隐私取舍
@@ -7453,6 +7482,7 @@
 	#下一步可参与的项目
 	#中继点与桥接点
 	#什么是-Tor
+	#使用-Tor-Browser-的注意事项
 	#常见问题
 	#接下来
 /zh-cn/tor-snowflake/ -> /zh-cn/tools/tor-snowflake/

@@ -85,6 +85,20 @@ Tor 不是万能匿名钮。把它用在不对的场景，会付出效能代价�
 - 点对点文件分享（BitTorrent 等）。Tor 出口节点频宽有限，这类流量会伤害网络给其他人用的容量，也容易暴露你的真实 IP。
 - 「我所有上网都走 Tor 就比较安全」的全包式期待。Tor 处理的是连线层匿名，跟浏览器指纹、登录身分绑定、文件 [Metadata](../basics/metadata.md) 是不同层级的问题。
 
+## 使用 Tor Browser 的注意事项
+
+Tor 很难做到完全匿名，知道它的限制，可以避开多数意外[^ssd-tor]：
+
+- **只有 Tor Browser 里的浏览会匿名**：装了 Tor Browser 不代表整台电脑都走 Tor，同一台电脑上的普通浏览器与其他 App 仍然直接连接
+- **下载的文件**：从 Tor 下载的文件可能内嵌网络上的资源，在 Tor 之外用普通软件打开时会联网下载，你的真实 IP 地址就会暴露。Tor Browser 还开着时尤其要小心
+- **登录与填写个人资料**：用 Tor Browser 登录账号或在表单填写可以识别身份的资料，网站就能认出你，也可能知道你在用 Tor
+- **别人看得到你在用 Tor**：能看到你网络流量的人，看不到你连去哪里，但看得到你在用 Tor。需要隐藏这一点时改用网桥（见 [Tor Browser 进阶设定](./tor-browser-advanced.md)）
+- **不要另外安装扩展**：Tor Browser 已经内置隐私保护的设置，不需要再装广告或追踪器拦截，多装的扩展反而可能让你被认出来
+
+下载 Tor Browser 只从[官方网站](https://www.torproject.org/download/){target="_blank"}，用搜索引擎找的话先确认网址正确。下载过程中要求你接受其他的 HTTPS 证书时，不要继续。不确定下载的文件是不是正版，可以照 Tor Project 的说明[验证 Tor Browser 的签名](https://support.torproject.org/tbb/how-to-verify-signature/){target="_blank"}[^ssd-tor]。手机版的安装见 [手机上的 Tor](./tor-browser-mobile.md)。
+
+本节依 EFF Surveillance Self-Defense 的〈[How to: Use Tor](https://ssd.eff.org/module/how-to-use-tor){target="_blank"}〉（审阅日 2025-01-28，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"}）改写，未经 EFF 审阅。
+
 ## 常见问题
 
 ??? question "Tor 跟 VPN 哪个比较匿名？"
@@ -136,3 +150,4 @@ Tor 不是万能匿名钮。把它用在不对的场景，会付出效能代价�
 - [:material-server-network: Tor Relay 架设指南](https://anoni.net/zh-cn/join/setup-tor-relay/){target="_blank"}
 
 </div>
+[^ssd-tor]: [How to: Use Tor](https://ssd.eff.org/module/how-to-use-tor){target="_blank"} - EFF Surveillance Self-Defense，审阅日 2025-01-28。

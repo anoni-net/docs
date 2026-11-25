@@ -14,7 +14,7 @@ icon: material/key-variant
 
 简单密码也撑不住。一台普通电脑每秒可以试上千万个常见密码组合，加上社交工程取得的姓名、生日、宠物名字，「定制化字典」攻击速度更快。再串上 SIM swap（攻击者透过社交工程把你的号码移到他们的 SIM 卡，拦截短信验证码），单纯的「密码 + 短信 2FA」就会失守。
 
-浏览器内建的「记住密码」功能能帮一点忙，但限制明显：跨装置同步弱、被偷装置就全暴露、恶意的浏览器扩展可以读取、没有恢复机制。
+浏览器与操作系统内置的密码管理（Apple 的 Passwords、Google 密码管理工具、Firefox）是最容易上手的起点，最好的密码管理器就是你真的会用的那一个。内置在浏览器里的自动填充可以防钓鱼，也不必另外安装扩展[^ssd-pm]。代价是绑在单一浏览器或生态系（Firefox 的只能在 Firefox 里用），也比独立的密码管理器少了加密笔记、安全问题的答案、家人共享这类功能。各家默认的加密程度不同，Google 的需要自行开启，见下方的[浏览器内置的密码管理与自动填充](#浏览器内置的密码管理与自动填充)。
 
 密码管理器的核心承诺是：**你只记一组难记的主密码，其他每个服务都用不同、随机、长密码，由密钥库加密保管**。主密码用来解锁密钥库，密钥库里是你所有的密码、TOTP 种子、安全笔记。
 
@@ -22,11 +22,13 @@ icon: material/key-variant
 
 主密码是整套系统的单一支点，值得花一点时间想清楚。
 
-**用 passphrase，不要用单字密码**。Passphrase 是 4 到 6 个随机英文单字串成的句子（例如 `correct horse battery staple`），熵比短而复杂的密码高得多，也比较好记。可以用 [diceware](https://theworld.com/~reinhold/diceware.html){target="_blank"} 字典随机抽单字，避免自己选有意义的词。社区也做了一份带亚洲味、与 EFF 兼容的 [Asian Diceware 密语字典](./asian-diceware.md)，附 A5 小册与掷骰、安全随机数的产生教学。
+**用 passphrase，不要用单字密码**。Passphrase 是随机英文单字串成的句子（例如 `oolong lantern basket typhoon pencil marble`，仅为示意），熵比短而复杂的密码高得多，也比较好记。用作主密码或全盘加密的密码时，至少用 6 个字[^ssd-pw]。可以用 [diceware](https://theworld.com/~reinhold/diceware.html){target="_blank"} 字典随机抽单字，避免自己选有意义的词。社区也做了一份带亚洲味、与 EFF 兼容的 [Asian Diceware 密语字典](./asian-diceware.md)，附 A5 小册与掷骰、安全随机数的产生教学。
 
 **主密码不要重用**。这个密码一旦曝露，等于你所有的账号全部曝露。除了密码管理器，其他任何服务都不能用这组密码。
 
 **不要存在电脑上**。记在脑中、写在纸上、放保险柜。可以给家人或律师一份封存的副本，作为遗产规划。
+
+**装置要保持干净**。电脑或手机被装了间谍软件，你输入主密码的过程会被记录下来，密钥库里的内容也可能被偷走[^ssd-pw]。主密码再强也挡不住，用密码管理器的同时仍要防范恶意软件（做法见[恶意软件的防范与处理](./malware.md)）。
 
 ## 四类密码管理器与选择取舍
 
@@ -66,6 +68,8 @@ icon: material/key-variant
 
 [1Password](https://1password.com/){target="_blank"} 是付费服务（个人每年约 48 美元，2026 年 3 月调涨，实际以官网为准），在 UX 与额外功能上做得最完整。Watchtower 主动监控你的密码是否出现在外泄数据库、是否使用弱密码、哪些服务该开 2FA 还没开。家庭与团队计划成熟，多人共享部分项目方便。
 
+各家的家庭方案通常让每位成员各有私人密钥库，水电、流媒体这类共用账号再另外共享。家庭账号的管理者可能有办法恢复成员的密码，等于能看到内容，加入之前要确认自己在一定程度上信任管理者[^ssd-pm]。
+
 1Password 是闭源，但有公开第三方 audit，并用「Secret Key」设计：除了主密码，还有一组装置上才有的长随机字串，攻击者光取得主密码也解不开密钥库。
 
 适合：愿意付费换 UX 与监控功能、需要家庭或团队共享、追求最低操作摩擦的用户。
@@ -78,6 +82,14 @@ iOS 18 与 macOS Sequoia 起，Apple 把密码功能独立成 [Passwords](https:
 
 适合：完全在 Apple 生态的个人用户、不想额外装 app 的人。
 
+## 浏览器内置的密码管理与自动填充
+
+Apple 的 Passwords 默认就有端对端加密，Google 密码管理工具默认没有[^ssd-pm]。Google 另外提供「设备端加密」，设置之后只有你自己握有解锁的密钥，Google 也无法读取你存的密码与 passkey。解锁时用 Google 账号密码或兼容装置的屏幕锁。Google 的说明写了之后会逐步为所有人设置，在那之前需要自行到 Google 密码管理工具的设置里开启[^google-ode]，用 Chrome 或 Android 存密码的人建议开启。
+
+设备端加密设置之后无法移除，忘记 Google 账号密码而无法登录时，存着的密码也可能无法取回[^google-ode]。开启前先确认账号的辅助电话号码与辅助邮箱是最新的。其他浏览器内置的密码管理，使用前先查它如何加密数据。
+
+自动填充对多数人是防钓鱼的重要保护，假网站的网址不相符，密码就不会填进去。独立的密码管理器靠浏览器扩展做自动填充，扩展也是密码管理器最常出现漏洞的地方。被政府这类强大的对手锁定时，可以考虑关掉扩展的自动填充[^ssd-pm]，改从密码管理器的 app 复制粘贴。少了自动填充，防钓鱼就更需要依靠硬件密钥或 passkey（见下方的[硬件密钥](#硬件密钥YubiKeySolo)）。
+
 ## TOTP（两步验证）与密码管理器的关系
 
 两步验证在密码之外加一道时效验证码。TOTP（Time-based One-Time Password）是最常见的形式，每 30 秒换一次。
@@ -85,7 +97,7 @@ iOS 18 与 macOS Sequoia 起，Apple 把密码功能独立成 [Passwords](https:
 存放策略上有两派：
 
 - **同密钥库存 TOTP**：KeePassXC、Bitwarden（Premium）、1Password 都支持。方便、跨装置同步自动处理。缺点是主密码曝露 = TOTP 也曝露，等于两步验证变成一步
-- **独立 app 存 TOTP**：Android 用 [Aegis](https://getaegis.app/){target="_blank"}、iOS 用 [Raivo](https://raivo-otp.com/){target="_blank"} 或 [Ente Auth](https://ente.io/auth/){target="_blank"}（跨平台）。多一道分层，安全多一道
+- **独立 app 存 TOTP**：Android 用 [Aegis](https://getaegis.app/){target="_blank"}，iOS 与跨平台用 [Ente Auth](https://ente.io/auth/){target="_blank"}。多一道分层，安全多一道。iOS 的 Raivo 在 2023 年被收购后，隐私政策纳入广告追踪器与 log 收集，不建议新采用[^raivo]（挑选 TOTP app 的判准见[怎么维持多个网络身分](../basics/multiple-identities.md)）
 
 社区建议：高敏感账号（Email、银行、云端服务）用独立 app，其他可以同密钥库图方便。
 
@@ -152,6 +164,12 @@ Passkey 是基于 [FIDO2 / WebAuthn](https://fidoalliance.org/passkeys/){target=
 
 Tails 用户：把 `.kdbx` 存进 Persistent Storage 并另外备份到加密硬盘。Tails 默认关机就清空，没做 Persistent Storage 设定的话下次开机什么都没了。
 
+## 被要求交出密码的情况
+
+各地法律对交出密码的规定不同。有些地方或许可以在法律上挑战交出密码的要求，有些地方的法律允许政府要求你交出，甚至可以因为怀疑你知道某组密码或密钥就将人监禁。也有人以人身威胁强迫对方交出密码。过境时拒绝交出密码或解锁装置，可能被延误通关或扣下装置[^ssd-pw]。
+
+密码管理器把所有密码集中在一组主密码后面，被迫交出主密码时，失去的是整个密钥库。事先想清楚谁可能强迫你或你身边的人交出密码，以及交出与拒绝各自的后果。东亚与东南亚各地入境时被要求解锁的后果与应对，见[出差与研讨会的数字准备](../scenarios/asia-travel.md#入境时被要求解锁或交出设备)。
+
 ## 在台湾与香港的补充
 
 台湾、香港有几个跟密码管理器相关的特殊情境，国际指南通常不会提：
@@ -166,6 +184,10 @@ Tails 用户：把 `.kdbx` 存进 Persistent Storage 并另外备份到加密硬
 
 - **政府与银行服务的 2FA**：HKID、iAM Smart（政府数字身份）与网银多用短信 OTP，SIM swap 同样存在，能改 TOTP 的服务就改，recovery codes 存进密钥库
 - **Apple ID 一样是关键账号**：Sign in with Apple 绑定多个服务的逻辑在香港一样成立，务必开 2FA 与 Recovery Contacts
+
+## 本页的来源与核对
+
+本页部分内容依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[Choosing a Password Manager](https://ssd.eff.org/module/choosing-the-password-manager-that-s-right-for-you){target="_blank"}〉（审阅日 2025-03-06）与〈[Creating Strong Passwords](https://ssd.eff.org/module/creating-strong-passwords){target="_blank"}〉（审阅日 2023-08-18）改写，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"} 授权。依 SSD 补上的是主密码至少 6 个字、间谍软件会记录主密码、家庭方案的管理者、浏览器内置密码管理的取舍与被要求交出密码的情况。Google 设备端加密的说明 2026 年 11 月依 Google 帐号帮助核对。本页未经 EFF 审阅，内容与原文不同之处由匿名网络社区 anoni.net 负责。
 
 ## :material-chat-question: 一同了解
 
@@ -188,3 +210,8 @@ Tails 用户：把 `.kdbx` 存进 Persistent Storage 并另外备份到加密硬
 - [:material-translate-variant: 中文化与文件翻译](../community/i18n.md)
 
 </div>
+
+[^ssd-pm]: [Choosing a Password Manager](https://ssd.eff.org/module/choosing-the-password-manager-that-s-right-for-you){target="_blank"} - EFF Surveillance Self-Defense，审阅日 2025-03-06。
+[^ssd-pw]: [Creating Strong Passwords](https://ssd.eff.org/module/creating-strong-passwords){target="_blank"} - EFF Surveillance Self-Defense，审阅日 2023-08-18。
+[^google-ode]: [设备端加密功能使用入门](https://support.google.com/accounts/answer/11350823?hl=zh-Hans){target="_blank"} - Google 帐号帮助，查证日 2026-11。
+[^raivo]: [PSA: Raivo OTP for iOS was acquired by Mobime a few months ago](https://www.ghacks.net/2023/12/19/psa-raivo-otp-for-ios-was-acquired-by-mobime-a-few-months-ago/){target="_blank"} - gHacks，2023 年 12 月。Privacy Guides 社区同期讨论指出新东家的隐私政策含 Facebook 与 Google AdMob 追踪器并收集 IP 等 log 数据。查证日 2026-08。

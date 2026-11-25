@@ -166,6 +166,8 @@ icon: material/cellphone-cog
 
 设好锁定之后，iPhone 与近年的 Android 手机都会加密手机里的数据，手机丢失时，别人拆下存储设备也读不出内容。当场被要求解锁时，加密帮不上忙。
 
+回家之后，把解锁密码换成 8 到 12 个随机字符的密码，太短的密码让加密比较容易被暴力破解[^ssd-android]。面容或指纹解锁很方便，但被要求当场解锁时比密码更难拒绝，处境涉及执法部门时只用密码解锁（见 [手机的位置追踪与监控手法](../basics/phone-surveillance.md) 的〈生物辨识解锁〉）[^ssd-iphone]。
+
 ### 4. 位置权限
 
 住处、工作地点与常去的地方，从一周的位置记录就推得出来。多数 App 只需要在你使用时知道大致位置。精确位置可以准到几米内，大致位置只知道你在哪一区，Google 的说明是约 3 平方公里的范围[^google-location]，天气、新闻、购物 App 用大致位置就够了。
@@ -401,12 +403,31 @@ SIM 卡被拔走插到另一部手机，对方就能收到发给你的短信验�
 
     搜索「SIM 卡锁定」，开启锁定并输入目前的 PIN 码。
 
+## 选做：关闭 2G
+
+伪基站会引诱附近的手机改连到假的 2G 基站，借此定位、拦截通讯或发送诈骗短信。在已经关闭 2G 的地区（例如台湾），关掉手机的 2G 不会影响一般使用，手机出现 2G 信号反而代表可能遇到伪基站（见 [手机的位置追踪与监控手法](../basics/phone-surveillance.md) 的〈伪基站〉）。仍有 2G 网络的地区，关掉之后在只有 2G 信号的地方会无法上网[^ssd-android]。
+
+=== "iPhone"
+
+    iPhone 没有单独的 2G 开关，开启「锁定模式」会停用 2G，但也会限制很多其他功能，位置与取舍见下方的〈做完之后〉。
+
+=== "Android"
+
+    打开「设置」>「网络和互联网」>「SIM 卡」，点你的运营商，关闭允许 2G 的选项（英文界面是 Allow 2G，名称依系统版本不同）。同一页如果有要求加密连接的选项，也一并开启[^ssd-android]。
+
+    选项是否出现，依系统版本、手机品牌与运营商而定。其他品牌搜索「2G」。
+
+=== "Samsung Galaxy"
+
+    搜索「2G」，找到允许 2G 的选项就关闭。找不到的话，代表手机或运营商没有开放此设置。
+
 ## 做完之后
 
-十个步骤做完，手机出厂时默认开着的数据流向，大部分已经关上。接下来可以往三个方向走：
+十个步骤做完，手机出厂时默认开着的数据流向，大部分已经关上。接下来可以往四个方向走：
 
 - 一年回来看一次：权限列表、位置共享与登录中的设备会慢慢长回来，[我的准备清单](../utils/checklist.md) 的「每年重看」收了这几项
 - 要出国：手机号、eSIM、酒店网络各自暴露什么，见 [出国的手机号与网络连接](../scenarios/travel-connectivity.md)
+- 备份：iPhone 的 iCloud 备份默认不是端对端加密，开启「高级数据保护」才是（见 [端对端加密的保护范围](../basics/e2ee.md) 的〈iCloud 的高级数据保护〉）。Android 备份到 Google 相册的照片与视频也不是端对端加密[^ssd-android][^ssd-iphone]
 - 处境的风险比一般人高，例如可能被间谍软件锁定的记者与倡议工作者：iPhone 的「锁定模式」与 Android 的「高级保护」会关掉部分功能，换来更小的被攻击范围，一般人不需要开。要不要开，先从 [威胁模型如何建立](../basics/threat-model.md) 想清楚
 
 锁定模式在 iPhone 的「设置」>「隐私与安全性」>「锁定模式」，开启之后 App、网站与部分功能会受到严格限制[^ios-lockdown]。高级保护在 Android 16 以上的「设置」>「安全和隐私」，「其他设置」下方的「高级保护」，开启「设备保护」，需要先设好屏幕锁定[^google-ap]。
@@ -418,6 +439,8 @@ SIM 卡被拔走插到另一部手机，对方就能收到发给你的短信验�
 - iPhone：iOS 26、iOS 27，依 Apple 的 iPhone 使用手册与支持文章的简体中文版，2026 年 10 月核对
 - Android：Google Pixel 的 Android 16 与 Android 17，依 Google 的 Android 帮助中心、Pixel 帮助中心与 Android 开放源代码项目，2026 年 10 月核对。部分上层菜单的简体中文名称还没有核对到，那几步以描述为主
 - Samsung Galaxy：One UI 8 以上，依 Samsung 的官方支持页，2026 年 10 月核对。简体中文界面的菜单名称没有逐一核对，这个分页以描述与搜索关键词为主
+
+解锁密码长度、关闭 2G 与备份的建议，依 EFF Surveillance Self-Defense 的〈[How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"}〉（审阅日 2025-06-23）与〈[How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"}〉（审阅日 2025-09-15）补充，两篇以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"} 授权，补充的内容未经 EFF 审阅。
 
 照着做却找不到选项，先用设置里的搜索栏找名称。仍然找不到的话，欢迎到社区的线上聊天室（[Matrix 公开 room](https://anoni.net/zh-cn/services/){target="_blank"}）告诉我们手机型号、系统版本与销售地区，我们会查证后更新。
 
@@ -448,3 +471,5 @@ SIM 卡被拔走插到另一部手机，对方就能收到发给你的短信验�
 [^google-ap]: [通过 Android 的“高级保护”功能提高设备安全性](https://support.google.com/android/answer/16339980?hl=zh-Hans){target="_blank"} - Android 帮助。
 [^samsung-theft]: [How to use security settings on your phone](https://www.samsung.com/uk/support/mobile-devices/how-to-use-security-settings/){target="_blank"} - Samsung 英国支持页。
 [^samsung-puk]: [手機顯示需要輸入 PUK 碼](https://www.samsung.com/tw/support/mobile-devices/my-mobile-is-locked-could-you-tell-me-what-is-puk-code/){target="_blank"} - Samsung 台湾支持页（正体中文）。
+[^ssd-android]: [How to: Get to Know Android Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-android-privacy-and-security-settings){target="_blank"} - EFF Surveillance Self-Defense，审阅日 2025-06-23。
+[^ssd-iphone]: [How to: Get to Know iPhone Privacy and Security Settings](https://ssd.eff.org/module/how-to-get-to-know-iphone-privacy-and-security-settings){target="_blank"} - EFF Surveillance Self-Defense，审阅日 2025-09-15。
