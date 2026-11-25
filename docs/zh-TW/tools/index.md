@@ -47,6 +47,7 @@ icon: material/toolbox-outline
 想從通訊、協作、帳號、金流、AI 使用先補齊基礎的人，從這群開始。各篇主題彼此獨立，不必照順序。
 
 - [手機隱私設定逐步指引](./phone-privacy-settings.md)：拿著自己的手機照編號調整，iPhone、Android、Samsung Galaxy 各有對照的路徑，約三十分鐘。
+- [社群平台的隱私設定](./social-media-settings.md)：LINE、Facebook、Instagram、Threads 上決定同事、前任、家人與陌生人能不能找到你、看得到你什麼的設定，以及 Facebook 社團的管理方式。
 - [藍牙追蹤器的偵測與處理](./bluetooth-tracker.md)：AirTag 這類追蹤器被偷放進包包或車上時，iPhone 與 Android 偵測得到哪些、收到警示後如何找出來，以及找到之後先顧安全再決定是否停用。
 - [網路釣魚的辨識與防範](./phishing.md)：假登入頁與魚叉式釣魚如何運作，更新、密碼管理器、passkey、附件與郵件圖片這幾項防範，以及輸入了密碼之後的處理。
 - [裝置加密與資料抹除](./device-encryption.md)：Windows、Mac、Linux、iPhone、Android 的全碟加密，復原金鑰存在哪裡，以及出售或送出裝置前的清除。

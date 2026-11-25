@@ -23,6 +23,7 @@ icon: material/school-outline
 - [浏览器指纹是什么，为什么很难摆脱](./browser-fingerprinting.md)：cookie 删得掉，指纹删不掉，各家浏览器现在各自做到哪里。
 - [监控现在做得到什么](./surveillance-capability.md)：按平台、电信、国家、商用间谍软件四层盘点能力边界，每一条标出证据与日期。
 - [手机的位置追踪与监控手法](./phone-surveillance.md)：基站、伪基站、Wi-Fi 与蓝牙、App 与广告标识符如何定位你，加上传感器、生物识别、一次性手机与手机被扣押时的取证。
+- [网络封锁的手法与绕过方式](./network-censorship.md)：封锁发生在哪里、DNS、IP、域名与协议封锁的运作方式、如何用 OONI Probe 确认，以及加密 DNS、VPN、Tor 与通讯软件的 Proxy 各自挡得住哪一种封锁。
 - [怎么维持多个网络身分](./multiple-identities.md)：要几层身分、每层的工具边界、被反查的途径，以及长期维持与收尾。
 - [为什么匿名支付重要](./payments-anonymity.md)：金流如何变成最黏的 metadata，现金为什么是最成熟的匿名支付。
 - [端对端加密的保护范围](./e2ee.md)：传输加密、端对端加密与存储加密各自挡得住谁，以及有加密之后还留下哪些记录。

@@ -83,6 +83,7 @@ Beyond consuming this data, anoni.net runs [Tor Relay Watch](https://anoni.net/e
 ## Where to go from here
 
 - [Regional observatory](../regional/index.md) — the empirical work and country-by-country observations
+- [How network blocking works and how to get around it](./network-censorship.md) — checking whether you are blocked, and what each circumvention tool can get around
 - [LGBTQ+ scenarios](../scenarios/lgbtq.md) — a worked-through showcase of how regional framing applies to one population
 - [About anoni.net](https://anoni.net/en/about/){target="_blank"} — how the community works and how to collaborate
 - [OONI Explorer](https://explorer.ooni.org/){target="_blank"} and [Tor Metrics](https://metrics.torproject.org/){target="_blank"} — go directly to the upstream measurement portals

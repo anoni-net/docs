@@ -8,7 +8,7 @@ icon: material/cellphone-marker
 
 A phone keeps announcing where you are through the signals it sends, and that is one of its deepest and least visible privacy risks. Beyond the location you share on purpose, there are at least four ways to track a phone: cell towers, fake base stations, Wi-Fi and Bluetooth, and location leaks from apps and websites[^ssd-loc].
 
-This page combines and adapts the five-part mobile phone series in EFF's Surveillance Self-Defense (listed under [Sources and review](#sources-and-review)), and adds context from Taiwan. For who can do what at what cost, see [what surveillance can actually do](./surveillance-capability.md). For the settings to change, see [phone privacy settings, step by step](../tools/phone-privacy-settings.md).
+This page combines and adapts the five-part mobile phone series in EFF's Surveillance Self-Defense (listed under [Sources and review](#Sources-and-review)), and adds context from Taiwan. For who can do what at what cost, see [what surveillance can actually do](./surveillance-capability.md). For the settings to change, see [phone privacy settings, step by step](../tools/phone-privacy-settings.md).
 
 !!! tip "Short on time? Start here"
 
