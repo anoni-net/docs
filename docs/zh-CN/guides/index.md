@@ -1,13 +1,13 @@
 ---
 title: 指南
 subtitle: 概念到实践的三个层次
-description: anoni.net 文档站的核心阅读路径，从概念、工具到场景，三个层次从理论走到实际操作，各层依主题分组。
+description: anoni.net 文档站的核心阅读路径，概念、工具、场景三个层次，从理论走到实际操作，各层依主题分组。
 icon: material/compass-outline
 ---
 
 # :material-compass-outline: 指南
 
-「指南」整合了文档站的核心阅读路径，从基础概念走到具体工具与实际应用场景。三个层次各有自己的索引页，文章依主题分组，侧边栏与索引页用的是同一套分组。
+「指南」整合了文档站的核心阅读路径，从基础概念走到具体工具与实际应用场景。三个层次各有索引页，文章依主题分组，侧边栏的分组与索引页相同。
 
 ## 三个阅读层次 { #五个阅读层次 }
 
@@ -15,7 +15,7 @@ icon: material/compass-outline
 
 - [:material-school-outline: 概念](../basics/index.md)
 
-    匿名与隐私的词汇与判断框架，分成基本词汇与框架、数据留下的痕迹、监控与封锁三组。从这里建立共同的动机与词汇。
+    匿名与隐私的基本概念，分成基本词汇与框架、你留下的痕迹、监控与封锁三组，从这里建立共同的动机与词汇。
 
 - [:material-toolbox-outline: 工具](../tools/index.md)
 
@@ -38,4 +38,4 @@ icon: material/compass-outline
 - **想找特定工具**：直接到[工具](../tools/index.md)找对应工具的介绍与威胁模型
 - **有具体需求**：到[场景](../scenarios/index.md)找最接近自己的角色，看完整流程
 
-延伸到本地的法规与观测，可以接着看[在地脉络](../taiwan/index.md)。外部研究报告与指引的全文中译收在社区首页的[报告与指引中译](https://anoni.net/zh-cn/library/){target="_blank"}。协议与密码学的原理（后量子密码、去中心化网站发布、零知识身份验证等）写给技术读者，收在社区首页的[技术文章](https://anoni.net/zh-cn/articles/){target="_blank"}。想加入社区协作，见[社区参与](https://anoni.net/zh-cn/join/){target="_blank"}。
+延伸到本地的法规与观测，可以接着看[在地脉络](../taiwan/index.md)。外部研究报告与指引的全文中译，以及写给技术读者的协议与密码学原理（后量子密码、去中心化网站发布、零知识身份验证等），分别收在社区首页的[报告与指引中译](https://anoni.net/zh-cn/library/){target="_blank"}与[技术文章](https://anoni.net/zh-cn/articles/){target="_blank"}。想加入社区协作，见[社区参与](https://anoni.net/zh-cn/join/){target="_blank"}。

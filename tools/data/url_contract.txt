@@ -46,11 +46,11 @@
 /advanced/post-quantum/ -> https://anoni.net/articles/post-quantum/
 /advanced/zk-identity-payments/ -> https://anoni.net/articles/zk-identity-payments/
 /basics/
+	#你留下的痕跡
 	#基本詞彙與框架
 	#文章一覽
 	#概念層
 	#監控與封鎖
-	#資料留下的痕跡
 /basics/anonymity-vs-privacy/
 	#一個工具通常做不到全部
 	#一個常見的誤判把機密當成匿名
@@ -5244,8 +5244,8 @@
 /zh-cn/advanced/post-quantum/ -> https://anoni.net/zh-cn/articles/post-quantum/
 /zh-cn/advanced/zk-identity-payments/ -> https://anoni.net/zh-cn/articles/zk-identity-payments/
 /zh-cn/basics/
+	#你留下的痕迹
 	#基本词汇与框架
-	#数据留下的痕迹
 	#文章一览
 	#概念层
 	#监控与封锁

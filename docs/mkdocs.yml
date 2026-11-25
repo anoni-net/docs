@@ -35,7 +35,7 @@ nav:
               - basics/threat-model.md
               - basics/e2ee.md
               - basics/mistaken-for-anonymity.md
-          - "資料留下的痕跡":
+          - "你留下的痕跡":
               - basics/metadata.md
               - basics/platform-tracking.md
               - basics/browser-fingerprinting.md
@@ -46,7 +46,7 @@ nav:
               - basics/phone-surveillance.md
               - basics/network-censorship.md
       # 子分組沿用 tools/index.md 的小標題：連線、環境、觀測三層各一組，日常隱私基本功
-      # 依該節底下的四個 ### 小標題拆成四組，17 篇擠在一組太長。
+      # 依該節底下的四個 ### 小標題拆成四組，17 篇放在同一組太長。
       # 改這裡的分組時同步改那一頁，不要各寫各的。
       - !ENV [NAV_TOOLS, "工具"]:
           - tools/index.md
@@ -89,7 +89,7 @@ nav:
               - tools/ai-privacy.md
               - tools/crypto-privacy-spectrum.md
       # 分組與順序跟著 scenarios/index.md 的 ### 小標題走。「共同基準」只有一篇，留在
-      # 分組外排在最前面，單頁分組反而難掃。
+      # 分組外排在最前面，單頁分組反而不易瀏覽。
       - !ENV [NAV_SCENARIOS, "場景"]:
           - scenarios/index.md
           - scenarios/everyday-baseline.md

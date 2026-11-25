@@ -15,11 +15,11 @@ Guides collects the docs site's core reading paths, from foundational concepts t
 
 - [:material-school-outline: Concepts](../basics/index.md)
 
-    The vocabulary and frameworks behind anonymity and privacy, in three groups: vocabulary and frameworks, the traces you leave, and surveillance and blocking. Start here for the shared vocabulary.
+    The ideas behind anonymity and privacy, in three groups: vocabulary and frameworks, the traces you leave, and surveillance and blocking. Start here for the shared vocabulary.
 
 - [:material-toolbox-outline: Tools](../tools/index.md)
 
-    Introductions and comparisons, in three groups: tools to start with, comparisons and hardening, and ways to contribute and measure regionally.
+    Introductions to individual tools, in three groups: tools to start with, comparisons and hardening, and ways to contribute and measure regionally.
 
 - [:material-account-group-outline: Scenarios](../scenarios/index.md)
 
@@ -31,7 +31,7 @@ Guides collects the docs site's core reading paths, from foundational concepts t
 
 There is no need to read all three in order. Several ways in:
 
-- **Your account was taken over, a device is lost, or you are being harassed**: start with [Emergency Help](../help/index.md), which covers helplines and what to do in each situation
+- **Your account has been taken over, a device is lost, or someone is harassing you**: start with [Emergency Help](../help/index.md), which covers helplines and what to do in each situation
 - **You want to know what to do and can read the reasoning later**: start with [an everyday baseline](../scenarios/everyday-baseline.md), ordered by actual effect
 - **You want to know how familiar you are with Tor, Tails and OONI**: place yourself on the [self-skills evaluation form](../community/skill-level.md), which links each level to a learning path
 - **First time with anonymity networks**: start with [Concepts](../basics/index.md) and read through for the vocabulary and the motivation
