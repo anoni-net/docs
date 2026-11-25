@@ -50,7 +50,7 @@ AirTag 與相容的追蹤器離開擁有者一段時間之後，移動時會發�
 | 偵測得到 | AirTag、AirPods、「尋找」網路配件、相容的藍牙追蹤器 | AirTag、與「尋找中心」相容的追蹤器與耳機 |
 | 要另外處理 | Samsung SmartTag、Tile | Samsung SmartTag、Tile |
 
-Apple 與 Google 的說明頁都沒有把 Samsung SmartTag 與 Tile 列為相容的追蹤器[^apple][^google]，這兩個品牌要靠各自的 App 或 AirGuard（見[手動掃描](#手動掃描)）。
+Apple 與 Google 的說明頁都沒有把 Samsung SmartTag 與 Tile 列為相容的追蹤器[^apple][^google]，這兩個品牌要靠各自的 App 或 AirGuard（見[手動掃描](#手動掃描)）。共同標準在 2024 年 5 月推出，EFF 當時測試發現新支援的第三方追蹤器不一定偵測得到，所以仍建議搭配 AirGuard[^ssd]。
 
 警示要等追蹤器跟著你移動一段時間才會出現，Apple 與 Google 都沒有公布確切的時間，EFF 測試時最長要等到 24 小時[^ssd]。借朋友的鑰匙、跟帶著追蹤器的人同行，也可能收到警示，收到時先想想最近有沒有借用別人的東西。
 
@@ -92,7 +92,7 @@ Apple 與 Google 的說明頁都沒有把 Samsung SmartTag 與 Tile 列為相容
 
     「設定」>「安全與緊急救援」>「不明追蹤器警示」>「立即掃描」，大約 10 秒完成。結果只列出不在擁有者身邊的追蹤器。Android 11 以上不必開啟位置資訊也能掃描[^google]。
 
-    內建掃描找不到 Samsung SmartTag 與 Tile。要一併偵測，可以安裝 AirGuard，Android 版偵測得到 AirTag、Samsung SmartTag 與「尋找中心」的追蹤器[^airguard]。
+    Google 的說明頁沒有把 Samsung SmartTag 與 Tile 列在支援範圍[^google]。要偵測 SmartTag，可以安裝 AirGuard，Android 版偵測得到 AirTag、Samsung SmartTag 與「尋找中心」的追蹤器[^airguard]。
 
 === "iPhone"
 
@@ -127,7 +127,7 @@ Apple 與 Google 的說明頁都沒有把 Samsung SmartTag 與 Tile 列為相容
 
 覺得有立即危險時，先到人多的公共場所，再撥 `110`。警方可以向 Apple 等廠商調閱擁有者的資料，會需要追蹤器的序號或裝置 ID[^apple]。
 
-在台灣，[跟蹤騷擾防制法](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0080211&flno=3){target="_blank"} 第 3 條把「監視、觀察、跟蹤或知悉特定人行蹤」列為跟蹤騷擾行為之一，要件是反覆或持續、違反對方意願、與性或性別有關，並使對方心生畏怖。對象是特定人的配偶、親屬等關係密切的人時，不需要與性或性別有關[^stalking]。是否構成要看個案，報案時把上面保留的證據一併帶著。家暴相關的保護令與求助管道見 [家暴受害者的數位準備](../scenarios/domestic-violence.md) 的〈台灣的求助管道與法律〉。
+在台灣，[跟蹤騷擾防制法](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0080211&flno=3){target="_blank"} 第 3 條把「監視、觀察、跟蹤或知悉特定人行蹤」列為跟蹤騷擾行為之一，要件是反覆或持續、違反對方意願、與性或性別有關，並使對方心生畏怖[^stalking]。是否構成要看個案，報案時把上面保留的證據一併帶著。家暴相關的保護令與求助管道見 [家暴受害者的數位準備](../scenarios/domestic-violence.md) 的〈台灣的求助管道與法律〉。
 
 ## 偵測的限制
 
@@ -142,7 +142,7 @@ Apple 與 Google 的說明頁都沒有把 Samsung SmartTag 與 Tile 列為相容
 本頁依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[How to: Detect Bluetooth Trackers](https://ssd.eff.org/module/how-to-detect-bluetooth-trackers){target="_blank"}〉改寫，原文的審閱日是 2024-07-15，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant){target="_blank"} 授權。改寫時加入台灣的求助管道與法規，並依官方說明更新了三處：
 
 - Android 從 6.0 起就內建不明追蹤器警示，原文寫 Android 14 以上
-- iPhone 從 iOS 17.5 起偵測得到相容的第三方追蹤器，原文寫只偵測得到 AirTag
+- iPhone 從 iOS 17.5 起偵測得到相容的第三方追蹤器。原文的內文寫自動警示只支援 AirTag，開頭另外補註了 2024 年 5 月的跨平台標準，本頁依 Apple 的說明整理成系統需求，並保留 EFF 對新支援追蹤器的測試結果
 - 部分追蹤器停用之後會回到出廠設定，警方無法再查詢擁有者，原文沒有提到
 
 本頁未經 EFF 審閱，內容與原文不同之處由匿名網路社群 anoni.net 負責。

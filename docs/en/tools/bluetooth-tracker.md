@@ -35,7 +35,7 @@ An AirTag owner sees only the current location, not a movement history. Tile and
 | Detects | AirTag, AirPods, Find My accessories, compatible Bluetooth trackers | AirTag, Find Hub-compatible trackers and headphones |
 | Needs something else | Samsung SmartTag, Tile | Samsung SmartTag, Tile |
 
-Neither Apple nor Google lists Samsung SmartTag or Tile as compatible[^apple][^google]. Phones sold in mainland China often ship without Google Play services and may not have Android's built-in alerts. In both cases, use AirGuard (see [manual scans](#manual-scans)).
+Neither Apple nor Google lists Samsung SmartTag or Tile as compatible[^apple][^google]. Phones sold in mainland China often ship without Google Play services and may not have Android's built-in alerts. In both cases, use AirGuard (see [manual scans](#manual-scans)). When the shared standard launched in May 2024, EFF found newly supported third-party trackers were not always detected, and still recommends AirGuard alongside the built-in alerts[^ssd].
 
 Neither company publishes how long a tracker must travel with you before an alert appears. In EFF's testing it took up to 24 hours[^ssd]. Borrowed keys or a companion's tracker can also trigger an alert.
 
@@ -62,7 +62,7 @@ Neither company publishes how long a tracker must travel with you before an aler
 Scan away from crowds. In a parking lot or apartment block, other people's trackers will show up, so scan more than once and compare[^ssd].
 
 - **Android**: Settings > Safety & emergency > Unknown tracker alerts > Scan now takes about 10 seconds and lists trackers separated from their owners. On Android 11 and later it works without location turned on[^google]
-- **iPhone**: there is no built-in scan. AirGuard, from a research team at TU Darmstadt, detects Samsung SmartTag and Tile on iPhone, and AirTag, SmartTag, and Find Hub trackers on Android. Besides the app stores, the Android version is on F-Droid and GitHub[^airguard]. Its search screen shows signal strength as a percentage, and above about 90% the tracker is very close. EFF found it sometimes slow to flag a tracker, so do not rely on it alone[^ssd]
+- **iPhone**: there is no built-in scan. AirGuard, from a research team at TU Darmstadt, detects Samsung SmartTag and Tile on iPhone, and AirTag, SmartTag, and Find Hub trackers on Android, so it covers SmartTag where Android's built-in scan does not list it[^google]. Besides the app stores, the Android version is on F-Droid and GitHub[^airguard]. Its search screen shows signal strength as a percentage, and above about 90% the tracker is very close. EFF found it sometimes slow to flag a tracker, so do not rely on it alone[^ssd]
 - **Samsung Galaxy**: the SmartThings app has Unknown tag detection in the SmartThings Find settings[^samsung]
 
 ## After you find a tracker
@@ -73,7 +73,7 @@ If a partner, ex-partner, or family member may have planted it, think about safe
 - **Disabling**: tap Instructions to Disable and follow the steps, usually removing the battery. The owner stops getting updates but may still see the last location[^apple][^google]. Some trackers reset to factory settings when disabled and lose the link to their owner, so police can no longer ask the manufacturer who owns it. If you plan to report it, save the information first[^google]
 - **Turning off Bluetooth or location on your phone does not stop the owner** from seeing the tracker, because other phones keep reporting it[^apple][^google]
 
-If you are in immediate danger, go to a busy public place and call the local police. Police can request owner information from Apple and other manufacturers using the serial number or device ID[^apple]. In Taiwan, Article 3 of the [Stalking and Harassment Prevention Act](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0080211&flno=3){target="_blank"} lists "monitoring, observing, following, or ascertaining a specific person's whereabouts" as stalking when it is repeated, unwanted, related to sex or gender, and causes fear. The sex-or-gender condition does not apply when the target is a spouse, relative, or someone close to the specific person[^stalking]. Hotlines for Taiwan, Hong Kong, Macau, and other places are listed in the [regional context](../scenarios/domestic-violence.md) section of our domestic-violence guide.
+If you are in immediate danger, go to a busy public place and call the local police. Police can request owner information from Apple and other manufacturers using the serial number or device ID[^apple]. In Taiwan, Article 3 of the [Stalking and Harassment Prevention Act](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0080211&flno=3){target="_blank"} lists "monitoring, observing, following, or ascertaining a specific person's whereabouts" as stalking when it is repeated, unwanted, related to sex or gender, and causes fear. Whether it applies depends on the case[^stalking]. Hotlines for Taiwan, Hong Kong, Macau, and other places are listed in the [regional context](../scenarios/domestic-violence.md) section of our domestic-violence guide.
 
 ## Limits of detection
 
@@ -88,7 +88,7 @@ If you are in immediate danger, go to a busy public place and call the local pol
 This page is adapted from [How to: Detect Bluetooth Trackers](https://ssd.eff.org/module/how-to-detect-bluetooth-trackers){target="_blank"} in EFF's [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"}, last reviewed on 2024-07-15 and licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){target="_blank"}. We added regional resources and made three updates based on the vendors' documentation:
 
 - Android has had built-in unknown tracker alerts since Android 6.0. The original says Android 14 or later
-- Since iOS 17.5, iPhone detects compatible third-party trackers. The original says only AirTags are detected
+- Since iOS 17.5, iPhone detects compatible third-party trackers. The original's body says automatic alerts cover only AirTags, with a note at the top about the May 2024 cross-platform standard. We describe the system requirements from Apple's documentation and keep EFF's test results for newly supported trackers
 - Some trackers reset to factory settings when disabled, so police can no longer look up the owner. The original does not mention this
 
 This page has not been reviewed by EFF, and anoni.net is responsible for any differences from the original.

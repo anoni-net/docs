@@ -234,6 +234,10 @@ const CORE_PAGES_ZH = [
   "tools/what-is-age/",
   "tools/what-is-passkey/",
   "tools/phone-privacy-settings/",
+  "tools/bluetooth-tracker/",
+  "tools/phishing/",
+  "tools/device-encryption/",
+  "tools/malware/",
   // scenarios（場景）
   //
   // 預快取是在讀者只開過首頁、沒點進去、也沒安裝 PWA 的情況下就發生的。
@@ -350,6 +354,10 @@ const CORE_PAGES_EN = [
   "tools/what-is-age/",
   "tools/what-is-passkey/",
   "tools/phone-privacy-settings/",
+  "tools/bluetooth-tracker/",
+  "tools/phishing/",
+  "tools/device-encryption/",
+  "tools/malware/",
   // scenarios（場景，只留不指向特定受威脅身分的）
   "scenarios/",
   "scenarios/asia-travel/",

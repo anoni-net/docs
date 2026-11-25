@@ -67,7 +67,7 @@ iPhone 上的数据很多也同步到 iCloud。iCloud 默认使用「标准数�
 - **iPhone**：「设置」> 你的姓名 >「iCloud」>「高级数据保护」>「打开高级数据保护」，按照屏幕上的说明查看恢复方法
 - **Mac**：苹果菜单 >「系统设置」> 你的姓名 >「iCloud」>「高级数据保护」>「打开」
 
-在一台设备上打开，整个账户都会启用，之后可以随时关闭。管理式 Apple 账户与儿童账户不能使用[^apple-adp]。英国的用户在 2025 年之后无法使用高级数据保护，Apple 以此回应英国政府要求加密后门[^ssd-icloud]。
+在一台设备上打开，整个账户都会启用，之后可以随时关闭。管理式 Apple 账户与儿童账户不能使用[^apple-adp]。2025 年 2 月起，英国尚未开启的用户无法再打开高级数据保护[^apple-uk]，EFF 的说明是为了回应英国政府要求加密后门[^ssd-icloud]。
 
 本节依 EFF Surveillance Self-Defense 的〈[How to: Encrypt Your iPhone](https://ssd.eff.org/module/how-encrypt-your-iphone){target="_blank"}〉（审阅日 2025-02-25，[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"}）改写，数据类别与步骤依 Apple 2026 年的说明更新，未经 EFF 审阅。
 
@@ -124,3 +124,4 @@ Signal 在 2026 年 8 月推出自动密钥验证，由 App 与第三方审计�
 [^apple-icloud]: [iCloud 数据安全概览](https://support.apple.com/zh-cn/102651){target="_blank"} - Apple 支持，2026-01-08。
 [^apple-adp]: [如何打开 iCloud 高级数据保护](https://support.apple.com/zh-cn/108756){target="_blank"} - Apple 支持，2026-04-24。
 [^ssd-icloud]: [How to: Encrypt Your iPhone](https://ssd.eff.org/module/how-encrypt-your-iphone){target="_blank"} - EFF Surveillance Self-Defense，审阅日 2025-02-25。
+[^apple-uk]: [Apple can no longer offer Advanced Data Protection in the United Kingdom to new users](https://support.apple.com/en-gb/122234){target="_blank"} - Apple 支持（英国），2025-09-23。

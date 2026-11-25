@@ -50,7 +50,7 @@ AirTag 与兼容的追踪器离开物主一段时间之后，移动时会发出�
 | 检测得到 | AirTag、AirPods、“查找”网络配件、兼容的蓝牙追踪器 | AirTag、与“查找中心”兼容的追踪器与耳机 |
 | 要另外处理 | Samsung SmartTag、Tile | Samsung SmartTag、Tile |
 
-Apple 与 Google 的说明页都没有把 Samsung SmartTag 与 Tile 列为兼容的追踪器[^apple][^google]，这两个品牌要靠各自的 App 或 AirGuard（见[手动扫描](#手动扫描)）。
+Apple 与 Google 的说明页都没有把 Samsung SmartTag 与 Tile 列为兼容的追踪器[^apple][^google]，这两个品牌要靠各自的 App 或 AirGuard（见[手动扫描](#手动扫描)）。共同标准在 2024 年 5 月推出，EFF 当时测试发现新支持的第三方追踪器不一定检测得到，所以仍建议搭配 AirGuard[^ssd]。
 
 Android 的提醒功能由 Google Play 服务提供[^google]。在中国大陆销售、没有 Google Play 服务的 Android 手机可能没有这项功能，在设置里找不到「不明追踪器提醒」的话，改用 AirGuard。
 
@@ -94,7 +94,7 @@ Android 的提醒功能由 Google Play 服务提供[^google]。在中国大陆�
 
     「设置」>「安全和紧急情况」>「不明追踪器提醒」>「立即扫描」，大约 10 秒完成。结果只列出不在物主身边的追踪器。Android 11 以上不必开启位置信息也能扫描[^google]。
 
-    内建扫描找不到 Samsung SmartTag 与 Tile。要一并检测，或者手机没有 Google Play 服务，可以安装 AirGuard，Android 版检测得到 AirTag、Samsung SmartTag 与“查找中心”的追踪器。除了 Google Play，AirGuard 也可以从 F-Droid 或 GitHub 的 Releases 页面下载[^airguard]。
+    Google 的说明页没有把 Samsung SmartTag 与 Tile 列在支持范围[^google]。要检测 SmartTag，或者手机没有 Google Play 服务，可以安装 AirGuard，Android 版检测得到 AirTag、Samsung SmartTag 与“查找中心”的追踪器。除了 Google Play，AirGuard 也可以从 F-Droid 或 GitHub 的 Releases 页面下载[^airguard]。
 
 === "iPhone"
 
@@ -129,7 +129,7 @@ Android 的提醒功能由 Google Play 服务提供[^google]。在中国大陆�
 
 觉得有立即危险时，先到人多的公共场所，再拨打当地的报警电话。警方可以向 Apple 等厂商调取物主的资料，会需要追踪器的序列号或设备 ID[^apple]。
 
-各地的求助热线与法律依据不同，见 [家暴受害者的数字准备](../scenarios/domestic-violence.md) 的〈在地脉络〉。以台湾为例，[跟踪骚扰防制法](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0080211&flno=3){target="_blank"} 第 3 条把「监视、观察、跟踪或知悉特定人行踪」列为跟踪骚扰行为之一，要件是反复或持续、违反对方意愿、与性或性别有关，并使对方心生畏怖。对象是特定人的配偶、亲属等关系密切的人时，不需要与性或性别有关[^stalking]。是否构成要看个案，报警时把上面保留的证据一并带着。
+各地的求助热线与法律依据不同，见 [家暴受害者的数字准备](../scenarios/domestic-violence.md) 的〈在地脉络〉。以台湾为例，[跟踪骚扰防制法](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0080211&flno=3){target="_blank"} 第 3 条把「监视、观察、跟踪或知悉特定人行踪」列为跟踪骚扰行为之一，要件是反复或持续、违反对方意愿、与性或性别有关，并使对方心生畏怖[^stalking]。是否构成要看个案，报警时把上面保留的证据一并带着。
 
 ## 检测的限制
 
@@ -144,7 +144,7 @@ Android 的提醒功能由 Google Play 服务提供[^google]。在中国大陆�
 本页依 EFF [Surveillance Self-Defense](https://ssd.eff.org/){target="_blank"} 的〈[How to: Detect Bluetooth Trackers](https://ssd.eff.org/module/how-to-detect-bluetooth-trackers){target="_blank"}〉改写，原文的审阅日是 2024-07-15，以 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans){target="_blank"} 授权。改写时加入各地的求助入口，并依官方说明更新了三处：
 
 - Android 从 6.0 起就内建不明追踪器提醒，原文写 Android 14 以上
-- iPhone 从 iOS 17.5 起检测得到兼容的第三方追踪器，原文写只检测得到 AirTag
+- iPhone 从 iOS 17.5 起检测得到兼容的第三方追踪器。原文的正文写自动提醒只支持 AirTag，开头另外补注了 2024 年 5 月的跨平台标准，本页依 Apple 的说明整理成系统需求，并保留 EFF 对新支持追踪器的测试结果
 - 部分追踪器停用之后会恢复出厂设置，警方无法再查询物主，原文没有提到
 
 本页未经 EFF 审阅，内容与原文不同之处由匿名网络社区 anoni.net 负责。
