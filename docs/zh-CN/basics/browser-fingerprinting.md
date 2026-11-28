@@ -1,6 +1,6 @@
 ---
 title: 浏览器指纹是什么，为什么很难摆脱
-description: cookie 删得掉，指纹删不掉。说明指纹由哪些特征组成、为什么结构上难以规避，以及 Tor Browser、Brave、Safari、Firefox、Chrome 现在各自做到哪里。
+description: 浏览器指纹是屏幕、时区、字体、显卡等特征组合出的识别码，删掉 cookie 也去不掉。说明为什么难以规避，以及 Tor Browser、Brave、Firefox 等浏览器各自做到哪里。
 icon: material/fingerprint
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Metadata 是什麼，為什麼重要
-description: 通話沒被監聽，為什麼仍能還原你和誰聯繫、在哪裡、做了什麼。
+description: Metadata 字面意思是「資料的資料」，例如通話的對象、時間、地點與長度。通話內容沒被監聽，光靠 metadata 仍能還原你和誰聯繫、在哪裡、做了什麼。
 icon: material/file-tree
 ---
 

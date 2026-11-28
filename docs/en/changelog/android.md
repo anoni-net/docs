@@ -1,6 +1,6 @@
 ---
 title: Android Security Patch Levels
-description: "Monthly Android security patch levels: how to check how far behind your device is, and what changed when Google dropped vulnerability details in July 2026 and restored them in September."
+description: Monthly Android security bulletin summaries by patch level, how to check how far behind your device is, and why July and August 2026 lack details.
 icon: material/android
 digest:
   name: Android
