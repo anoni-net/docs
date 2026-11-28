@@ -1,6 +1,6 @@
 ---
 title: What Taiwan's Digital Credential Wallet Protects
-description: Reading the source code of Taiwan's government digital identity wallet to answer three separate privacy questions — whether the issuer sees your presentations, whether verifiers can link you across visits, and who is allowed to ask.
+description: Reading the source code of moda's Digital Credential Wallet app (TWDIW) to see what the issuer can see, what verifiers can link, and who is allowed to ask.
 icon: material/wallet-outline
 ---
 

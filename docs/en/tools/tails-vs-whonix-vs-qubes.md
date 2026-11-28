@@ -1,6 +1,6 @@
 ---
 title: Tails vs Whonix vs Qubes
-description: Three anonymity operating systems built on different philosophies (amnesia, isolation, compartmentalization), which threat each one fits, and where to go for setup depth.
+description: Tails for short tasks on a machine you don't trust, Whonix for a long-running Tor workflow, Qubes with Whonix for strict separation of activities.
 icon: material/compare-horizontal
 ---
 
